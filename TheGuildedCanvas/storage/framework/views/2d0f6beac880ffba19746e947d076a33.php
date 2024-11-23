@@ -1,0 +1,1 @@
+<h1>Contact Us Page</h1><?php /**PATH C:\Users\muham\OneDrive\Documents\GitHub\Gilded-Canvas\The Guilded Canvas(Setup)\resources\views/contact-us.blade.php ENDPATH**/ ?>

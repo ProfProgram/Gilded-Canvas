@@ -1,0 +1,1 @@
+<h1>Home Page</h1><?php /**PATH C:\Users\muham\OneDrive\Documents\GitHub\Gilded-Canvas\The Guilded Canvas(Setup)\resources\views/home.blade.php ENDPATH**/ ?>
