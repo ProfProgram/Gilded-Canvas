@@ -29,7 +29,7 @@ return new class extends Migration
             $table->decimal('Total_price', 10, 0);
             $table->dateTime('Order_data');
             $table->foreign('Admin_id')->references('Admin_id')->on('Admin table')->onDelete('cascade');
-            $table->foreign('User_id')->references('User_id')->on('Users table')->onDelete('cascade');
+            $table->foreign('User_id')->references('User_id')->on('users_table')->onDelete('cascade');
             $table->enum('Status',['Pending','Shipped','Delivered','Cancelled'])->default('Pending');
             $table->timestamps();
         });
@@ -38,7 +38,7 @@ return new class extends Migration
             $table->increments('Return_id')->unique();
             $table->foreign('Order_id')->references('Order_id')->on('Orders details table')->onDelete('cascade');
             $table->foreign('Product_id')->references('Products_id')->on('Products table')->onDelete('cascade');
-            $table->foreign('User_id')->references('User_id')->on('Users table')->onDelete('cascade');
+            $table->foreign('User_id')->references('User_id')->on('users_table')->onDelete('cascade');
             $table->foreign('Admin_id')->references('Admin_id')->on('Admin table')->onDelete('cascade');
             $table->string('Return_reason');
             $table->enum('Return_status',['Pending','Approved','Rejected','Completed','Refunded','Cancelled'])->default('Pending');

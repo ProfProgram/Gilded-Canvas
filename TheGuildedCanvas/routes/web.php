@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('/home', function () {
     return view('home');
@@ -33,3 +38,5 @@ Route::get('/payment', function () {
 Route::get('/review', function () {
     return view('review');
 });
+
+Route::post('/register', [UserController::class, 'register']);

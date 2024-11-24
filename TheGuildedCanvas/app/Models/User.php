@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Enums\UserRole;
 
 class User extends Authenticatable
 {
@@ -13,7 +14,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     // connected table
-    protected $table = 'Users Table';
+    protected $table = 'users_table';
 
     /**
      * The attributes that are mass assignable.
@@ -43,13 +44,11 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'Role' => UserRole::class
+    ];
 
     public function admin()
     {

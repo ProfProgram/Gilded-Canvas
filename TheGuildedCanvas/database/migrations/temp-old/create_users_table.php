@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users table', function (Blueprint $table) {
+        Schema::create('users_table', function (Blueprint $table) {
             $table->increments('Users_id');
             $table->string('Name');
             $table->string('Email')->unique();
@@ -50,7 +50,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Users table');
+        Schema::dropIfExists('users_table');
         Schema::dropIfExists('Admin table');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
