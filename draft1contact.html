@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+  </head>
+  <body
+    style="
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fdf4e3;
+      color: #333;
+    "
+  >
+    <!-- Header with Logo -->
+    <header
+      style="
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      "
+    >
+      <img
+        src="logo-placeholder.png"
+        alt="Essentials Logo"
+        style="height: 50px; margin-right: 10px"
+      />
+      <span style="font-size: 20px; font-weight: bold">Glided Canvas</span>
+    </header>
+
+    <!-- Main Content -->
+    <main
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 40px;
+      "
+    >
+      <!-- Contact Information Section -->
+      <section style="flex: 1; max-width: 400px; padding-right: 20px">
+        <h1 style="font-size: 32px; font-weight: bold; margin-bottom: 10px">
+          Contact Us
+        </h1>
+        <p style="font-size: 16px; line-height: 1.5">
+          We’d love to hear from you! Reach out with any questions or feedback.
+        </p>
+        <p style="font-size: 16px; margin-top: 20px">
+          Email:
+          <a
+            href="mailto:support@essentials.com"
+            style="color: #007bff; text-decoration: none"
+            >support@glidedcanvas.com</a
+          >
+        </p>
+        <p style="font-size: 16px">Phone: +447953456456</p>
+      </section>
+
+      <!-- Contact Form Section -->
+      <section style="flex: 1; max-width: 400px">
+        <form style="display: flex; flex-direction: column">
+          <label for="name" style="font-size: 14px; margin-bottom: 5px"
+            >Name <span style="color: #d00">(required)</span></label
+          >
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            style="
+              padding: 10px;
+              margin-bottom: 20px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+              font-size: 14px;
+            "
+          />
+
+          <label for="email" style="font-size: 14px; margin-bottom: 5px"
+            >Email <span style="color: #d00">(required)</span></label
+          >
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            style="
+              padding: 10px;
+              margin-bottom: 20px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+              font-size: 14px;
+            "
+          />
+
+          <label for="message" style="font-size: 14px; margin-bottom: 5px"
+            >Message <span style="color: #d00">(required)</span></label
+          >
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            required
+            style="
+              padding: 10px;
+              margin-bottom: 20px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+              font-size: 14px;
+            "
+          ></textarea>
+
+          <button
+            type="submit"
+            style="
+              padding: 10px 20px;
+              background-color: #333;
+              color: white;
+              border: none;
+              border-radius: 5px;
+              font-size: 16px;
+              cursor: pointer;
+            "
+          >
+            Send Message
+          </button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
