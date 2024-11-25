@@ -27,10 +27,16 @@
             font-size: 2rem;
             margin: 0;
         }
-        .product-content {
+        .product {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+        }
+        .product:last-child {
+            border-bottom: none;
         }
         .product-image {
             flex: 1;
@@ -73,27 +79,5 @@
 </head>
 <body>
     <div class="container">
-        <div class="product-header">
-            <h1>Product Page</h1>
-        </div>
+        <div cl
 
-        <div class="product-content">
-            <!-- Product Image -->
-            <div class="product-image">
-                <img src="product-image-placeholder.jpg" alt="Product Image">
-            </div>
-
-            <!-- Product Details -->
-            <div class="product-details">
-                <h2>Product Name</h2>
-                <p>product description</p>
-                <p>product ting</p>
-
-                <p class="product-price">$99.99</p>
-
-                <a href="#" class="buy-button">Buy Now</a>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
