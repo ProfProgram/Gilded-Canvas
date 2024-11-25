@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/sign-up', [UserController::class, 'store'])->middleware('throttle:10,1');
+Route::post('/sign-in', [UserController::class, 'login'])->middleware('throttle:10,1');

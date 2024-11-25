@@ -4,42 +4,55 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        $users = User::all();
-        return $this->sendResponse($users, 'Users retrieved successfully.');
-    }
-
-    public function show($id)
-    {
-        $user = User::find($id);
-        if (!$user) {
-            return $this->sendError('User not found.');
-        }
-        return $this->sendResponse($user, 'User retrieved successfully.');
-    }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'Name' => 'required|string|max:255',
-            'Password' => 'required|string|max:255|min:8|confirmed',
-            'Password_confirmation' => 'required|string|max:255|min:8',
-            'Email' => 'required|string|email|max:255|unique:users_table',
-            'Phone_number' => 'required|string|max:15',
-            'Role' => 'required|in:User,Admin',
+            'name' => 'required|string|max:255',
+            'password' => 'required|string|max:255|min:8|confirmed',
+            'password_confirmation' => 'required|string|max:255|min:8',
+            'email' => 'required|string|email|max:255|unique:users_table',
+            'phone_number' => 'required|string|max:15',
+            'role' => 'required|in:user,admin',
         ]);
 
-        $input = $request->only(['Name', 'Password', 'Email', 'Phone_number', 'Role']);
-        $input['Password'] = bcrypt($input['Password']);
+        $input = $request->only(['name', 'password', 'email', 'phone_number', 'role']);
+        $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
 
         return $this->sendResponse($user, 'User created successfully.');
     }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string|min:8'
+        ]);
+        // Attempt to authenticate the user
+        if (!Auth::attempt($credentials)) {
+            return $this->sendError('Invalid credentials.', [], 401);
+        }
+
+        // Retrieve the authenticated user
+        $user = Auth::user();
+
+        // Ensure the authenticated user is correctly retrieved
+        if ($user instanceof User) {
+            $token = $user->createToken('AppToken')->plainTextToken;
+            return $this->sendResponse([
+                'token' => $token,
+                'user' => $user,
+            ], 'User logged in successfully.');
+        }
+
+        return $this->sendError('User not found after authentication.', [], 401);
+    }
+
 
     public function update(Request $request, $id)
     {
