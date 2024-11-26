@@ -44,6 +44,7 @@ return new class extends Migration
         Schema::create('Products Table', function (Blueprint $table) {
             $table->increments('Product_id');
             $table->string('Category_name');
+            $table->string('Product_name');
             $table->text('Description');
             $table->timestamps();
         });

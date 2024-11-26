@@ -1,0 +1,48 @@
+
+/* NAVBAR */
+
+#navbar {
+    background-color: gold;
+}
+
+/* REVIEW PAGE */
+
+#input-collection {
+    position: relative;
+    display: grid;
+    font-size:14px;
+}
+
+#input-collection::after {
+    display: block;
+    content: attr(data-value) " ";
+    white-space: pre-wrap;
+    visibility: hidden;
+}
+
+#input-collection input {
+    width: 150px;
+}
+
+#input-collection div {
+    margin-bottom: 10px;
+}
+
+#input-collection label {
+    display: block;
+}
+
+#input-collection textarea {
+    resize: none;
+    overflow: hidden;
+    width: 500px;
+    word-wrap: break-word;
+    box-sizing: border-box;
+}
+
+#input-collection textarea,
+#input-collection::after {
+    font : inherit;
+    grid-area: 1/1/2/2;
+    padding:2px;
+}
