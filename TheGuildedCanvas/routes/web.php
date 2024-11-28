@@ -33,4 +33,7 @@ Route::get('/payment', function () {
 
 // REVIEW ROUTES
 Route::get('/review', [ReviewController::class, 'index']);
-Route::post('/review', [ReviewController::class, 'store']);     
+Route::post('/review', [ReviewController::class, 'store']);
+
+// REMOVE THE ALERT MESSAGE
+Route::post('/close-alert', function () {Session::forget('status'); return redirect()->back();})->name('close-alert');     

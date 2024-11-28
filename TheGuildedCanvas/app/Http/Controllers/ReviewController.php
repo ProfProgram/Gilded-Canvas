@@ -48,13 +48,15 @@ class ReviewController extends Controller
         $review->Rating = $request->Rating;
         $review->Review_text = $request->Review_text;
 
-        Log::info('Review to save: ', $review->toArray());
-        return $review;
-        $review->save();
-        if ($review->save()){
-            $status = 'Review Added Successfully';
-        } else {
-            $status = 'Review was not added';
+        try {
+            if ($review->save()) {
+                $status = 'Review Added Successfully';
+            } else {
+                $status = 'Review was not added';
+            }
+        } catch (\Exception $e) {
+            Log::error('Failed to save review: ' . $e->getMessage());
+            $status = 'An error occurred while saving the review.';
         }
 
         Log::info('Form data received: ', $request->all());
