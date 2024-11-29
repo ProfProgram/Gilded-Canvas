@@ -187,3 +187,22 @@ footer {
     flex-wrap: wrap;
     margin-top: auto; /* Pushes the footer to the bottom */
 }
+.cart-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Adds space between the icon and the count */
+}
+
+.cart-icon-img {
+    width: 35px; /* Adjust the size of the cart icon */
+    height: auto; /* Maintain aspect ratio */
+    vertical-align: middle;
+}
+
+.cart-item-count {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333333;
+}
+
