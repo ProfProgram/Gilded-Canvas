@@ -42,11 +42,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Handle removing a cart item
     function removeCartItem(event) {
-        const cartItem = event.target.closest('.cart-item'); // Find closest cart item
-        cartItem.remove(); // Remove the cart item from the DOM
-        updateTotal(); // Update the total
-        checkIfCartIsEmpty(); // Check if the cart is empty
+        const cartItem = event.target.closest('.cart-item'); // Find the closest cart item
+        if (cartItem) {
+            cartItem.remove(); // Remove the item
+            updateTotal(); // Update the total price
+            updateBasketCount(); // Update the basket count
+            checkIfCartIsEmpty(); // Check if the cart is empty
+        }
     }
+    
 
     // Attach event listeners to quantity inputs
     const quantityInputs = document.querySelectorAll('.quantity-input');
@@ -62,3 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initial check for empty cart
     checkIfCartIsEmpty();
 });
+//this function ensures the number of items in the basket dynamically updates
+function updateBasketCount() {
+    const itemCount = document.querySelectorAll('.cart-item').length;
+    const cartIcon = document.querySelector('.cart-icon a');
+    if (cartIcon) {
+        cartIcon.textContent = `🛒 (${itemCount})`;
+    }
+}
