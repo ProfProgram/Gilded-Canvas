@@ -1,0 +1,142 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F5F5DC
+;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px 20px;
+    border-bottom: 2px solid #e3c878;
+	height: 800;
+}
+
+.logo img {
+    height: 65px;
+	position: absolute;
+	left: 5px;
+	top: 10px;
+}
+
+
+
+nav {
+     display: flex; /* Ensures Flexbox layout */
+    justify-content: center; /* Horizontally centers the links */
+    align-items: center; /* Vertically aligns the links */
+    padding: 10px 0; /* Optional: Adds spacing around the navigation bar */
+    gap: 20px; /* Adds space between the links */
+    flex-grow: 1; 
+}
+
+nav a {
+    color: black; /* Retains the current color */
+    text-decoration: none; /* Removes underlines */
+    font-weight: bold; /* Keeps links bold */
+
+
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.signup-btn {
+    background-color:#FFD700;
+    border: none;
+    border-radius: 700px;
+    padding: 15px 10px;
+    cursor: pointer;
+    font-weight: bold;
+position: absolute;
+	right: 5px;
+	top: 10px;
+	color: white;
+
+}
+
+h1 {
+	text-decoration-color:black;
+
+text-align: center;
+
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px);
+}
+
+.login-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px 30px;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 6px 
+}
+
+.login-container h1 {
+    color: black;
+    margin-bottom: 20px;
+}
+
+.form-text {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+
+
+.form-text input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e3c878;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.forgot-details {
+    display: block;
+    margin: 10px 0;
+    color: black;
+    font-size: 15px;
+}
+
+
+.login-btn {
+    background-color: #FFD700;
+    border: none;
+    border-radius: 0px;
+    padding: 5px 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    width: 50%;
+}
+
+.login-btn:hover {
+    background-color: #FFD700;
+}
+
+
+
+.signup-link {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
