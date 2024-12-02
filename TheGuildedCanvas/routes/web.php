@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\paymentController;
 
 Route::get('/home', function () {
     return view('home');
@@ -27,9 +28,9 @@ Route::get('/product', function () {
     return view('product');
 });
 
-Route::get('/payment', function () {
-    return view('payment');
-});
+// PAYMENT ROUTES
+Route::get('/payment', [paymentController::class, 'index']);
+Route::post('/payment', [paymentController::class, 'store']);
 
 // REVIEW ROUTES
 Route::get('/review', [ReviewController::class, 'index']);

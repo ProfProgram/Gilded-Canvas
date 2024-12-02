@@ -18,6 +18,7 @@
             <a href="/product">Products</a>
             <a href="/review">Review</a>
             <a href="/contact-us">Contact Us</a>
+            <a href="/payment">Payment</a>
             <a href="/basket" class="cart-icon">🛒</a>
         </nav>
     </header>
@@ -40,9 +41,9 @@
             <div style="margin-right: 20px;">
                 <h3 style="font-size: 1rem; margin-bottom: 10px;">Quick Links:</h3>
                 <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.8;">
-                    <li><a href="index.html" style="color: #ffffff; text-decoration: none;">Home</a></li>
-                    <li><a href="products.html" style="color: #ffffff; text-decoration: none;">Products</a></li>
-                    <li><a href="contact.html" style="color: #ffffff; text-decoration: none;">Contact Us</a></li>
+                    <li><a href="/home" style="color: #ffffff; text-decoration: none;">Home</a></li>
+                    <li><a href="/product" style="color: #ffffff; text-decoration: none;">Products</a></li>
+                    <li><a href="/contact-us" style="color: #ffffff; text-decoration: none;">Contact Us</a></li>
                 </ul>
             </div>
             <!-- About Us -->

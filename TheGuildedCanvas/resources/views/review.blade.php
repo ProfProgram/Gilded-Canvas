@@ -50,7 +50,7 @@
         </div>
         <!-- image to be based off of the product name (Id) queried to database -->
         <div class="rightSide">
-            <img src="{{ asset('images/openart-image_1.jpg') }}" alt="Current seclected product" id="reviewSelectedProduct-image">
+            <img src="{{ asset('images/openart-image_1.jpg') }}" alt="Current selected product" id="reviewSelectedProduct-image">
         </div>
     </div>
     <!-- Script needs to be on this page (when put in js/js.js the image doesn't update as expected) -->
