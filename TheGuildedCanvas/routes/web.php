@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\paymentController;
+use App\Http\Controllers\OrdersController;
 
 
 Route::get('/home', function () {
@@ -25,6 +26,9 @@ Route::get('/contact-us', function () {
 Route::get('/basket', function () {
     return view('basket');
 });
+
+// PREVIOUS ORDERS
+Route::get('/previous-orders', [OrdersController::class, 'index']);
 
 Route::get('/product', function () {
     return view('product');

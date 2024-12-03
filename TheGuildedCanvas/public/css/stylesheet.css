@@ -50,7 +50,6 @@ header {
 }
 
 .cart-icon::after {
-    content: "(2)"; /* Number of items in the cart */
     position: absolute;
     top: -5px; /* Position above the cart */
     right: -10px; /* Offset slightly to the right */
@@ -465,4 +464,65 @@ nav a:nth-child(5) {
     .navbar {
         gap: 10px;
     }
+}
+
+/* PREVIOUS ORDERS PAGE */
+
+.orders-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.orders-title {
+    font-family: 'Merriweather', serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Orders Layout */
+.orders-layout {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.product-image img {
+    width: 150px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-details {
+    flex: 1;
+}
+
+/* Buttons */
+.reorder-button {
+    background-color: #d4af37;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.reorder-button:hover {
+    background-color: #b08a2e;
+    transform: scale(1.05);
 }
