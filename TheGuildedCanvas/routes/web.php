@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\paymentController;
 
+
 Route::get('/home', function () {
     return view('home');
 });
