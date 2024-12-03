@@ -34,6 +34,10 @@ body {
     color: #333333;
     font-weight: bold;
 }
+.navbar a:hover {
+    color: #d4af37; /* Gold on hover */
+}
+
 
 .cart-icon a {
     text-decoration: none;
@@ -205,4 +209,6 @@ footer {
     font-weight: bold;
     color: #333333;
 }
+
+
 
