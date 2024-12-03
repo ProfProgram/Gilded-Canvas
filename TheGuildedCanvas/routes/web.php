@@ -12,11 +12,12 @@ Route::get('/home', function () {
 Route::get('/sign-up', function () {
     return view('sign-up');
 });
-
+// SIGN IN PAGE (LOGIN)
 Route::get('/sign-in', function () {
     return view('sign-in');
 });
 
+// SIGN UP PAGE
 Route::get('/contact-us', function () {
     return view('contact-us');
 });
