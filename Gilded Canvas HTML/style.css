@@ -23,20 +23,34 @@ body {
     background-color: #fff;
     border-bottom: 2px solid #d4af37;
 }
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Ensures header stays above other content */
+}
 
 .logo img {
     max-height: 50px;
 }
 
-.navbar a {
-    margin: 0 15px;
-    text-decoration: none;
-    color: #333333;
-    font-weight: bold;
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
+
+.navbar a {
+    text-decoration: none;
+    color: #333333; /* Charcoal grey text */
+    font-weight: bold;
+    font-size: 1rem;
+    transition: color 0.3s ease; /* Smooth hover transition */
+}
+
 .navbar a:hover {
     color: #d4af37; /* Gold on hover */
 }
+
 
 
 .cart-icon a {
@@ -132,7 +146,6 @@ body {
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
 .remove-button:hover,
 .checkout-button:hover,
 .continue-shopping-button:hover {
@@ -209,6 +222,81 @@ footer {
     font-weight: bold;
     color: #333333;
 }
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    .flex-container {
+        flex-direction: column;
+    }
 
+    .header, footer {
+        flex-wrap: wrap;
+    }
+
+    .navbar {
+        gap: 10px;
+    }
+}
+
+footer {
+    background-color: #1A1A1A; /* Dark footer background */
+    color: #ffffff; /* White text */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: auto; /* Push footer to the bottom */
+}
+
+footer .quick-links,
+footer .about-us,
+footer .contact-info {
+    flex: 1; /* Equal spacing for each section */
+    margin: 10px;
+}
+
+footer .quick-links h4,
+footer .about-us h4,
+footer .contact-info h4 {
+    font-size: 1.2rem;
+    color: #d4af37; /* Gold color for section headers */
+    margin-bottom: 10px;
+}
+
+footer a {
+    color: #ffffff; /* White text for links */
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 0.9rem;
+}
+
+footer a:hover {
+    color: #d4af37; /* Gold on hover */
+}
+
+footer .social-media-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+footer .social-media-links img {
+    width: 25px;
+    height: 25px;
+    filter: invert(100%); /* White-colored icons */
+    transition: transform 0.3s ease;
+}
+
+footer .social-media-links img:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+footer .copyright {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #cccccc; /* Light grey for copyright text */
+}
 
 
