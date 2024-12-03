@@ -41,6 +41,7 @@ $totalPrice = 0;
                 <!-- Table columns -->
                 <tr>
                     <th>Product ID</th>
+                    <th>Product Image</th>
                     <th>Quantity</th>
                     <th>Price Per</th>
                 </tr>
