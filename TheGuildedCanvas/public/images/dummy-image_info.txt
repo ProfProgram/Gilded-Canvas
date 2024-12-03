@@ -1,0 +1,5 @@
+3 dummy images named :
+openart-image_1.jpg -> refers to product 1 dummy data
+openart-image_2.jpg -> refers to product 2 dummy data
+openart-image_3.jpg -> refers to product 3 dummy data
+where made using free AI named openart. These are only meant to be used as dummy images, as people assigned to get offical product images have yet to supply at this time.

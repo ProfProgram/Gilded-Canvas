@@ -1,0 +1,217 @@
+
+/* GLOBAL CSS */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* NAVBAR */
+
+header {
+    width: 100%;
+    background-color: #ffffff; /* White background for the navbar */
+    border-bottom: 3px solid #d4af37; /* Gold bottom border */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+#navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px; /* Adjust padding for spacing */
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+#navbar a {
+    text-decoration: none; /* Remove underlines from links */
+    color: black; /* Default link color */
+    margin: 0 10px; /* Spacing between links */
+    font-weight: bold;
+}
+
+#navbar a:hover {
+    color: #d4af37; /* Gold color on hover */
+}
+
+#navbar-logo {
+    width: 80px; /* Adjust logo size */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.cart-icon {
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 18px; /* Adjust cart icon size */
+}
+
+.cart-icon::after {
+    content: "(2)"; /* Number of items in the cart */
+    position: absolute;
+    top: -5px; /* Position above the cart */
+    right: -10px; /* Offset slightly to the right */
+    font-size: 14px;
+    color: black;
+    font-weight: bold;
+}
+
+nav a:nth-child(2),
+nav a:nth-child(3),
+nav a:nth-child(4),
+nav a:nth-child(5) {
+    margin-left: 15px; /* Space between "Home" and other links */
+}
+
+/* REVIEW PAGE */
+
+#reviewForm {
+    max-width: 400px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#reviewForm input[type="text"],
+#reviewForm select,
+#reviewForm textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#reviewForm input::placeholder,
+#reviewForm textarea::placeholder {
+    color: #888;
+}
+
+#reviewForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#rating-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#desc-txtArea {
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-addReview {
+    background-color: #d4af37;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+}
+
+.btn-addReview:hover {
+    background-color: #b9952d;
+}
+
+#input-collection > div {
+    margin-bottom: 10px;
+}
+
+#input-collection {
+    float: left;
+}
+
+.alert {
+    background-color: #d4af37;
+    color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    border: 1px solid #b9952d;
+}
+
+.close-btn {
+    float: right;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 10px;
+    color: #ffffff;
+}
+
+.close-btn:hover {
+    color: #000000;
+}
+
+#reviewContent,
+#prodContent {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    gap: 20px;
+}
+
+#leftSide {
+    flex: 1;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.rightSide {
+    flex: 1;
+    max-width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.rightSide img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+} 
+
+/* PAYMENT PAGE */
+
+#cardNum::-webkit-outer-spin-button,
+#cardNum::-webkit-inner-spin-button,
+#CVC::-webkit-outer-spin-button,
+#CVC::-webkit-inner-spin-button,
+#EdMonth::-webkit-outer-spin-button,
+#EdMonth::-webkit-inner-spin-button,
+#EdYear::-webkit-outer-spin-button,
+#EdYear::-webkit-inner-spin-button
+{
+    -webkit-appearance: none;
+    margin: 0;
+}

@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\paymentController;
+
 
 Route::get('/home', function () {
     return view('home');
@@ -26,10 +29,13 @@ Route::get('/product', function () {
     return view('product');
 });
 
-Route::get('/payment', function () {
-    return view('payment');
-});
+// PAYMENT ROUTES
+Route::get('/payment', [paymentController::class, 'index']);
+Route::post('/payment', [paymentController::class, 'store']);
 
-Route::get('/review', function () {
-    return view('review');
-});
+// REVIEW ROUTES
+Route::get('/review', [ReviewController::class, 'index']);
+Route::post('/review', [ReviewController::class, 'store']);
+
+// REMOVE THE ALERT MESSAGE
+Route::post('/close-alert', function () {Session::forget('status'); return redirect()->back();})->name('close-alert');     
