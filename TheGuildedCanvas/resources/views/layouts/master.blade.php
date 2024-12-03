@@ -11,7 +11,7 @@
     <header>
         <nav id="navbar">
             <a url="/home">
-            <img id="navbar-logo" src="{{ asset('images/logo.png') }}" alt="The Gilded Canvas Logo">
+            <img id="navbar-logo" src="{{ asset('images/TGC-Black-and-Gold.png') }}" alt="The Gilded Canvas Logo">
             </a>
             <!-- connected pages -->
             <a href="/home">Home</a>
@@ -19,7 +19,10 @@
             <a href="/review">Review</a>
             <a href="/contact-us">Contact Us</a>
             <a href="/payment">Payment</a>
-            <a href="/basket" class="cart-icon">🛒</a>
+            <a href="/basket" class="cart-icon">
+                <img src="Images/cart-icon.png" alt="Shopping Cart" class="cart-icon-img">
+            <span class="cart-item-count">(2)</span>
+            </a>
         </nav>
     </header>
 
