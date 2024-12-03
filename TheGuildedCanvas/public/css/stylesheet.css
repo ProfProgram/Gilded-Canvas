@@ -215,3 +215,78 @@ nav a:nth-child(5) {
     -webkit-appearance: none;
     margin: 0;
 }
+
+
+/* SIGN IN PAGE */
+
+.sign-inMain,
+.sign-upMain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px);
+}
+
+.login-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px 30px;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 6px 
+}
+
+.login-container h1 {
+    color: black;
+    margin-bottom: 20px;
+}
+
+.form-text {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+
+
+.form-text input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e3c878;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.forgot-details {
+    display: block;
+    margin: 10px 0;
+    color: black;
+    font-size: 15px;
+}
+
+
+.login-btn {
+    background-color: #FFD700;
+    border: none;
+    border-radius: 0px;
+    padding: 5px 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    width: 50%;
+}
+
+.login-btn:hover {
+    background-color: #FFD700;
+}
+
+.signup-link {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
