@@ -1,0 +1,60 @@
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateProductsCategoriesAndProductImagesTables extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        // Create Categories Table
+        Schema::create('categories', function (Blueprint $table) {
+            $table->increments('CategoryID'); // Auto-increment primary key
+            $table->string('CategoryName', 200)->unique(); // Unique category name
+            $table->timestamps(); // Adds created_at and updated_at columns
+        });
+
+        // Create Products Table
+        Schema::create('products', function (Blueprint $table) {
+            $table->increments('ProductID'); // Auto-increment primary key
+            $table->string('Name', 200)->unique(); // Unique product name
+            $table->decimal('Price', 10, 2); // Price with precision 10 and scale 2
+            $table->integer('Stock'); // Stock quantity
+            $table->string('Description', 200); // Product description
+            $table->unsignedInteger('CategoryID'); // Foreign key to categories table
+            $table->timestamps(); // Adds created_at and updated_at columns
+
+            // Foreign key constraint
+            $table->foreign('CategoryID')->references('CategoryID')->on('categories')->onDelete('cascade');
+        });
+
+        // Create ProductImages Table
+        Schema::create('product_images', function (Blueprint $table) {
+            $table->increments('ImageID'); // Auto-increment primary key
+            $table->unsignedInteger('ProductID'); // Foreign key to products table
+            $table->string('FileName', 255); // File name of the image
+            $table->boolean('MainImage'); // Indicates if this is the main image
+            $table->timestamps(); // Adds created_at and updated_at columns
+
+            // Foreign key constraint
+            $table->foreign('ProductID')->references('ProductID')->on('products')->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        // Drop tables in reverse order of creation to avoid foreign key constraint issues
+        Schema::dropIfExists('product_images');
+        Schema::dropIfExists('products');
+        Schema::dropIfExists('categories');
+    }
+}
