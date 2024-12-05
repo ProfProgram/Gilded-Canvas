@@ -128,6 +128,7 @@
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/laravel/sanctum" />
+      <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/laravel/ui" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
