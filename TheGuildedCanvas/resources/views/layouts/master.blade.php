@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Gilded Canvas</title>
     <link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}">
-    <link rel="script" href="{{ asset('js/js.js') }}">
 </head>
 <body>
     <header>
@@ -81,5 +80,6 @@
             </div>
         </div>
     </footer>
+    <script rel="script" src="{{ asset('js/js.js') }}"></script>
 </body>
 </html>
