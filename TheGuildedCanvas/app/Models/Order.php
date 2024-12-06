@@ -8,12 +8,12 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $table = 'Orders Table';
+    protected $table = 'orders_table';
 
     protected $fillable = [
-        'Admin_id',
-        'User_id',
-        'Status'
+        'admin_id',
+        'user_id',
+        'status'
     ];
 
     /**

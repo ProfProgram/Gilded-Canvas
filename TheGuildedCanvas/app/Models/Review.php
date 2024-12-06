@@ -8,19 +8,19 @@ class Review extends Model
 {
     use HasFactory;
 
-    protected $table = 'Reviews Table';
+    protected $table = 'reviews_table';
 
     protected $fillable = [
-        'User_id',
-        'Product_id',
-        'Rating',
-        'Review_text',
+        'user_id',
+        'product_id',
+        'rating',
+        'review_text',
     ];
 
     protected function casts(): array
     {
         return [
-            'Review_date' => 'datetime',
+            'review_date' => 'datetime',
         ];
     }
 

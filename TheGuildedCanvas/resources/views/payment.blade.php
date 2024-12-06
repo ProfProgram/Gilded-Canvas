@@ -45,19 +45,21 @@ $totalPrice = 0;
                     <th>Quantity</th>
                     <th>Price Per</th>
                 </tr>
-                @foreach ($orderDetail as $detail)
-                <tr>
-                    <td>{{$detail->Product_id}}</td>
-                    <td>
-                        <img src="{{ asset('images/openart-image_'. $detail->Product_id .'.jpg') }}" alt="Product" width="50px" height="50px">
-                    </td>
-                    <td>{{$detail->Quantity}}</td>
-                    <td>{{$detail->Price_of_order}}</td>
-                </tr>
-                @php
-                    $totalPrice += $detail->Quantity * $detail->Price_of_order;
-                @endphp
-                @endforeach
+                @if ($orderDetail != null)
+                    @foreach ($orderDetail as $detail)
+                    <tr>
+                        <td>{{$detail->product_id}}</td>
+                        <td>
+                            <img src="{{ asset('images/openart-image_'. $detail->product_id .'.jpg') }}" alt="Product" width="50px" height="50px">
+                        </td>
+                        <td>{{$detail->quantity}}</td>
+                        <td>{{$detail->price_of_order}}</td>
+                    </tr>
+                    @php
+                        $totalPrice += $detail->quantity * $detail->price_of_order;
+                    @endphp
+                    @endforeach
+                @endif
             </table>
 
         </div>

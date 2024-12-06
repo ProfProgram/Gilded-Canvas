@@ -9,9 +9,9 @@ use App\Models\OrderDetail;
 class paymentController extends Controller
 {
     public function index() {
-        $orderInfo = Order::where('User_id', 1)->latest('Order_time')->first();
+        $orderInfo = Order::where('user_id', 1)->latest('order_time')->first();
         if ($orderInfo) {
-            $orderDetail = OrderDetail::where('Order_id', $orderInfo->Order_id)->get();
+            $orderDetail = OrderDetail::where('order_id', $orderInfo->order_id)->get();
         
         return view('payment' , ['orderDetail'=>$orderDetail]);
         } else {

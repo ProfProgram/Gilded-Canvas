@@ -8,12 +8,13 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $table = 'Products Table';
+    protected $table = 'products_table';
 
     protected $fillable = [
-        'Category_name',
-        'Product_name',
-        'Description',
+        'category_name',
+        'product_name',
+        'price',
+        'description',
     ];
 
     public function reviews() {

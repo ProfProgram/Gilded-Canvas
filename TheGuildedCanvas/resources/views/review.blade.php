@@ -30,7 +30,7 @@
                     <label for="ProductId">Product Name:</label>
                     <select name="Product_id" id="ProductId" onchange="updateProductImage()" required>
                     @foreach($prod_names as $prod_name)
-                        <option id="prod_name-option" value="{{ $prod_name->Product_id }}" data-image="{{ asset('images/openart-image_' . $prod_name->Product_id . '.jpg') }}">{{ $prod_name->Product_name }}</option>
+                        <option id="prod_name-option" value="{{ $prod_name->product_id }}" data-image="{{ asset('images/openart-image_' . $prod_name->product_id . '.jpg') }}">{{ $prod_name->product_name }}</option>
                     @endforeach
                     </select>
                 </div>

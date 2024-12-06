@@ -13,7 +13,7 @@ class ReviewController extends Controller
     {
         // $db_product = DB::table('Products Table');
         // $prod_names = $db_product->select('Product_id','Product_name')->get();
-        $prod_names = Product::all(['Product_id', 'Product_name']);
+        $prod_names = Product::all(['product_id', 'product_name']);
         return view('review', ['prod_names'=>$prod_names]);
     }
 
@@ -43,10 +43,10 @@ class ReviewController extends Controller
 
         $review = new Review;
         
-        $review->User_id = $request->User_id;
-        $review->Product_id = $request->Product_id;
-        $review->Rating = $request->Rating;
-        $review->Review_text = $request->Review_text;
+        $review->user_id = $request->User_id;
+        $review->product_id = $request->Product_id;
+        $review->rating = $request->Rating;
+        $review->review_text = $request->Review_text;
 
         try {
             if ($review->save()) {
