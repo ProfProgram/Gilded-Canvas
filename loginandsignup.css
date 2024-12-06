@@ -140,3 +140,17 @@ main {
 .signup-link:hover {
     text-decoration: underline;
 }
+
+
+/* this is the box css for select a role */
+
+
+#options {
+    width: 60%;
+    padding: 4px;
+    font-size: 14px;
+    border: #ccc;
+    background-color: #ffcc00; 
+    color: black; 
+    cursor: pointer;
+}
