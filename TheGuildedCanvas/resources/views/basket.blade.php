@@ -3,6 +3,9 @@
 
 @section('content')
 
+@php
+$totalPrice = 0;
+@endphp
 <!-- Main Shopping Cart Section -->
 <main class="cart-container">
         <h1 class="cart-title">Shopping Cart</h1>
@@ -10,36 +13,28 @@
             <!-- Cart Items -->
             <div class="cart-items" id="cart-items">
                 <div class="cart-item">
+                @foreach($cartItems as $item)
                     <div class="product-image">
-                        <img src="{{ asset('images/ProductOne.jpg')}}" alt="Gold Leaf Canvas">
+                        <img src="{{ asset('images/openart-image_'. $item->product_id .'.jpg')}}" alt="Gold Leaf Canvas">
                     </div>
                     <div class="product-details">
-                        <h3>Gold Leaf Canvas</h3>
-                        <p>Elegant gold leaf design on a premium canvas.</p>
-                        <p>Price: £50.00</p>
+                        <h3>{{$item->product->product_name}}</h3>
+                        <p>{{$item->product->description}}</p>
+                        <p>Price: {{$item->product->price}}</p>
                         <div class="quantity-container">
                             <label for="quantity">Quantity:</label>
-                            <input type="number" class="quantity-input" value="1" min="1" max="15" step="1" data-price="50">
+                            <input type="number" class="quantity-input" value="{{$item->quantity}}" min="1" max="15" step="1" data-price="{{$item->product->price}}">
                         </div>
                     </div>
-                    <button class="remove-button">Remove</button>
+                    <a href="{{url('delete/'.$item->basket_id)}}">
+                        <button class="remove-button">Remove</button>
+                    </a>
                 </div>
-                <hr class="divider">
-                <div class="cart-item">
-                    <div class="product-image">
-                        <img src="{{ asset('images/ProductTwo.jpg')}}" alt="Luxury Canvas">
-                    </div>
-                    <div class="product-details">
-                        <h3>Luxury Canvas</h3>
-                        <p>High-quality black and gold abstract canvas design.</p>
-                        <p>Price: £75.00</p>
-                        <div class="quantity-container">
-                            <label for="quantity">Quantity:</label>
-                            <input type="number" class="quantity-input" value="1" min="1" max="15" step="1" data-price="75">
-                        </div>
-                    </div>
-                    <button class="remove-button">Remove</button>
-                </div>
+                @php
+                $totalPrice += $item->quantity * $item->product->price;
+                @endphp
+                @endforeach
+            </div>
                 <!-- Continue Shopping Button Inside the Cart -->
                 <div class="continue-shopping">
                     <a href="{{ url('/product')}}">
@@ -51,8 +46,8 @@
             <!-- Checkout Section -->
             <aside class="checkout-container" id="checkout-container">
                 <h2>Estimated Total:</h2>
-                <p id="estimated-total">£125.00</p>
-                <a href="{{ url('/payment')}}">
+                <p id="estimated-total">£{{$totalPrice}}.00</p>
+                <a href="{{ url('payment/'. $totalPrice)}}">
                     <button class="checkout-button">Checkout</button>
                 </a>
                 </aside>

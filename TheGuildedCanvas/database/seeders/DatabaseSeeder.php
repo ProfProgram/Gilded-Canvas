@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\OrderReturn;
+use App\Models\Cart;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -362,6 +363,28 @@ class DatabaseSeeder extends Seeder
         foreach($reviews as $reviewData) {
             Review::firstOrCreate($reviewData);
         }
+
+        /**
+         * cart dummy data
+         */
+        $carts = [
+            [
+                'user_id' => 1,
+                'product_id' => 1,
+                'quantity' => 1,
+                'price' => 57,
+            ],
+            [
+                'user_id' => 1,
+                'product_id' => 2,
+                'quantity' => 2,
+                'price' => 40,
+            ],
+        ];
+        foreach($carts as $cartData) {
+            Cart::firstOrCreate($cartData);
+        }
+
         /**
           * returns dummy data
           */

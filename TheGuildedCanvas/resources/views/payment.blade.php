@@ -33,10 +33,6 @@ $totalPrice = 0;
     <div class="rightSide">
         <h1>Summary</h1>
         <div class="prodList">
-            <!-- use to check if $orderDetail was being sent properly to view -->
-            <!-- @if ($orderDetail)
-                {{ $orderDetail}}
-            @endif -->
             <table>
                 <!-- Table columns -->
                 <tr>
@@ -45,21 +41,19 @@ $totalPrice = 0;
                     <th>Quantity</th>
                     <th>Price Per</th>
                 </tr>
-                @if ($orderDetail != null)
-                    @foreach ($orderDetail as $detail)
-                    <tr>
-                        <td>{{$detail->product_id}}</td>
-                        <td>
-                            <img src="{{ asset('images/openart-image_'. $detail->product_id .'.jpg') }}" alt="Product" width="50px" height="50px">
-                        </td>
-                        <td>{{$detail->quantity}}</td>
-                        <td>{{$detail->price_of_order}}</td>
-                    </tr>
-                    @php
-                        $totalPrice += $detail->quantity * $detail->price_of_order;
-                    @endphp
-                    @endforeach
-                @endif
+                @foreach ($cartInfo as $item)
+                <tr>
+                    <td>{{$item->product_id}}</td>
+                    <td>
+                        <img src="{{ asset('images/openart-image_'. $item->product_id .'.jpg') }}" alt="Product" width="50px" height="50px">
+                    </td>
+                    <td>{{$item->quantity}}</td>
+                    <td>{{$item->product->price}}</td>
+                </tr>
+                @php
+                    $totalPrice += $item->quantity * $item->product->price;
+                @endphp
+                @endforeach
             </table>
 
         </div>
