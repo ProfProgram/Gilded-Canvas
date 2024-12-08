@@ -1,0 +1,423 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #f8f8f8;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 20px;
+    background-color: #1A1A1A;
+    color: #ffffff;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.header .logo img {
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    letter-spacing: 0.05rem;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #d4af37;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 1px solid #d4af37;
+    border-radius: 5px;
+    outline: none;
+    width: 80%;
+    max-width: 400px;
+}
+
+.search-bar button {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #d4af37;
+    color: #1A1A1A;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #ffffff;
+    color: #d4af37;
+}
+
+.user-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.user-actions .nav-btn {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+}
+
+.user-actions .nav-btn:hover {
+    color: #d4af37;
+}
+
+.cart-icon a {
+    background-color: #d4af37;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cart-icon a:hover {
+    background-color: #ffffff;
+    color: #d4af37;
+}
+
+/* Responsive Styles for Smaller Screens */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        padding: 50px 10px;
+    }
+
+    .navbar {
+        gap: 15px;
+    }
+
+    .navbar a {
+        font-size: 1.4rem;
+    }
+
+    .search-bar input {
+        font-size: 1.2rem;
+    }
+
+    .search-bar button {
+        font-size: 1.2rem;
+    }
+
+    .user-actions .nav-btn {
+        font-size: 1.3rem;
+    }
+
+    .cart-icon a {
+        font-size: 1.3rem;
+        padding: 12px 25px;
+    }
+}
+
+
+/* Responsive Styles for Smaller Screens */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column; /* Stacks elements vertically */
+        padding: 50px 10px; /* Adds padding for readability */
+    }
+
+    .navbar {
+        gap: 15px; /* Reduces gap between links */
+    }
+
+    .navbar a {
+        font-size: 1.4rem; /* Larger font size for small screens */
+    }
+
+    .search-bar input {
+        font-size: 1.2rem; /* Larger input font size */
+    }
+
+    .search-bar button {
+        font-size: 1.2rem; /* Larger button font size */
+    }
+
+    .user-actions .nav-btn {
+        font-size: 1.3rem; /* Larger buttons for readability */
+    }
+
+    .cart-icon a {
+        font-size: 1.3rem; /* Larger cart icon text */
+        padding: 12px 25px; /* Adjust padding */
+    }
+}
+
+
+/* Hero Section */
+.hero {
+    background-color: #f1dba3; /* Light beige color */
+    color: #1A1A1A; /* Dark brown text for contrast */
+    text-align: center;
+    padding: 100px 20px;
+    border-radius: 0; /* square bottom corners */
+}
+
+.hero h1 {
+    font-size: 2h.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.hero .btn {
+    display: inline-block;
+    background-color: #d4af37;
+    color: #1A1A1A;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: color 0.3s ease;
+}
+
+.hero .btn:hover {
+    color: #ffffff;
+}
+
+/* Product Section */
+.products {
+    background-color: #ffffff;
+    padding: 40px 20px;
+}
+
+.products h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #1A1A1A;
+}
+
+/* Product Price */
+.product-slide .price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #d4af37; /* Golden color to match the theme */
+    margin: 10px 0;
+}
+
+/* Slider Track and Slides */
+.slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.product-slide {
+    flex: 0 0 33.33%;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: none; /* No shadow by default */
+}
+
+.product-slide:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Visible shadow on hover */
+}
+
+.product-slide img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.product-slide p {
+    font-size: 1rem;
+}
+
+/* Buttons Inside Product Slide */
+.product-slide .btn {
+    background-color: #d4af37;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.product-slide .btn:hover {
+    background-color: #ffffff;
+    color: #d4af37;
+}
+
+/* Slider Buttons */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.slider:hover .slider-btn {
+    opacity: 1;
+    visibility: visible;
+}
+
+.slider-btn:hover {
+    background-color: #d4af37;
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+/* Footer */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 50px; /* Original padding */
+    background-color: #1A1A1A;
+    color: #ffffff;
+}
+
+/* Footer Links */
+.footer-contact a {
+    color: #d4af37;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.footer-contact a:hover {
+    text-decoration: underline;
+}
+
+/* Social Media Section */
+.footer-social {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-social img {
+    width: 40px; /* Original size */
+    height: 40px; /* Original size */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-social img:hover {
+    transform: scale(1.3); /* Slightly enlarge on hover */
+    opacity: 0.8;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .header,
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header .logo img {
+        height: 40px; /* Shrinks logo for smaller windows */
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+        gap: 10px; /* Reduced gap */
+    }
+
+    .navbar a {
+        font-size: 0.9rem; /* Shrinks font size for smaller screens */
+    }
+
+    .search-bar input {
+        font-size: 0.9rem;
+        width: 80%;
+    }
+
+    .search-bar button {
+        font-size: 0.9rem;
+    }
+
+    .user-actions .nav-btn {
+        font-size: 0.9rem; /* Shrinks buttons' font size */
+    }
+
+    .cart-icon a {
+        font-size: 1rem; /* Shrinks cart icon size */
+        padding: 8px 15px; /* Adjust padding */
+    }
+
+    .footer-contact a {
+        font-size: 0.9rem; /* Shrinks footer text */
+    }
+
+    .footer-social img {
+        width: 30px; /* Shrinks social media icons */
+        height: 30px;
+    }
+}

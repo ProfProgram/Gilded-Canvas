@@ -1,3 +1,4 @@
+@extends('layouts.app')
 <head>
     <head_text>
 
@@ -10,7 +11,7 @@
     <title>login page</title>
     <button class="signup-btn">Sign up</button>
     <div class="logo">
-        <img src="Logo.jpg" alt="gilded canvas Logo" width="120" height="400" />
+        <img src="images/TGC_BLack_and_gold.png" alt="gilded canvas Logo" width="120" height="400" />
     </div>
 
     <link rel="stylesheet" href="{{ asset('css/loginandsignup.css') }}">
@@ -21,10 +22,10 @@
 
     <nav>
 
-        <a href="index.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="contact.html">Contact Us</a>
-        <a href="about.html">About Us</a>
+        <a href="{{ route('home') }}">Home</a>
+        <a href="{{ route('product') }}">Products</a>
+        <a href="{{ route('contact-us') }}">Contact Us</a>
+        <a href="{{ route('review') }}">About Us</a>
 
     </nav>
 </header>
@@ -32,14 +33,15 @@
 <main>
     <section class="login-container">
         <h1>Login</h1>
-        <form>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
             <div class="form-text">
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Username" />
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Email" required />
             </div>
             <div class="form-text">
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Password" />
+                <input type="password" name="password" id="password" placeholder="Password" required />
             </div>
             <a href="#" class="forgot-details">Forgot Details?</a>
             <button type="submit" class="login-btn">Log-In</button>

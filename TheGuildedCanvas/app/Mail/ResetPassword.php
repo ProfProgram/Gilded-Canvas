@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -10,20 +11,32 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Queue\SerializesModels;
-
 class ResetPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $name;
     public $email;
+    public $token;
+    public $name;
+
     /**
      * Create a new message instance.
      */
-    public function __construct($name, $email)
+    public function __construct($email, $token)
     {
-        $this->name = $name;
-        $this->email= $email;
+        $this->email = $email;
+        $this->token = $token;
+        $this->name = $this->getUserNameByEmail($this->email);
+    }
+    public function getUserNameByEmail($email)
+    {
+        $user = User::where('email', $email)->first();
+
+        if ($user) {
+            return $user->name;
+        }
+
+        return null; // Or handle the case where the user is not found
     }
 
     public function build()
@@ -31,8 +44,8 @@ class ResetPassword extends Mailable
         return $this->subject('Password Reset')
             ->view('mail.password-reset')
             ->with([
-                'name' => $this->name,
                 'email' => $this->email,
+                'token' => $this->token,
             ]);
     }
     /**

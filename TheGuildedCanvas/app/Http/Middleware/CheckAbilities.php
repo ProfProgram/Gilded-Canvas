@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckAbilities
 {
-    public function handle(Request $request, Closure $next, $ability)
+    public function handle($request, Closure $next, $role)
     {
-        if (!Auth::user()->tokenCan($ability)) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+        if (Auth::check() && Auth::user()->role === $role) {
+            return $next($request);
         }
-
-        return $next($request);
+        return redirect('/'); // Redirect to home if unauthorized
     }
+
 }
 

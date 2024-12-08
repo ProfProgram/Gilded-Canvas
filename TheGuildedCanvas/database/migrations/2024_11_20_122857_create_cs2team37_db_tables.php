@@ -48,9 +48,15 @@ return new class extends Migration
         if (!Schema::hasTable('products_table')) {
             Schema::create('products_table', function (Blueprint $table) {
                 $table->increments('product_id');
+                $table->string('name');
                 $table->string('category_name');
                 $table->text('description');
                 $table->timestamps();
+                $table->string('image_path')->nullable();
+                $table->string('caption')->nullable();
+                $table->decimal('price', 8, 2)->nullable();
+                $table->boolean('is_featured')->default(false);
+                $table->boolean('is_new')->default(false);
             });
         }
 
@@ -120,7 +126,7 @@ return new class extends Migration
                 $table->unsignedInteger('product_id');
                 // remember to make Rating a drop down of 0 to 5
                 $table->integer('rating')->default(5);
-                $table->text('review_text')->default('');
+                $table->text('review_text');
                 $table->timestamp('review_date');
                 $table->timestamps();
                 $table->foreign('user_id')->references('user_id')->on('users_table')->onDelete('cascade');
@@ -149,6 +155,25 @@ return new class extends Migration
                 $table->foreign('admin_id')->references('admin_id')->on('admin_table')->onDelete('cascade');
             });
         }
+        if (!Schema::hasTable('sessions')) {
+
+            Schema::create('sessions', function (Blueprint $table) {
+                $table->string('id')->primary();
+                $table->foreignId('user_id')->nullable()->index();
+                $table->string('ip_address', 45)->nullable();
+                $table->text('user_agent')->nullable();
+                $table->longText('payload');
+                $table->integer('last_activity')->index();
+            });
+        }
+        if (!Schema::hasTable('password_reset_tokens')) {
+
+            Schema::create('password_reset_tokens', function (Blueprint $table) {
+                $table->string('email')->index();
+                $table->string('token');
+                $table->timestamp('created_at')->nullable();
+            });
+        }
     }
 
     /**
@@ -164,5 +189,7 @@ return new class extends Migration
         Schema::dropIfExists('orders_details_table');
         Schema::dropIfExists('reviews_table');
         Schema::dropIfExists('returns_table');
+        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
     }
 };

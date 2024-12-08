@@ -12,7 +12,7 @@
 
 <p>We received a request to reset your password. If you didn't make this request, please ignore this email. Otherwise, you can reset your password using the link below:</p>
 
-<a href="{{ url('/password/reset?email=' . urlencode($email)) }}">Reset Password</a>
+<a href="{{ url('/reset-password/{token}', $token) }}">Reset Password</a>
 
 <p>Thank you,<br>
     TheGildedCanvas Team</p>
