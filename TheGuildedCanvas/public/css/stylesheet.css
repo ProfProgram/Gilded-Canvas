@@ -264,7 +264,6 @@ nav a:nth-child(5) {
     font-size: 15px;
 }
 
-
 .login-btn {
     background-color: #FFD700;
     border: none;
@@ -290,6 +289,16 @@ nav a:nth-child(5) {
     text-decoration: underline;
 }
 
+#role {
+    width: 60%;
+    padding: 4px;
+    font-size: 14px;
+    border: #ccc;
+    background-color: #ffcc00; 
+    color: black; 
+    cursor: pointer;
+}
+
 /* BASKET PAGE */
 
 .cart-icon a {
@@ -298,12 +307,12 @@ nav a:nth-child(5) {
     font-weight: bold;
 }
 .cart-container {
-    flex: 1; /* This allows the cart container to stretch and fill the available space */
+    flex: 1;
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
-/* Cart Container */
+
 .cart-container {
     padding: 20px;
     max-width: 1200px;
@@ -316,15 +325,13 @@ nav a:nth-child(5) {
     margin-bottom: 20px;
 }
 
-/* Cart Layout */
 .cart-layout {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 20px;
-    align-items: start; /* Align items dynamically */
+    align-items: start;
 }
 
-/* Cart Items */
 .cart-items {
     background-color: #fff;
     padding: 20px;
@@ -352,25 +359,22 @@ nav a:nth-child(5) {
     flex: 1;
 }
 
-/* Quantity Container */
 .quantity-container {
     display: flex;
     align-items: center;
-    gap: 5px; /* Space between buttons and input */
+    gap: 5px;
 }
 
-/* Quantity Input */
 .quantity-input {
     width: 50px;
     height: 30px;
-    text-align: center; /* Center align the text */
+    text-align: center;
     font-size: 1rem;
-    border: 1px solid #ccc; /* Light border */
+    border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Buttons */
 .remove-button,
 .checkout-button,
 .continue-shopping-button {
@@ -392,7 +396,6 @@ nav a:nth-child(5) {
     transform: scale(1.05);
 }
 
-/* Checkout Section */
 .checkout-container {
     background-color: #fff;
     padding: 20px;
@@ -401,13 +404,11 @@ nav a:nth-child(5) {
     text-align: center;
 }
 
-/* Continue Shopping */
 .continue-shopping {
     text-align: center;
     margin-top: 20px;
 }
 
-/* Empty Basket Styling */
 #empty-basket-container {
     display: none;
     justify-content: center;
@@ -436,12 +437,12 @@ nav a:nth-child(5) {
 .cart-icon {
     display: flex;
     align-items: center;
-    gap: 5px; /* Adds space between the icon and the count */
+    gap: 5px;
 }
 
 .cart-icon-img {
-    width: 35px; /* Adjust the size of the cart icon */
-    height: auto; /* Maintain aspect ratio */
+    width: 35px;
+    height: auto;
     vertical-align: middle;
 }
 
@@ -489,7 +490,6 @@ nav a:nth-child(5) {
     margin-bottom: 20px;
 }
 
-/* Orders Layout */
 .orders-layout {
     background-color: #fff;
     padding: 20px;
@@ -517,7 +517,6 @@ nav a:nth-child(5) {
     flex: 1;
 }
 
-/* Buttons */
 .reorder-button {
     background-color: #d4af37;
     color: #ffffff;
@@ -605,13 +604,12 @@ nav a:nth-child(5) {
 
 /* HOME PAGE */
 
-/* Hero Section */
 .hero {
-    background-color: #f1dba3; /* Light beige color */
-    color: #1A1A1A; /* Dark brown text for contrast */
+    background-color: #f1dba3;
+    color: #1A1A1A;
     text-align: center;
     padding: 100px 20px;
-    border-radius: 0; /* square bottom corners */
+    border-radius: 0;
 }
 
 .hero h1 {
@@ -641,7 +639,7 @@ nav a:nth-child(5) {
     color: #ffffff;
 }
 
-/* Product Section */
+
 .products {
     background-color: #ffffff;
     padding: 40px 20px;
@@ -654,15 +652,15 @@ nav a:nth-child(5) {
     color: #1A1A1A;
 }
 
-/* Product Price */
+
 .product-slide .price {
     font-size: 1rem;
     font-weight: bold;
-    color: #d4af37; /* Golden color to match the theme */
+    color: #d4af37;
     margin: 10px 0;
 }
 
-/* Slider Track and Slides */
+
 .slider {
     position: relative;
     overflow: hidden;
@@ -684,12 +682,12 @@ nav a:nth-child(5) {
     color: #333;
     border-radius: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: none; /* No shadow by default */
+    box-shadow: none;
 }
 
 .product-slide:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Visible shadow on hover */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .product-slide img {
@@ -704,7 +702,7 @@ nav a:nth-child(5) {
     font-size: 1rem;
 }
 
-/* Buttons Inside Product Slide */
+
 .product-slide .btn {
     background-color: #d4af37;
     color: #ffffff;
@@ -720,7 +718,7 @@ nav a:nth-child(5) {
     color: #d4af37;
 }
 
-/* Slider Buttons */
+
 .slider-btn {
     position: absolute;
     top: 50%;
@@ -753,4 +751,66 @@ nav a:nth-child(5) {
 
 .next-btn {
     right: 10px;
+}
+
+
+/* CONTACT-US/ABOUT-US PAGE */
+
+#contact-main {
+    padding: 40px;
+    max-width: 800px;
+    margin: auto;
+}
+
+#headers-contact {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+#para-contact {
+    margin-bottom: 20px;
+}
+
+.mission, .team {
+    margin-top: 40px;
+}
+
+.team img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    margin: 10px;
+}
+
+/* Contact Us Section */
+section {
+    margin-top: 40px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+form input, form textarea {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
 }

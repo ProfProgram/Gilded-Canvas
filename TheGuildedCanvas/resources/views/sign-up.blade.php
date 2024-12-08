@@ -30,7 +30,7 @@
             </div>
             <div class="form-text">
                 <label for="role">Role</label>
-                <select name="role" required>
+                <select name="role" id="role" required>
                     <option value="User">User</option>
                     <option value="User">Admin</option>
                 </select>
