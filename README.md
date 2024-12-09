@@ -1,7 +1,7 @@
 # Gilded-Canvas
 A web application implemented as an e-commerce website. The project is based on requirements for a university module project. This is Team 37's interpretation of the requirements.
 
-ASTON SERVER HOSTING STATUS :::: (https://cs2team37.cs2410-web01pvm.aston.ac.uk/) ::: current commit equivalent = Server v1 
+ASTON SERVER HOSTING STATUS :::: (https://cs2team37.cs2410-web01pvm.aston.ac.uk/) ::: current commit equivalent = Server v2 
 
 update1 : Laravel Framework Update
 
