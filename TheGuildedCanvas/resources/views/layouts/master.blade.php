@@ -13,18 +13,34 @@
             <img id="navbar-logo" src="{{ asset('images/TGC-Black-and-Gold.png') }}" alt="The Gilded Canvas Logo">
             </a>
             <!-- connected pages -->
+            <!-- public links -->
             <a href="/home">Home</a>
             <a href="/product">Products</a>
             <a href="/review">Review</a>
             <a href="/contact-us">Contact Us</a>
+            <!-- Logged in links -->
+            @auth
             <a href="/payment">Payment</a>
-            <a href="/sign-in">Sign-in</a>
-            <a href="/sign-up">Sign-up</a>
-            <a href="/previous-orders">Previous-Orders</a>
             <a href="/basket" class="cart-icon">
                 <img src="Images/cart-icon.png" alt="Shopping Cart" class="cart-icon-img">
             <span class="cart-item-count">(2)</span>
             </a>
+            <a href="/previous-orders">Previous-Orders</a>
+            <li>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit">Logout</button>
+                </form>
+            </li>
+            @if(Auth::user()->role === 'admin')
+            <li><a href="{{ route('admin') }}">Admin Panel</a></li>
+            @endif
+            @endauth
+            <!-- guest links -->
+            @guest
+            <a href="/sign-in">Sign-in</a>
+            <a href="/sign-up">Sign-up</a>
+            @endguest
         </nav>
     </header>
 

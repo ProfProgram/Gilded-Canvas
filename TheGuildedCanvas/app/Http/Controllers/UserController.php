@@ -53,7 +53,15 @@ class UserController extends Controller
 
         $input = $request->only(['name', 'password', 'email', 'phone_number', 'role']);
         $input['password'] = bcrypt($input['password']);
-        $user = User::create($input);
+
+        // $user = User::create($input);
+        $user = new User;
+        $user->name = $request->name;
+        $user->password = $request->password;
+        $user->email = $request->email;
+        $user->phone_number = $request->phone_number;
+        $user->role = $request->role;
+        $user->save();
         Mail::to($user->email)->send(new TestMail($user->name, $user->email));
 
         //return $this->sendResponse($user, 'User created successfully. Please check your email to verify your account.');

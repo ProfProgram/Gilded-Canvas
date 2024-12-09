@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\middleware\CheckAbilities;
+use App\Http\Middleware\CheckAbilities;
 
 
 Route::get('/user', function (Request $request) {
