@@ -26,12 +26,12 @@
             <span class="cart-item-count">(2)</span>
             </a>
             <a href="/previous-orders">Previous-Orders</a>
-            <li>
+            <a>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit">Logout</button>
                 </form>
-            </li>
+            </a>
             @if(Auth::user()->role === 'admin')
             <li><a href="{{ route('admin') }}">Admin Panel</a></li>
             @endif

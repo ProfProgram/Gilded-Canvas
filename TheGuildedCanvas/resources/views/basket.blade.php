@@ -15,7 +15,7 @@ $totalPrice = 0;
                 <div class="cart-item">
                 @foreach($cartItems as $item)
                     <div class="product-image">
-                        <img src="{{ asset('images/products/img-'. $item->product_id .'.jpg')}}" alt="Gold Leaf Canvas">
+                        <img src="{{ asset('images/products/img-'. $item->product_id .'.png')}}" alt="Gold Leaf Canvas">
                     </div>
                     <div class="product-details">
                         <h3>{{$item->product->product_name}}</h3>
