@@ -8,13 +8,13 @@ class OrderDetail extends Model
 {
     use HasFactory;
 
-    protected $table = 'Orders Details Table';
+    protected $table = 'orders_details_table';
 
     protected $fillable = [
-        'Order_id',
-        'Product_id',
-        'Quantity',
-        'Price_of_order',
+        'order_id',
+        'product_id',
+        'quantity',
+        'price_of_order',
     ];
 
     /**

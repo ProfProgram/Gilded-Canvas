@@ -11,128 +11,160 @@ return new class extends Migration
      */
     public function up(): void
     {
-        /**
-         * does not require foreign keys
-         */
-        Schema::create('Users Table', function (Blueprint $table) {
-            $table->increments('User_id');
-            $table->string('Name');
-            $table->string('Email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('Password');
-            $table->string('Phone_number');
-            $table->enum('Role', ['User', 'Admin']);
-            $table->rememberToken();
-            $table->timestamps();
-        });
+        /*
+        * NEEDS NO FOREIGN KEY
+        */
+        if (!Schema::hasTable('users_table')) {
+            Schema::create('users_table', function (Blueprint $table) {
+                $table->increments('user_id');
+                $table->string('name');
+                $table->string('email')->unique();
+                $table->timestamp('email_verified_at')->nullable();
+                $table->string('password');
+                $table->string('phone_number');
+                $table->enum('role', ['user', 'admin']);
+                $table->rememberToken();
+                $table->timestamps();
+            });
+        }
 
         /**
          *  requires users table foreign keys
          * when a user's role = Admin an entry is made
          * for any user in the admin table their is only 1 entry
-         */ 
-        Schema::create('Admin Table', function (Blueprint $table) {
-            $table->increments('Admin_id');
-            $table->unsignedInteger('User_id');
-            $table->timestamps();
-            $table->foreign('User_id')->references('User_id')->on('Users Table')->onDelete('cascade');
-        });
+         */
+        if (!Schema::hasTable('admin_table')) {
+            Schema::create('admin_table', function (Blueprint $table) {
+                $table->increments('admin_id');
+                $table->unsignedInteger('user_id');
+                $table->timestamps();
+                $table->foreign('user_id')->references('user_id')->on('users_table')->onDelete('cascade');
+            });
+        }
 
-        /** 
+        /**
          * does not require foreign keys
          */
-        Schema::create('Products Table', function (Blueprint $table) {
-            $table->increments('Product_id');
-            $table->string('Category_name');
-            $table->text('Description');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('products_table')) {
+            Schema::create('products_table', function (Blueprint $table) {
+                $table->increments('product_id');
+                $table->string('category_name');
+                $table->string('product_name')->unique();
+                $table->integer('price');
+                $table->text('description');
+                $table->timestamps();
+            });
+        }
 
         /**
          *  requires product and admin tables first for foreign keys
          * There is 1 products entry for each inventory row
          */
-        Schema::create('Inventory Table', function (Blueprint $table) {
-            $table->increments('Inventory_id');
-            $table->unsignedInteger('Product_id');
-            $table->unsignedInteger('Admin_id');
-            $table->integer('Stock_in')->default(0);
-            $table->integer('Stock_out')->default(0);
-            $table->integer('Stock_level')->default(0);
-            $table->timestamps();
-            // Threshold will send notification if stock level is exceedingly low 
-            //$table->integer('Threshold_level')->default(0)->nullable();
-            $table->foreign('Product_id')->references('Product_id')->on('Products Table')->onDelete('cascade');
-            $table->foreign('Admin_id')->references('Admin_id')->on('Admin Table')->onDelete('cascade');
-        });
+        if (!Schema::hasTable('inventory_table')) {
+            Schema::create('inventory_table', function (Blueprint $table) {
+                $table->increments('inventory_id');
+                $table->unsignedInteger('product_id');
+                $table->unsignedInteger('admin_id');
+                $table->integer('stock_level')->default(0);
+                $table->timestamps();
+                // Threshold will send notification if stock level is exceedingly low
+                //$table->integer('threshold_level')->default(0)->nullable();
+                $table->foreign('product_id')->references('product_id')->on('products_table')->onDelete('cascade');
+                $table->foreign('admin_id')->references('admin_id')->on('admin_table')->onDelete('cascade');
+            });
+        }
 
         /**
          * requires admin and user and order detail table for foreign keys
          * requires rule for many OrderDetails, and Total_price column is sum of all associated Price_of_order's
          */
-        Schema::create('Orders Table', function (Blueprint $table) {
-            $table->increments('Order_id');
-            $table->decimal('Total_price', 10, 0)->default(0);
-            $table->timestamp('Order_time');
-            $table->unsignedInteger('Admin_id');
-            $table->unsignedInteger('User_id');
-            $table->timestamps();
-            $table->foreign('Admin_id')->references('Admin_id')->on('Admin Table')->onDelete('cascade');
-            $table->foreign('User_id')->references('User_id')->on('Users Table')->onDelete('cascade');
-            $table->enum('Status', ['Pending','Shipped','Delivered','Cancelled'])->default('Pending');
-            // payment currently out of scope
-            // $table->enum('Payment_type', ['Visa', 'MasterCard', 'PayPal']);
-        });
+        if (!Schema::hasTable('orders_table')) {
+            Schema::create('orders_table', function (Blueprint $table) {
+                $table->increments('order_id');
+                $table->decimal('total_price', 10, 0)->default(0);
+                $table->timestamp('order_time');
+                $table->unsignedInteger('admin_id');
+                $table->unsignedInteger('user_id');
+                $table->foreign('admin_id')->references('admin_id')->on('admin_table')->onDelete('cascade');
+                $table->foreign('user_id')->references('user_id')->on('users_table')->onDelete('cascade');
+                $table->enum('status', ['pending', 'shipped', 'delivered', 'cancelled'])->default('pending');
+                // payment currently out of scope
+                // $table->enum('payment_type', ['Visa', 'MasterCard', 'PayPal']);
+                $table->timestamps();
+            });
+        }
 
         /**
          * requires products and orders tables for foreign keys
          * */
-        Schema::create('Orders Details Table', function (Blueprint $table) {
-            $table->increments('Orders_details_id');
-            $table->unsignedInteger('Order_id');
-            $table->unsignedInteger('Product_id');
-            $table->integer('Quantity');
-            $table->decimal('Price_of_order', 10, 0);
-            $table->timestamps();
-            $table->foreign('Order_id')->references('Order_id')->on('Orders Table')->onDelete('cascade');
-            $table->foreign('Product_id')->references('Product_id')->on('Products Table')->onDelete('cascade');
-        });
+        if (!Schema::hasTable('orders_details_table')) {
+            Schema::create('orders_details_table', function (Blueprint $table) {
+                $table->increments('orders_details_id');
+                $table->unsignedInteger('order_id');
+                $table->unsignedInteger('product_id');
+                $table->integer('quantity');
+                $table->decimal('price_of_order', 10, 0);
+                $table->timestamps();
+                $table->foreign('order_id')->references('order_id')->on('orders_table')->onDelete('cascade');
+                $table->foreign('product_id')->references('product_id')->on('products_table')->onDelete('cascade');
+            });
+        }
 
         /**
-         * requires user and Products Table for foreign keys
+         * requires user and products_table for foreign keys
          */
-        Schema::create('Reviews Table', function (Blueprint $table) {
-            $table->increments('Review_id');
-            $table->unsignedInteger('User_id');
-            $table->unsignedInteger('Product_id');
-            // remember to make Rating a drop down of 0 to 5
-            $table->integer('Rating')->default(5);
-            $table->text('Review_text')->default('');
-            $table->timestamp('Review_date');
-            $table->timestamps();
-            $table->foreign('User_id')->references('User_id')->on('Users Table')->onDelete('cascade');
-            $table->foreign('Product_id')->references('Product_id')->on('Products Table')->onDelete('cascade');
-        });
-        
+        if (!Schema::hasTable('reviews_table')) {
+            Schema::create('reviews_table', function (Blueprint $table) {
+                $table->increments('review_id');
+                $table->unsignedInteger('user_id');
+                $table->unsignedInteger('product_id');
+                // remember to make Rating a drop down of 0 to 5
+                $table->integer('rating')->default(5);
+                $table->text('review_text')->default('');
+                $table->timestamp('review_date');
+                // does not run seeding without more timestamps
+                $table->timestamps();
+                $table->foreign('user_id')->references('user_id')->on('users_table')->onDelete('cascade');
+                $table->foreign('product_id')->references('product_id')->on('products_table')->onDelete('cascade');
+            });
+        }
+
         /**
          * requires order, order, product, user and admin tables for foreign keys
          * */
-        Schema::create('Returns Table', function (Blueprint $table) {
-            $table->increments('Return_id');
-            $table->unsignedInteger('Order_id');
-            $table->unsignedInteger('Product_id');
-            $table->unsignedInteger('User_id');
-            $table->unsignedInteger('Admin_id');
-            $table->text('Return_reason');
-            $table->enum('Return_status', ['Pending','Approved','Rejected','Completed','Refunded','Cancelled'])->default('Pending');
-            // not timestamp since Return_date will be a chosen date to return by
-            $table->dateTime('Return_date');
-            $table->timestamps();
-            $table->foreign('User_id')->references('User_id')->on('Users Table')->onDelete('cascade');
-            $table->foreign('Product_id')->references('Product_id')->on('Products Table')->onDelete('cascade');
-            $table->foreign('Order_id')->references('Order_id')->on('Orders Table')->onDelete('cascade');
-            $table->foreign('Admin_id')->references('Admin_id')->on('Admin Table')->onDelete('cascade');
+        // not using since no return page
+    //     if (!Schema::hasTable('returns_table')) {
+    //         Schema::create('returns_table', function (Blueprint $table) {
+    //             $table->increments('return_id');
+    //             $table->unsignedInteger('order_id');
+    //             $table->unsignedInteger('product_id');
+    //             $table->unsignedInteger('user_id');
+    //             $table->unsignedInteger('admin_id');
+    //             $table->text('return_reason');
+    //             $table->enum('return_status', ['pending', 'approved', 'rejected', 'completed', 'refunded', 'cancelled'])->default('pending');
+    //             // not timestamp since Return_date will be a chosen date to return by
+    //             $table->dateTime('return_date');
+    //             $table->timestamps();
+    //             $table->foreign('user_id')->references('user_id')->on('users_table')->onDelete('cascade');
+    //             $table->foreign('product_id')->references('product_id')->on('products_table')->onDelete('cascade');
+    //             $table->foreign('order_id')->references('order_id')->on('orders_table')->onDelete('cascade');
+    //             $table->foreign('admin_id')->references('admin_id')->on('admin_table')->onDelete('cascade');
+    //         });
+    //     }
+
+        if (!Schema::hasTable('cart_table')) {
+            Schema::create('cart_table', function (Blueprint $table) {
+                $table->increments('basket_id');
+                $table->unsignedInteger('user_id');
+                $table->unsignedInteger('product_id');
+                // remember to make Rating a drop down of 0 to 5
+                $table->integer('quantity');
+                $table->integer('price');
+                $table->foreign('user_id')->references('user_id')->on('users_table')->onDelete('cascade');
+                $table->foreign('product_id')->references('product_id')->on('products_table')->onDelete('cascade');
+                $table->timestamps();
         });
+        }
     }
 
     /**
@@ -140,13 +172,14 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Users Table');
-        Schema::dropIfExists('Admin Table');
-        Schema::dropIfExists('Products Table');
-        Schema::dropIfExists('Inventory Table');
-        Schema::dropIfExists('Orders Table');
-        Schema::dropIfExists('Orders Details Table');
-        Schema::dropIfExists('Reviews Table');
-        Schema::dropIfExists('Returns Table');
+        Schema::dropIfExists('users_table');
+        Schema::dropIfExists('admin_table');
+        Schema::dropIfExists('products_table');
+        Schema::dropIfExists('inventory_table');
+        Schema::dropIfExists('orders_table');
+        Schema::dropIfExists('orders_details_table');
+        Schema::dropIfExists('reviews_table');
+        Schema::dropIfExists('returns_table');
+        Schema::dropIfExists('cart_table');
     }
 };

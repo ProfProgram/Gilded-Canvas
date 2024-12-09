@@ -13,7 +13,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     // connected table
-    protected $table = 'Users Table';
+    protected $table = 'users_table';
 
     /**
      * The attributes that are mass assignable.
@@ -21,11 +21,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'Name',
-        'Email',
-        'Password',
-        'Phone_number',
-        'Role'
+        'name',
+        'email',
+        'password',
+        'phone_number',
+        'role'
     ];
 
     /**
