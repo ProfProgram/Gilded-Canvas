@@ -105,7 +105,7 @@ $categories = array_unique($categoryUnordered);
             </div>
         </div>
     @empty
-        <p>No products found matching your search.</p>
+        <p id="search-empty">No products found matching your search.</p>
     @endforelse
 </div>
 

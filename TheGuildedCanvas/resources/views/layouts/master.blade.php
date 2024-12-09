@@ -49,7 +49,7 @@
         @yield('content')
     </div>
     <footer style="background-color: #1A1A1A; color: #ffffff; padding: 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
-        <!-- copywrite notice and the year we were established -->
+        <!-- copyright notice and the year we were established -->
 
         <div style="flex: 1; margin-bottom: 15px; min-width: 200px;">
             <p style="color: #d4af37; font-size: 1.2rem; font-weight: bold; margin: 0;">© 2024 The Gilded Canvas</p>

@@ -5,7 +5,7 @@ ASTON SERVER HOSTING STATUS :::: (https://cs2team37.cs2410-web01pvm.aston.ac.uk/
 
 update1 : Laravel Framework Update
 
-Larvel was committed to the repo. This came along with empty views files, and updated routes to accommodate the views. An update to the default seeder to input dummy/testing data into the database, as well as migration and model files for the database.
+Laravel was committed to the repo. This came along with empty views files, and updated routes to accommodate the views. An update to the default seeder to input dummy/testing data into the database, as well as migration and model files for the database.
 
 update2 : Pages
 
