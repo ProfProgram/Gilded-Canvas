@@ -27,21 +27,21 @@ $categories = array_unique($categoryUnordered);
         <div class="slider-track">
             <!-- Product 1: Gilded Frame Art -->
             <a href="product1.html" class="product-slide">
-                <img src="Images/gilded-frame-art.png" alt="Gilded Frame Art">
+                <img src="{{asset('images/products/img-1.jpg')}}" alt="Gilded Frame Art">
                 <p>Gilded Frame Art</p>
                 <p class="price">£199</p>
                 <button class="btn">Add to Cart</button>
             </a>
             <!-- Product 2: Golden Vase -->
             <a href="product2.html" class="product-slide">
-                <img src="Images/golden-vase.png" alt="Golden Vase">
+                <img src="{{asset('images/products/img-2.jpg')}}" alt="Golden Vase">
                 <p>Golden Vase</p>
                 <p class="price">£149</p>
                 <button class="btn">Add to Cart</button>
             </a>
             <!-- Product 3: Luxury Wall Clock -->
             <a href="product3.html" class="product-slide">
-                <img src="Images/luxury-wall-clock.png" alt="Luxury Wall Clock">
+                <img src="{{asset('images/products/img-3.jpg')}}" alt="Luxury Wall Clock">
                 <p>Luxury Wall Clock</p>
                 <p class="price">£249</p>
                 <button class="btn">Add to Cart</button>
@@ -91,7 +91,7 @@ $categories = array_unique($categoryUnordered);
     @forelse ($productInfo as $info)
         <div class="product">
             <div class="product-image">
-                <img src="{{ asset('images/openart-image_'.$info->product_id.'.jpg') }}" alt="{{ $info->product_name }}">
+                <img src="{{ asset('images/products/img-'.$info->product_id.'.jpg') }}" alt="{{ $info->product_name }}">
             </div>
             <div class="product-details">
                 <h2>{{ $info->product_name }}</h2>

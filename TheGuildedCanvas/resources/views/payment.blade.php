@@ -45,7 +45,7 @@ $totalPrice = 0;
                 <tr>
                     <td>{{$item->product_id}}</td>
                     <td>
-                        <img src="{{ asset('images/openart-image_'. $item->product_id .'.jpg') }}" alt="Product" width="50px" height="50px">
+                        <img src="{{ asset('images/products/img-'. $item->product_id .'.jpg') }}" alt="Product" width="50px" height="50px">
                     </td>
                     <td>{{$item->quantity}}</td>
                     <td>{{$item->product->price}}</td>

@@ -57,7 +57,7 @@ $categories = array_unique($categoryUnordered);
     @forelse ($productInfo as $info)
         <div class="product">
             <div class="product-image">
-                <img src="{{ asset('images/openart-image_'.$info->product_id.'.jpg') }}" alt="{{ $info->product_name }}">
+                <img src="{{ asset('images/products/img-'.$info->product_id.'.jpg') }}" alt="{{ $info->product_name }}">
             </div>
             <div class="product-details">
                 <h2>{{ $info->product_name }}</h2>
