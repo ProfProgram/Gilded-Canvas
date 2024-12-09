@@ -41,45 +41,46 @@ $categories = array_unique($categoryUnordered);
     </form>
     </div>
 
-@php
-    $query = request('query');
-    $category = request('category');
+    @php
+        $query = request('query');
+        $category = request('category');
 
-    // Filter products based on query and category
-    $filteredProducts = $productInfo->filter(function($product) use ($query, $category) {
-        $matchesQuery = $query ? stripos($product->product_name, $query) !== false || stripos($product->category_name, $query) !== false : true;
-        $matchesCategory = $category ? $product->category_name == $category : true;
+        // Filter products based on query and category
+        $filteredProducts = $productInfo->filter(function($product) use ($query, $category) {
+            $matchesQuery = $query ? stripos($product->product_name, $query) !== false || stripos($product->category_name, $query) !== false : true;
+            $matchesCategory = $category ? $product->category_name == $category : true;
 
-        return $matchesQuery && $matchesCategory;
-    });
-@endphp
+            return $matchesQuery && $matchesCategory;
+        });
+    @endphp
 
-<div class="product-list">
-    @if ($query || $category)
-        <h2>Search Results for "{{ $query }}" in "{{ $category }}" category</h2>
-    @endif
+    <div class="product-list">
+        @if ($query || $category)
+            <h2>Search Results for "{{ $query }}" in "{{ $category }}" category</h2>
+        @endif
 
-    @forelse ($filteredProducts as $info)
-        <div class="product">
-            <div class="product-image">
-                <img src="{{ asset('images/products/img-'.$info->product_id.'.jpg') }}" alt="{{ $info->product_name }}">
+        @forelse ($filteredProducts as $info)
+            <div class="product">
+                <div class="product-image">
+                    <img src="{{ asset('images/products/img-'.$info->product_id.'.png') }}" alt="{{ $info->product_name }}">
+                </div>
+                <div class="product-details">
+                    <h2>{{ $info->product_name }}</h2>
+                    <p>{{ $info->description }}</p>
+                    <p class="product-price">£{{ $info->price }}.00</p>
+                    <form method="POST" action="{{ route('cart.add') }}">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $info->product_id }}">
+                        <input type="hidden" name="product_name" value="{{ $info->product_name }}">
+                        <input type="hidden" name="product_price" value="{{ $info->price }}">
+                        <button type="submit" class="buy-button">Buy Now</button>
+                    </form>
+                </div>
             </div>
-            <div class="product-details">
-                <h2>{{ $info->product_name }}</h2>
-                <p>{{ $info->description }}</p>
-                <p class="product-price">£{{ $info->price }}.00</p>
-                <form method="POST" action="{{ route('cart.add') }}">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $info->product_id }}">
-                    <input type="hidden" name="product_name" value="{{ $info->product_name }}">
-                    <input type="hidden" name="product_price" value="{{ $info->price }}">
-                    <button type="submit" class="buy-button">Buy Now</button>
-                </form>
-            </div>
-        </div>
-    @empty
-        <p>No products found matching your search.</p>
-    @endforelse
+        @empty
+            <p>No products found matching your search.</p>
+        @endforelse
+    </div>
 </div>
 
 @endsection
