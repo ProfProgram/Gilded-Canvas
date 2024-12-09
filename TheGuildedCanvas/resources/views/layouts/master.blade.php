@@ -22,7 +22,7 @@
             @auth
             <a href="/payment">Payment</a>
             <a href="/basket" class="cart-icon">
-                <img src="Images/cart-icon.png" alt="Shopping Cart" class="cart-icon-img">
+                <img src="images/cart-icon.png" alt="Shopping Cart" class="cart-icon-img">
             <span class="cart-item-count">(2)</span>
             </a>
             <a href="/previous-orders">Previous-Orders</a>
@@ -85,13 +85,13 @@
             <h3 style="font-size: 1rem; margin-bottom: 10px;">Social Media Links:</h3>
             <div style="display: flex; justify-content: flex-end; gap: 10px;">
                 <a href="https://www.facebook.com" target="_blank">
-                    <img src="Images/facebook-logo.png" alt="Facebook" style="width: 30px; height: auto;">
+                    <img src="images/facebook-logo.png" alt="Facebook" style="width: 30px; height: auto;">
                 </a>
                 <a href="https://www.instagram.com" target="_blank">
-                    <img src="Images/instagram-icon.png" alt="Instagram" style="width: 30px; height: auto;">
+                    <img src="images/instagram-icon.png" alt="Instagram" style="width: 30px; height: auto;">
                 </a>
                 <a href="https://www.twitter.com" target="_blank">
-                    <img src="Images/twitter-icon.png" alt="Twitter" style="width: 30px; height: auto;">
+                    <img src="images/twitter-icon.png" alt="Twitter" style="width: 30px; height: auto;">
                 </a>
             </div>
         </div>

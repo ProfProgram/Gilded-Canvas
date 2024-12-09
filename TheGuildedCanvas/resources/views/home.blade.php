@@ -17,7 +17,7 @@ $categories = array_unique($categoryUnordered);
 <section class="hero" id="home">
     <h1>Welcome to The Gilded Canvas</h1>
     <p>Where art meets elegance. Discover unique and timeless pieces crafted for the discerning collector.</p>
-    <a href="{{url('/products')}}" class="btn">Shop Now</a>
+    <a href="{{url('/product')}}" class="btn">Shop Now</a>
 </section>
 
 <!-- Product Slider Section -->
@@ -25,22 +25,20 @@ $categories = array_unique($categoryUnordered);
     <h2>Featured Products</h2>
     <div class="slider">
         <div class="slider-track">
-            <!-- Product 1: Gilded Frame Art -->
-            <a href="product1.html" class="product-slide">
+             <!-- anchors will let us connect images with the associated product pages -->
+            <a class="product-slide">
                 <img src="{{asset('images/products/img-1.jpg')}}" alt="Gilded Frame Art">
                 <p>Gilded Frame Art</p>
                 <p class="price">£199</p>
                 <button class="btn">Add to Cart</button>
             </a>
-            <!-- Product 2: Golden Vase -->
-            <a href="product2.html" class="product-slide">
+            <a class="product-slide">
                 <img src="{{asset('images/products/img-2.jpg')}}" alt="Golden Vase">
                 <p>Golden Vase</p>
                 <p class="price">£149</p>
                 <button class="btn">Add to Cart</button>
             </a>
-            <!-- Product 3: Luxury Wall Clock -->
-            <a href="product3.html" class="product-slide">
+            <a class="product-slide">
                 <img src="{{asset('images/products/img-3.jpg')}}" alt="Luxury Wall Clock">
                 <p>Luxury Wall Clock</p>
                 <p class="price">£249</p>

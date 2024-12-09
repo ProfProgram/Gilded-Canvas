@@ -82,7 +82,7 @@ return new class extends Migration
             Schema::create('orders_table', function (Blueprint $table) {
                 $table->increments('order_id');
                 $table->decimal('total_price', 10, 0)->default(0);
-                $table->timestamp('order_time');
+                $table->timestamp('order_time')->default(DB::raw('CURRENT_TIMESTAMP'));;
                 $table->unsignedInteger('admin_id');
                 $table->unsignedInteger('user_id');
                 $table->foreign('admin_id')->references('admin_id')->on('admin_table')->onDelete('cascade');
@@ -120,8 +120,8 @@ return new class extends Migration
                 $table->unsignedInteger('product_id');
                 // remember to make Rating a drop down of 0 to 5
                 $table->integer('rating')->default(5);
-                $table->text('review_text')->default('');
-                $table->timestamp('review_date');
+                $table->text('review_text');
+                $table->timestamp('review_date')->default(DB::raw('CURRENT_TIMESTAMP'));;
                 // does not run seeding without more timestamps
                 $table->timestamps();
                 $table->foreign('user_id')->references('user_id')->on('users_table')->onDelete('cascade');
