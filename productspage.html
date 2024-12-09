@@ -1,0 +1,172 @@
+<!-- Header Section -->
+<header class="header" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background-color: #1A1A1A; color: #ffffff;">
+    <!-- Logo -->
+    <div class="logo" style="flex: 1;">
+        <a href="index.html" aria-label="The Gilded Canvas Homepage">
+            <img src="Images/logoi.png" alt="The Gilded Canvas Logo" style="height: 50px; max-width: 100%; object-fit: contain;">
+        </a>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar" style="flex: 2; display: flex; justify-content: center; gap: 15px;">
+        <a href="index.html" style="color: #ffffff; text-decoration: none; font-size: 1rem;">Home</a>
+        <a href="about.html" style="color: #ffffff; text-decoration: none; font-size: 1rem;">About Us</a>
+        <a href="products.html" style="color: #ffffff; text-decoration: none; font-size: 1rem;">Products</a>
+        <a href="contact.html" style="color: #ffffff; text-decoration: none; font-size: 1rem;">Contact Us</a>
+    </nav>
+
+    <!-- Cart Icon -->
+    <div class="cart-icon" style="flex: 1; text-align: right;">
+        <a href="cart.html" style="color: #d4af37; text-decoration: none; font-size: 1rem;" aria-label="Shopping Cart with 2 items">
+            🛒 (2)
+        </a>
+    </div>
+</header>
+
+<!-- Styling -->
+<style>
+    /* Hover Effects */
+    .navbar a:hover {
+        color: #d4af37;
+        text-decoration: underline;
+    }
+
+    .cart-icon a:hover {
+        color: #ffffff;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .header {
+            flex-wrap: wrap;
+            padding: 15px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .navbar {
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .cart-icon {
+            text-align: center;
+            margin-top: 10px;
+        }
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage - The Gilded Canvas</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <!-- Include Header -->
+    <div id="header">
+        <object type="text/html" data="header.html" style="width: 100%; height: auto;"></object>
+    </div>
+
+    <!-- Logo Section -->
+    <div class="logo-section">
+        <img src="./images/logoi.png" alt="The Gilded Canvas Logo">
+    </div>
+
+    <!-- Main Section -->
+    <main>
+        <section class="categories">
+            <h2>Our Categories</h2>
+            <div class="category-grid">
+                <div class="category-block wide">
+                    <a href="./categories/category1.html">
+                        <h3><strong>Landscape Art</strong></h3>
+                    </a>
+                </div>
+                <div class="category-block">
+                    <a href="./categories/category2.html">
+                        <h3><strong>Decorative Art</strong></h3>
+                    </a>
+                </div>
+                <div class="category-block">
+                    <a href="./categories/category3.html">
+                        <h3><strong>Figurative Art</strong></h3>
+                    </a>
+                </div>
+                <div class="category-block">
+                    <a href="./categories/category4.html">
+                        <h3><strong>Modern Art</strong></h3>
+                    </a>
+                </div>
+                <div class="category-block">
+                    <a href="./categories/category5.html">
+                        <h3><strong>Abstract Art</strong></h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Include Footer -->
+    <div id="footer">
+        <object type="text/html" data="footer.html" style="width: 100%; height: auto;"></object>
+    </div>
+</body>
+
+</html>
+
+<footer style="background-color: #1A1A1A; color: #ffffff; padding: 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
+    <!-- Copyright Notice -->
+    <div style="flex: 1; margin-bottom: 15px; min-width: 200px;">
+        <p style="color: #d4af37; font-size: 1.2rem; font-weight: bold; margin: 0;">© 2024 The Gilded Canvas</p>
+        <p style="color: #d4af37; font-size: 1rem; margin: 0;">All Rights Reserved.</p>
+    </div>
+
+    <!-- Middle Section: Quick Links and Contact Information -->
+    <nav style="flex: 2; margin-bottom: 15px; display: flex; justify-content: space-between; min-width: 400px;">
+        <!-- Quick Links -->
+        <div style="margin-right: 20px;">
+            <h3 style="font-size: 1rem; margin-bottom: 10px;">Quick Links:</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.8;">
+                <li><a href="index.html" style="color: #ffffff; text-decoration: none;">Home</a></li>
+                <li><a href="products.html" style="color: #ffffff; text-decoration: none;">Products</a></li>
+                <li><a href="contact.html" style="color: #ffffff; text-decoration: none;">Contact Us</a></li>
+            </ul>
+        </div>
+        <!-- About Us -->
+        <div style="margin-right: 20px;">
+            <h3 style="font-size: 1rem; margin-bottom: 10px;">About Us:</h3>
+            <p style="margin: 0;">Find out more about The Gilded Canvas.</p>
+            <a href="about.html" style="color: #ffffff; text-decoration: none;">Learn More</a>
+        </div>
+        <!-- Contact Information -->
+        <address>
+            <h3 style="font-size: 1rem; margin-bottom: 10px;">Contact Information:</h3>
+            <p style="margin: 0;">Email: 
+                <a href="mailto:info@gildedcanvas.com" style="color: #ffffff; text-decoration: none;">info@gildedcanvas.com</a>
+            </p>
+        </address>
+    </nav>
+
+    <!-- Social Media Links -->
+    <aside style="text-align: right; margin-bottom: 15px; min-width: 150px;">
+        <h3 style="font-size: 1rem; margin-bottom: 10px;">Social Media Links:</h3>
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+            <a href="https://www.facebook.com" target="_blank" aria-label="Visit our Facebook page">
+                <img src="Images/facebook.png" alt="Facebook" style="width: 30px; height: 30px; object-fit: contain;">
+            </a>
+            <a href="https://www.instagram.com" target="_blank" aria-label="Visit our Instagram page">
+                <img src="Images/instagram.png" alt="Instagram" style="width: 30px; height: 30px; object-fit: contain;">
+            </a>
+            <a href="https://www.twitter.com" target="_blank" aria-label="Visit our Twitter (X) page">
+                <img src="Images/X.png" alt="Twitter" style="width: 30px; height: 30px; object-fit: contain;">
+            </a>
+        </div>
+    </aside>
+</footer>
+
+
