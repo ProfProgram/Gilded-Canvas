@@ -466,6 +466,15 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+        'laravel/sanctum' => array(
+            'pretty_version' => 'v4.0.5',
+            'version' => '4.0.5.0',
+            'reference' => 'fe361b9a63407a228f884eb78d7217f680b50140',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/sanctum',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'laravel/serializable-closure' => array(
             'pretty_version' => 'v1.3.6',
             'version' => '1.3.6.0',
