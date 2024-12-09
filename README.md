@@ -14,6 +14,7 @@ Home:
 	FontEnd:
 
 		Routes are working. NavBar is functional. CSS is inconsistent. Shows all images in a list.
+		Search by category or name using search bar or the category select.
 
 	BackEnd:
 
@@ -34,7 +35,8 @@ Product: (List)
 	FontEnd:
 	
 		Shows all products in a list. Needs consistent CSS as with the rest of the website. The search functionality works for names and categories, including similarities (as well as partial inputs).
-		Category filtering is currently broken because it does not mesh with the search functionality (category filter = select under the search bar).
+		Search by category or name using search bar or the category select.
+
 
 	BackEnd:
 	

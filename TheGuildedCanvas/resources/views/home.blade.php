@@ -25,7 +25,7 @@ $categories = array_unique($categoryUnordered);
     <h2>Featured Products</h2>
     <div class="slider">
         <div class="slider-track">
-             <!-- anchors will let us connect images with the associated product pages -->
+            <!-- anchors will let us connect images with the associated product pages -->
             <a class="product-slide">
                 <img src="{{asset('images/products/img-1.jpg')}}" alt="Gilded Frame Art">
                 <p>Gilded Frame Art</p>
@@ -48,9 +48,10 @@ $categories = array_unique($categoryUnordered);
         <button class="slider-btn prev-btn">❮</button>
         <button class="slider-btn next-btn">❯</button>
     </div>
-    <!-- Search by name or category -->
+    <!-- Product Filtering -->
     <div class="search-container">
     <form action="{{ route('home-search') }}" method="GET">
+        <!-- Search by name or category -->
         <input 
             type="text" 
             name="query" 
@@ -58,35 +59,38 @@ $categories = array_unique($categoryUnordered);
             value="{{ request('query') }}"
             class="search-input"
         >
+        <!-- Choose Category -->
+        <select name="category">
+            <option value="">Select a Category</option>
+            @foreach ($categories as $category)
+                <option value="{{ $category }}" @if(request('category') == $category) selected @endif>
+                    {{ $category }}
+                </option>
+            @endforeach
+        </select>
         <button type="submit" class="search-button">Search</button>
     </form>
     </div>
-    <!-- Choose Category -->
-    <form method="GET" action="{{ route('product.index') }}">
-    <select name="category" onchange="this.form.submit()">
-        <option value="">Select a Category</option>
-        @foreach ($categories as $category)
-            <option value="{{ $category }}" @if(request('category') == $category) selected @endif>
-                {{ $category }}
-            </option>
-        @endforeach
-    </select>
-    </form>
-    @if (request('category'))
-        @php
-            $filteredProducts = $productInfo->where('category_name', request('category'));
-        @endphp
-    @else
-        @php
-            $filteredProducts = $productInfo;
-        @endphp
-    @endif
-    <div class="product-list">
-    @if ($query ?? false)
-        <h2>Search Results for "{{ $query }}"</h2>
+
+@php
+    $query = request('query');
+    $category = request('category');
+
+    // Filter products based on query and category
+    $filteredProducts = $productInfo->filter(function($product) use ($query, $category) {
+        $matchesQuery = $query ? stripos($product->product_name, $query) !== false || stripos($product->category_name, $query) !== false : true;
+        $matchesCategory = $category ? $product->category_name == $category : true;
+
+        return $matchesQuery && $matchesCategory;
+    });
+@endphp
+
+<div class="product-list">
+    @if ($query || $category)
+        <h2>Search Results for "{{ $query }}" in "{{ $category }}" category</h2>
     @endif
 
-    @forelse ($productInfo as $info)
+    @forelse ($filteredProducts as $info)
         <div class="product">
             <div class="product-image">
                 <img src="{{ asset('images/products/img-'.$info->product_id.'.jpg') }}" alt="{{ $info->product_name }}">

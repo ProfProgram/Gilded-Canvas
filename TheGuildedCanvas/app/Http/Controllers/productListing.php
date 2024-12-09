@@ -16,12 +16,15 @@ class productListing extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query');
+        $category = $request->input('category');
 
         // Search products by name or category
-        $products = Product::where('product_name', 'LIKE', "%{$query}%")
-            ->orWhere('category_name', 'LIKE', "%{$query}%")
-            ->get();
+        $products = Product::all();
 
-        return view('product', ['productInfo' => $products, 'query' => $query]);
+        return view('product', [
+            'productInfo' => $products,
+            'query' => $query,
+            'category' => $category
+        ]);
     }
 }
