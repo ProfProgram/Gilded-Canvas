@@ -156,7 +156,7 @@ class UserController extends Controller
             // Revoke the token that was used in the current request
             $request->user()->currentAccessToken()->delete();
 
-            return $this->sendResponse([], 'User logged out successfully.');
+            return redirect('/home')->with('status', 'User logged out successfully.');
         }
         Auth::logout();
         $request->session()->invalidate();

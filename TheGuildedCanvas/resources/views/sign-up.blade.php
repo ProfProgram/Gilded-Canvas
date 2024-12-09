@@ -88,12 +88,12 @@
 
 
 
-            <a href="#" class="forgot-details">Already a member?</a>
+            <a href="{{ route('login') }}" class="forgot-details">Already a member?</a>
             <button type="submit" class="login-btn">Signup</button>
         </form>
         <div class="signup-prompt">
             <p>have an account?</p>
-            <a href="#" class="signup-link">Login Now</a>
+            <a href="{{ route('login') }}" class="signup-link">Login Now</a>
         </div>
     </section>
 </main>
