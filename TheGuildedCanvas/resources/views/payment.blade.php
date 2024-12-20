@@ -61,7 +61,7 @@ $totalPrice = 0;
             <h2>Total</h2>
             <div id="totalNumContainer">
                 <!-- total price -->
-                <h2>{{$totalPrice}}</h2>
+                <h2>{{$total_price}}</h2>
             </div>
         </div>
     </div>

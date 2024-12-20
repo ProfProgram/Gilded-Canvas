@@ -29,11 +29,11 @@ $totalPrice = 0;
                     <a href="{{url('delete/'.$item->basket_id)}}">
                         <button class="remove-button">Remove</button>
                     </a>
-                </div>
                 @php
                 $totalPrice += $item->quantity * $item->product->price;
                 @endphp
                 @endforeach
+                </div>
             </div>
                 <!-- Continue Shopping Button Inside the Cart -->
                 <div class="continue-shopping">
@@ -44,13 +44,15 @@ $totalPrice = 0;
             </div>
 
             <!-- Checkout Section -->
-            <aside class="checkout-container" id="checkout-container">
-                <h2>Estimated Total:</h2>
-                <p id="estimated-total">£{{$totalPrice}}.00</p>
-                <a href="{{ url('payment/'. $totalPrice)}}">
-                    <button class="checkout-button">Checkout</button>
-                </a>
+            <form method="GET" action="{{url('/payment')}}">
+                @csrf
+                <aside class="checkout-container" id="checkout-container">
+                    <h2>Estimated Total:</h2>
+                    <input type="hidden" name="totalPrice" value="{{$totalPrice}}">
+                    <p id="estimated-total" name="total_price" value="{{$totalPrice}}">£{{$totalPrice}}.00</p>
+                    <button class="checkout-button" type="submit">Checkout</button>
                 </aside>
+            </form>
         </div>
     </main>
 

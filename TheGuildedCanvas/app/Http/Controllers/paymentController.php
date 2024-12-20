@@ -9,7 +9,7 @@ use App\Models\OrderDetail;
 
 class paymentController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         // $orderInfo = Order::where('user_id', 1)->latest('order_time')->first();
         // if ($orderInfo) {
         //     $orderDetail = OrderDetail::where('order_id', $orderInfo->order_id)->get();
@@ -19,7 +19,7 @@ class paymentController extends Controller
         //     return view('payment', ['orderDetail'=>null]);
         // }
         $cartInfo = Cart::with('product')->get();
-        return view('payment', ['cartInfo'=>$cartInfo]);
+        return view('payment', ['cartInfo'=>$cartInfo, 'total_price'=>$request->totalPrice]);
     }
 
     public function store(Request $request) {
