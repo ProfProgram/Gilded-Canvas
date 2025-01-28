@@ -1,13 +1,9 @@
+
 @extends('layouts.master')
 
 @section('content')
 
 <main id="contact-main">
-    <!-- Introduction Section -->
-    
-  
-   
-
     <section style="flex: 1; max-width: 400px; padding-right: 20px">
         <h1 style="font-size: 32px; font-weight: bold; margin-bottom: 10px">
         Contact Us
