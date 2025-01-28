@@ -4,37 +4,6 @@
 @section('content')
 
 <main id="contact-main">
-    <!-- Introduction Section -->
-    <section class="introduction">
-        <h2 id="headers-contact">About Us</h2>
-        <p id="para-contact">
-            Welcome to <strong>Glided Canvas</strong>, a platform dedicated to connecting people with extraordinary art. 
-            We are proud to offer unique art pieces and provide a space for up-and-coming artists to showcase their talent.
-        </p>
-        <p id="para-contact">
-            Our mission is to make stunning, original art accessible to all while fostering a community that uplifts emerging artists, 
-            helping them gain the recognition they deserve.
-        </p>
-    </section>
-
-    <!-- Mission Statement Section -->
-    <section class="mission">
-        <h2 id="headers-contact">Our Mission</h2>
-        <p id="para-contact">
-            At Glided Canvas, we believe that every piece of art tells a story and that every artist deserves a chance to be seen. 
-            We work tirelessly to bridge the gap between art lovers and creators, ensuring that your purchase supports and celebrates creativity.
-        </p>
-    </section>
-
-    <!-- Team Section -->
-    <section class="team">
-        <h2 id="headers-contact">Meet Our Team</h2>
-        <p id="para-contact">
-            Behind Glided Canvas is a passionate team of art enthusiasts, curators, and innovators dedicated to making art accessible 
-            and empowering the next generation of artists.
-        </p>
-    </section>
-
     <section style="flex: 1; max-width: 400px; padding-right: 20px">
         <h1 style="font-size: 32px; font-weight: bold; margin-bottom: 10px">
         Contact Us

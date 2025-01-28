@@ -17,6 +17,7 @@
             <a href="/home">Home</a>
             <a href="/product">Products</a>
             <a href="/review">Review</a>
+            <a href="/about-us">About Us</a>
             <a href="/contact-us">Contact Us</a>
             <!-- Logged in links -->
             @auth
@@ -71,7 +72,7 @@
             <div style="margin-right: 20px;">
                 <h3 style="font-size: 1rem; margin-bottom: 10px;">About Us:</h3>
                 <p style="margin: 0;">Find out more about The Gilded Canvas.</p>
-            <a href="about.html" style="color: #ffffff; text-decoration: none;">Learn More</a>
+                <a href="/about-us" style="color: #ffffff; text-decoration: none;">Learn More</a>
             </div>
             <!-- Contact Information -->
             <div>

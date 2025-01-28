@@ -143,3 +143,13 @@ Route::post('/review', [ReviewController::class, 'store']);
 
 // REMOVE THE ALERT MESSAGE
 Route::post('/close-alert', function () {Session::forget('status'); return redirect()->back();})->name('close-alert');     
+
+// ABOUT US
+Route::get('/about-us', function () {
+    return view('about-us');
+})->name('about');
+
+// CONTACT US
+Route::get('/contact-us', function () {
+    return view('contact-us');
+})->name('contact');
