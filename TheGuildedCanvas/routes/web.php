@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\homeController;
+use App\Http\Controllers\IndivProductController;
 use App\Http\Controllers\productListing;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReviewController;
@@ -130,8 +131,13 @@ Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 // PREVIOUS ORDERS
 Route::get('/previous-orders', [OrdersController::class, 'index']);
 
+// PRODUCT LISTINGS
 Route::get('/product', [productListing::class, 'index'])->name('product.index');
 Route::get('/prod-search', [productListing::class, 'search'])->name('product-search');
+
+// INDIVIDUAL DYNAMIC PRODUCTS
+// needs to be updated to be dynamic name in url
+Route::get('/SereneDream', [IndivProductController::class, 'index']);
 
 // PAYMENT ROUTES
 Route::get('/payment', [paymentController::class, 'index']);
