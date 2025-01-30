@@ -137,7 +137,7 @@ Route::get('/prod-search', [productListing::class, 'search'])->name('product-sea
 
 // INDIVIDUAL DYNAMIC PRODUCTS
 // needs to be updated to be dynamic name in url
-Route::get('/SereneDream', [IndivProductController::class, 'index']);
+Route::get('/product/{productName}', [IndivProductController::class, 'index']);
 
 // PAYMENT ROUTES
 Route::get('/payment', [paymentController::class, 'index']);
