@@ -35,7 +35,18 @@ Product: (List)
 	FontEnd:
 	
 		Shows all products in a list. Needs consistent CSS as with the rest of the website. The search functionality works for names and categories, including similarities (as well as partial inputs).
-		Search by category or name using search bar or the category select.
+		Search by category or name using search bar or the category select. Clicking on img's will send you to that products dynamic page.
+
+
+	BackEnd:
+	
+		Adds to the basket, does so when not logged in (issue), but functions as intended when logged in. 
+  
+Product: (Individual Dynamic pages)
+
+	FontEnd:
+	
+		Shows information regarding selected product, allows the users to add more than 1 product to cart. Has review section, showing all reviews for that product. Has a 'Leave a Review' button, sending users to the review page.
 
 
 	BackEnd:
