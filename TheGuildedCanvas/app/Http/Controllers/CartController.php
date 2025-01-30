@@ -34,6 +34,7 @@ class CartController extends Controller
         $productId = $request->input('product_id');
         $productName = $request->input('product_name');
         $productPrice = $request->input('product_price');
+        $quantity = $request->input('cartQuan_add');
         
         // Check if the product already exists in the cart (for the current user)
         $existingCartItem = Cart::where('product_id', $productId)
@@ -42,7 +43,7 @@ class CartController extends Controller
 
         if ($existingCartItem) {
             // Product exists in the cart, increment the quantity
-            $existingCartItem->quantity += 1;
+            $existingCartItem->quantity += $quantity;
             $existingCartItem->save();
         } else {
             // Product doesn't exist in the cart, create a new cart entry
@@ -51,7 +52,7 @@ class CartController extends Controller
                 'user_id' => 1, // Assuming you're using authentication
                 'product_name' => $productName,
                 'price' => $productPrice,
-                'quantity' => 1, // Start with 1 quantity
+                'quantity' => $quantity, // Start with 1 quantity
             ]);
         }
 

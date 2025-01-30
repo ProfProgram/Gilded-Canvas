@@ -50,6 +50,8 @@ return new class extends Migration
                 $table->increments('product_id');
                 $table->string('category_name');
                 $table->string('product_name')->unique();
+                $table->integer('height');
+                $table->integer('width');
                 $table->integer('price');
                 $table->text('description');
                 $table->timestamps();
