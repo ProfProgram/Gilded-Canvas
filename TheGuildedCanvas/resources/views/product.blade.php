@@ -62,7 +62,7 @@ $categories = array_unique($categoryUnordered);
         @forelse ($filteredProducts as $info)
             <div class="product">
                 <div class="product-image">
-                    <img src="{{ asset('images/products/img-'.$info->product_id.'.png') }}" alt="{{ $info->product_name }}">
+                    <img src="{{ asset('images/products/img-'.$info->product_id.'.png') }}" alt="{{ $info->product_name }}" onclick="window.location.href='{{ url('/product/'.$info->product_name.'') }}'">
                 </div>
                 <div class="product-details">
                     <h2>{{ $info->product_name }}</h2>
@@ -83,5 +83,27 @@ $categories = array_unique($categoryUnordered);
         @endforelse
     </div>
 </div>
+<style>
+    .product-image {
+        position: relative;
+    }
 
+    .product-image img {
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .product-image:hover img {
+        opacity: 0.6;
+    }
+
+    .product-image:hover::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.2);
+    }
+</style>
 @endsection
