@@ -1,8 +1,5 @@
 <?php
 
-<<<<<<< Updated upstream
-use App\Http\Controllers\HomeController;
-=======
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\productListing;
@@ -10,12 +7,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\paymentController;
 use App\Http\Controllers\OrdersController;
->>>>>>> Stashed changes
 use App\Http\Controllers\ProductController;
 use App\Mail\ResetPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Mail\TestMail;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -144,8 +139,6 @@ Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestF
 Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
-<<<<<<< Updated upstream
-=======
 
 
 Route::get('/', [homeController::class, 'index']);
@@ -196,4 +189,3 @@ Route::get('/about-us', function () {
 Route::get('/contact-us', function () {
     return view('contact-us');
 })->name('contact');
->>>>>>> Stashed changes
