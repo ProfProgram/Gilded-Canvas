@@ -32,8 +32,15 @@
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/laravel/pint" />
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/laravel/prompts" />
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/laravel/sail" />
+<<<<<<< Updated upstream
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/laravel/serializable-closure" />
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/laravel/tinker" />
+=======
+      <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/laravel/sanctum" />
+      <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/laravel/serializable-closure" />
+      <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/laravel/tinker" />
+      <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/laravel/ui" />
+>>>>>>> Stashed changes
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/league/commonmark" />
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/league/config" />
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/league/flysystem" />
@@ -127,8 +134,11 @@
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/webmozart/assert" />
+<<<<<<< Updated upstream
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/laravel/sanctum" />
       <excludeFolder url="file://$MODULE_DIR$/TheGuildedCanvas/vendor/laravel/ui" />
+=======
+>>>>>>> Stashed changes
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

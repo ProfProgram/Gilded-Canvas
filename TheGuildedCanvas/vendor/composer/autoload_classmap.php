@@ -15,11 +15,16 @@ return array(
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\Auth\\VerificationController' => $baseDir . '/app/Http/Controllers/Auth/VerificationController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+<<<<<<< Updated upstream
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\InventoryController' => $baseDir . '/app/Http/Controllers/InventoryController.php',
     'App\\Http\\Controllers\\OrderController' => $baseDir . '/app/Http/Controllers/OrderController.php',
     'App\\Http\\Controllers\\OrderDetailController' => $baseDir . '/app/Http/Controllers/OrderDetailController.php',
     'App\\Http\\Controllers\\OrderReturnController' => $baseDir . '/app/Http/Controllers/OrderReturnController.php',
+=======
+    'App\\Http\\Controllers\\IndivProductController' => $baseDir . '/app/Http/Controllers/IndivProductController.php',
+    'App\\Http\\Controllers\\OrdersController' => $baseDir . '/app/Http/Controllers/OrdersController.php',
+>>>>>>> Stashed changes
     'App\\Http\\Controllers\\ProductController' => $baseDir . '/app/Http/Controllers/ProductController.php',
     'App\\Http\\Controllers\\ReviewtController' => $baseDir . '/app/Http/Controllers/ReviewtController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',

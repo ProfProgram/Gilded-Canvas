@@ -600,11 +600,16 @@ class ComposerStaticInitc87b2821d962c0230dba3e5da7a8a8d4
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+<<<<<<< Updated upstream
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\InventoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/InventoryController.php',
         'App\\Http\\Controllers\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderController.php',
         'App\\Http\\Controllers\\OrderDetailController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderDetailController.php',
         'App\\Http\\Controllers\\OrderReturnController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderReturnController.php',
+=======
+        'App\\Http\\Controllers\\IndivProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/IndivProductController.php',
+        'App\\Http\\Controllers\\OrdersController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrdersController.php',
+>>>>>>> Stashed changes
         'App\\Http\\Controllers\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductController.php',
         'App\\Http\\Controllers\\ReviewtController' => __DIR__ . '/../..' . '/app/Http/Controllers/ReviewtController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
