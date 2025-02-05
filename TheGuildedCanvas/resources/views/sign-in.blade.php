@@ -2,7 +2,15 @@
 @extends('layouts.master')
 
 @section('content')
-
+@if (session('message'))
+    <div class="alert">
+        {{ session('message') }}
+        <form method="POST" action="{{ url('/close-alert') }}" style="display: inline;">
+            @csrf
+            <button type="submit" class="close-btn">✖</button>
+        </form>
+    </div>
+@endif
 <main>
     <section class="login-container">
         <h1>Login</h1>

@@ -114,7 +114,7 @@ Route::get('/sign-up', function () {
 // SIGN IN PAGE (LOGIN)
 Route::get('/sign-in', function () {
     return view('sign-in');
-});
+})->name('sign-in');
 
 // SIGN UP PAGE
 Route::get('/contact-us', function () {
