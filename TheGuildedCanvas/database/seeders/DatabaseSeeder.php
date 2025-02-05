@@ -343,17 +343,26 @@ class DatabaseSeeder extends Seeder
             [
                 'admin_id' => 1,
                 'user_id' => 1,
+                'total_price' => 365,
                 'status' => 'Pending',
             ],
             [
                 'admin_id' => 2,
                 'user_id' => 2,
+                'total_price' => 160,
                 'status' => 'Delivered',
             ],
             [
                 'admin_id' => 3,
                 'user_id' => 3,
+                'total_price' => 65,
                 'status' => 'Shipped',
+            ],
+            [
+                'admin_id' => 2,
+                'user_id' => 1,
+                'total_price' => 65,
+                'status' => 'Delivered',
             ],
         ];
         foreach($orders as $orderData) {
@@ -368,19 +377,31 @@ class DatabaseSeeder extends Seeder
                 'order_id' => 1,
                 'product_id' => 1,
                 'quantity' => 5,
-                'price_of_order' => 543,
+                'price_of_order' => 285,
+            ],
+            [
+                'order_id' => 1,
+                'product_id' => 2,
+                'quantity' => 2,
+                'price_of_order' => 80,
             ],
             [
                 'order_id' => 2,
                 'product_id' => 2,
                 'quantity' => 4,
-                'price_of_order' => 320,
+                'price_of_order' => 160,
             ],
             [
                 'order_id' => 3,
                 'product_id' => 3,
                 'quantity' => 1,
-                'price_of_order' => 60,
+                'price_of_order' => 65,
+            ],
+            [
+                'order_id' => 4,
+                'product_id' => 3,
+                'quantity' => 1,
+                'price_of_order' => 65,
             ],
         ];
         foreach($orderDetails as $detailsData) {

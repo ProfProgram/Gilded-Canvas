@@ -534,6 +534,16 @@ nav a:nth-child(5) {
     transform: scale(1.05);
 }
 
+.order-details, .order-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.order-details h3, .order-details p, .order-footer p {
+    margin: 0;
+}
+
 /* PRODUCT PAGE */
 
 .container {
