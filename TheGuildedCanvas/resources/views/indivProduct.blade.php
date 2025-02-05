@@ -47,7 +47,9 @@
     <!--  -->
     <section class="review-list">
         <h1 class="ReviewList-title">Reviews:</h1>
+        @auth
         <button class="MakeReview" onclick="window.location.href='{{ url('/review') }}'">Leave a Review</button>
+        @endauth
         <div class="ReviewList">
             @foreach ($reviewInfo as $review)
                 <div class="review">

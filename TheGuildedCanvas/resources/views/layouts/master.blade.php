@@ -16,7 +16,6 @@
             <!-- public links -->
             <a href="/home">Home</a>
             <a href="/product">Products</a>
-            <a href="/review">Review</a>
             <a href="/about-us">About Us</a>
             <a href="/contact-us">Contact Us</a>
             <!-- Logged in links -->

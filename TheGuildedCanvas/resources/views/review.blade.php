@@ -4,6 +4,12 @@
 @section('content')
 
 <!DOCTYPE html>
+{{ Auth::check() ? Auth::user()->user_id :'' }}
+@if (!Auth::check())
+    <div class="alert">
+        <p>User Not Logged In: this form will submit but wont save anything.</p>
+    </div>
+@endif
 <body>
     @if (session('status'))
     <div class="alert">
@@ -24,7 +30,7 @@
                 <!-- should be an enumeration of all product names -->
                 <div id="input-collection">
                 <div>
-                    <input type="text" id="UserId-txtBox" placeholder="User_id" name="User_id" required>
+                    <input type="hidden" id="UserId-txtBox" name="User_id" value='{{ Auth::check() ? Auth::user()->user_id :'' }}' required>
                 </div>
                 <div>
                     <label for="ProductId">Product Name:</label>

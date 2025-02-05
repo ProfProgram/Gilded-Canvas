@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
 use App\Enums\UserRole;
 use App\Mail\ResetPassword;
 use Illuminate\Http\Request;
@@ -42,6 +43,7 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
+        Session::start();
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'password' => 'required|string|max:255|min:8|confirmed',
@@ -54,16 +56,17 @@ class UserController extends Controller
         $input = $request->only(['name', 'password', 'email', 'phone_number', 'role']);
         $input['password'] = bcrypt($input['password']);
 
-        // $user = User::create($input);
-        $user = new User;
+        $user = User::create($input);
+        /*$user = new User;
         $user->name = $request->name;
         $user->password = $request->password;
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
         $user->role = $request->role;
-        $user->save();
+        $user->save();*/
         Mail::to($user->email)->send(new TestMail($user->name, $user->email));
 
+        Auth::login($user);
         //return $this->sendResponse($user, 'User created successfully. Please check your email to verify your account.');
         return redirect()->route('home')->with('status', 'User created successfully. Please check your email to verify your account.');
     }
@@ -121,53 +124,35 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
+        Session::start();
         $credentials = $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string|min:8'
         ]);
+
         // Attempt to authenticate the user
-        if (!Auth::attempt($credentials)) {
-            return back()->withErrors(['error' => 'Invalid credentials.']);
-        }
+        if (Auth::attempt($credentials)) {
+            // Regenerate the session to prevent session fixation attacks
+            $request->session()->regenerate();
 
-
-        // Retrieve the authenticated user
-        $user = Auth::user();
-
-
-        // Ensure the authenticated user is correctly retrieved
-        if ($user instanceof User) {
-            $tokenName = 'UserAccessToken';
-            $tokenAbilities = ['user'];
-
-            if ($user->role === UserRole::admin) {
-                $tokenName = 'AdminAccessToken';
-                $tokenAbilities = ['admin'];
-            }
-
-            // Create the token with abilities
-            $token = $user->createToken($tokenName, $tokenAbilities)->plainTextToken;
-
-            //return redirect()->route('home')->with('status', 'User logged in successfully.');
+            // Redirect to the home page
             return redirect()->route('home')->with('status', 'User logged in successfully.');
         }
 
-        return back()->withErrors(['error' => 'User not found after authentication.']);
+        // If authentication fails, redirect back with an error message
+        return back()->withErrors(['error' => 'Invalid credentials.']);
     }
 
     public function logout(Request $request)
     {
+        Session::start();
         // Retrieve the authenticated user
-        $user = $request->user();
-
-        if ($user) {
-            // Revoke the token that was used in the current request
-            $request->user()->currentAccessToken()->delete();
-
-            return redirect('/home')->with('status', 'User logged out successfully.');
-        }
         Auth::logout();
+
+        // Invalidate the session
         $request->session()->invalidate();
+
+        // Regenerate the CSRF token
         $request->session()->regenerateToken();
 
         return redirect('/home')->with('status', 'User logged out successfully.');
@@ -208,4 +193,4 @@ class UserController extends Controller
 
         return response()->json(['message' => 'User deleted'], 200);
     }
-}
+} 

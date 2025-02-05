@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Review;
 use App\Models\Product;
 
@@ -34,6 +35,7 @@ class ReviewController extends Controller
 
         // $review->save();
 
+        Auth::check() ? Auth::user()->name :'';
         $request->validate([
             'User_id' => 'required|integer',
             'Product_id' => 'required|integer',
