@@ -81,7 +81,7 @@ Review:
 
 	BackEnd:
 
-		Change so that user_id is taken from the backend and inputted into the form automatically.
+		Adds reviews to the database using form data. Automatically takes user_id if a user is logged in, otherwise, it has an error message on the review page. This should redirect to the login page in later commits.
   
 Basket:
 
@@ -98,11 +98,11 @@ Previous Order:
 
 	FontEnd:
 
- 		Currently only shows static information. The information must be a list of all the orders tied to the current user, interacting with an order will show a more detailed view of that order (what products and in what quantity). 
+ 		Shows Orders of currently logged-in users in order of order ID. Lists all products within an order, their quantity and price as well as the admin that approved the order and the total price of the order. A reorder button is next to each product, which redirects to products/{product_name}. Redirects to the login screen if no user is logged in, giving an accompanying error message.
 
 	BackEnd:
 
-		Currently has no backend. Requires a backend that implements functionality as stated in FrontEnd.
+		No backend needed, other than the database query for data to be sent to page view.
 
 Payment:
 
