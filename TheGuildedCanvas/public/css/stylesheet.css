@@ -329,6 +329,8 @@ nav a:nth-child(5) {
     grid-template-columns: 2fr 1fr;
     gap: 20px;
     align-items: start;
+    /* margin to separate layout and total price areas, when no margin the total price box will cover the continue shopping button (when $cartItems isEmpty()) */
+    margin-bottom: 20px;
 }
 
 .cart-items {

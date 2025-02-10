@@ -9,59 +9,61 @@ $totalPrice = 0;
 <!-- Main Shopping Cart Section -->
 <main class="cart-container">
         <h1 class="cart-title">Shopping Cart</h1>
-        <div class="cart-layout">
-            <!-- Cart Items -->
-            <div class="cart-items" id="cart-items">
-                <div class="cart-item">
-                    @foreach($cartItems as $item)
-                    <div class="product-image">
-                        <img src="{{ asset('images/products/img-'. $item->product_id .'.png')}}" alt="Gold Leaf Canvas">
-                    </div>
-                    <div class="product-details">
-                        <h3>{{$item->product->product_name}}</h3>
-                        <p>{{$item->product->description}}</p>
-                        <p>Price: {{$item->product->price}}</p>
-                        <div class="quantity-container">
-                            <label for="quantity">Quantity:</label>
-                            <input type="number" class="quantity-input" value="{{$item->quantity}}" min="1" max="15" step="1" data-price="{{$item->product->price}}">
+        @if ($cartItems->isEmpty())
+            <!-- Empty Basket Message -->
+            <div id="empty-basket-container" style="display: none;">
+                <h2>Your shopping cart is empty</h2>
+                <button class="continue-shopping-button">Continue Shopping</button>
+            </div>
+        @else
+            <div class="cart-layout">
+                <!-- Cart Items -->
+                <div class="cart-items" id="cart-items">
+                    <div class="cart-item">
+                        @foreach($cartItems as $item)
+                        <div class="product-image">
+                            <img src="{{ asset('images/products/img-'. $item->product_id .'.png')}}" alt="Gold Leaf Canvas">
                         </div>
+                        <div class="product-details">
+                            <h3>{{$item->product->product_name}}</h3>
+                            <p>{{$item->product->description}}</p>
+                            <p>Price: {{$item->product->price}}</p>
+                            <div class="quantity-container">
+                                <label for="quantity">Quantity:</label>
+                                <input type="number" class="quantity-input" value="{{$item->quantity}}" min="1" max="15" step="1" data-price="{{$item->product->price}}">
+                            </div>
+                        </div>
+                        <a href="{{url('delete/'.$item->basket_id)}}">
+                            <button class="remove-button">Remove</button>
+                        </a>
+                        <hr class="divider">
+                        @php
+                        $totalPrice += $item->quantity * $item->product->price;
+                        @endphp
+                        @endforeach
                     </div>
-                    <a href="{{url('delete/'.$item->basket_id)}}">
-                        <button class="remove-button">Remove</button>
-                    </a>
-                    <hr class="divider">
-                    @php
-                    $totalPrice += $item->quantity * $item->product->price;
-                    @endphp
-                    @endforeach
                 </div>
-            </div>
-                <!-- Continue Shopping Button Inside the Cart -->
-                <div class="continue-shopping">
-                    <a href="{{ url('/product')}}">
-                        <button class="continue-shopping-button">Continue Shopping</button>
-                    </a>
+                    <!-- Continue Shopping Button Inside the Cart -->
+                    <div class="continue-shopping">
+                        <a href="{{ url('/product')}}">
+                            <button class="continue-shopping-button">Continue Shopping</button>
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Checkout Section -->
-            <form method="GET" action="{{url('/payment')}}">
-                @csrf
-                <aside class="checkout-container" id="checkout-container">
-                    <h2>Estimated Total:</h2>
-                    <input type="hidden" name="totalPrice" value="{{$totalPrice}}">
-                    <p id="estimated-total" name="total_price" value="{{$totalPrice}}">£{{$totalPrice}}.00</p>
-                    <button class="checkout-button" type="submit">Checkout</button>
-                </aside>
-            </form>
-        </div>
+                <!-- Checkout Section -->
+                <form method="GET" action="{{url('/payment')}}">
+                    @csrf
+                    <aside class="checkout-container" id="checkout-container">
+                        <h2>Estimated Total:</h2>
+                        <input type="hidden" name="totalPrice" value="{{$totalPrice}}">
+                        <p id="estimated-total" name="total_price" value="{{$totalPrice}}">£{{$totalPrice}}.00</p>
+                        <button class="checkout-button" type="submit">Checkout</button>
+                    </aside>
+                </form>
+            </div>
+        @endif
     </main>
-
-    <!-- Empty Basket Message -->
-    <div id="empty-basket-container" style="display: none;">
-        <h2>Your shopping cart is empty</h2>
-        <button class="continue-shopping-button">Continue Shopping</button>
-    </div>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
     // Function to update the total

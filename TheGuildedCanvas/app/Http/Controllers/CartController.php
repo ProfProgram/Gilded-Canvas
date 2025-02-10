@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -12,7 +13,11 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cartItems = Cart::with('product')->get();
+        if (!Auth::check()) {
+            return redirect()->route('sign-in')->with('message', 'Please log in to view your previous orders.');
+        }
+        $userId = Auth::user()->user_id;
+        $cartItems = Cart::with('product')->with( 'user')->where('user_id', '=', $userId)->get();
         return view('basket', ['cartItems'=>$cartItems]);
     }
 
