@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Inventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,28 +15,27 @@ class CartController extends Controller
     public function index()
     {
         if (!Auth::check()) {
-            return redirect()->route('sign-in')->with('message', 'Please log in to view your previous orders.');
+            return redirect()->route('sign-in')->with('message', 'Please log in to view your basket.');
         }
         $userId = Auth::user()->user_id;
         $cartItems = Cart::with('product')->with( 'user')->where('user_id', '=', $userId)->get();
         return view('basket', ['cartItems'=>$cartItems]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
     public function delete($id)
     {
+        if (!Auth::check()) {
+            return redirect()->route('sign-in')->with('message', 'Please log in to delete from basket.');
+        }
         $cart = Cart::where('basket_id', $id);
         $cart->delete();
         return redirect()->back()->with('status', 'Data Deleted');
     }
     public function add(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect()->route('sign-in')->with('message', 'Please log in to add to basket.');
+        }
         $productId = $request->input('product_id');
         $productName = $request->input('product_name');
         $productPrice = $request->input('product_price');
@@ -94,7 +94,17 @@ class CartController extends Controller
      */
     public function update(Request $request, Cart $cart)
     {
-        //
+        if (!Auth::check()) {
+            return redirect()->route('sign-in')->with('message', 'Please log in to view your previous orders.');
+        }
+        $cart = Cart::with('product')->find($request->id);
+        $inv_lvl = Inventory::where('product_id', $cart->product->product_id)->first();
+        if ($request->quantity > $inv_lvl->stock_level) {
+            return redirect()->route('basket')->with('status', 'Failed to update '.$cart->product->product_name.' quantity: Exceeds available stock');
+        }
+        $cart->quantity = $request->quantity;
+        $cart->save();
+        return redirect()->route('basket')->with('status', 'Updated '.$cart->product->product_name.' quantity to '.$cart->quantity);
     }
 
     /**
