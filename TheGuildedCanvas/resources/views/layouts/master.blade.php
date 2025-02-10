@@ -18,23 +18,26 @@
             <a href="/product">Products</a>
             <a href="/about-us">About Us</a>
             <a href="/contact-us">Contact Us</a>
-            <!-- Logged in links -->
+            <!-- Logged-in Links -->
             @auth
-            <a href="/payment">Payment</a>
-            <a href="/basket" class="cart-icon">
-                <img src="{{ asset('images/cart-icon.png') }}" alt="Shopping Cart" class="cart-icon-img">
-            <span class="cart-item-count">(2)</span>
-            </a>
-            <a href="/previous-orders">Previous-Orders</a>
-            <a>
-                <form action="{{ route('logout') }}" method="POST">
+                <a href="/payment">Payment</a>
+                <a href="/basket" class="cart-icon">
+                    <img src="{{ asset('images/cart-icon.png') }}" alt="Shopping Cart" class="cart-icon-img">
+                    <span class="cart-item-count">(2)</span>
+                </a>
+                <a href="/previous-orders">Previous Orders</a>
+                <!-- Role-Specific Links -->
+                @if(Auth::user()->role === \App\Enums\UserRole::admin)
+                    <a href="{{ route('admin.inventory') }}">Admin Panel</a>
+                @endif
+                @if(Auth::user()->role === \App\Enums\UserRole::manager)
+                    <a href="{{ route('manager.users') }}">Manage Users</a>
+                @endif
+                <form action="{{ route('logout') }}" method="POST" class="inline-form">
                     @csrf
-                    <button type="submit">Logout</button>
+                    <button type="submit" class="logout-link">Logout</button>
                 </form>
-            </a>
-            @if(Auth::user()->role === 'admin')
-            <li><a href="{{ route('admin') }}">Admin Panel</a></li>
-            @endif
+
             @endauth
             <!-- guest links -->
             @guest

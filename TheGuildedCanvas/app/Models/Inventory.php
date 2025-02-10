@@ -9,6 +9,7 @@ class Inventory extends Model
     use HasFactory;
 
     protected $table = 'inventory_table';
+    protected $primaryKey = 'inventory_id';
 
     protected $fillable = [
         'product_id',
@@ -23,7 +24,7 @@ class Inventory extends Model
      */
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id','product_id');
     }
 
     public function admin()

@@ -50,10 +50,10 @@ class UserController extends Controller
             'password_confirmation' => 'required|string|max:255|min:8',
             'email' => 'required|string|email|max:255|unique:users_table',
             'phone_number' => 'required|string|max:15',
-            'role' => 'required|in:user,admin',
+            'role' => 'user'
         ]);
 
-        $input = $request->only(['name', 'password', 'email', 'phone_number', 'role']);
+        $input = $request->only(['name', 'password', 'email', 'phone_number','role']);
         $input['password'] = bcrypt($input['password']);
 
         $user = User::create($input);
@@ -193,4 +193,4 @@ class UserController extends Controller
 
         return response()->json(['message' => 'User deleted'], 200);
     }
-} 
+}
