@@ -121,6 +121,6 @@ function updateBasketCount() {
 }
 
 // Call this function whenever the cart is updated
-updateBasketCount();
+// updateBasketCount();
 </script>
 @endsection
