@@ -144,18 +144,36 @@ nav a:nth-child(5) {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     margin: 20px 0;
     border: 1px solid #b9952d;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.alert form {
+    max-width: fit-content;
+    max-height: fit-content;
 }
 
 .close-btn {
-    float: right;
     cursor: pointer;
     font-size: 18px;
-    margin-left: 10px;
     color: #ffffff;
 }
 
 .close-btn:hover {
     color: #000000;
+}
+
+.alert p {
+    margin: 0;
+    padding-top: 20px;
+}
+
+@media (max-width: 600px) {
+    .alert {
+        padding: 15px;
+    }
 }
 
 #reviewContent,

@@ -9,13 +9,13 @@ $totalPrice = 0;
 <!-- Main Shopping Cart Section -->
 <main class="cart-container">
     @if (session('status'))
-        <div class="alert">
-            {{ session('status') }}
-            <form method="POST" action="{{ url('/close-alert') }}" style="display: inline;">
-                @csrf
-                <button type="submit" class="close-btn">✖</button>
-            </form>
-        </div>
+    <div class="alert">
+        <p class="message">{{ session('status') }}</p>
+        <form method="POST" action="{{ url('/close-alert') }}" style="display: inline;">
+            @csrf
+            <button type="submit" class="close-btn">✖</button>
+        </form>
+    </div>
     @endif
     <h1 class="cart-title">Shopping Cart</h1>
     @if ($cartItems->isEmpty())
