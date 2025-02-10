@@ -57,6 +57,8 @@ $categories = array_unique($categoryUnordered);
         <button class="slider-btn prev-btn">❮</button>
         <button class="slider-btn next-btn">❯</button>
     </div>
+</section>
+<section class="productFilters">
     <!-- Product Filtering -->
     <div class="search-container">
     <form action="{{ route('home-search') }}" method="GET">
@@ -80,19 +82,20 @@ $categories = array_unique($categoryUnordered);
         <button type="submit" class="search-button">Search</button>
     </form>
     </div>
+    @php
+        $query = request('query');
+        $category = request('category');
 
-@php
-    $query = request('query');
-    $category = request('category');
+        // Filter products based on query and category
+        $filteredProducts = $productInfo->filter(function($product) use ($query, $category) {
+            $matchesQuery = $query ? stripos($product->product_name, $query) !== false || stripos($product->category_name, $query) !== false : true;
+            $matchesCategory = $category ? $product->category_name == $category : true;
 
-    // Filter products based on query and category
-    $filteredProducts = $productInfo->filter(function($product) use ($query, $category) {
-        $matchesQuery = $query ? stripos($product->product_name, $query) !== false || stripos($product->category_name, $query) !== false : true;
-        $matchesCategory = $category ? $product->category_name == $category : true;
+            return $matchesQuery && $matchesCategory;
+        });
+    @endphp
+</section>
 
-        return $matchesQuery && $matchesCategory;
-    });
-@endphp
 
 <div class="product-list">
     @if ($query || $category)
