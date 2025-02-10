@@ -13,6 +13,15 @@ $categoryUnordered[] = $info->category_name;
 @php
 $categories = array_unique($categoryUnordered);
 @endphp
+@if (session('status'))
+<div class="alert">
+    <p class="message">{{ session('status') }}</p>
+    <form method="POST" action="{{ url('/close-alert') }}" style="display: inline;">
+        @csrf
+        <button type="submit" class="close-btn">✖</button>
+    </form>
+</div>
+@endif
 <!-- Hero Section -->
 <section class="hero" id="home">
     <h1>Welcome to The Gilded Canvas</h1>

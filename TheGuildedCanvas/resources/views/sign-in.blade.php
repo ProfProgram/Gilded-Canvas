@@ -4,7 +4,7 @@
 @section('content')
 @if (session('message'))
     <div class="alert">
-        <p class="message">{{ session('message') }}</p>
+        <p class="message">{{ session('status') }}</p>
         <form method="POST" action="{{ url('/close-alert') }}" style="display: inline;">
             @csrf
             <button type="submit" class="close-btn">✖</button>

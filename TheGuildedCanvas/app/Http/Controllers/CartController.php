@@ -15,7 +15,7 @@ class CartController extends Controller
     public function index()
     {
         if (!Auth::check()) {
-            return redirect()->route('sign-in')->with('message', 'Please log in to view your basket.');
+            return redirect()->route('sign-in')->with('status', 'Please log in to view your basket.');
         }
         $userId = Auth::user()->user_id;
         $cartItems = Cart::with('product')->with( 'user')->where('user_id', '=', $userId)->get();
@@ -25,17 +25,20 @@ class CartController extends Controller
     public function delete($id)
     {
         if (!Auth::check()) {
-            return redirect()->route('sign-in')->with('message', 'Please log in to delete from basket.');
+            return redirect()->route('sign-in')->with('status', 'Please log in to delete from basket.');
         }
-        $cart = Cart::where('basket_id', $id);
+        $cart = Cart::with('product')->where('basket_id', $id)->first();
+        $prod_name = $cart->product->product_name;
         $cart->delete();
-        return redirect()->back()->with('status', 'Data Deleted');
+        return redirect()->back()->with('status', 'Removed '.$prod_name.' from your cart');
     }
     public function add(Request $request)
     {
         if (!Auth::check()) {
-            return redirect()->route('sign-in')->with('message', 'Please log in to add to basket.');
+            return redirect()->route('sign-in')->with('status', 'Please log in to add to basket.');
         }
+        $userId = Auth::user()->user_id;
+
         $productId = $request->input('product_id');
         $productName = $request->input('product_name');
         $productPrice = $request->input('product_price');
@@ -43,7 +46,7 @@ class CartController extends Controller
         
         // Check if the product already exists in the cart (for the current user)
         $existingCartItem = Cart::where('product_id', $productId)
-                                ->where('user_id', 1)  // Assuming you're using authentication
+                                ->where('user_id', $userId)  // Assuming you're using authentication
                                 ->first();
 
         if ($existingCartItem) {
@@ -51,18 +54,16 @@ class CartController extends Controller
             $existingCartItem->quantity += $quantity;
             $existingCartItem->save();
         } else {
-            // Product doesn't exist in the cart, create a new cart entry
             Cart::create([
                 'product_id' => $productId,
-                'user_id' => 1, // Assuming you're using authentication
+                'user_id' => $userId,
                 'product_name' => $productName,
                 'price' => $productPrice,
-                'quantity' => $quantity, // Start with 1 quantity
+                'quantity' => $quantity,
             ]);
         }
 
-        // Optionally, redirect back to the product page or cart page
-        return redirect()->back()->with('success', 'Product added to cart!');
+        return redirect()->back()->with('status', $productName.' added to cart!');
     }
     
     /**
@@ -95,7 +96,7 @@ class CartController extends Controller
     public function update(Request $request, Cart $cart)
     {
         if (!Auth::check()) {
-            return redirect()->route('sign-in')->with('message', 'Please log in to view your previous orders.');
+            return redirect()->route('sign-in')->with('status', 'Please log in to view your previous orders.');
         }
         $cart = Cart::with('product')->find($request->id);
         $inv_lvl = Inventory::where('product_id', $cart->product->product_id)->first();

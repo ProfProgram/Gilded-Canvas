@@ -453,7 +453,6 @@ nav a:nth-child(5) {
 }
 
 #empty-basket-container {
-    display: none;
     justify-content: center;
     align-items: center;
     height: 300px;
