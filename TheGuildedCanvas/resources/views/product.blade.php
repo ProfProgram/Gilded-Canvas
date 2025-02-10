@@ -65,7 +65,7 @@ $categories = array_unique($categoryUnordered);
                     <img src="{{ asset('images/products/img-'.$info->product_id.'.png') }}" 
                         alt="{{ $info->product_name }}" onclick="window.location.href='{{ url('/product/'.$info->product_name.'') }}'">
                 </div>
-                <div class="product-details">
+                <div class="prod-page-details">
                     <h2>{{ $info->product_name }}</h2>
                     <p>{{ $info->description }}</p>
                     <p class="product-price">£{{ $info->price }}.00</p>

@@ -25,7 +25,7 @@
                             <div class="product-image">
                                 <img src="{{ asset('images/products/img-'.$order->product_id.'.png') }}" alt="{{$order->product_name}}">
                             </div>
-                            <div class="product-details">
+                            <div class="product-description">
                                 <h3>{{$order->product_name}}</h3>
                                 <p>Quantity: {{$order->quantity}}</p>
                                 <p>Total: £{{$order->price_of_order}}</p>

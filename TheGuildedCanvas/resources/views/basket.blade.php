@@ -13,7 +13,7 @@ $totalPrice = 0;
             <!-- Cart Items -->
             <div class="cart-items" id="cart-items">
                 <div class="cart-item">
-                @foreach($cartItems as $item)
+                    @foreach($cartItems as $item)
                     <div class="product-image">
                         <img src="{{ asset('images/products/img-'. $item->product_id .'.png')}}" alt="Gold Leaf Canvas">
                     </div>
@@ -29,10 +29,11 @@ $totalPrice = 0;
                     <a href="{{url('delete/'.$item->basket_id)}}">
                         <button class="remove-button">Remove</button>
                     </a>
-                @php
-                $totalPrice += $item->quantity * $item->product->price;
-                @endphp
-                @endforeach
+                    <hr class="divider">
+                    @php
+                    $totalPrice += $item->quantity * $item->product->price;
+                    @endphp
+                    @endforeach
                 </div>
             </div>
                 <!-- Continue Shopping Button Inside the Cart -->
