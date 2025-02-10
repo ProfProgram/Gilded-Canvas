@@ -107,20 +107,6 @@ $totalPrice = 0;
     quantityInputs.forEach(input => {
         input.addEventListener('input', updateTotal); // Attach updateTotal function to input change
     });
-
-    // Initial check for empty cart
-    checkIfCartIsEmpty();
 });
-//this function ensures the number of items in the basket dynamically updates
-function updateBasketCount() {
-    const itemCount = document.querySelectorAll('.cart-item').length; // Count items in the cart
-    const cartItemCount = document.querySelector('.cart-item-count');
-    if (cartItemCount) {
-        cartItemCount.textContent = `(${itemCount})`; // Update the count dynamically
-    }
-}
-
-// Call this function whenever the cart is updated
-// updateBasketCount();
 </script>
 @endsection
