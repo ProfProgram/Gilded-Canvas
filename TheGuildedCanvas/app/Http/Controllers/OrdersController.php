@@ -10,7 +10,7 @@ class OrdersController extends Controller
 {
     public function index() {
         if (!Auth::check()) {
-            return redirect()->route('sign-in')->with('message', 'Please log in to view your previous orders.');
+            return redirect()->route('sign-in')->with('status', 'Please log in to view your previous orders.');
         }
         $userId = Auth::user()->user_id;
         $orderInfo = Order::join('orders_details_table', 'orders_details_table.order_id', '=', 'orders_table.order_id')

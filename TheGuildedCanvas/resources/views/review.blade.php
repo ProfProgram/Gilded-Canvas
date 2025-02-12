@@ -13,11 +13,12 @@
 <body>
     @if (session('status'))
     <div class="alert">
-        {{ session('status') }}
+        <p class="message">{{ session('status') }}</p>
         <form method="POST" action="{{ url('/close-alert') }}" style="display: inline;">
             @csrf
             <button type="submit" class="close-btn">✖</button>
         </form>
+    </div>
     </div>
     @endif
 

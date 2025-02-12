@@ -13,6 +13,15 @@ $categoryUnordered[] = $info->category_name;
 @php
 $categories = array_unique($categoryUnordered);
 @endphp
+@if (session('status'))
+<div class="alert">
+    <p class="message">{{ session('status') }}</p>
+    <form method="POST" action="{{ url('/close-alert') }}" style="display: inline;">
+        @csrf
+        <button type="submit" class="close-btn">✖</button>
+    </form>
+</div>
+@endif
 <!-- Hero Section -->
 <section class="hero" id="home">
     <h1>Welcome to The Gilded Canvas</h1>
@@ -48,6 +57,8 @@ $categories = array_unique($categoryUnordered);
         <button class="slider-btn prev-btn">❮</button>
         <button class="slider-btn next-btn">❯</button>
     </div>
+</section>
+<section class="productFilters">
     <!-- Product Filtering -->
     <div class="search-container">
     <form action="{{ route('home-search') }}" method="GET">
@@ -71,19 +82,20 @@ $categories = array_unique($categoryUnordered);
         <button type="submit" class="search-button">Search</button>
     </form>
     </div>
+    @php
+        $query = request('query');
+        $category = request('category');
 
-@php
-    $query = request('query');
-    $category = request('category');
+        // Filter products based on query and category
+        $filteredProducts = $productInfo->filter(function($product) use ($query, $category) {
+            $matchesQuery = $query ? stripos($product->product_name, $query) !== false || stripos($product->category_name, $query) !== false : true;
+            $matchesCategory = $category ? $product->category_name == $category : true;
 
-    // Filter products based on query and category
-    $filteredProducts = $productInfo->filter(function($product) use ($query, $category) {
-        $matchesQuery = $query ? stripos($product->product_name, $query) !== false || stripos($product->category_name, $query) !== false : true;
-        $matchesCategory = $category ? $product->category_name == $category : true;
+            return $matchesQuery && $matchesCategory;
+        });
+    @endphp
+</section>
 
-        return $matchesQuery && $matchesCategory;
-    });
-@endphp
 
 <div class="product-list">
     @if ($query || $category)
@@ -113,6 +125,47 @@ $categories = array_unique($categoryUnordered);
         <p id="search-empty">No products found matching your search.</p>
     @endforelse
 </div>
+<script>
+    const sliderTrack = document.querySelector('.slider-track');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+
+    let currentIndex = 0;
+
+    function updateSlider() {
+        const slideWidth = document.querySelector('.product-slide').offsetWidth;
+        sliderTrack.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+        currentIndex = Math.max(currentIndex - 1, 0);
+        updateSlider();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        const totalSlides = document.querySelectorAll('.product-slide').length;
+        const maxIndex = totalSlides - Math.floor(sliderTrack.clientWidth / document.querySelector('.product-slide').clientWidth);
+        currentIndex = Math.min(currentIndex + 1, maxIndex);
+        updateSlider();
+    });
+
+    window.addEventListener('resize', updateSlider);
+    // Auto-slide functionality
+    let autoSlide = setInterval(() => {
+        const totalSlides = document.querySelectorAll('.product-slide').length;
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlider();
+    }, 5000);
+
+    sliderTrack.addEventListener('mouseover', () => clearInterval(autoSlide));
+    sliderTrack.addEventListener('mouseout', () => {
+        autoSlide = setInterval(() => {
+            const totalSlides = document.querySelectorAll('.product-slide').length;
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }, 5000);
+    });
+</script>
 
 @endsection
 
