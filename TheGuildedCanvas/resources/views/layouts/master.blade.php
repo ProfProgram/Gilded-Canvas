@@ -24,7 +24,7 @@
                 <a href="/payment">Payment</a>
                 <a href="/basket" class="cart-icon">
                     <img src="{{ asset('images/cart-icon.png') }}" alt="Shopping Cart" class="cart-icon-img">
-                    <span class="cart-item-count">(2)</span>
+                    <span class="cart-item-count">({{$cartCount}})</span>
                 </a>
                 <a href="/previous-orders">Previous Orders</a>
                 <!-- Role-Specific Links -->

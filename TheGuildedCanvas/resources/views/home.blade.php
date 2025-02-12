@@ -30,7 +30,7 @@ $categories = array_unique($categoryUnordered);
 </section>
 
 <!-- Product Slider Section -->
-<section class="products" id="products-sliders">
+<section class="products-carousel" id="products-sliders">
     <h2>Featured Products</h2>
     <div class="slider">
         <div class="slider-track">
@@ -59,28 +59,31 @@ $categories = array_unique($categoryUnordered);
     </div>
 </section>
 <section class="productFilters">
+    <h2>Search Our Products</h2>
     <!-- Product Filtering -->
     <div class="search-container">
-    <form action="{{ route('product-search') }}" method="GET">
-        <!-- Search by name or category -->
-        <input
-            type="text"
-            name="query"
-            placeholder="Search for product names or categories..."
-            value="{{ request('query') }}"
-            class="search-input"
-        >
-        <!-- Choose Category -->
-        <select name="category">
-            <option value="">Select a Category</option>
-            @foreach ($categories as $category)
-                <option value="{{ $category }}" @if(request('category') == $category) selected @endif>
-                    {{ $category }}
-                </option>
-            @endforeach
-        </select>
-        <button type="submit" class="search-button">Search</button>
-    </form>
+        <form action="{{ route('product-search') }}" method="GET">
+            <!-- Search by name or category -->
+            <input
+                type="text"
+                name="query"
+                placeholder="Search for product names or categories..."
+                value="{{ request('query') }}"
+                class="search-input"
+            >
+            <!-- Choose Category -->
+            <select class="category-select" name="category">
+                @foreach ($categories as $category)
+                    <option value="" disabled 
+                        @if(!request('category')) selected @endif 
+                        hidden>Select a Category</option>
+                        <option value="{{ $category }}" @if(request('category') == $category) selected @endif>
+                            {{ $category }}
+                        </option>
+                @endforeach
+            </select>
+            <button type="submit" class="search-button">Search</button>
+        </form>
     </div>
     @php
         $query = request('query');
@@ -95,6 +98,9 @@ $categories = array_unique($categoryUnordered);
         });
     @endphp
 </section>
+<style>
+</style>
+
 <script>
     const sliderTrack = document.querySelector('.slider-track');
     const prevBtn = document.querySelector('.prev-btn');
