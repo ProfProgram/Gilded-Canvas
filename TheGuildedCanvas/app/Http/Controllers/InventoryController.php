@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Inventory;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Admin;
 
 class InventoryController extends Controller
 {
@@ -55,7 +56,7 @@ class InventoryController extends Controller
         $inventory->update([
             'product_id' => $request['product_id'],
             'stock_level' => $validatedData['stock_level'],
-            'admin_id' => Auth::id(), // Update the admin who made the change
+            'admin_id' => Admin::where('user_id', Auth::id())->value('admin_id'), // Update the admin who made the change
         ]);
 
         //dd($inventory);

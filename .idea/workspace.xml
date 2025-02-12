@@ -5,18 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a9ea0e8-b314-4a97-9bee-9383a7c9568a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/.env" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Enums/UserRole.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Enums/UserRole.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Models/Inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Models/Inventory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/InventoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/InventoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/UserManagementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/UserManagementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Models/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Models/Admin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/database/migrations/2024_11_20_122857_create_cs2team37_db_tables.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/database/migrations/2024_11_20_122857_create_cs2team37_db_tables.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/layouts/master.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/vendor/composer/installed.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/database/seeders/DatabaseSeeder.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,7 +219,11 @@
       <workItem from="1739110938155" duration="2140000" />
       <workItem from="1739115255078" duration="10862000" />
       <workItem from="1739180380383" duration="15141000" />
-      <workItem from="1739216986321" duration="2783000" />
+      <workItem from="1739216986321" duration="3630000" />
+      <workItem from="1739263752720" duration="3035000" />
+      <workItem from="1739301122386" duration="168000" />
+      <workItem from="1739307439011" duration="1507000" />
+      <workItem from="1739355552683" duration="1463000" />
     </task>
     <servers />
   </component>

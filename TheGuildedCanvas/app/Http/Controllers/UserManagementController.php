@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
+use App\Models\Manager;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -28,6 +30,18 @@ class UserManagementController extends Controller
         $validatedData = $request->validate([
             'role' => 'required|in:admin,manager,user',
         ]);
+        if ($validatedData['role'] === 'admin') {
+            $admin = Admin::create(['user_id' => $id]);
+        }
+        if ($validatedData['role'] === 'manager') {
+            $manager = Manager::create(['user_id' => $id]);
+        }
+        if ($validatedData['role'] === 'user') {
+            $admin = Admin::findOrFail(['user_id'=> $id]);
+            $manager = Manager::findOrFail(['user_id'=> $id]);
+            $manager->delete();
+            $admin->delete();
+        }
 
 
         // Find the user

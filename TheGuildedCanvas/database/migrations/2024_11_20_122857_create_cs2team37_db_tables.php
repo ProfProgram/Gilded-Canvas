@@ -42,6 +42,15 @@ return new class extends Migration
             });
         }
 
+        if (!Schema::hasTable('manager_table')) {
+            Schema::create('manager_table', function (Blueprint $table) {
+                $table->increments('manager_id');
+                $table->unsignedInteger('user_id');
+                $table->timestamps();
+                $table->foreign('user_id')->references('user_id')->on('users_table')->onDelete('cascade');
+            });
+        }
+
         /**
          * does not require foreign keys
          */
@@ -176,6 +185,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('users_table');
         Schema::dropIfExists('admin_table');
+        Schema::dropIfExists('manager_table');
         Schema::dropIfExists('products_table');
         Schema::dropIfExists('inventory_table');
         Schema::dropIfExists('orders_table');
