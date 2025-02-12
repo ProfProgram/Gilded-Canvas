@@ -22,10 +22,10 @@
                         <form action="{{ route('manager.users.update', $user) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            <select name="role" class="form-select">
-                                <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="manager" {{ $user->role === 'manager' ? 'selected' : '' }}>Manager</option>
-                                <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>
+                            <select name="role" class="form-select" required>
+                                <option value="admin" {{ $user->role->value === 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="manager" {{ $user->role->value === 'manager' ? 'selected' : '' }}>Manager</option>
+                                <option value="user" {{ $user->role->value === 'user' ? 'selected' : '' }}>User</option>
                             </select>
                             <button type="submit" class="logout-link">Update</button>
                         </form>
