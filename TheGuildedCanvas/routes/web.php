@@ -122,7 +122,6 @@ Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('
 Route::get('/', [homeController::class, 'index']);
 
 Route::get('/home', [homeController::class, 'index']);
-Route::get('/search', [homeController::class, 'search'])->name('home-search');
 
 Route::get('/sign-up', function () {
     return view('sign-up');

@@ -12,19 +12,4 @@ class homeController extends Controller
         $productInfo = Product::all();
         return view('home', ['productInfo'=>$productInfo]);
     }
-
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
-        $category = $request->input('category');
-
-        // Search products by name or category
-        $products = Product::all();
-
-        return view('home', [
-            'productInfo' => $products,
-            'query' => $query,
-            'category' => $category
-        ]);
-    }
 }
