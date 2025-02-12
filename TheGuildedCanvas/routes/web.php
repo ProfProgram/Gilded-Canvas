@@ -23,10 +23,26 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Models\User;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\UserManagementController;
+
 
 
 Auth::routes(['verify' => true]);
 
+// Admin routes
+Route::middleware('auth')->group(function () {
+    // Inventory management routes
+    Route::get('/admin/inventory', [InventoryController::class, 'index'])->name('admin.inventory');
+    Route::put('/admin/inventory/{id}', [InventoryController::class, 'update'])->name('admin.inventory.update');
+    Route::delete('/admin/inventory/{id}', [InventoryController::class, 'destroy'])->name('admin.inventory.destroy');
+});
+// Manager routes
+Route::middleware('auth')->group(function () {
+    Route::get('manager/users', [UserManagementController::class, 'index'])->name('manager.users');
+    Route::put('manager/users/{id}', [UserManagementController::class, 'updateRole'])->name('manager.users.update');
+    Route::delete('manager/users/{id}', [UserManagementController::class, 'destroy'])->name('manager.users.destroy');
+});
 // Handle email verification
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -149,7 +165,7 @@ Route::get('/review', [ReviewController::class, 'index']);
 Route::post('/review', [ReviewController::class, 'store']);
 
 // REMOVE THE ALERT MESSAGE
-Route::post('/close-alert', function () {Session::forget('status'); return redirect()->back();})->name('close-alert');     
+Route::post('/close-alert', function () {Session::forget('status'); return redirect()->back();})->name('close-alert');
 
 // ABOUT US
 Route::get('/about-us', function () {

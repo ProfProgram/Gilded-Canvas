@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Admin;
 use App\Models\Inventory;
+use App\Models\Manager;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\User;
@@ -22,7 +23,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-        
+
         /**
          * Users dummy data
          */
@@ -70,13 +71,34 @@ class DatabaseSeeder extends Seeder
                 'phone_number' => '478916287462148',
                 'role' => 'admin',
             ],
+            [
+                'name' => 'Alex',
+                'email' => 'alex@hotmail.com',
+                'password' => '89747977832',
+                'phone_number' => '4789162874632',
+                'role' => 'manager',
+            ],
+            [
+                'name' => 'Alexis',
+                'email' => 'alexis@hotmail.com',
+                'password' => '8974792133',
+                'phone_number' => '4789162874631',
+                'role' => 'manager',
+            ],
+            [
+                'name' => 'Kobbie',
+                'email' => 'kobbie@hotmail.com',
+                'password' => '89747977835',
+                'phone_number' => '4789162874635',
+                'role' => 'manager',
+            ]
         ];
 
         foreach($users as $userData) {
             User::create($userData);
         }
-    
-    
+
+
         /**
          * Admin dummy data
          */
@@ -90,6 +112,24 @@ class DatabaseSeeder extends Seeder
              // If the Admin entry doesn't exist, create one
             if (!$existingAdmin) {
                 Admin::create([
+                    'user_id' => $user->user_id,
+                ]);
+            }
+        }
+
+        /**
+         * Manager dummy data
+         */
+
+        $managerUsers = User::where('role', 'manager')->get();
+
+        foreach ($managerUsers as $user) {
+            // Check if the manager entry already exists for this user
+            $existingManager = Manager::where('user_id', $user->user_id)->first();
+
+            // If the Manager entry doesn't exist, create one
+            if (!$existingManager) {
+                Manager::create([
                     'user_id' => $user->user_id,
                 ]);
             }
@@ -428,7 +468,7 @@ class DatabaseSeeder extends Seeder
                 'user_id' => 3,
                 'product_id' => 3,
                 'rating' => 5,
-                'review_text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',    
+                'review_text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
             ],
         ];
         foreach($reviews as $reviewData) {

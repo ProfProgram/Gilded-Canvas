@@ -63,10 +63,10 @@ $categories = array_unique($categoryUnordered);
     <div class="search-container">
     <form action="{{ route('home-search') }}" method="GET">
         <!-- Search by name or category -->
-        <input 
-            type="text" 
-            name="query" 
-            placeholder="Search for product names or categories..." 
+        <input
+            type="text"
+            name="query"
+            placeholder="Search for product names or categories..."
             value="{{ request('query') }}"
             class="search-input"
         >
