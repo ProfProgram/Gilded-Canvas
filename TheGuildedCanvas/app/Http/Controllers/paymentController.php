@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Cart;
 use App\Models\OrderDetail;
+use Illuminate\Support\Facades\Auth;
 
 class paymentController extends Controller
 {
@@ -18,7 +19,8 @@ class paymentController extends Controller
         // } else {
         //     return view('payment', ['orderDetail'=>null]);
         // }
-        $cartInfo = Cart::with('product')->get();
+        $userId = Auth::user()->user_id;
+        $cartInfo = Cart::with('product')->where('cart_table.user_id', '=', $userId)->get();
         return view('payment', ['cartInfo'=>$cartInfo, 'total_price'=>$request->totalPrice]);
     }
 
