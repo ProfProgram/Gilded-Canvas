@@ -2,7 +2,7 @@
 @extends('layouts.master')
 
 @section('content')
-@if (session('message'))
+@if (session('status'))
     <div class="alert">
         <p class="message">{{ session('status') }}</p>
         <form method="POST" action="{{ url('/close-alert') }}" style="display: inline;">
