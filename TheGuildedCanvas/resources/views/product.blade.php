@@ -13,6 +13,15 @@ $categoryUnordered[] = $info->category_name;
 @php
 $categories = array_unique($categoryUnordered);
 @endphp
+@if (session('status'))
+<div class="alert">
+    <p class="message">{{ session('status') }}</p>
+    <form method="POST" action="{{ url('/close-alert') }}" style="display: inline;">
+        @csrf
+        <button type="submit" class="close-btn">✖</button>
+    </form>
+</div>
+@endif
 <div class="container">
     <div class="product-header">
         <h1>Product Page</h1>
@@ -65,7 +74,7 @@ $categories = array_unique($categoryUnordered);
                     <img src="{{ asset('images/products/img-'.$info->product_id.'.png') }}" 
                         alt="{{ $info->product_name }}" onclick="window.location.href='{{ url('/product/'.$info->product_name.'') }}'">
                 </div>
-                <div class="product-details">
+                <div class="prod-page-details">
                     <h2>{{ $info->product_name }}</h2>
                     <p>{{ $info->description }}</p>
                     <p class="product-price">£{{ $info->price }}.00</p>

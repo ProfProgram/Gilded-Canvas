@@ -138,10 +138,11 @@ Route::get('/contact-us', function () {
 });
 
 // BASKET PAGE
-Route::get('/basket', [CartController::class, 'index']);
+Route::get('/basket', [CartController::class, 'index'])->name('basket');
 Route::get('delete/{id}', [CartController::class, 'delete'])->name('cart_delete');
 
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::post('/update-basket', [CartController::class, 'update'])->name('basket.update');
 
 
 // PREVIOUS ORDERS

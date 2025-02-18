@@ -87,12 +87,15 @@ Basket:
 
 	FontEnd:
 
- 		Shows all products in the cart table. Allows quantities to be amended, does affect total price (live). Initial quantities are based on database values.
-   		All baskets are the same one, must be based on the user's login id. ISSUES when passing the total price to the payment page.
+ 		Shows all products in the cart table. Allows quantities to be amended, affects the total price (live). Initial quantities are based on database values.
+   		Baskets are now tailored to the user's ID.
+     		Runs different html if the cart_table has no entries tied to user's user_id, prompts the user to 'continue shopping'.
 
 	BackEnd:
 
- 		Delete functionality is working as intended. Adding functionality when adding an item to the cart that already exists causes quantity to be updated (currently only increments).
+ 		Delete removes the cart item that has the same basket ID.
+   		Update validates the quantity input to be lower than the stock_level and if so saves to the cart_table.
+     		On view, the checkout button will POST the total price to the payment page. (not based off JS but PHP so the live update does not get sent to redirect)
 
 Previous Order:
 
