@@ -35,12 +35,12 @@
                     <option value="user">customer</option>
                 </select>
             </div>
-            <a href="{{ route('login') }}" class="forgot-details">Already a member?</a>
+            <a href="{{ route('sign-in') }}" class="forgot-details">Already a member?</a>
             <button type="submit" class="login-btn">Signup</button>
         </form>
         <div class="signup-prompt">
             <p>have an account?</p>
-            <a href="{{ route('login') }}" class="signup-link">Login Now</a>
+            <a href="{{ route('sign-in') }}" class="signup-link">Login Now</a>
         </div>
     </section>
 </main>
