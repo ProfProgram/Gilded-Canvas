@@ -121,43 +121,6 @@ class UserController extends Controller
         return response()->json(['message' => 'Password has been reset successfully!']);
     }
 
-
-    public function login(Request $request)
-    {
-        Session::start();
-        $credentials = $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string|min:8'
-        ]);
-
-        // Attempt to authenticate the user
-        if (Auth::attempt($credentials)) {
-            // Regenerate the session to prevent session fixation attacks
-            $request->session()->regenerate();
-
-            // Redirect to the home page
-            return redirect()->route('home')->with('status', 'User logged in successfully.');
-        }
-
-        // If authentication fails, redirect back with an error message
-        return back()->withErrors(['error' => 'Invalid credentials.']);
-    }
-
-    public function logout(Request $request)
-    {
-        Session::start();
-        // Retrieve the authenticated user
-        Auth::logout();
-
-        // Invalidate the session
-        $request->session()->invalidate();
-
-        // Regenerate the CSRF token
-        $request->session()->regenerateToken();
-
-        return redirect('/home')->with('status', 'User logged out successfully.');
-    }
-
     public function update(Request $request, $id)
     {
         $user = User::find($id);
