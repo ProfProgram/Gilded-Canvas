@@ -11,9 +11,16 @@
         </form>
     </div>
 @endif
+
 <main>
     <section class="login-container">
         <h1>Login</h1>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                {{ $errors->first() }}
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="form-text">
