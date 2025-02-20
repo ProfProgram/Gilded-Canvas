@@ -6,6 +6,11 @@
 <main>
     <section class="login-container">
         <h1>Signup</h1>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                {{ $errors->first() }}
+            </div>
+        @endif
         <form method="POST" action="{{ route('register') }}">
             @csrf
             <div class="form-text">

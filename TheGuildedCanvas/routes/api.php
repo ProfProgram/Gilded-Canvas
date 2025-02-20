@@ -2,6 +2,8 @@
 <?php
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,9 +33,9 @@ Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLink'
 Route::get('/home', [ProductController::class, 'index'])->name('home');
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->middleware('auth:sanctum');
 Route::put('/users/{id}', [UserController::class, 'update'])->middleware('auth:sanctum');
-Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/sign-up', [UserController::class, 'register'])->middleware('throttle:10,1')->name('register');
-Route::post('/sign-in', [UserController::class, 'login'])->middleware('throttle:10,1')->name('login');
+Route::post('/sign-in', [LoginController::class, 'login'])->middleware('throttle:10,1')->name('login');
 Route::get('/product-carousel', [ProductController::class, 'getCarouselData']);
 Route::get('/product/filter-by-genre', [ProductController::class, 'filterByGenre']);
 Route::get('/product/filter-by-price', [ProductController::class, 'filterByPrice']);
