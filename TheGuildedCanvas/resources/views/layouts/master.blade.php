@@ -21,7 +21,6 @@
             <a href="/contact-us">Contact Us</a>
             <!-- Logged-in Links -->
             @auth
-                <a href="/payment">Payment</a>
                 <a href="/basket" class="cart-icon">
                     <img src="{{ asset('images/cart-icon.png') }}" alt="Shopping Cart" class="cart-icon-img">
                     <span class="cart-item-count">({{$cartCount}})</span>
