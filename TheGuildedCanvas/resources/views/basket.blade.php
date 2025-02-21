@@ -22,7 +22,8 @@ $totalPrice = 0;
         </form>
     </div>
     @endif
-    <h1 class="cart-title">Shopping Cart</h1>
+    <!-- <h1 class="cart-title">Shopping Cart</h1> -->
+
     @if ($cartItems->isEmpty())
         <!-- Empty Basket Message -->
         <div id="empty-basket-container">
