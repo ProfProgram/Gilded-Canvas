@@ -45,7 +45,6 @@ $totalPrice = 0;
                         <input type="hidden" name="id" value="{{$item->basket_id}}">
                         <div class="product-details">
                             <h3>{{$item->product->product_name}}</h3>
-                            <p>{{$item->product->description}}</p>
                             <p>Price: {{$item->product->price}}</p>
                             <div class="quantity-container">
                                 <label for="quantity">Quantity:</label>
