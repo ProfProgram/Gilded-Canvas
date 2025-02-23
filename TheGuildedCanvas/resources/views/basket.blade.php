@@ -1,6 +1,10 @@
 
 @extends('layouts.master')
 
+
+
+
+    <!-- Your basket page content -->
 @section('content')
 
 @php
@@ -17,7 +21,8 @@ $totalPrice = 0;
         </form>
     </div>
     @endif
-    <h1 class="cart-title">Shopping Cart</h1>
+    <!-- <h1 class="cart-title">Shopping Cart</h1> -->
+
     @if ($cartItems->isEmpty())
         <!-- Empty Basket Message -->
         <div id="empty-basket-container">
@@ -30,34 +35,47 @@ $totalPrice = 0;
         <div class="cart-layout">
             <!-- Cart Items -->
             <div class="cart-items" id="cart-items">
-                <div class="cart-item">
-                    @foreach($cartItems as $item)
-                    <div class="product-image">
-                        <img src="{{ asset('images/products/img-'. $item->product_id .'.png')}}" alt="Gold Leaf Canvas">
-                    </div>
-                    <form action="{{ route('basket.update')}}" method="post">
-                        @csrf
-                        <input type="hidden" name="id" value="{{$item->basket_id}}">
-                        <div class="product-details">
-                            <h3>{{$item->product->product_name}}</h3>
-                            <p>{{$item->product->description}}</p>
-                            <p>Price: {{$item->product->price}}</p>
-                            <div class="quantity-container">
-                                <label for="quantity">Quantity:</label>
-                                <input type="number" class="quantity-input" name="quantity" value="{{$item->quantity}}" min="1" max="15" step="1" data-price="{{$item->product->price}}">
-                            </div>
-                            <button class="update-basket-button">Update Basket</button>
-                        </div>
-                    </form>
-                    <a href="{{url('delete/'.$item->basket_id)}}">
-                        <button class="remove-button">Remove</button>
-                    </a>
-                    <hr class="divider">
-                    @php
+          <!-- Cart Items -->
+<div class="cart-items" id="cart-items">
+    @foreach($cartItems as $item)
+    <div class="cart-item">
+        <div class="product-image">
+            <img src="{{ asset('images/products/img-' . $item->product_id . '.png') }}" alt="Gold Leaf Canvas">
+        </div>
+        <form action="{{ route('basket.update') }}" method="post">
+            @csrf
+            <input type="hidden" name="id" value="{{ $item->basket_id }}">
+            <div class="product-details">
+                <h3>{{ $item->product->product_name }}</h3>
+                <!-- Remove the description line here -->
+                <!-- <p>{{ $item->product->description }}</p> -->
+
+                <p>Price: £{{ $item->product->price }}</p>
+                <div class="quantity-container">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number"
+                           class="quantity-input"
+                           name="quantity"
+                           value="{{ $item->quantity }}"
+                           min="1"
+                           max="15"
+                           step="1"
+                           data-price="{{ $item->product->price }}">
+                </div>
+                <button class="update-basket-button">Update Basket</button>
+                <a href="{{ url('delete/'.$item->basket_id) }}">
+                    <button class="remove-button" type="button">Remove</button>
+                </a>
+            </div>
+        </form>
+    </div>
+    <hr class="item-divider">
+    @php
                     $totalPrice += $item->quantity * $item->product->price;
                     @endphp
                     @endforeach
-                </div>
+</div>
+     
             </div>
                 <!-- Continue Shopping Button Inside the Cart -->
                 <div class="continue-shopping">
