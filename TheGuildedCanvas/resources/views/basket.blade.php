@@ -71,7 +71,10 @@ $totalPrice = 0;
         </form>
     </div>
     <hr class="item-divider">
-    @endforeach
+    @php
+                    $totalPrice += $item->quantity * $item->product->price;
+                    @endphp
+                    @endforeach
 </div>
      
             </div>

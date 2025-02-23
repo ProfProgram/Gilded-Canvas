@@ -10,7 +10,6 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('images/TGC-Black-and-Gold.png') }}">
     <title>The Gilded Canvas</title>
     <link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
 
     @yield('styles')
 </head>
