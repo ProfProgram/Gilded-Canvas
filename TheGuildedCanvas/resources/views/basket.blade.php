@@ -1,9 +1,9 @@
 
 @extends('layouts.master')
 
-@endsection
 
-@section('content')
+
+
     <!-- Your basket page content -->
 @section('content')
 
