@@ -1,0 +1,16 @@
+/* navbar.css logo issue */
+.cart-icon img,
+.cart-icon-img {
+  width: 35px;   /* set your desired size */
+  height: auto;
+}
+
+#navbar {
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff; 
+  padding: 10px 20px;
+  /* etc. */
+}
