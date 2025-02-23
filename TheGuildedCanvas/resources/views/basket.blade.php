@@ -1,7 +1,6 @@
 
 @extends('layouts.master')
-@section('styles')
-    <link rel="stylesheet" href="{{ asset('css/basket.css') }}">
+
 @endsection
 
 @section('content')
