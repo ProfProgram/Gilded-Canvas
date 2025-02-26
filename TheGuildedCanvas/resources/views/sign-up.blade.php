@@ -6,6 +6,11 @@
 <main>
     <section class="login-container">
         <h1>Signup</h1>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                {{ $errors->first() }}
+            </div>
+        @endif
         <form method="POST" action="{{ route('register') }}">
             @csrf
             <div class="form-text">
@@ -35,12 +40,12 @@
                     <option value="user">customer</option>
                 </select>
             </div>
-            <a href="{{ route('login') }}" class="forgot-details">Already a member?</a>
+            <a href="{{ route('sign-in') }}" class="forgot-details">Already a member?</a>
             <button type="submit" class="login-btn">Signup</button>
         </form>
         <div class="signup-prompt">
             <p>have an account?</p>
-            <a href="{{ route('login') }}" class="signup-link">Login Now</a>
+            <a href="{{ route('sign-in') }}" class="signup-link">Login Now</a>
         </div>
     </section>
 </main>

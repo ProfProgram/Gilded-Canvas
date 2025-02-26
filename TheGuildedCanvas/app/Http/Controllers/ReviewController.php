@@ -12,6 +12,9 @@ class ReviewController extends Controller
 {
     public function index()
     {
+        if (!Auth::check()) {
+            return redirect()->route('sign-in')->with('status', 'Please log in to leave a review.');
+        }
         // $db_product = DB::table('Products Table');
         // $prod_names = $db_product->select('Product_id','Product_name')->get();
         $prod_names = Product::all(['product_id', 'product_name']);

@@ -6,11 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="5a9ea0e8-b314-4a97-9bee-9383a7c9568a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/InventoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/InventoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/UserManagementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/UserManagementController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Models/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Models/Admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/database/migrations/2024_11_20_122857_create_cs2team37_db_tables.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/database/migrations/2024_11_20_122857_create_cs2team37_db_tables.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/sign-in.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/sign-in.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/sign-up.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/sign-up.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,11 +225,24 @@
       <workItem from="1739263752720" duration="3035000" />
       <workItem from="1739301122386" duration="168000" />
       <workItem from="1739307439011" duration="1507000" />
-      <workItem from="1739355552683" duration="1463000" />
+      <workItem from="1739355552683" duration="2238000" />
+      <workItem from="1739870740430" duration="8755000" />
+      <workItem from="1739953064319" duration="4792000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/TheGuildedCanvas/routes/web.php</url>
+          <line>31</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

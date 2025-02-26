@@ -1,7 +1,7 @@
 # Gilded-Canvas
 A web application implemented as an e-commerce website. The project is based on requirements for a university module project. This is Team 37's interpretation of the requirements.
 
-ASTON SERVER HOSTING STATUS :::: (https://cs2team37.cs2410-web01pvm.aston.ac.uk/) ::: current commit equivalent = Unknown
+ASTON SERVER HOSTING STATUS :::: (https://cs2team37.cs2410-web01pvm.aston.ac.uk/) ::: current commit equivalent = Server v4
 Hafsa is working using the webmin and so host server may have changes that are not in any commits on GitHub
 
 update1 : Laravel Framework Update
