@@ -10,6 +10,7 @@
                 <th>Email</th>
                 <th>Role</th>
                 <th>Actions</th>
+                <th class="remove-column">Remove Option</th> <!-- New column -->
             </tr>
             </thead>
             <tbody>
