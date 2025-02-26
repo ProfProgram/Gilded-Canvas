@@ -1104,3 +1104,12 @@ form {
 .logout-link.delete:hover {
     background: #c9302c;
 }
+/* Apply Merriweather to the entire page */
+body {
+    font-family: 'Merriweather', serif;
+}
+
+/* Ensure headers and table text use Merriweather */
+h1, .table th, .table td, button, select {
+    font-family: 'Merriweather', serif;
+}
