@@ -28,14 +28,16 @@
                                 <option value="manager" {{ $user->role->value === 'manager' ? 'selected' : '' }}>Manager</option>
                                 <option value="user" {{ $user->role->value === 'user' ? 'selected' : '' }}>User</option>
                             </select>
-                            <button type="submit" class="logout-link">Update</button>
+                            <button type="submit" class="update-button">Update</button>
+
                         </form>
                     </td>
                     <td>
                         <form action="{{ route('manager.users.destroy', $user) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="logout-link">Delete</button>
+                            <button type="submit" class="delete-button">Delete</button>
+
                         </form>
                     </td>
                 </tr>

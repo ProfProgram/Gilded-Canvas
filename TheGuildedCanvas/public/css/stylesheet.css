@@ -1083,27 +1083,26 @@ form {
     cursor: pointer;
 }
 
-.logout-link {
-    background: #545454;
-    color: white;
-    padding: 8px 15px;
+.update-button,
+.delete-button {
+    background-color: #d4af37; /* Gold color */
+    color: #ffffff;
+    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 50px; /* Rounded edges */
+    font-size: 1em;
+    font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.logout-link:hover {
-    background: #333;
+/* Hover effect */
+.update-button:hover,
+.delete-button:hover {
+    background-color: #b7952b; /* Slightly darker gold */
 }
 
-.logout-link.delete {
-    background: #d9534f;
-}
-
-.logout-link.delete:hover {
-    background: #c9302c;
-}
 /* Apply Merriweather to the entire page */
 body {
     font-family: 'Merriweather', serif;
