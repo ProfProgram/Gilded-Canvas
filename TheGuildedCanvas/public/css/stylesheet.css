@@ -1048,18 +1048,20 @@ h1 {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    border: 2px solid #333; /* Ensures table border is visible */
 }
 
 .table thead {
     background: #d4af37; /* Gold Accent */
     color: white;
     font-weight: bold;
+    width: 100%;
 }
 
 .table th, .table td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border: 2px solid #333; /* Adds visible lines for a structured table */
 }
 
 .table tbody tr:nth-child(even) {
