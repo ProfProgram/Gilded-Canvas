@@ -1026,7 +1026,7 @@ form button {
     height: 200px;
 }
 /* User Management Page */
-.container {
+.user-management {
     width: 90%;
     max-width: 1200px;
     margin: 30px auto;
@@ -1069,13 +1069,13 @@ h1 {
 }
 
 /* Form & Buttons */
-form {
+.user-management form {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.form-select {
+.user-management .form-select {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
