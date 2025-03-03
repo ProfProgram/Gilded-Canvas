@@ -1164,8 +1164,9 @@ form button {
     height: 200px;
 }
 
-/* User Management Page */
-.user-management {
+
+/* Apply to both User Management & Inventory Management pages */
+.user-management, .inventory-management {
     width: 90%;
     max-width: 1200px;
     margin: 30px auto;
@@ -1208,13 +1209,13 @@ h1 {
 }
 
 /* Form & Buttons */
-.user-management form {
+.user-management form, .inventory-management form {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.user-management .form-select {
+.user-management .form-select, .inventory-management .form-control {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -1222,8 +1223,10 @@ h1 {
     cursor: pointer;
 }
 
+/* Buttons */
 .update-button,
-.delete-button {
+.delete-button,
+.logout-link {
     background-color: #d4af37; /* Gold color */
     color: #ffffff;
     padding: 10px 20px;
@@ -1238,7 +1241,8 @@ h1 {
 
 /* Hover effect */
 .update-button:hover,
-.delete-button:hover {
+.delete-button:hover,
+.logout-link:hover {
     background-color: #b7952b; /* Slightly darker gold */
 }
 
@@ -1248,6 +1252,6 @@ body {
 }
 
 /* Ensure headers and table text use Merriweather */
-h1, .table th, .table td, button, select {
+h1, .table th, .table td, button, select, input {
     font-family: 'Merriweather', serif;
 }
