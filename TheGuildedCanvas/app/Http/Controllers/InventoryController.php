@@ -14,7 +14,7 @@ class InventoryController extends Controller
     {
     // Ensure the user is an admin
         if (auth()->user()->role !== \App\Enums\UserRole::admin) {
-            return redirect('/home')->with('error', 'You do not have access to this page.');
+            return redirect('/home')->with('status', 'You do not have access to this page.');
         }
     // Fetch all inventory items with their associated products
         $inventory = Inventory::with('product')->get();
@@ -33,7 +33,7 @@ class InventoryController extends Controller
     {
         // Ensure the user is an admin
         if (auth()->user()->role !== \App\Enums\UserRole::admin) {
-            return redirect('/home')->with('error', 'You do not have access to this page.');
+            return redirect('/home')->with('status', 'You do not have access to this page.');
         }
 
 
@@ -68,7 +68,7 @@ class InventoryController extends Controller
     {
         // Ensure the user is an admin
         if (auth()->user()->role !== \App\Enums\UserRole::admin) {
-            return redirect('/home')->with('error', 'You do not have access to this page.');
+            return redirect('/home')->with('status', 'You do not have access to this page.');
         }
 
         // Find the inventory item by ID

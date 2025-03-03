@@ -19,6 +19,9 @@ class paymentController extends Controller
         // } else {
         //     return view('payment', ['orderDetail'=>null]);
         // }
+        if (!Auth::check()) {
+            return redirect()->route('sign-in')->with('status', 'Please log in to access payment procedure.');
+        }
         $userId = Auth::user()->user_id;
         $cartInfo = Cart::with('product')->where('cart_table.user_id', '=', $userId)->get();
         return view('payment', ['cartInfo'=>$cartInfo, 'total_price'=>$request->totalPrice]);
