@@ -3,15 +3,25 @@
 
 @section('content')
 
-<main id="contact-main">
+
+<main id="contact-main"
+
+style="padding-left: 370px;"        
+>
+  <!--  above is the padding making the page contents more to the right -->
+
+    
     <section style="flex: 1; max-width: 400px; padding-right: 20px">
-        <h1 style="font-size: 32px; font-weight: bold; margin-bottom: 10px">
+        <h1 style="font-size: 32px; font-weight: bold; margin-bottom: 10px; margin-left: -100px;">
         Contact Us
         </h1>
         <p style="font-size: 16px; line-height: 1.5">
         We’d love to hear from you! Reach out with any questions or feedback.
         </p>
-        <p style="font-size: 16px; margin-top: 20px">
+        <p style="font-family: 'Merriweather'; font-size: 16px; margin-top: 20px">       <!-- font have been changed to merriweather -->
+
+
+
         Email:
         <a
             href="mailto:support@essentials.com"
@@ -80,14 +90,17 @@
             type="submit"
             style="
             padding: 10px 20px;
-            background-color: #333;
-            color: white;
+            background-color:#d4af37;      
+            color:black;
             border: none;
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
             "
         >
+
+          <!-- above is where i changed the colour and text of the button to gold and black -->
+
             Create Email
         </button>
         </form>    
