@@ -822,7 +822,7 @@ nav a:nth-child(5) {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #007BFF;
+    background-color: #d4af37;
     color: white;
     text-decoration: none;
     border-radius: 4px;
