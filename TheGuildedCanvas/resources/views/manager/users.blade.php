@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container">
+    <div class="container user-management">
         <h1>User Management</h1>
         <table class="table">
             <thead>
@@ -10,6 +10,7 @@
                 <th>Email</th>
                 <th>Role</th>
                 <th>Actions</th>
+                <th class="remove-column">Remove Option</th>
             </tr>
             </thead>
             <tbody>
@@ -27,14 +28,14 @@
                                 <option value="manager" {{ $user->role->value === 'manager' ? 'selected' : '' }}>Manager</option>
                                 <option value="user" {{ $user->role->value === 'user' ? 'selected' : '' }}>User</option>
                             </select>
-                            <button type="submit" class="logout-link">Update</button>
+                            <button type="submit" class="update-button">Update</button>
                         </form>
                     </td>
                     <td>
                         <form action="{{ route('manager.users.destroy', $user) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="logout-link">Delete</button>
+                            <button type="submit" class="delete-button">Delete</button>
                         </form>
                     </td>
                 </tr>

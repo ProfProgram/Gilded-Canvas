@@ -1163,3 +1163,95 @@ form button {
 #search {
     height: 200px;
 }
+
+
+/* Apply to both User Management & Inventory Management pages */
+.user-management, .inventory-management {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Table Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 2px solid #333; /* Ensures table border is visible */
+}
+
+.table thead {
+    background: #d4af37; /* Gold Accent */
+    color: white;
+    font-weight: bold;
+    width: 100%;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border: 2px solid #333; /* Adds visible lines for a structured table */
+}
+
+.table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* Form & Buttons */
+.user-management form, .inventory-management form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-management .form-select, .inventory-management .form-control {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+}
+
+/* Buttons */
+.update-button,
+.delete-button,
+.logout-link {
+    background-color: #d4af37; /* Gold color */
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px; /* Rounded edges */
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover effect */
+.update-button:hover,
+.delete-button:hover,
+.logout-link:hover {
+    background-color: #b7952b; /* Slightly darker gold */
+}
+
+/* Apply Merriweather to the entire page */
+body {
+    font-family: 'Merriweather', serif;
+}
+
+/* Ensure headers and table text use Merriweather */
+h1, .table th, .table td, button, select, input {
+    font-family: 'Merriweather', serif;
+}

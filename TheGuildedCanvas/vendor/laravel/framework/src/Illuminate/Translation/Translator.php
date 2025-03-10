@@ -210,7 +210,9 @@ class Translator extends NamespacedItemResolver implements TranslatorContract
             $number = count($number);
         }
 
-        $replace['count'] = $number;
+        if (! isset($replace['count'])) {
+            $replace['count'] = $number;
+        }
 
         return $this->makeReplacements(
             $this->getSelector()->choose($line, $number, $locale), $replace
@@ -400,6 +402,17 @@ class Translator extends NamespacedItemResolver implements TranslatorContract
     public function addNamespace($namespace, $hint)
     {
         $this->loader->addNamespace($namespace, $hint);
+    }
+
+    /**
+     * Add a new path to the loader.
+     *
+     * @param  string  $path
+     * @return void
+     */
+    public function addPath($path)
+    {
+        $this->loader->addPath($path);
     }
 
     /**
