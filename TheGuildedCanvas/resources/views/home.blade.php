@@ -1,4 +1,3 @@
-
 @extends('layouts.master')
 
 @section('content')
@@ -28,36 +27,62 @@ $categories = array_unique($categoryUnordered);
     <p>Where art meets elegance. Discover unique and timeless pieces crafted for the discerning collector.</p>
     <a href="{{url('/product')}}" class="btn">Shop Now</a>
 </section>
-
-<!-- Product Slider Section -->
 <section class="products-carousel" id="products-sliders">
     <h2>Featured Products</h2>
     <div class="slider">
+        <button class="slider-btn prev-btn">❮</button>  <!-- Previous Button -->
+        
         <div class="slider-track">
-            <!-- anchors will let us connect images with the associated product pages -->
+            <!-- Product 1 -->
             <a class="product-slide">
                 <img src="{{asset('images/products/img-12.png')}}" alt="Gilded Frame Art">
                 <p>Gilded Frame Art</p>
                 <p class="price">£199</p>
                 <button class="btn">Add to Cart</button>
             </a>
+            <!-- Product 2 -->
             <a class="product-slide">
                 <img src="{{asset('images/products/img-13.png')}}" alt="Golden Vase">
                 <p>Golden Vase</p>
                 <p class="price">£149</p>
                 <button class="btn">Add to Cart</button>
             </a>
+            <!-- Product 3 -->
             <a class="product-slide">
                 <img src="{{asset('images/products/img-14.png')}}" alt="Luxury Wall Clock">
                 <p>Luxury Wall Clock</p>
                 <p class="price">£249</p>
                 <button class="btn">Add to Cart</button>
             </a>
+            <!-- Product 4 -->
+            <a class="product-slide">
+                <img src="{{asset('images/products/img-15.png')}}" alt="Golden Candle Holder">
+                <p>Golden Candle Holder</p>
+                <p class="price">£129</p>
+                <button class="btn">Add to Cart</button>
+            </a>
+            <!-- Product 5 -->
+            <a class="product-slide">
+                <img src="{{asset('images/products/img-16.png')}}" alt="Elegant Gold Mirror">
+                <p>Elegant Gold Mirror</p>
+                <p class="price">£179</p>
+                <button class="btn">Add to Cart</button>
+            </a>
+            <!-- Product 6 -->
+            <a class="product-slide">
+                <img src="{{asset('images/products/img-17.png')}}" alt="Art Deco Sculpture">
+                <p>Art Deco Sculpture</p>
+                <p class="price">£219</p>
+                <button class="btn">Add to Cart</button>
+            </a>
         </div>
-        <button class="slider-btn prev-btn">❮</button>
-        <button class="slider-btn next-btn">❯</button>
+
+        <button class="slider-btn next-btn">❯</button>  <!-- Next Button -->
     </div>
 </section>
+
+
+
 <section class="productFilters">
     <h2>Search Our Products</h2>
     <!-- Product Filtering -->
@@ -102,45 +127,51 @@ $categories = array_unique($categoryUnordered);
 </style>
 
 <script>
-    const sliderTrack = document.querySelector('.slider-track');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
+const sliderTrack = document.querySelector('.slider-track');
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
 
-    let currentIndex = 0;
+let currentIndex = 0;
+const productsPerSlide = 3; // Show 3 products per view
+const totalProducts = document.querySelectorAll('.product-slide').length;
+const maxIndex = Math.ceil(totalProducts / productsPerSlide) - 1; // Ensure correct slide count
 
-    function updateSlider() {
-        const slideWidth = document.querySelector('.product-slide').offsetWidth;
-        sliderTrack.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-    }
+function updateSlider() {
+    const slideWidth = document.querySelector('.product-slide').offsetWidth;
+    sliderTrack.style.transform = `translateX(-${currentIndex * slideWidth * productsPerSlide}px)`;
+}
 
-    prevBtn.addEventListener('click', () => {
-        currentIndex = Math.max(currentIndex - 1, 0);
-        updateSlider();
-    });
+// Previous Button Event
+prevBtn.addEventListener('click', () => {
+    currentIndex = Math.max(currentIndex - 1, 0);
+    updateSlider();
+});
 
-    nextBtn.addEventListener('click', () => {
-        const totalSlides = document.querySelectorAll('.product-slide').length;
-        const maxIndex = totalSlides - Math.floor(sliderTrack.clientWidth / document.querySelector('.product-slide').clientWidth);
-        currentIndex = Math.min(currentIndex + 1, maxIndex);
-        updateSlider();
-    });
+// Next Button Event
+nextBtn.addEventListener('click', () => {
+    currentIndex = Math.min(currentIndex + 1, maxIndex);
+    updateSlider();
+});
 
-    window.addEventListener('resize', updateSlider);
-    // Auto-slide functionality
-    let autoSlide = setInterval(() => {
-        const totalSlides = document.querySelectorAll('.product-slide').length;
-        currentIndex = (currentIndex + 1) % totalSlides;
+// Auto-slide functionality every 5 seconds
+let autoSlide = setInterval(() => {
+    currentIndex = (currentIndex + 1) % (maxIndex + 1);
+    updateSlider();
+}, 5000);
+
+// Pause auto-slide on hover
+sliderTrack.addEventListener('mouseover', () => clearInterval(autoSlide));
+sliderTrack.addEventListener('mouseout', () => {
+    autoSlide = setInterval(() => {
+        currentIndex = (currentIndex + 1) % (maxIndex + 1);
         updateSlider();
     }, 5000);
+});
 
-    sliderTrack.addEventListener('mouseover', () => clearInterval(autoSlide));
-    sliderTrack.addEventListener('mouseout', () => {
-        autoSlide = setInterval(() => {
-            const totalSlides = document.querySelectorAll('.product-slide').length;
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateSlider();
-        }, 5000);
-    });
+// Ensure the slider updates on resize
+window.addEventListener('resize', updateSlider);
+
+
 </script>
 
 @endsection
