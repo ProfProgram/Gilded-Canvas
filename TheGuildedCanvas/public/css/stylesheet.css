@@ -986,30 +986,45 @@ nav a:nth-child(5) {
 
 /* CONTACT-US/ABOUT-US PAGE */
 
-#contact-main {
-    padding: 40px;
-    max-width: 800px;
-    margin: auto;
+
+/* About Us Page Styling */
+
+.about-us-page {
+    font-family: 'Merriweather', serif;
+    max-width: 70%;  
+    margin: 0 auto; 
+    text-align: center;  
+    padding: 50px 0; 
 }
 
-#headers-contact {
-    font-size: 28px;
-    margin-bottom: 15px;
+
+.about-us-page h2 {
+    font-weight: bold;
+    font-size: 30px; 
+    color: #333333;
+    text-align: center; 
+    margin-bottom: 20px; 
 }
 
-#para-contact {
-    margin-bottom: 20px;
+
+.about-us-page p {
+    font-size: 18px;
+    line-height: 1.8; 
+    margin-bottom: 30px; 
 }
 
-.mission, .team {
-    margin-top: 40px;
+/* Custom Divider */
+.about-us-divider {
+    border: none;
+    height: 4px;
+    background-color: #d4af37; 
+    margin: 40px auto; 
+    width: 50%;
 }
 
-.team img {
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    margin: 10px;
+
+.about-us-page section {
+    margin-bottom: 70px; /* Increased space between sections */
 }
 
 /* Contact Us Section */
