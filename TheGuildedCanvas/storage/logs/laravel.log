@@ -604,3 +604,18 @@ Stack trace:
 [stacktrace]
 #0 {main}
 "} 
+[2025-03-10 19:40:07] local.ERROR: No arguments expected for "config:clear" command, got "cache:clear". {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): No arguments expected for \"config:clear\" command, got \"cache:clear\". at C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\symfony\\console\\Input\\ArgvInput.php:199)
+[stacktrace]
+#0 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\symfony\\console\\Input\\ArgvInput.php(92): Symfony\\Component\\Console\\Input\\ArgvInput->parseArgument('cache:clear')
+#1 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\symfony\\console\\Input\\ArgvInput.php(77): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken('cache:clear', true)
+#2 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\symfony\\console\\Input\\Input.php(53): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#3 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\symfony\\console\\Command\\Command.php(238): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#4 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(182): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#5 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\symfony\\console\\Application.php(1094): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#6 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\symfony\\console\\Application.php(342): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Foundation\\Console\\ConfigClearCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\symfony\\console\\Application.php(193): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(198): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1235): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\artisan(13): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#11 {main}
+"} 
