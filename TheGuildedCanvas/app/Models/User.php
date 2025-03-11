@@ -41,6 +41,11 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
         return $this->belongsTo(Admin::class);
     }
 
+    public function sendEmailVerificationNotification()
+    {
+        // Do nothing (disables Laravel's default email)
+    }
+
     public function order()
     {
         return $this->hasMany(Order::class);

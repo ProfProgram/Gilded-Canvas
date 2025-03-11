@@ -2,7 +2,14 @@
 
 @section('content')
     <div class="login-container">
-        <h1>Forgot Password</h1>
+        <h1>Reset Password</h1>
+
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
+
         @if ($errors->any())
             <div class="alert alert-danger">
                 @foreach ($errors->all() as $error)
@@ -10,15 +17,15 @@
                 @endforeach
             </div>
         @endif
-        @if (session('status'))
-            <div class="alert alert-success">{{ session('status') }}</div>
-        @endif
-        <form action="{{ route('password.email') }}" method="POST">
+
+        <form method="POST" action="{{ route('password.email') }}">
             @csrf
+
             <div class="mb-3">
-                <label for="email" class="form-label">Email Address: </label>
-                <input type="email" name="email" id="email" class="form-control" required>
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" id="email" name="email" class="form-control" required autofocus>
             </div>
+
             <button type="submit" class="login-btn">Send Password Reset Link</button>
         </form>
     </div>
