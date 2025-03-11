@@ -203,9 +203,6 @@
       <option name="pestRunnerSettings">
         <PestRunner configuration_file="$PROJECT_DIR$/TheGuildedCanvas/phpunit.xml" scope="ConfigurationFile" use_alternative_configuration_file="true" />
       </option>
-      <option name="runnerSettings">
-        <PhpTestRunnerSettings configuration_file="$PROJECT_DIR$/TheGuildedCanvas/phpunit.xml" scope="ConfigurationFile" use_alternative_configuration_file="true" />
-      </option>
       <method v="2" />
     </configuration>
   </component>

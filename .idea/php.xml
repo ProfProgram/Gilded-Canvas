@@ -140,6 +140,8 @@
       <path value="$PROJECT_DIR$/TheGuildedCanvas/vendor/sebastian/environment" />
       <path value="$PROJECT_DIR$/TheGuildedCanvas/vendor/sebastian/version" />
       <path value="$PROJECT_DIR$/TheGuildedCanvas/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/TheGuildedCanvas/vendor/league/uri" />
+      <path value="$PROJECT_DIR$/TheGuildedCanvas/vendor/league/uri-interfaces" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
