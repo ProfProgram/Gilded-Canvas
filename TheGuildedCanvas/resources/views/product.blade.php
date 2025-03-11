@@ -38,8 +38,10 @@ $categories = array_unique($categoryUnordered);
             class="search-input"
         >
         <!-- Choose Category -->
-        <select name="category">
-            <option value="">Select a Category</option>
+        <select class="category-select" name="category">
+            <option value="" disabled 
+            @if(!request('category')) selected @endif
+            hidden>Select a Category</option>
             @foreach ($categories as $category)
                 <option value="{{ $category }}" @if(request('category') == $category) selected @endif>
                     {{ $category }}

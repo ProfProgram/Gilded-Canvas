@@ -9,6 +9,7 @@ class Manager extends Model
     use HasFactory;
 
     protected $table = 'manager_table';
+    protected $primaryKey = 'manager_id';
 
     protected $fillable = [
         'user_id'

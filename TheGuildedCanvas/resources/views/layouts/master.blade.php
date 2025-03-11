@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link
+  href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap"
+  rel="stylesheet"
+/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ asset('images/TGC-Black-and-Gold.png') }}">
     <title>The Gilded Canvas</title>
     <link rel="stylesheet" href="{{ asset('css/stylesheet.css') }}">
+
+    @yield('styles')
 </head>
 <body>
     <header>
@@ -21,10 +27,9 @@
             <a href="/contact-us">Contact Us</a>
             <!-- Logged-in Links -->
             @auth
-                <a href="/payment">Payment</a>
                 <a href="/basket" class="cart-icon">
                     <img src="{{ asset('images/cart-icon.png') }}" alt="Shopping Cart" class="cart-icon-img">
-                    <span class="cart-item-count">(2)</span>
+                    <span class="cart-item-count">({{$cartCount}})</span>
                 </a>
                 <a href="/previous-orders">Previous Orders</a>
                 <!-- Role-Specific Links -->

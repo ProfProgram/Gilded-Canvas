@@ -37,10 +37,8 @@ class UserManagementController extends Controller
             $manager = Manager::create(['user_id' => $id]);
         }
         if ($validatedData['role'] === 'user') {
-            $admin = Admin::findOrFail(['user_id'=> $id]);
-            $manager = Manager::findOrFail(['user_id'=> $id]);
-            $manager->delete();
-            $admin->delete();
+            Admin::where('user_id', $id)->delete();
+            Manager::where('user_id', $id)->delete();
         }
 
 

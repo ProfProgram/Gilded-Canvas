@@ -30,7 +30,7 @@ $categories = array_unique($categoryUnordered);
 </section>
 
 <!-- Product Slider Section -->
-<section class="products" id="products-sliders">
+<section class="products-carousel" id="products-sliders">
     <h2>Featured Products</h2>
     <div class="slider">
         <div class="slider-track">
@@ -59,28 +59,31 @@ $categories = array_unique($categoryUnordered);
     </div>
 </section>
 <section class="productFilters">
+    <h2>Search Our Products</h2>
     <!-- Product Filtering -->
     <div class="search-container">
-    <form action="{{ route('home-search') }}" method="GET">
-        <!-- Search by name or category -->
-        <input
-            type="text"
-            name="query"
-            placeholder="Search for product names or categories..."
-            value="{{ request('query') }}"
-            class="search-input"
-        >
-        <!-- Choose Category -->
-        <select name="category">
-            <option value="">Select a Category</option>
-            @foreach ($categories as $category)
-                <option value="{{ $category }}" @if(request('category') == $category) selected @endif>
-                    {{ $category }}
-                </option>
-            @endforeach
-        </select>
-        <button type="submit" class="search-button">Search</button>
-    </form>
+        <form action="{{ route('product-search') }}" method="GET">
+            <!-- Search by name or category -->
+            <input
+                type="text"
+                name="query"
+                placeholder="Search for product names or categories..."
+                value="{{ request('query') }}"
+                class="search-input"
+            >
+            <!-- Choose Category -->
+            <select class="category-select" name="category">
+                @foreach ($categories as $category)
+                    <option value="" disabled 
+                        @if(!request('category')) selected @endif 
+                        hidden>Select a Category</option>
+                        <option value="{{ $category }}" @if(request('category') == $category) selected @endif>
+                            {{ $category }}
+                        </option>
+                @endforeach
+            </select>
+            <button type="submit" class="search-button">Search</button>
+        </form>
     </div>
     @php
         $query = request('query');
@@ -95,36 +98,9 @@ $categories = array_unique($categoryUnordered);
         });
     @endphp
 </section>
+<style>
+</style>
 
-
-<div class="product-list">
-    @if ($query || $category)
-        <h2>Search Results for "{{ $query }}" in "{{ $category }}" category</h2>
-    @endif
-
-    @forelse ($filteredProducts as $info)
-        <div class="product">
-            <div class="product-image">
-                <img src="{{ asset('images/products/img-'.$info->product_id.'.png') }}" alt="{{ $info->product_name }}">
-            </div>
-            <div class="product-details">
-                <h2>{{ $info->product_name }}</h2>
-                <p>{{ $info->description }}</p>
-                <p class="product-price">£{{ $info->price }}.00</p>
-                <form method="POST" action="{{ route('cart.add') }}">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $info->product_id }}">
-                    <input type="hidden" name="product_name" value="{{ $info->product_name }}">
-                    <input type="hidden" name="product_price" value="{{ $info->price }}">
-                    <input type="hidden" name="cartQuan_add" value="1">
-                    <button type="submit" class="buy-button">Buy Now</button>
-                </form>
-            </div>
-        </div>
-    @empty
-        <p id="search-empty">No products found matching your search.</p>
-    @endforelse
-</div>
 <script>
     const sliderTrack = document.querySelector('.slider-track');
     const prevBtn = document.querySelector('.prev-btn');

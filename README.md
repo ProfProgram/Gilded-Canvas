@@ -1,7 +1,8 @@
 # Gilded-Canvas
 A web application implemented as an e-commerce website. The project is based on requirements for a university module project. This is Team 37's interpretation of the requirements.
 
-ASTON SERVER HOSTING STATUS :::: (https://cs2team37.cs2410-web01pvm.aston.ac.uk/) ::: current commit equivalent = Server v3 
+ASTON SERVER HOSTING STATUS :::: (https://cs2team37.cs2410-web01pvm.aston.ac.uk/) ::: current commit equivalent = Server v4
+Hafsa is working using the webmin and so host server may have changes that are not in any commits on GitHub
 
 update1 : Laravel Framework Update
 
@@ -117,4 +118,27 @@ Payment:
 
 		Completing a payment must update the database to have all cart items associated with the current user made into an order and then removed from the cart table. The shipping information can stay as a dummy.
 
-   
+Admin Panel:
+
+	FontEnd:
+
+ 		Shows a table of Product Name, Stock Level, and Actions. Update button is part of Stock Level column and Actions currently only holds the delete button.
+
+	BackEnd:
+
+		Only accessible by Admin users. Currently allows admins to change stock level of products as well as delete them from the database.
+
+Manage Users:
+
+	FontEnd:
+
+ 		Currently a table of Name, Email, Role, and Actions. Role has the update button to change the role and on page loading will automatically select the role of the user in its row (roles are shown as a select input). Actions column currently only holds the delete button.
+
+	BackEnd:
+
+		Only accessible by Manager users. Currently allows managers to change the role of any person in the users table (allows change between user, admin, manager) - can also remove themselves as a manager. Also allows the deletion of user, admin or manager - sends them to home screen if they delete themselves.
+		
+
+update 3 : User Authentication Change
+
+Previous versions used token based managing system. We have changed in this update to a Session system, this allows us to use Auth::user()->user_id to check the user_id of sessions with a log in. We can also check if anyone is signed in using Auth::check(), among other use's.

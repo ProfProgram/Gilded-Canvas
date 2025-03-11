@@ -9,9 +9,9 @@
 $totalPrice = 0;
 
 @endphp
-<div id="prodContent">
-    <div id="leftSide">
-    <h1>Payment Page</h1>
+<div id="payment-wrapper">
+    <div id="payment-details">
+    <h2>Payment Page</h2>
     <form id="shipForm" method="POST" action="{{ url('/payment') }}">
         @csrf
         <label for="cardHolder" id="cardHolder-lbl">Card Holder</label>
@@ -26,13 +26,13 @@ $totalPrice = 0;
             <input type="number" id="CVC" placeholder="123" required>
         </div>
         <div>
-            <button type="submit" class="btn-Purchase">Purchase</button>
+            <button type="submit" class="purchase-btn">Purchase</button>
         </div>
     </form>
     </div>
-    <div class="rightSide">
-        <h1>Summary</h1>
-        <div class="prodList">
+    <div class="summary">
+        <h3>Summary</h3>
+        <div class="summary-box">
             <table>
                 <!-- Table columns -->
                 <tr>
@@ -57,9 +57,9 @@ $totalPrice = 0;
             </table>
 
         </div>
-        <div class="totalContainer">
+        <div class="total-section">
             <h2>Total</h2>
-            <div id="totalNumContainer">
+            <div id="total-price">
                 <!-- total price -->
                 <h2>{{$total_price}}</h2>
             </div>
