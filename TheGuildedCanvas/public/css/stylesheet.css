@@ -1,4 +1,3 @@
-
 /* GLOBAL CSS */
 
 body, html {
@@ -561,6 +560,7 @@ nav a:nth-child(5) {
 
 /* SIGN IN PAGE */
 
+
 .sign-inMain,
 .sign-upMain {
     display: flex;
@@ -569,37 +569,41 @@ nav a:nth-child(5) {
     height: calc(100vh - 60px);
 }
 
+/* Center the login container properly */
 .login-container {
     background-color: white;
     border-radius: 10px;
-    padding: 20px 30px;
+    padding: 30px 40px;
     text-align: center;
     max-width: 400px;
     width: 100%;
-    box-shadow: 0 4px 6px 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    align-items: center;
 }
 
+/* Form heading */
 .login-container h1 {
     color: black;
     margin-bottom: 20px;
 }
 
+/* Input fields styling */
 .form-text {
     margin-bottom: 15px;
     text-align: left;
 }
 
-
-
 .form-text input {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #e3c878;
+    padding: 10px;
+    border: 2px solid #d4af37; /* Gold border */
     border-radius: 5px;
     font-size: 14px;
     box-sizing: border-box;
 }
 
+/* Forgot password link */
 .forgot-details {
     display: block;
     margin: 10px 0;
@@ -607,21 +611,33 @@ nav a:nth-child(5) {
     font-size: 15px;
 }
 
+/* Styled Login Button */
 .login-btn {
-    background-color: #FFD700;
-    border: none;
-    border-radius: 0px;
-    padding: 5px 5px;
+    display: inline-block;
+    background-color: #d4af37; /* Gold */
+    color: #1A1A1A; /* Dark text */
+    padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
-    color: white;
-    width: 50%;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 60%; /* Adjust width */
+    text-align: center;
+    margin: 15px auto; /* Centering */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+/* Hover effect */
 .login-btn:hover {
-    background-color: #FFD700;
+    background-color: #b8962e; /* Darker gold */
+    color: white;
 }
 
+/* Sign-up link */
 .signup-link {
     color: black;
     font-weight: bold;
@@ -632,14 +648,27 @@ nav a:nth-child(5) {
     text-decoration: underline;
 }
 
+/* Role dropdown styling */
 #role {
     width: 60%;
-    padding: 4px;
+    padding: 10px;
     font-size: 14px;
-    border: #ccc;
-    background-color: #ffcc00; 
-    color: black; 
+    border: 2px solid #d4af37; /* Gold border */
+    background-color: #d4af37; /* Gold background */
+    color: black;
     cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Align form elements to center */
+.form-text,
+.forgot-details,
+#role {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Mobile Optimization */
@@ -793,7 +822,7 @@ nav a:nth-child(5) {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #007BFF;
+    background-color: #d4af37;
     color: white;
     text-decoration: none;
     border-radius: 4px;
@@ -995,7 +1024,13 @@ nav a:nth-child(5) {
 #headers-contact {
     font-size: 28px;
     margin-bottom: 15px;
+    text-align: center; /* Centers the text horizontally */
+    display: flex;
+    justify-content: center; /* Centers the element if it has a width */
+    align-items: center; /* Aligns it vertically if necessary */
+    width: 100%;
 }
+
 
 #para-contact {
     margin-bottom: 20px;
@@ -1162,96 +1197,4 @@ form button {
 
 #search {
     height: 200px;
-}
-
-
-/* Apply to both User Management & Inventory Management pages */
-.user-management, .inventory-management {
-    width: 90%;
-    max-width: 1200px;
-    margin: 30px auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    text-align: center;
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-/* Table Styling */
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    border: 2px solid #333; /* Ensures table border is visible */
-}
-
-.table thead {
-    background: #d4af37; /* Gold Accent */
-    color: white;
-    font-weight: bold;
-    width: 100%;
-}
-
-.table th, .table td {
-    padding: 12px;
-    text-align: left;
-    border: 2px solid #333; /* Adds visible lines for a structured table */
-}
-
-.table tbody tr:nth-child(even) {
-    background: #f9f9f9;
-}
-
-/* Form & Buttons */
-.user-management form, .inventory-management form {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.user-management .form-select, .inventory-management .form-control {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background: white;
-    cursor: pointer;
-}
-
-/* Buttons */
-.update-button,
-.delete-button,
-.logout-link {
-    background-color: #d4af37; /* Gold color */
-    color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 50px; /* Rounded edges */
-    font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Hover effect */
-.update-button:hover,
-.delete-button:hover,
-.logout-link:hover {
-    background-color: #b7952b; /* Slightly darker gold */
-}
-
-/* Apply Merriweather to the entire page */
-body {
-    font-family: 'Merriweather', serif;
-}
-
-/* Ensure headers and table text use Merriweather */
-h1, .table th, .table td, button, select, input {
-    font-family: 'Merriweather', serif;
 }
