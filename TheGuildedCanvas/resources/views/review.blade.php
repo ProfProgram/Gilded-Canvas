@@ -3,7 +3,23 @@
 
 @section('content')
 
+
+
+
 <!DOCTYPE html>
+<<<<<<< Updated upstream
+=======
+{{ Auth::check() ? Auth::user()->user_id :'' }}
+@if (!Auth::check())
+    <div class="alert">
+        <p>User Not Logged In: this form will submit but wont save anything.</p>
+    </div>
+@endif
+
+
+
+
+>>>>>>> Stashed changes
 <body>
     @if (session('status'))
     <div class="alert">
@@ -44,7 +60,10 @@
                 </div>
                 </div>
                 <div>
-                    <button type="submit" class="btn-addReview">Add Review</button>
+
+                        <!-- the magrin right makes the button come more to the left and margin top makes it so you can control the space betwen button and form  -->
+
+                    <button type="submit" class="btn-addReview" style="margin-right: 130px; margin-top: -35px;">Add Review</button>
                 </div>
             </form>
         </div>
