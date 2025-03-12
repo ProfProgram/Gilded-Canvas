@@ -35,4 +35,18 @@ class OrdersController extends Controller
         ->get();
         return view('/previous-orders', ['orders'=>$orderInfo]);
     }
+    public function manage() {
+        $orders = Order::join('users_table AS customer', 'customer.user_id', '=', 'orders_table.user_id')
+            ->select(
+                'orders_table.order_id', 
+                'orders_table.order_time', 
+                'orders_table.total_price', 
+                'orders_table.status', 
+                'customer.name AS customer_name'
+            )
+            ->orderBy('orders_table.order_id', 'DESC')
+            ->get();
+
+        return view('admin.orders', compact('orders')); // ✅ Passes orders to the view
+    }
 }
