@@ -35,18 +35,49 @@ class OrdersController extends Controller
         ->get();
         return view('/previous-orders', ['orders'=>$orderInfo]);
     }
-    public function manage() {
-        $orders = Order::join('users_table AS customer', 'customer.user_id', '=', 'orders_table.user_id')
+    public function manage()
+    {
+        $orders = DB::table('orders_table')
+            ->join('users_table AS customer', 'customer.user_id', '=', 'orders_table.user_id')
+            ->join('orders_details_table', 'orders_details_table.order_id', '=', 'orders_table.order_id')
+            ->join('products_table', 'products_table.product_id', '=', 'orders_details_table.product_id')
             ->select(
-                'orders_table.order_id', 
-                'orders_table.order_time', 
-                'orders_table.total_price', 
-                'orders_table.status', 
-                'customer.name AS customer_name'
+                'orders_table.order_id',
+                'orders_table.order_time',
+                'orders_table.total_price',
+                'orders_table.status',
+                'customer.name AS customer_name',
+                'orders_details_table.product_id',
+                'orders_details_table.quantity',
+                'orders_details_table.price_of_order',
+                'products_table.product_name'
             )
             ->orderBy('orders_table.order_id', 'DESC')
             ->get();
 
-        return view('admin.orders', compact('orders')); // ✅ Passes orders to the view
+        return view('admin.orders', compact('orders'));
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,shipped,delivered,cancelled',
+        ]);
+
+        $order = Order::findOrFail($id);
+        $order->update(['status' => $request->status]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Order status updated successfully!',
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->delete();
+
+        return response()->json(['success' => true]);
     }
 }
