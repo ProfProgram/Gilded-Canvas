@@ -130,3 +130,6 @@ Route::get('/about-us', function () {
 Route::get('/contact-us', function () {
     return view('contact-us');
 })->name('contact');
+
+Route::get('/admin/orders', [OrdersController::class, 'manage'])->name('admin.orders');
+
