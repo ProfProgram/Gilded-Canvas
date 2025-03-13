@@ -13,17 +13,23 @@
 
     <!-- Filter/Search Form -->
     <form method="GET" action="{{ route('admin.orders') }}" class="filter-form">
-        <input type="text" name="search" placeholder="Search Order ID or Customer Name" class="filter-input" />
+        <input type="text" name="search" placeholder="Search Order ID or Customer Name" 
+               value="{{ request()->search }}" class="filter-input" />
+        
         <select name="status_filter" class="filter-select">
-            <option value="">All Statuses</option>
-            <option value="pending">Pending</option>
-            <option value="shipped">Shipped</option>
-            <option value="delivered">Delivered</option>
-            <option value="cancelled">Cancelled</option>
+            <option value="" {{ request()->status_filter == '' ? 'selected' : '' }}>All Statuses</option>
+            <option value="pending" {{ request()->status_filter == 'pending' ? 'selected' : '' }}>Pending</option>
+            <option value="shipped" {{ request()->status_filter == 'shipped' ? 'selected' : '' }}>Shipped</option>
+            <option value="delivered" {{ request()->status_filter == 'delivered' ? 'selected' : '' }}>Delivered</option>
+            <option value="cancelled" {{ request()->status_filter == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
         </select>
+
         <button type="submit" class="filter-button">Filter</button>
     </form>
 
+    @if($orders->isEmpty())
+        <p class="no-results">No orders found matching your search/filter criteria.</p>
+    @else
     <!-- Order Table -->
     <table class="table">
         <thead>
@@ -70,12 +76,13 @@
                         <form action="{{ route('admin.orders.destroy', $order->order_id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="logout-link">Delete</button>
+                            <button type="submit" class="logout-link" onclick="return confirm('Are you sure you want to delete this order?');">Delete</button>
                         </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    @endif
 </div>
 @endsection
