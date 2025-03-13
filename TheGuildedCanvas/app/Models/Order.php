@@ -9,6 +9,8 @@ class Order extends Model
     use HasFactory;
 
     protected $table = 'orders_table';
+    protected $primaryKey = 'order_id';
+    public $timestamps = false; 
 
     protected $fillable = [
         'admin_id',
@@ -23,16 +25,15 @@ class Order extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function admin()
     {
-        return $this->belongsTo(Admin::class);
+        return $this->belongsTo(Admin::class, 'admin_id');
     }
 
     public function details()
-    {
-        return $this->hasMany(OrderDetails::class, 'order_id', 'order_id');
-    }
+{
+    return $this->hasMany(OrderDetails::class, 'order_id', 'order_id');
 }

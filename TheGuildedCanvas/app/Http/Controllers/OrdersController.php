@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
@@ -63,14 +64,13 @@ class OrdersController extends Controller
         $request->validate([
             'status' => 'required|in:pending,shipped,delivered,cancelled',
         ]);
-
-        $order = Order::findOrFail($id);
+    
+       
+        $order = Order::where('order_id', $id)->firstOrFail();
+    
         $order->update(['status' => $request->status]);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Order status updated successfully!',
-        ]);
+    
+        return redirect()->route('admin.orders')->with('status', 'Order status updated successfully!');
     }
 
     public function destroy($id)
@@ -80,4 +80,3 @@ class OrdersController extends Controller
 
         return response()->json(['success' => true]);
     }
-}

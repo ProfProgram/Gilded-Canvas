@@ -5,9 +5,11 @@
     <h2 class="page-title">Order Management</h2>
 
     <!-- Success Message -->
-    <div id="successMessage" class="alert alert-success" style="display:none;">
-        Action completed successfully!
-    </div>
+    @if(session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
 
     <!-- Filter/Search Form -->
     <form method="GET" action="{{ route('admin.orders') }}" class="filter-form">
@@ -39,7 +41,7 @@
         </thead>
         <tbody>
             @foreach($orders as $order)
-                <tr id="order-{{ $order->order_id }}">
+                <tr>
                     <td>#{{ $order->order_id }}</td>
                     <td>{{ $order->customer_name }}</td>
                     <td>{{ $order->product_name }}</td>
@@ -48,85 +50,32 @@
                     <td>£{{ number_format($order->price_of_order, 2) }}</td>
                     <td>£{{ number_format($order->total_price, 2) }}</td>
 
-                    <!-- Status Dropdown -->
+                    <!-- Status Update Form -->
                     <td>
-                        <select id="status-{{ $order->order_id }}" class="status-select">
-                            <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                            <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
-                            <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
-                            <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                        </select>
+                        <form action="{{ route('admin.orders.update', $order->order_id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('PUT')
+                            <select name="status" class="status-select">
+                                <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
+                                <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
+                                <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                            </select>
+                            <button type="submit" class="logout-link">Update</button>
+                        </form>
                     </td>
 
-                    <!-- Action Buttons -->
+                    <!-- Delete Order Form -->
                     <td>
-                        <button class="update-button" onclick="updateOrder({{ $order->order_id }})">Update</button>
-                        <button class="delete-button" onclick="deleteOrder({{ $order->order_id }})">Delete</button>
+                        <form action="{{ route('admin.orders.destroy', $order->order_id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="logout-link">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 </div>
-
-<script>
-    function updateOrder(orderId) {
-        let statusDropdown = document.getElementById(`status-${orderId}`);
-        let newStatus = statusDropdown.value;
-
-        fetch(`/admin/orders/${orderId}/update`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: JSON.stringify({ status: newStatus })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                let successMessage = document.getElementById("successMessage");
-                successMessage.textContent = data.message;
-                successMessage.style.display = "block";
-
-                setTimeout(() => {
-                    successMessage.style.display = "none";
-                }, 3000);
-            } else {
-                alert('Failed to update order status.');
-            }
-        })
-        .catch(error => alert('Error: ' + error));
-    }
-
-    function deleteOrder(orderId) {
-        if (!confirm("Are you sure you want to delete this order?")) {
-            return;
-        }
-
-        fetch(`/admin/orders/${orderId}/delete`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                document.getElementById(`order-${orderId}`).remove();
-                let successMessage = document.getElementById("successMessage");
-                successMessage.textContent = "Order deleted successfully!";
-                successMessage.style.display = "block";
-
-                setTimeout(() => {
-                    successMessage.style.display = "none";
-                }, 3000);
-            } else {
-                alert('Failed to delete order.');
-            }
-        })
-        .catch(error => alert('Error: ' + error));
-    }
-</script>
 @endsection

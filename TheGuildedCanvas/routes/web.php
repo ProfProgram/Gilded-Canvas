@@ -133,6 +133,6 @@ Route::get('/contact-us', function () {
 
 
 Route::get('/admin/orders', [OrdersController::class, 'manage'])->name('admin.orders');
-Route::post('/admin/orders/{id}/update', [OrdersController::class, 'updateStatus'])->name('admin.orders.update');
+Route::put('/admin/orders/{id}/update', [OrdersController::class, 'updateStatus'])->name('admin.orders.update');
 Route::delete('/admin/orders/{id}/delete', [OrdersController::class, 'destroy'])->name('admin.orders.destroy');
 
