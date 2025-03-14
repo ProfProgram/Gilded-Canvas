@@ -64,6 +64,55 @@ nav a:nth-child(4),
 nav a:nth-child(5) {
     margin-left: 15px; /* Space between "Home" and other links */
 }
+/* ADMIN PANEL DROPDOWN */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    font-family: Arial, sans-serif;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.dropdown-toggle:hover {
+    color: #d4af37; /* Gold color on hover */
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #d4af37;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 160px;
+    z-index: 1000;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    font-weight: normal;
+    transition: color 0.3s ease-in-out;
+}
+
+.dropdown-menu a:hover {
+    color: #d4af37; /* Change text to gold */
+    background-color: transparent; /* Remove background color */
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
 
 /* REVIEW PAGE */
 
