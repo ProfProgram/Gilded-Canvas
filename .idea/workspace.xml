@@ -6,12 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="5a9ea0e8-b314-4a97-9bee-9383a7c9568a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/.env" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/ForgotPasswordController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/sign-in.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/sign-in.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/sign-up.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/sign-up.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/ResetPasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Mail/ResetPassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Mail/ResetPassword.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Mail/TestMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Mail/TestMail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/mail/forgot-password.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/mail/forgot-password.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/mail/reset-password.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/auth/passwords/reset.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -189,6 +192,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Users\Ahmed Abdulkadir\Documents\GitHub\Gilded-Canvas-modified\Gilded-Canvas\TheGuildedCanvas\resources\views\auth\passwords" />
+      <recent name="D:\Users\Ahmed Abdulkadir\Documents\GitHub\Gilded-Canvas-modified\Gilded-Canvas\TheGuildedCanvas\resources\views\mail" />
       <recent name="D:\Users\Ahmed Abdulkadir\Documents\GitHub\Gilded-Canvas-modified\Gilded-Canvas\TheGuildedCanvas\resources\views\manager" />
       <recent name="D:\Users\Ahmed Abdulkadir\Documents\GitHub\Gilded-Canvas-modified\Gilded-Canvas\TheGuildedCanvas\resources\views\admin" />
     </key>
@@ -227,7 +232,13 @@
       <workItem from="1739307439011" duration="1507000" />
       <workItem from="1739355552683" duration="2238000" />
       <workItem from="1739870740430" duration="8755000" />
-      <workItem from="1739953064319" duration="4792000" />
+      <workItem from="1739953064319" duration="5347000" />
+      <workItem from="1741090504740" duration="1404000" />
+      <workItem from="1741169203019" duration="5387000" />
+      <workItem from="1741181834225" duration="596000" />
+      <workItem from="1741574434270" duration="1443000" />
+      <workItem from="1741649870901" duration="623000" />
+      <workItem from="1741690997101" duration="1727000" />
     </task>
     <servers />
   </component>

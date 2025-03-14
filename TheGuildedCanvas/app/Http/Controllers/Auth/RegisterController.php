@@ -78,7 +78,7 @@ class RegisterController extends Controller
             'phone_number' => $data['phone_number'],
             'role' => 'user'
         ]);
-        //Mail::to($user->email)->send(new TestMail($user->name, $user->email));
+        Mail::to($user->email)->send(new TestMail($user->name, $user->email, $user));
 
        return $user;
     }
