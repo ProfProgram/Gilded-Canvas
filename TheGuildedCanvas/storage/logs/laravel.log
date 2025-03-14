@@ -604,3 +604,21 @@ Stack trace:
 [stacktrace]
 #0 {main}
 "} 
+[2025-03-14 04:09:02] local.INFO: Order saved successfully. Order ID:   
+[2025-03-14 04:09:02] local.INFO: Creating OrderDetail for Order ID:   
+[2025-03-14 04:15:35] local.INFO: Order saved successfully. Order ID: 7  
+[2025-03-14 04:15:35] local.INFO: Creating OrderDetail for Order ID: 7  
+[2025-03-14 04:15:35] local.INFO: Creating OrderDetail for Order ID: 7  
+[2025-03-14 04:18:13] local.INFO: Order saved successfully. Order ID: 8  
+[2025-03-14 04:18:13] local.INFO: Creating OrderDetail for Order ID: 8  
+[2025-03-14 04:18:13] local.INFO: Creating OrderDetail for Order ID: 8  
+[2025-03-14 04:20:14] local.ERROR: There are no commands defined in the "log" namespace. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\NamespaceNotFoundException(code: 0): There are no commands defined in the \"log\" namespace. at C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\symfony\\console\\Application.php:660)
+[stacktrace]
+#0 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\symfony\\console\\Application.php(709): Symfony\\Component\\Console\\Application->findNamespace('log')
+#1 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\symfony\\console\\Application.php(284): Symfony\\Component\\Console\\Application->find('log:clear')
+#2 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\symfony\\console\\Application.php(193): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(198): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1235): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\artisan(13): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#6 {main}
+"} 

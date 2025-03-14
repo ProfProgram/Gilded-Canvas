@@ -94,7 +94,7 @@ return new class extends Migration
                 $table->increments('order_id');
                 $table->decimal('total_price', 10, 0)->default(0);
                 $table->timestamp('order_time')->default(DB::raw('CURRENT_TIMESTAMP'));;
-                $table->unsignedInteger('admin_id');
+                $table->unsignedInteger('admin_id')->nullable();
                 $table->unsignedInteger('user_id');
                 $table->foreign('admin_id')->references('admin_id')->on('admin_table')->onDelete('cascade');
                 $table->foreign('user_id')->references('user_id')->on('users_table')->onDelete('cascade');
