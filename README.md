@@ -6,7 +6,7 @@ Hafsa is working using the webmin and so host server may have changes that are n
 
 update1 : Laravel Framework Update
 
-Laravel was committed to the repo. This came along with empty views files, and updated routes to accommodate the views. An update to the default seeder to input dummy/testing data into the database, as well as migration and model files for the database.
+Laravel was committed to the repo. This came along with empty views files, and updated routes to accommodate the views. An update to the default seeder to input dummy/testing data into the database, as well as migration and model files for the database. For more information about the Laravel framework we have kept the automatic README.md that generates upon creation of a Laravel project.
 
 update2 : Pages
 
@@ -14,14 +14,14 @@ Home:
 
 	FontEnd:
 
-		Routes are working. NavBar is functional. CSS is inconsistent. Shows all images in a list.
-		Search by category or name using search bar or the category select.
+		Routes are working. NavBar is functional. CSS is inconsistent.
+		Search by category or name using search bar or the category select, this will send you to the product page with auto filled filters.
 
 	BackEnd:
 
-		Adds to the basket, does so when not logged in (issue), but functions as intended when logged in.
+		Only backend needed was handling the filter data pass-over from home to product page.
 
-Contact / About:
+Contact Us:
 
 	FontEnd:
 
@@ -29,7 +29,17 @@ Contact / About:
 
 	BackEnd:
 
-		We could change the mailto into an automatic email to the admin team or post it to a Q&A available only to admins, similar to adding a review.
+		Although not really "backend" this page will open the users preferred email app and fill in relevant information. It will not automatically send emails.
+
+About Us:
+
+	FontEnd:
+
+		Has introduction text...
+
+	BackEnd:
+
+		Upon feedback from superiors the Contact / About Us page, which acted as a conjoined twin of the two, was separated into two pages. This is the resulting About Us page. - BackEnd (Lore)
 
 Product: (List)
 
@@ -118,7 +128,7 @@ Payment:
 
 		Completing a payment must update the database to have all cart items associated with the current user made into an order and then removed from the cart table. The shipping information can stay as a dummy.
 
-Admin Panel:
+Admin Panel (Inventory Management):
 
 	FontEnd:
 
@@ -127,6 +137,18 @@ Admin Panel:
 	BackEnd:
 
 		Only accessible by Admin users. Currently allows admins to change stock level of products as well as delete them from the database.
+
+Admin Panel (Order Management):
+
+	FontEnd:
+
+ 		Shows a table of Orders with column's : 
+		Order ID, Customer Name, Product Name, Price per product, Quantity, Total Price, Status, and Actions. Update button is part of Status column and Actions currently only holds the delete button.
+		Also has a filer that can filter results by order ID, customer name, or status.
+
+	BackEnd:
+
+		Only accessible by Admin users. Currently allows admins to change status of orders as well as delete them from the database, as well as any cascade deletions in the order_details table.
 
 Manage Users:
 

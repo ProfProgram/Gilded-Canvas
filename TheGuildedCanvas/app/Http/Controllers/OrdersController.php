@@ -45,6 +45,16 @@ class OrdersController extends Controller
 
     public function manage(Request $request)
     {
+        // User checks for managing access to view
+        if (!Auth::check()) {
+            return redirect()->route('sign-in')->with('status', 'Please log in to view your previous orders.');
+        }
+
+        if (auth()->user()->role !== \App\Enums\UserRole::admin) {
+            return redirect('/home')->with('status', 'You do not have access to this page.');
+        }
+        
+        
         //  Ensure products appear under a single order row
         $query = DB::table('orders_table')
         ->join('users_table AS customer', 'customer.user_id', '=', 'orders_table.user_id')
