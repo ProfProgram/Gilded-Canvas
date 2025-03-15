@@ -16,8 +16,7 @@
         <input type="text" name="search" placeholder="Search Order ID or Customer Name" 
                value="{{ request()->search }}" class="filter-input" />
         
-               <select name="status_filter" class="category-select">
-
+       <select name="status_filter" class="category-select">
             <option value="" {{ request()->status_filter == '' ? 'selected' : '' }}>All Statuses</option>
             <option value="pending" {{ request()->status_filter == 'pending' ? 'selected' : '' }}>Pending</option>
             <option value="shipped" {{ request()->status_filter == 'shipped' ? 'selected' : '' }}>Shipped</option>
@@ -37,10 +36,9 @@
             <tr>
                 <th>Order ID</th>
                 <th>Customer</th>
-                <th>Product Name</th>
-                <th>Product ID</th>
-                <th>Quantity</th>
-                <th>Price of Order</th>
+                <th>Products</th> 
+                <th>Quantities</th> 
+                <th>Prices</th> 
                 <th>Total Price</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -51,13 +49,25 @@
                 <tr>
                     <td>#{{ $order->order_id }}</td>
                     <td>{{ $order->customer_name }}</td>
-                    <td>{{ $order->product_name }}</td>
-                    <td>{{ $order->product_id }}</td>
-                    <td>{{ $order->quantity }}</td>
-                    <td>£{{ number_format($order->price_of_order, 2) }}</td>
+
+                   
+                    <td>
+                        {!! nl2br(e($order->product_names)) !!}
+                    </td>
+
+                    
+                    <td>
+                        {!! nl2br(e($order->product_quantities)) !!}
+                    </td>
+
+                   
+                    <td>
+                        {!! nl2br(e($order->product_prices)) !!}
+                    </td>
+
                     <td>£{{ number_format($order->total_price, 2) }}</td>
 
-                    <!-- Status Update Form -->
+                    
                     <td>
                         <form action="{{ route('admin.orders.update', $order->order_id) }}" method="POST" style="display:inline;">
                             @csrf
@@ -72,7 +82,7 @@
                         </form>
                     </td>
 
-                    <!-- Delete Order Form -->
+                   
                     <td>
                         <form action="{{ route('admin.orders.destroy', $order->order_id) }}" method="POST" style="display:inline;">
                             @csrf
