@@ -130,3 +130,9 @@ Route::get('/about-us', function () {
 Route::get('/contact-us', function () {
     return view('contact-us');
 })->name('contact');
+
+
+Route::get('/admin/orders', [OrdersController::class, 'manage'])->name('admin.orders');
+Route::put('/admin/orders/{id}/update', [OrdersController::class, 'updateStatus'])->name('admin.orders.update');
+Route::delete('/admin/orders/{id}/delete', [OrdersController::class, 'destroy'])->name('admin.orders.destroy');
+
