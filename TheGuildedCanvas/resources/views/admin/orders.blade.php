@@ -16,7 +16,8 @@
         <input type="text" name="search" placeholder="Search Order ID or Customer Name" 
                value="{{ request()->search }}" class="filter-input" />
         
-        <select name="status_filter" class="filter-select">
+               <select name="status_filter" class="category-select">
+
             <option value="" {{ request()->status_filter == '' ? 'selected' : '' }}>All Statuses</option>
             <option value="pending" {{ request()->status_filter == 'pending' ? 'selected' : '' }}>Pending</option>
             <option value="shipped" {{ request()->status_filter == 'shipped' ? 'selected' : '' }}>Shipped</option>
