@@ -1304,3 +1304,99 @@ body {
 h1, .table th, .table td, button, select, input {
     font-family: 'Merriweather', serif;
 }
+/* ORDER MANAGEMENT PAGE STYLING */
+
+/* Center the Order Management title */
+.page-title {
+    text-align: center;  /* Centers the text */
+    font-size: 2rem;  /* Adjust as needed */
+    font-weight: bold;
+    color: #333;  /* Ensures readability */
+    margin-bottom: 20px;
+    width: 100%;  /* Makes sure it spans the full width */
+}
+
+
+/* Center the search input, status dropdown, and filter button */
+.order-management-filters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Style the filter button to match the search button */
+.filter-button {
+    background-color: #d4af37;
+    color: black;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.filter-button:hover {
+    background-color: #b08a2e;
+    color: white;
+}
+
+/* Maintain spacing for table */
+.order-management-table {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the table */
+.order-management-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 2px solid #333;
+}
+
+.order-management-table thead {
+    background: #d4af37;
+    color: white;
+    font-weight: bold;
+}
+
+.order-management-table th, 
+.order-management-table td {
+    padding: 12px;
+    text-align: left;
+    border: 2px solid #333;
+}
+
+.order-management-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* Style update & delete buttons */
+.update-button,
+.delete-button {
+    background-color: #d4af37;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.update-button:hover,
+.delete-button:hover {
+    background-color: #b08a2e;
+    color: white;
+}
