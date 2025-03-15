@@ -23,7 +23,7 @@ class ResetPasswordController extends Controller
     {
         $request->validate([
             'token' => 'required',
-            'email' => 'required|email|exists:users,email',
+            'email' => 'required|email|exists:users_table,email',
             'password' => 'required|confirmed|min:8',
         ]);
 
@@ -33,7 +33,7 @@ class ResetPasswordController extends Controller
             ->first();
 
         if (!$reset) {
-            return response()->json(['message' => 'Invalid token or email address.'], 404);
+            return back()->withInput()->with('status' ,'Invalid token or email address.');
         }
 
         $user = User::where('email', $request->email)->first();
@@ -43,7 +43,7 @@ class ResetPasswordController extends Controller
         // Delete the password reset token
         DB::table('password_resets')->where('email', $request->email)->delete();
 
-        return response()->json(['message' => 'Password has been reset successfully!']);
+        return redirect()->route('home')->with('status','Password has been reset successfully!');
     }
     protected $redirectTo = '/home';
 }

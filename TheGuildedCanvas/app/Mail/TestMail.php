@@ -10,6 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\URL;
 
 class TestMail extends Mailable
 {
@@ -17,22 +18,29 @@ class TestMail extends Mailable
 
     public $name;
     public $email;
+    public $verificationUrl;
     /**
      * Create a new message instance.
      */
-    public function __construct($name, $email)
+    public function __construct($name, $email, $user)
     {
         $this->name = $name;
-        $this->email= $email;
+        $this->email = $email;
+        $this->verificationUrl = URL::temporarySignedRoute(
+            'verification.verify',
+            now()->addMinutes(60),
+            ['id' => $user->user_id, 'hash' => sha1($user->email)]
+        );
     }
 
     public function build()
     {
         return $this->subject('Email Verification')
-        ->view('mail.name')
+            ->view('mail.name')
             ->with([
                 'name' => $this->name,
                 'email' => $this->email,
+                'verificationUrl' => $this->verificationUrl
             ]);
     }
     /**
