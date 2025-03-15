@@ -91,3 +91,4 @@ class OrdersController extends Controller
 
         return response()->json(['success' => true]);
     }
+}
