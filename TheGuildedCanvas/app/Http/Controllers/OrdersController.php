@@ -47,20 +47,26 @@ class OrdersController extends Controller
     {
         //  Ensure products appear under a single order row
         $query = DB::table('orders_table')
-            ->join('users_table AS customer', 'customer.user_id', '=', 'orders_table.user_id')
-            ->join('orders_details_table', 'orders_details_table.order_id', '=', 'orders_table.order_id')
-            ->join('products_table', 'products_table.product_id', '=', 'orders_details_table.product_id')
-            ->select(
-                'orders_table.order_id',
-                'orders_table.order_time',
-                'orders_table.total_price',
-                'orders_table.status',
-                'customer.name AS customer_name',
-                DB::raw("GROUP_CONCAT(products_table.product_name SEPARATOR ', ') AS product_names"), //  Group products
-                DB::raw("GROUP_CONCAT(orders_details_table.quantity SEPARATOR ', ') AS product_quantities"), //  Group quantities
-                DB::raw("GROUP_CONCAT(orders_details_table.price_of_order SEPARATOR ', ') AS product_prices") //  Group prices
-            )
-            ->groupBy('orders_table.order_id'); //  Ensure only one row per order
+        ->join('users_table AS customer', 'customer.user_id', '=', 'orders_table.user_id')
+        ->join('orders_details_table', 'orders_details_table.order_id', '=', 'orders_table.order_id')
+        ->join('products_table', 'products_table.product_id', '=', 'orders_details_table.product_id')
+        ->select(
+            'orders_table.order_id',
+            'orders_table.order_time',
+            'orders_table.total_price',
+            'orders_table.status',
+            'customer.name AS customer_name',
+            DB::raw("GROUP_CONCAT(products_table.product_name SEPARATOR ', ') AS product_names"),
+            DB::raw("GROUP_CONCAT(orders_details_table.quantity SEPARATOR ', ') AS product_quantities"),
+            DB::raw("GROUP_CONCAT(orders_details_table.price_of_order SEPARATOR ', ') AS product_prices")
+        )
+        ->groupBy(
+            'orders_table.order_id',
+            'orders_table.order_time',
+            'orders_table.total_price',
+            'orders_table.status',
+            'customer.name'
+        ); //  Ensure only one row per order
 
         // **Apply Search Filter**
         if ($request->has('search') && !empty($request->search)) {
@@ -98,6 +104,6 @@ class OrdersController extends Controller
         $order = Order::findOrFail($id);
         $order->delete();
 
-        return response()->json(['success' => true]);
+        return redirect()->back()->with('status', "Order : {$id} DELETED.");
     }
 }

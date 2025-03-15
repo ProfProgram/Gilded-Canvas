@@ -5,10 +5,14 @@
     <h2 class="page-title">Order Management</h2>
 
     <!-- Success Message -->
-    @if(session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
+    @if (session('status'))
+    <div class="alert">
+        <p class="message">{{ session('status') }}</p>
+        <form method="POST" action="{{ url('/close-alert') }}" style="display: inline;">
+            @csrf
+            <button type="submit" class="close-btn">✖</button>
+        </form>
+    </div>
     @endif
 
     <!-- Filter/Search Form -->
