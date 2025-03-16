@@ -141,3 +141,6 @@ use App\Http\Controllers\CustomerController;
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/customers', [CustomerController::class, 'manage'])->name('admin.customers');
 });
+Route::post('/admin/customers/add', [CustomerController::class, 'store'])->name('admin.customers.add');
+Route::post('/admin/customers/store', [CustomerController::class, 'store'])->name('admin.customers.store');
+
