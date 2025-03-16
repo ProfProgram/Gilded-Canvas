@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container">
+<div class="container user-management">
     <h2 class="page-title">Customer Management</h2>
 
     <!-- Success Message -->
@@ -11,11 +11,12 @@
 
     <!-- Add Customer Button -->
     <button class="update-button" onclick="showAddCustomerModal()">+ Add Customer</button>
-<!-- Search Form -->
-<form method="GET" action="{{ route('admin.customers') }}" class="filter-form">
-    <input type="text" name="search" placeholder="Search by ID or Name" value="{{ request()->search }}" class="filter-input" />
-    <button type="submit" class="filter-button">Search</button>
+<form method="GET" action="{{ route('admin.customers') }}" class="search-container">
+    <input type="text" name="search" placeholder="Search by ID or Name" 
+           value="{{ request()->search }}" class="search-input" />
+    <button type="submit" class="search-button">Search</button>
 </form>
+
 
     <!-- Customer Table -->
     <table class="table">
@@ -43,10 +44,7 @@
                         <td>{{ $customer->phone_number ?? 'N/A' }}</td>
                         <td>{{ \Carbon\Carbon::parse($customer->created_at)->format('d M Y') }}</td>
                         <td>
-                            <!-- Edit Button -->
                             <button class="update-button" onclick="showEditCustomerModal({{ json_encode($customer) }})">Edit</button>
-                            
-                            <!-- Delete Button -->
                             <button class="delete-button" onclick="showDeleteCustomerModal({{ $customer->user_id }})">Delete</button>
                         </td>
                     </tr>
@@ -135,70 +133,5 @@ function closeDeleteCustomerModal() {
     document.getElementById("deleteCustomerModal").style.display = "none";
 }
 </script>
-
-<!-- Modal CSS -->
-<style>
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-}
-
-.modal-content {
-    background-color: #EED9A4;
-    margin: 15% auto;
-    padding: 20px;
-    width: 40%;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.close {
-    float: right;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.update-button {
-    background-color: #b08a2e;
-    border: none;
-    padding: 10px 15px;
-    margin: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    color: white;
-    border-radius: 5px;
-}
-
-.update-button:hover {
-    background-color: #8d6b23;
-}
-
-.delete-button {
-    background-color: #b08a2e;
-    border: none;
-    padding: 10px 15px;
-    margin: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    color: white;
-    border-radius: 5px;
-}
-
-.delete-button:hover {
-    background-color: #8d6b23;
-}
-
-.cancel-button {
-    background-color: white;
-    color: black;
-    border: 1px solid #b08a2e;
-}
-</style>
 
 @endsection
