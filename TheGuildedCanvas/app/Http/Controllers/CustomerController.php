@@ -96,10 +96,14 @@ class CustomerController extends Controller
      * Remove the specified customer.
      */
     public function destroy($id)
-    {
-        $customer = User::where('user_id', $id)->firstOrFail(); 
-        $customer->delete();
+{
+    // Find the customer by user_id
+    $customer = User::where('user_id', $id)->firstOrFail();
 
-        return redirect()->route('admin.customers')->with('status', 'Customer deleted successfully.');
-    }
+    // Delete the customer
+    $customer->delete();
+
+    // Redirect back with success message
+    return redirect()->route('admin.customers')->with('status', 'Customer deleted successfully.');
+}
 }

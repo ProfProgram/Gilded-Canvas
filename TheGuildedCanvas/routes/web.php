@@ -144,5 +144,7 @@ Route::middleware(['auth'])->group(function () {
 Route::post('/admin/customers/add', [CustomerController::class, 'store'])->name('admin.customers.add');
 Route::post('/admin/customers/store', [CustomerController::class, 'store'])->name('admin.customers.store');
 Route::put('/admin/customers/{id}/update', [CustomerController::class, 'update'])->name('admin.customers.update');
+Route::delete('/admin/customers/{id}/delete', [CustomerController::class, 'destroy'])
+    ->name('admin.customers.delete');
 
 

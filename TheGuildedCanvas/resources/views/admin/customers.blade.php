@@ -12,7 +12,6 @@
     <!-- Add Customer Button -->
     <button class="update-button" onclick="showAddCustomerModal()">+ Add Customer</button>
 
-
     <!-- Customer Table -->
     <table class="table">
         <thead>
@@ -40,17 +39,32 @@
                         <td>{{ \Carbon\Carbon::parse($customer->created_at)->format('d M Y') }}</td>
                         <td>
                             <!-- Edit Button -->
-                           <button class="update-button" onclick="showEditCustomerModal({{ json_encode($customer) }})">
-    Edit
-</button>
-
-
+                            <button class="update-button" onclick="showEditCustomerModal({{ json_encode($customer) }})">Edit</button>
+                            
+                            <!-- Delete Button -->
+                            <button class="delete-button" onclick="showDeleteCustomerModal({{ $customer->user_id }})">Delete</button>
                         </td>
                     </tr>
                 @endforeach
             @endif
         </tbody>
     </table>
+</div>
+
+<!-- Add Customer Modal -->
+<div id="addCustomerModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeAddCustomerModal()">&times;</span>
+        <h3>Add New Customer</h3>
+        <form id="addCustomerForm" method="POST" action="{{ route('admin.customers.store') }}">
+            @csrf
+            <input type="text" name="name" placeholder="Customer Name" required>
+            <input type="email" name="email" placeholder="Customer Email" required>
+            <input type="text" name="phone_number" placeholder="Phone Number">
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit" class="update-button">Add Customer</button>
+        </form>
+    </div>
 </div>
 
 <!-- Edit Customer Modal -->
@@ -65,25 +79,55 @@
             <input type="text" id="edit_name" name="name" placeholder="Customer Name" required>
             <input type="email" id="edit_email" name="email" placeholder="Customer Email" required>
             <input type="text" id="edit_phone_number" name="phone_number" placeholder="Phone Number">
-            <button type="submit">Update Customer</button>
+            <button type="submit" class="update-button">Update Customer</button>
+        </form>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteCustomerModal" class="modal">
+    <div class="modal-content">
+        <h3>Are you sure?</h3>
+        <p>Do you really want to delete this customer? This action cannot be undone.</p>
+        <form id="deleteCustomerForm" method="POST" action="">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="update-button">Yes, Delete</button>
+            <button type="button" class="update-button cancel-button" onclick="closeDeleteCustomerModal()">Cancel</button>
         </form>
     </div>
 </div>
 
 <!-- JavaScript for Modal Handling -->
 <script>
+function showAddCustomerModal() {
+    document.getElementById("addCustomerModal").style.display = "block";
+}
+
+function closeAddCustomerModal() {
+    document.getElementById("addCustomerModal").style.display = "none";
+}
+
 function showEditCustomerModal(customer) {
     document.getElementById("edit_user_id").value = customer.user_id;
     document.getElementById("edit_name").value = customer.name;
     document.getElementById("edit_email").value = customer.email;
     document.getElementById("edit_phone_number").value = customer.phone_number || '';
-
     document.getElementById("editCustomerForm").action = "/admin/customers/" + customer.user_id + "/update";
     document.getElementById("editCustomerModal").style.display = "block";
 }
 
 function closeEditCustomerModal() {
     document.getElementById("editCustomerModal").style.display = "none";
+}
+
+function showDeleteCustomerModal(user_id) {
+    document.getElementById("deleteCustomerForm").action = "/admin/customers/" + user_id + "/delete";
+    document.getElementById("deleteCustomerModal").style.display = "block";
+}
+
+function closeDeleteCustomerModal() {
+    document.getElementById("deleteCustomerModal").style.display = "none";
 }
 </script>
 
@@ -92,7 +136,7 @@ function closeEditCustomerModal() {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 10;
     left: 0;
     top: 0;
     width: 100%;
@@ -101,8 +145,8 @@ function closeEditCustomerModal() {
 }
 
 .modal-content {
-    background-color: white;
-    margin: 10% auto;
+    background-color: #EED9A4;
+    margin: 15% auto;
     padding: 20px;
     width: 40%;
     border-radius: 10px;
@@ -115,12 +159,40 @@ function closeEditCustomerModal() {
     cursor: pointer;
 }
 
-.edit-button {
-    background-color: darkorange;
+.update-button {
+    background-color: #b08a2e;
     border: none;
-    padding: 5px 10px;
+    padding: 10px 15px;
+    margin: 5px;
     cursor: pointer;
     font-weight: bold;
+    color: white;
+    border-radius: 5px;
+}
+
+.update-button:hover {
+    background-color: #8d6b23;
+}
+
+.delete-button {
+    background-color: #b08a2e;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+}
+
+.delete-button:hover {
+    background-color: #8d6b23;
+}
+
+.cancel-button {
+    background-color: white;
+    color: black;
+    border: 1px solid #b08a2e;
 }
 </style>
 
