@@ -10,7 +10,8 @@
     @endif
 
     <!-- Add Customer Button -->
-    <button class="add-button" onclick="showAddCustomerModal()">+ Add Customer</button>
+    <button class="update-button" onclick="showAddCustomerModal()">+ Add Customer</button>
+
 
     <!-- Customer Table -->
     <table class="table">
@@ -21,12 +22,13 @@
                 <th>Email</th>
                 <th>Phone Number</th>
                 <th>Registered Date</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             @if($customers->isEmpty())
                 <tr>
-                    <td colspan="5" class="no-results">No customers found.</td>
+                    <td colspan="6" class="no-results">No customers found.</td>
                 </tr>
             @else
                 @foreach($customers as $customer)
@@ -36,6 +38,14 @@
                         <td>{{ $customer->email }}</td>
                         <td>{{ $customer->phone_number ?? 'N/A' }}</td>
                         <td>{{ \Carbon\Carbon::parse($customer->created_at)->format('d M Y') }}</td>
+                        <td>
+                            <!-- Edit Button -->
+                           <button class="update-button" onclick="showEditCustomerModal({{ json_encode($customer) }})">
+    Edit
+</button>
+
+
+                        </td>
                     </tr>
                 @endforeach
             @endif
@@ -43,30 +53,37 @@
     </table>
 </div>
 
-<!-- Add Customer Modal -->
-<div id="addCustomerModal" class="modal">
+<!-- Edit Customer Modal -->
+<div id="editCustomerModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeAddCustomerModal()">&times;</span>
-        <h3>Add New Customer</h3>
-        <form method="POST" action="{{ route('admin.customers.store') }}">
+        <span class="close" onclick="closeEditCustomerModal()">&times;</span>
+        <h3>Edit Customer Details</h3>
+        <form id="editCustomerForm" method="POST" action="">
             @csrf
-            <input type="text" name="name" placeholder="Customer Name" required>
-            <input type="email" name="email" placeholder="Customer Email" required>
-            <input type="text" name="phone_number" placeholder="Phone Number">
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Add Customer</button>
+            @method('PUT')
+            <input type="hidden" id="edit_user_id" name="user_id">
+            <input type="text" id="edit_name" name="name" placeholder="Customer Name" required>
+            <input type="email" id="edit_email" name="email" placeholder="Customer Email" required>
+            <input type="text" id="edit_phone_number" name="phone_number" placeholder="Phone Number">
+            <button type="submit">Update Customer</button>
         </form>
     </div>
 </div>
 
-<!-- JavaScript to Handle Modal -->
+<!-- JavaScript for Modal Handling -->
 <script>
-function showAddCustomerModal() {
-    document.getElementById("addCustomerModal").style.display = "block";
+function showEditCustomerModal(customer) {
+    document.getElementById("edit_user_id").value = customer.user_id;
+    document.getElementById("edit_name").value = customer.name;
+    document.getElementById("edit_email").value = customer.email;
+    document.getElementById("edit_phone_number").value = customer.phone_number || '';
+
+    document.getElementById("editCustomerForm").action = "/admin/customers/" + customer.user_id + "/update";
+    document.getElementById("editCustomerModal").style.display = "block";
 }
 
-function closeAddCustomerModal() {
-    document.getElementById("addCustomerModal").style.display = "none";
+function closeEditCustomerModal() {
+    document.getElementById("editCustomerModal").style.display = "none";
 }
 </script>
 
@@ -98,11 +115,10 @@ function closeAddCustomerModal() {
     cursor: pointer;
 }
 
-.add-button {
-    background-color: gold;
+.edit-button {
+    background-color: darkorange;
     border: none;
-    padding: 10px 15px;
-    margin-bottom: 15px;
+    padding: 5px 10px;
     cursor: pointer;
     font-weight: bold;
 }

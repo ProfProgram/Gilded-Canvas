@@ -70,29 +70,28 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $customer = User::where('user_id', $id)->firstOrFail(); 
-
-        
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users_table,email,' . $customer->user_id . ',user_id',
-            'phone_number' => 'nullable|string|max:15',
-        ]);
-
+        // Find the customer
+        $customer = User::findOrFail($id);
+    
+       $validator = Validator::make($request->all(), [
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users_table,email,' . $customer->user_id . ',user_id',
+        'phone_number' => 'nullable|string|max:15',
+    ]);
+    
         if ($validator->fails()) {
             return redirect()->route('admin.customers')->withErrors($validator)->withInput();
         }
-
-       
+    
+        // Update customer details
         $customer->update([
             'name' => $request->name,
             'email' => $request->email,
             'phone_number' => $request->phone_number,
         ]);
-
-        return redirect()->route('admin.customers')->with('status', 'Customer details updated.');
+    
+        return redirect()->route('admin.customers')->with('status', 'Customer details updated successfully.');
     }
-
     /**
      * Remove the specified customer.
      */
