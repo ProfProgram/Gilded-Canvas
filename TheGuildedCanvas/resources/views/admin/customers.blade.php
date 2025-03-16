@@ -11,6 +11,11 @@
 
     <!-- Add Customer Button -->
     <button class="update-button" onclick="showAddCustomerModal()">+ Add Customer</button>
+<!-- Search Form -->
+<form method="GET" action="{{ route('admin.customers') }}" class="filter-form">
+    <input type="text" name="search" placeholder="Search by ID or Name" value="{{ request()->search }}" class="filter-input" />
+    <button type="submit" class="filter-button">Search</button>
+</form>
 
     <!-- Customer Table -->
     <table class="table">
