@@ -1426,7 +1426,7 @@ display: flex;
     gap: 10px;
     margin-bottom: 20px;
 }
-/
+
 /* Table Styling */
 .customer-management .table {
     width: 100%;
@@ -1533,3 +1533,42 @@ display: flex;
     color: white;
 }
 
+/* */
+.search-container {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centers the search bar */
+    margin-top:15px;
+    margin-bottom: 15px; /* Adds spacing */
+}
+
+/* Make search bar span full width */
+.search-bar {
+    width: 100%;  /* Ensures full width */
+    max-width: 90%;  /* Prevents overshooting */
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* Neutral grey border */
+    border-radius: 5px;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+/* Match focus effect with Order Management */
+.search-bar:focus {
+    border-color: #999; /* Slightly darker grey */
+    box-shadow: none; /* Remove any unwanted glow */
+}
+
+/* Adjust table container to match search width */
+.table-container {
+    width: 90%;
+    max-width: 1200px; /* Same as table width */
+    margin: auto; /* Centers content */
+}
+
+/* Ensure table takes full width */
+.customer-table {
+    width: 100%;
+    border-collapse: collapse;
+}

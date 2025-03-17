@@ -9,13 +9,15 @@
         <div class="alert alert-success">{{ session('status') }}</div>
     @endif
 
-    <!-- Add Customer Button -->
-    <button class="update-button" onclick="showAddCustomerModal()">+ Add Customer</button>
-<form method="GET" action="{{ route('admin.customers') }}" class="search-container">
-    <input type="text" name="search" placeholder="Search by ID or Name" 
-           value="{{ request()->search }}" class="search-input" />
-    <button type="submit" class="search-button">Search</button>
-</form>
+    <div class="customer-header">
+<button class="update-button" onclick="showAddCustomerModal()">+ Add Customer</button>
+    <form method="GET" action="{{ route('admin.customers') }}" class="search-container">
+        <input type="text" name="search" class="search-bar" 
+               placeholder="Search for customer names or IDs..." 
+               value="{{ request()->search }}">
+    </form>
+</div>
+
 
 
     <!-- Customer Table -->
