@@ -37,6 +37,9 @@
                                 <p>Total: £{{$product['price_of_order']}}</p>
                             </div>
                             <button class="reorder-button" onclick="window.location.href='{{ url('/product/'.$product['product_name'].'') }}'">Reorder</button>
+                            <button class="return-button" 
+    onclick="window.location.href='{{ route('product.return', ['product_id' => $product['product_id']]) }}'">
+    Return
                         </div>
                     </div>
                     @endforeach

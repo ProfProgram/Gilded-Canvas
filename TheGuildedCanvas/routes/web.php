@@ -150,5 +150,9 @@ Route::delete('/admin/customers/{id}/delete', [CustomerController::class, 'destr
     ->name('admin.customers.delete');
 
 // DASHBOARD
+//returns
+Route::get('/return/{product_id}', [OrderController::class, 'returnProduct'])->name('product.return');
+
+
 
 Route::get('/admin/dashboard', [InventoryController::class, 'dashboard'])->name('admin.dashboard');
