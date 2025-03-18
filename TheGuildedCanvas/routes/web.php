@@ -147,4 +147,8 @@ Route::put('/admin/customers/{id}/update', [CustomerController::class, 'update']
 Route::delete('/admin/customers/{id}/delete', [CustomerController::class, 'destroy'])
     ->name('admin.customers.delete');
 
+//returns
+Route::get('/return/{product_id}', [OrderController::class, 'returnProduct'])->name('product.return');
+
+
 
