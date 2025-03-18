@@ -27,8 +27,6 @@ use App\Models\User;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\UserManagementController;
 
-
-
 Auth::routes(['verify' => true]);
 
 // Admin routes
@@ -40,12 +38,14 @@ Route::middleware('auth')->group(function () {
     Route::put('/admin/inventory/{id}/outgoing', [InventoryController::class, 'updateOutgoing'])->name('admin.inventory.update.outgoing');
     Route::delete('/admin/inventory/{id}', [InventoryController::class, 'destroy'])->name('admin.inventory.destroy');
 });
+
 // Manager routes
 Route::middleware('auth')->group(function () {
     Route::get('manager/users', [UserManagementController::class, 'index'])->name('manager.users');
     Route::put('manager/users/{id}', [UserManagementController::class, 'updateRole'])->name('manager.users.update');
     Route::delete('manager/users/{id}', [UserManagementController::class, 'destroy'])->name('manager.users.destroy');
 });
+
 // Handle email verification
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -74,7 +74,6 @@ Route::post('password/email', [ForgotPasswordController::class, 'sendResetLink']
 Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('password/reset', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
 
-
 Route::get('/', [homeController::class, 'index']);
 
 Route::get('/home', [homeController::class, 'index'])->name('home');
@@ -83,12 +82,13 @@ Route::get('/search', [homeController::class, 'search'])->name('home-search');
 Route::get('/sign-up', function () {
     return view('sign-up');
 });
+
 // SIGN IN PAGE (LOGIN)
 Route::get('/sign-in', function () {
     return view('sign-in');
 })->name('sign-in');
 
-// SIGN UP PAGE
+// CONTACT US
 Route::get('/contact-us', function () {
     return view('contact-us');
 });
@@ -100,7 +100,6 @@ Route::get('delete/{id}', [CartController::class, 'delete'])->name('cart_delete'
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/update-basket', [CartController::class, 'update'])->name('basket.update');
 
-
 // PREVIOUS ORDERS
 Route::get('/previous-orders', [OrdersController::class, 'index']);
 
@@ -109,7 +108,6 @@ Route::get('/product', [productListing::class, 'index'])->name('product.index');
 Route::get('/prod-search', [productListing::class, 'search'])->name('product-search');
 
 // INDIVIDUAL DYNAMIC PRODUCTS
-// needs to be updated to be dynamic name in url
 Route::get('/product/{productName}', [IndivProductController::class, 'index']);
 
 // PAYMENT ROUTES
@@ -120,8 +118,11 @@ Route::post('/payment', [paymentController::class, 'store']);
 Route::get('/review', [ReviewController::class, 'index']);
 Route::post('/review', [ReviewController::class, 'store']);
 
-// REMOVE THE ALERT MESSAGE
-Route::post('/close-alert', function () {Session::forget('status'); return redirect()->back();})->name('close-alert');
+// REMOVE ALERT MESSAGE
+Route::post('/close-alert', function () {
+    Session::forget('status');
+    return redirect()->back();
+})->name('close-alert');
 
 // ABOUT US
 Route::get('/about-us', function () {
@@ -133,7 +134,7 @@ Route::get('/contact-us', function () {
     return view('contact-us');
 })->name('contact');
 
-
+// ADMIN ORDER MANAGEMENT
 Route::get('/admin/orders', [OrdersController::class, 'manage'])->name('admin.orders');
 Route::put('/admin/orders/{id}/update', [OrdersController::class, 'updateStatus'])->name('admin.orders.update');
 Route::delete('/admin/orders/{id}/delete', [OrdersController::class, 'destroy'])->name('admin.orders.destroy');
@@ -149,24 +150,28 @@ Route::put('/admin/customers/{id}/update', [CustomerController::class, 'update']
 Route::delete('/admin/customers/{id}/delete', [CustomerController::class, 'destroy'])
     ->name('admin.customers.delete');
 
-// DASHBOARD
-//returns
-//Route::get('/return/{product_id}', [OrderController::class, 'returnProduct'])->name('product.return');
+// RETURN REQUEST FORM
+Route::get('/return-request/{order_id}', function ($order_id) {
+    $orderDetails = \DB::table('orders_details_table')
+        ->where('order_id', $order_id)
+        ->join('products_table', 'orders_details_table.product_id', '=', 'products_table.product_id')
+        ->select('orders_details_table.product_id', 'products_table.product_name')
+        ->get();
 
-Route::get('/return-request', function () {
-    return view('return-form');
+    return view('return-form', ['order_id' => $order_id, 'orderDetails' => $orderDetails]);
 })->name('return.request');
+
 Route::post('/submit-return-request', function (Illuminate\Http\Request $request) {
     $request->validate([
-        'order_id' => 'required',
-        'product_name' => 'required',
-        'reason' => 'required|max:500',
+        'order_id' => 'required|integer',
+        'product_id' => 'required|integer',
+        'reason' => 'required|string|max:500',
     ]);
 
-    // Save return request (later we can store it properly in the database)
-    \DB::table('order_returns')->insert([
+    \DB::table('returns_table')->insert([
         'order_id' => $request->order_id,
-        'product_name' => $request->product_name,
+        'product_id' => $request->product_id,
+        'user_id' => auth()->user()->user_id,
         'reason' => $request->reason,
         'status' => 'pending',
         'created_at' => now(),
@@ -176,6 +181,5 @@ Route::post('/submit-return-request', function (Illuminate\Http\Request $request
     return redirect()->route('home')->with('status', 'Return request submitted successfully!');
 })->name('return.submit');
 
-
-
+// ADMIN DASHBOARD ROUTE
 Route::get('/admin/dashboard', [InventoryController::class, 'dashboard'])->name('admin.dashboard');
