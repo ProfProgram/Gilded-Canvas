@@ -148,3 +148,7 @@ Route::delete('/admin/customers/{id}/delete', [CustomerController::class, 'destr
     ->name('admin.customers.delete');
 
 
+// productAddButton
+
+Route::get('/admin/product/create', [InventoryController::class, 'create'])->name('product.create');
+Route::post('/admin/product/store', [InventoryController::class, 'store'])->name('product.store');
