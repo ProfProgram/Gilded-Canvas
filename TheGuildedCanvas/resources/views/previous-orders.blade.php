@@ -38,8 +38,10 @@
                             </div>
                             <button class="reorder-button" onclick="window.location.href='{{ url('/product/'.$product['product_name'].'') }}'">Reorder</button>
                             <button class="return-button" 
-    onclick="window.location.href='{{ route('product.return', ['product_id' => $product['product_id']]) }}'">
-    Return
+    onclick="window.location.href='{{ route('return.request', ['order_id' => $order['order_id']]) }}'">
+    Request Return
+</button>
+
                         </div>
                     </div>
                     @endforeach

@@ -149,21 +149,28 @@ Route::delete('/admin/customers/{id}/delete', [CustomerController::class, 'destr
 
 //returns
 //Route::get('/return/{product_id}', [OrderController::class, 'returnProduct'])->name('product.return');
+Route::get('/return-request/{order_id}', function ($order_id) {
+    // Fetch products associated with the order
+    $orderDetails = \DB::table('orders_details_table')
+        ->where('order_id', $order_id)
+        ->join('products_table', 'orders_details_table.product_id', '=', 'products_table.product_id')
+        ->select('orders_details_table.product_id', 'products_table.product_name')
+        ->get();
 
-Route::get('/return-request', function () {
-    return view('return-form');
+    return view('return-form', ['order_id' => $order_id, 'orderDetails' => $orderDetails]);
 })->name('return.request');
 Route::post('/submit-return-request', function (Illuminate\Http\Request $request) {
     $request->validate([
-        'order_id' => 'required',
-        'product_name' => 'required',
-        'reason' => 'required|max:500',
+        'order_id' => 'required|integer',
+        'product_id' => 'required|integer',
+        'reason' => 'required|string|max:500',
     ]);
 
-    // Save return request (later we can store it properly in the database)
-    \DB::table('order_returns')->insert([
+    // Insert into returns_table
+    \DB::table('returns_table')->insert([
         'order_id' => $request->order_id,
-        'product_name' => $request->product_name,
+        'product_id' => $request->product_id,
+        'user_id' => auth()->user()->user_id, // Assuming the user is logged in
         'reason' => $request->reason,
         'status' => 'pending',
         'created_at' => now(),
@@ -172,6 +179,3 @@ Route::post('/submit-return-request', function (Illuminate\Http\Request $request
 
     return redirect()->route('home')->with('status', 'Return request submitted successfully!');
 })->name('return.submit');
-
-
-
