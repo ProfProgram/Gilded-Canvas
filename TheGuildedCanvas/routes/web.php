@@ -157,9 +157,8 @@ Route::get('/return-request/{order_id}', function ($order_id) {
     $orderDetails = \DB::table('orders_details_table')
     ->where('order_id', $order_id)
     ->join('products_table', 'orders_details_table.product_id', '=', 'products_table.product_id')
-    ->select('orders_details_table.product_id', 'products_table.product_name')
+    ->select('orders_details_table.product_id', 'products_table.product_name', 'orders_details_table.quantity') // Fetch quantity
     ->get();
-
     return view('return-form', ['order_id' => $order_id, 'orderDetails' => $orderDetails]);
 })->name('return.request');
 

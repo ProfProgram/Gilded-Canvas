@@ -14,8 +14,9 @@
         <select name="product_ids[]" id="product_ids" class="custom-select" multiple required>
             @foreach ($orderDetails as $product)
                 <option value="{{ $product->product_id }}" 
-                        data-image="{{ asset('images/products/img-'.$product->product_id.'.png') }}">
-                    {{ $product->product_name }} (Qty: N/A)
+                        data-image="{{ asset('images/products/img-'.$product->product_id.'.png') }}" 
+                        data-quantity="{{ $product->quantity }}">
+                    {{ $product->product_name }} (Qty: {{ $product->quantity }})
                 </option>
             @endforeach
         </select>
