@@ -162,20 +162,23 @@ Route::get('/return-request/{order_id}', function ($order_id) {
 Route::post('/submit-return-request', function (Illuminate\Http\Request $request) {
     $request->validate([
         'order_id' => 'required|integer',
-        'product_id' => 'required|integer',
+        'product_ids' => 'required|array',
         'reason' => 'required|string|max:500',
     ]);
 
-    // Insert into returns_table
-    \DB::table('returns_table')->insert([
-        'order_id' => $request->order_id,
-        'product_id' => $request->product_id,
-        'user_id' => auth()->user()->user_id, // Assuming the user is logged in
-        'reason' => $request->reason,
-        'status' => 'pending',
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
+    // Insert multiple return requests for selected products
+    foreach ($request->product_ids as $product_id) {
+        \DB::table('returns_table')->insert([
+            'order_id' => $request->order_id,
+            'product_id' => $product_id,
+            'user_id' => auth()->user()->user_id,
+            'reason' => $request->reason,
+            'status' => 'pending',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
 
     return redirect()->route('home')->with('status', 'Return request submitted successfully!');
 })->name('return.submit');
+
