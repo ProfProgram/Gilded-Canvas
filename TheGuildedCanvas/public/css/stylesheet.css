@@ -1421,3 +1421,175 @@ h1, .table th, .table td, button, select, input {
     background-color: #b08a2e;
     color: white;
 }
+/* Customer Management Styling */
+.customer-management {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Page Title */
+.page-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+.filter form {
+display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Table Styling */
+.customer-management .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 2px solid #333;
+}
+
+.customer-management thead {
+    background: #d4af37;
+    color: white;
+    font-weight: bold;
+}
+
+.customer-management th, 
+.customer-management td {
+    padding: 12px;
+    text-align: left;
+    border: 2px solid #333;
+}
+
+.customer-management tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* Buttons Spacing & Styling */
+.customer-management .update-button,
+.customer-management .delete-button {
+    background-color: #d4af37;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-right: 10px; /* Ensures proper spacing between buttons */
+}
+
+.customer-management .update-button:hover,
+.customer-management .delete-button:hover {
+    background-color: #b08a2e;
+    color: white;
+}
+
+/* Add Customer Button */
+.add-button {
+    display: inline-block;
+    background-color: #d4af37;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.add-button:hover {
+    background-color: #b08a2e;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #EED9A4;
+    margin: 15% auto;
+    padding: 20px;
+    width: 40%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Modal Buttons */
+.modal-content .update-button,
+.modal-content .cancel-button {
+    background-color: white;
+    color: black;
+    border: 2px solid #d4af37;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-content .update-button:hover,
+.modal-content .cancel-button:hover {
+    background-color: #b08a2e;
+    color: white;
+}
+
+/* */
+.search-container {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centers the search bar */
+    margin-top:15px;
+    margin-bottom: 15px; /* Adds spacing */
+}
+
+/* Make search bar span full width */
+.search-bar {
+    width: 100%;  /* Ensures full width */
+    max-width: 90%;  /* Prevents overshooting */
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* Neutral grey border */
+    border-radius: 5px;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+/* Match focus effect with Order Management */
+.search-bar:focus {
+    border-color: #999; /* Slightly darker grey */
+    box-shadow: none; /* Remove any unwanted glow */
+}
+
+/* Adjust table container to match search width */
+.table-container {
+    width: 90%;
+    max-width: 1200px; /* Same as table width */
+    margin: auto; /* Centers content */
+}
+
+/* Ensure table takes full width */
+.customer-table {
+    width: 100%;
+    border-collapse: collapse;
+}

@@ -40,6 +40,7 @@
                     <div class="dropdown-menu">
                         <a href="{{ route('admin.orders') }}">Order Management</a>
                         <a href="{{ route('admin.inventory') }}">Inventory Management</a>
+                        <a href="{{ route('admin.customers') }}">Customer Management</a>
                     </div>
                 </div>
                 @endif
