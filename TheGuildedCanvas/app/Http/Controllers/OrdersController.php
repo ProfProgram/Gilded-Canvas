@@ -19,26 +19,34 @@ class OrdersController extends Controller
 
         //  Group products under the same order instead of showing them separately
         $orderInfo = DB::table('orders_table')
-            ->join('orders_details_table', 'orders_details_table.order_id', '=', 'orders_table.order_id')
-            ->join('users_table AS customer', 'customer.user_id', '=', 'orders_table.user_id')
-            ->leftJoin('admin_table', 'admin_table.admin_id', '=', 'orders_table.admin_id')
-            ->leftJoin('users_table AS admin', 'admin.user_id', '=', 'admin_table.user_id')
-            ->join('products_table', 'products_table.product_id', '=', 'orders_details_table.product_id')
-            ->where('orders_table.user_id', $userId)
-            ->select(
-                'orders_table.order_id',
-                'orders_table.order_time',
-                'orders_table.status',
-                'orders_table.admin_id',
-                'customer.name AS customer_name',
-                'admin.name AS admin_name',
-                'orders_table.total_price',
-                DB::raw("GROUP_CONCAT(products_table.product_name SEPARATOR ', ') AS product_names"), //  Group products
-                DB::raw("GROUP_CONCAT(orders_details_table.quantity SEPARATOR ', ') AS product_quantities"), //  Group quantities
-                DB::raw("GROUP_CONCAT(orders_details_table.price_of_order SEPARATOR ', ') AS product_prices") //  Group prices
-            )
-            ->groupBy('orders_table.order_id') //  Ensure only one row per order
-            ->get();
+        ->join('orders_details_table', 'orders_details_table.order_id', '=', 'orders_table.order_id')
+        ->join('users_table AS customer', 'customer.user_id', '=', 'orders_table.user_id')
+        ->leftJoin('admin_table', 'admin_table.admin_id', '=', 'orders_table.admin_id')
+        ->leftJoin('users_table AS admin', 'admin.user_id', '=', 'admin_table.user_id')
+        ->join('products_table', 'products_table.product_id', '=', 'orders_details_table.product_id')
+        ->where('orders_table.user_id', $userId)
+        ->select(
+            'orders_table.order_id',
+            'orders_table.order_time',
+            'orders_table.status',
+            'orders_table.admin_id',
+            'customer.name AS customer_name',
+            'admin.name AS admin_name',
+            'orders_table.total_price',
+            DB::raw("GROUP_CONCAT(products_table.product_name SEPARATOR ', ') AS product_names"),
+            DB::raw("GROUP_CONCAT(orders_details_table.quantity SEPARATOR ', ') AS product_quantities"),
+            DB::raw("GROUP_CONCAT(orders_details_table.price_of_order SEPARATOR ', ') AS product_prices")
+        )
+        ->groupBy(
+            'orders_table.order_id',
+            'orders_table.order_time',
+            'orders_table.status',
+            'orders_table.admin_id',
+            'customer.name',
+            'admin.name',
+            'orders_table.total_price'
+        ) // Ensures only one row
+        ->get();
 
         return view('/previous-orders', ['orders' => $orderInfo]);
     }
