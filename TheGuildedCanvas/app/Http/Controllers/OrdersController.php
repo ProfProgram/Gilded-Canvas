@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log; 
 
 class OrdersController extends Controller
 {
@@ -101,9 +103,24 @@ class OrdersController extends Controller
             'status' => 'required|in:pending,shipped,delivered,cancelled',
         ]);
 
+        $userId = Auth::user()->user_id;
+        $adminId = Admin::with('user')->where('user_id', $userId)->value('admin_id');
+
         //  Ensure that updating status applies to the whole order, not individual items
         $order = Order::where('order_id', $id)->firstOrFail();
         $order->update(['status' => $request->status]);
+
+        try {
+            if ($order->update(['admin_id' => $adminId])) {
+
+            }
+            else {
+                return redirect()->back()->with('status', 'Admin ID could not be updated.');
+            }
+        } catch (\Exception $e) {
+            Log::error('Failed to update admin_id on Order: '.$id.'' . $e->getMessage());
+            return redirect()->back()->with('status','Failed to update admin_id on Order: '.$id.'. ' . $e->getMessage() . ' Please contact us for more help.') ;
+        }
 
         return redirect()->route('admin.orders')->with('status', 'Order status updated successfully!');
     }
