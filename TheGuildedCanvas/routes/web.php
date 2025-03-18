@@ -148,7 +148,30 @@ Route::delete('/admin/customers/{id}/delete', [CustomerController::class, 'destr
     ->name('admin.customers.delete');
 
 //returns
-Route::get('/return/{product_id}', [OrderController::class, 'returnProduct'])->name('product.return');
+//Route::get('/return/{product_id}', [OrderController::class, 'returnProduct'])->name('product.return');
+
+Route::get('/return-request', function () {
+    return view('return-form');
+})->name('return.request');
+Route::post('/submit-return-request', function (Illuminate\Http\Request $request) {
+    $request->validate([
+        'order_id' => 'required',
+        'product_name' => 'required',
+        'reason' => 'required|max:500',
+    ]);
+
+    // Save return request (later we can store it properly in the database)
+    \DB::table('order_returns')->insert([
+        'order_id' => $request->order_id,
+        'product_name' => $request->product_name,
+        'reason' => $request->reason,
+        'status' => 'pending',
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+    return redirect()->route('home')->with('status', 'Return request submitted successfully!');
+})->name('return.submit');
 
 
 
