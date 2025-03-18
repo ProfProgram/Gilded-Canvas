@@ -153,10 +153,10 @@ Route::delete('/admin/customers/{id}/delete', [CustomerController::class, 'destr
 Route::get('/return-request/{order_id}', function ($order_id) {
     // Fetch products associated with the order
     $orderDetails = \DB::table('orders_details_table')
-        ->where('order_id', $order_id)
-        ->join('products_table', 'orders_details_table.product_id', '=', 'products_table.product_id')
-        ->select('orders_details_table.product_id', 'products_table.product_name') // Removed 'products_table.image'
-        ->get();
+    ->where('order_id', $order_id)
+    ->join('products_table', 'orders_details_table.product_id', '=', 'products_table.product_id')
+    ->select('orders_details_table.product_id', 'products_table.product_name')
+    ->get();
 
     return view('return-form', ['order_id' => $order_id, 'orderDetails' => $orderDetails]);
 })->name('return.request');
