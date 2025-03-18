@@ -136,3 +136,15 @@ Route::get('/admin/orders', [OrdersController::class, 'manage'])->name('admin.or
 Route::put('/admin/orders/{id}/update', [OrdersController::class, 'updateStatus'])->name('admin.orders.update');
 Route::delete('/admin/orders/{id}/delete', [OrdersController::class, 'destroy'])->name('admin.orders.destroy');
 
+use App\Http\Controllers\CustomerController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/customers', [CustomerController::class, 'manage'])->name('admin.customers');
+});
+Route::post('/admin/customers/add', [CustomerController::class, 'store'])->name('admin.customers.add');
+Route::post('/admin/customers/store', [CustomerController::class, 'store'])->name('admin.customers.store');
+Route::put('/admin/customers/{id}/update', [CustomerController::class, 'update'])->name('admin.customers.update');
+Route::delete('/admin/customers/{id}/delete', [CustomerController::class, 'destroy'])
+    ->name('admin.customers.delete');
+
+
