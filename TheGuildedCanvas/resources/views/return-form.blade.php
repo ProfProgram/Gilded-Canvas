@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+
 <div class="container">
     <h2 class="page-title">Return Request Form</h2>
 
@@ -13,14 +14,15 @@
         <select name="product_ids[]" id="product_ids" class="custom-select" multiple required>
             @foreach ($orderDetails as $product)
                 <option value="{{ $product->product_id }}" 
-                        data-image="{{ asset('storage/default.png') }}">
-                    {{ $product->product_name }} (Qty: {{ $product->quantity ?? 'N/A' }})
+                        data-image="{{ asset('images/products/img-'.$product->product_id.'.png') }}">
+                    {{ $product->product_name }} (Qty: N/A)
                 </option>
             @endforeach
         </select>
 
         <label for="return_images">Upload Images (Optional):</label>
         <input type="file" name="return_images[]" multiple accept="image/*" class="form-control">
+
 
         <label for="reason">Reason for Return:</label>
         <textarea name="reason" id="reason" required></textarea>
