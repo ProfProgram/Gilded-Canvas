@@ -26,6 +26,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Models\User;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\UserManagementController;
+use App\Http\Controllers\ReturnController;
 
 Auth::routes(['verify' => true]);
 
@@ -150,39 +151,22 @@ Route::put('/admin/customers/{id}/update', [CustomerController::class, 'update']
 Route::delete('/admin/customers/{id}/delete', [CustomerController::class, 'destroy'])
     ->name('admin.customers.delete');
 
-// RETURN REQUEST FORM
+// Returns
+// Route to return form
 Route::get('/return-request/{order_id}', function ($order_id) {
     $orderDetails = \DB::table('orders_details_table')
         ->where('order_id', $order_id)
         ->join('products_table', 'orders_details_table.product_id', '=', 'products_table.product_id')
-        ->select('orders_details_table.product_id', 'products_table.product_name')
+        ->select('orders_details_table.product_id', 'products_table.product_name') // Removed 'products_table.image'
         ->get();
 
     return view('return-form', ['order_id' => $order_id, 'orderDetails' => $orderDetails]);
 })->name('return.request');
 
-Route::post('/submit-return-request', function (Illuminate\Http\Request $request) {
-    $request->validate([
-        'order_id' => 'required|integer',
-        'product_ids' => 'required|array', // Array to allow multiple product returns
-        'reason' => 'required|string|max:500',
-    ]);
-
-    // Insert multiple return requests for selected products
-    foreach ($request->product_ids as $product_id) {
-        \DB::table('returns_table')->insert([
-            'order_id' => $request->order_id,
-            'product_id' => $product_id,
-            'user_id' => auth()->user()->user_id, // Assuming the user is logged in
-            'reason' => $request->reason,
-            'status' => 'pending',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-    }
-
-    return redirect()->route('home')->with('status', 'Return request submitted successfully!');
-})->name('return.submit');
+// Route to submit return request (Handled by Controller)
+Route::post('/submit-return-request', [ReturnController::class, 'processReturn'])
+    ->middleware('auth')
+    ->name('return.submit');
 
 // ADMIN DASHBOARD ROUTE
 Route::get('/admin/dashboard', [InventoryController::class, 'dashboard'])->name('admin.dashboard');
