@@ -625,7 +625,6 @@ nav a:nth-child(5) {
     text-align: center;
     max-width: 400px;
     width: 100%;
-    box-shadow: 0 4px 6px 
 }
 
 .login-container h1 {
@@ -633,12 +632,16 @@ nav a:nth-child(5) {
     margin-bottom: 20px;
 }
 
+.login-container form *:not(.form-text, .form-text label) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .form-text {
     margin-bottom: 15px;
     text-align: left;
 }
-
-
 
 .form-text input {
     width: 100%;
@@ -656,21 +659,6 @@ nav a:nth-child(5) {
     font-size: 15px;
 }
 
-.login-btn {
-    background-color: #FFD700;
-    border: none;
-    border-radius: 0px;
-    padding: 5px 5px;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    width: 50%;
-}
-
-.login-btn:hover {
-    background-color: #FFD700;
-}
-
 .signup-link {
     color: black;
     font-weight: bold;
@@ -679,16 +667,6 @@ nav a:nth-child(5) {
 
 .signup-link:hover {
     text-decoration: underline;
-}
-
-#role {
-    width: 60%;
-    padding: 4px;
-    font-size: 14px;
-    border: #ccc;
-    background-color: #ffcc00; 
-    color: black; 
-    cursor: pointer;
 }
 
 /* Mobile Optimization */
@@ -838,17 +816,54 @@ nav a:nth-child(5) {
     color: green;
     margin-top: 20px;
 }
-.buy-button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
+
+/* PRODUCT PAGE (INDIVIDUAL) */
+
+.product-info {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
-.buy-button:hover {
-    background-color: #0056b3;
+
+.addToCart {
+    width: 100%;
+}
+
+.review-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.MakeReview {
+    background-color: #d4af37;
+    color: #1A1A1A;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: color 0.3s ease;
+    border: none;
+    justify-self: start;
+}
+
+.MakeReview:hover {
+    color: #ffffff;
+}
+
+.ReviewList-title {
+    justify-self: center;
+    margin-right: 139.55px; /* Offsets the title to be slightly within the button, this centres the title to the true centre of the page rather than the center of its leftover space in the column */
+    width: 100%;
+}
+
+.review {
+    border-bottom: 1px solid #ddd;
+}
+
+.review:last-child {
+    border-bottom: none;
 }
 
 /* HOME PAGE */
@@ -954,17 +969,17 @@ nav a:nth-child(5) {
 
 .product-slide .btn {
     background-color: #d4af37;
-    color: #ffffff;
-    border: none;
+    color: #1A1A1A;
     padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    border: none;
+    transition: color 0.3s ease;
 }
 
 .product-slide .btn:hover {
-    background-color: #ffffff;
-    color: #d4af37;
+    color: #ffffff;
 }
 
 
@@ -1006,7 +1021,7 @@ nav a:nth-child(5) {
 .category-select {
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #e3c878;
     border-radius: 5px;
     font-size: 14px;
 }
@@ -1077,21 +1092,27 @@ form label {
 }
 
 form input, form textarea {
-    padding: 10px;
+    width: 100%;
+    padding: 8px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #e3c878;
     border-radius: 5px;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
 form button {
+    background-color: #d4af37;
+    color: #1A1A1A;
     padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    border: none;
+    font-weight: bold;
     border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+    transition: color 0.3s ease;
+    border: none;
+}
+
+form button:hover {
+    color: #ffffff;
 }
 
 /* SEARCH BAR */

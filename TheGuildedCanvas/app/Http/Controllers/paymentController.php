@@ -42,7 +42,7 @@ class paymentController extends Controller
 
         try {
             if ($order->save()) {
-                $order_id = $order->id;
+                $order_id = $order->order_id;
                 Log::info('Order saved successfully. Order ID: ' . $order_id);
 
                 foreach ($cartItems as $cartItem) {

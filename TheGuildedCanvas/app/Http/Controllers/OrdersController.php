@@ -17,38 +17,29 @@ class OrdersController extends Controller
 
         $userId = Auth::user()->user_id;
 
-        //  Group products under the same order instead of showing them separately
-        $orderInfo = DB::table('orders_table')
-        ->join('orders_details_table', 'orders_details_table.order_id', '=', 'orders_table.order_id')
-        ->join('users_table AS customer', 'customer.user_id', '=', 'orders_table.user_id')
-        ->leftJoin('admin_table', 'admin_table.admin_id', '=', 'orders_table.admin_id')
-        ->leftJoin('users_table AS admin', 'admin.user_id', '=', 'admin_table.user_id')
-        ->join('products_table', 'products_table.product_id', '=', 'orders_details_table.product_id')
-        ->where('orders_table.user_id', $userId)
-        ->select(
-            'orders_table.order_id',
-            'orders_table.order_time',
-            'orders_table.status',
-            'orders_table.admin_id',
-            'customer.name AS customer_name',
-            'admin.name AS admin_name',
-            'orders_table.total_price',
-            DB::raw("GROUP_CONCAT(products_table.product_name SEPARATOR ', ') AS product_names"),
-            DB::raw("GROUP_CONCAT(orders_details_table.quantity SEPARATOR ', ') AS product_quantities"),
-            DB::raw("GROUP_CONCAT(orders_details_table.price_of_order SEPARATOR ', ') AS product_prices")
-        )
-        ->groupBy(
-            'orders_table.order_id',
-            'orders_table.order_time',
-            'orders_table.status',
-            'orders_table.admin_id',
-            'customer.name',
-            'admin.name',
-            'orders_table.total_price'
-        ) // Ensures only one row
-        ->get();
+        $orders = Order::with(['details.product', 'admin.user'])
+        ->where('user_id', $userId)
+        ->get()
+        ->map(function ($order) {
+            return [
+                'order_id' => $order->order_id,
+                'order_time' => $order->order_time,
+                'status' => $order->status,
+                'total_price' => $order->total_price,
+                'admin_name' => optional($order->admin)->user->name ?? 'Not yet assigned.',
+                'products' => $order->details->map(function ($detail) {
+                    return [
+                        'product_id' => optional($detail->product)->product_id ?? null,
+                        'product_name' => optional($detail->product)->product_name ?? 'Unknown Product',
+                        'quantity' => $detail->quantity,
+                        'price_of_order' => $detail->price_of_order
+                    ];
+                })->toArray(),
+            ];
+        });
+    
 
-        return view('/previous-orders', ['orders' => $orderInfo]);
+        return view('/previous-orders', ['orders' => $orders]);
     }
 
     public function manage(Request $request)

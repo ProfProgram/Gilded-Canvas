@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+<main class="sign-inMain">
     <div class="login-container">
         <h1>Reset Password</h1>
         @if ($errors->any())
@@ -28,4 +29,5 @@
             <button type="submit" class="login-btn">Reset Password</button>
         </form>
     </div>
+</main>
 @endsection

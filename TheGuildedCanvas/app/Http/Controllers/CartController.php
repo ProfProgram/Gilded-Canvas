@@ -41,7 +41,7 @@ class CartController extends Controller
 
         $productId = $request->input('product_id');
         $productName = $request->input('product_name');
-        $productPrice = $request->input('product_price');
+        $productPrice = $request->input('price');
         $quantity = $request->input('cartQuan_add');
         
         // Check if the product already exists in the cart (for the current user)
@@ -63,7 +63,7 @@ class CartController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('status', $productName.' added to cart!');
+        return redirect()->back()->with('status', "{$quantity} {$productName} added to cart!");
     }
     
     /**

@@ -3,7 +3,7 @@
 
 @section('content')
 
-<main>
+<main class="sign-upMain">
     <section class="login-container">
         <h1>Signup</h1>
         @if ($errors->any())
@@ -32,13 +32,6 @@
             <div class="form-text">
                 <label for="PhoneNumber">PhoneNumber</label>
                 <input type="number" name="phone_number" id="PhoneNumber" placeholder="Enter PhoneNumber" />
-            </div>
-            <div class="form-text">
-                <label for="options">Select A Role</label>
-                <select id="options" name="role">
-                    <option value="admin">admin</option>
-                    <option value="user">customer</option>
-                </select>
             </div>
             <a href="{{ route('sign-in') }}" class="forgot-details">Already a member?</a>
             <button type="submit" class="login-btn">Signup</button>
