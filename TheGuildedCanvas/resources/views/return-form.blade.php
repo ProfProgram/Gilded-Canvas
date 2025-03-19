@@ -139,5 +139,193 @@
         }
     }
 </style>
+<style>
+    /*  */
+    .container {
+        max-width: 900px;  /* Wider form */
+        margin: 50px auto;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        font-family: 'Merriweather', serif;
+    }
 
+    /* Form Wrapper */
+    .return-form-wrapper {
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Bigger Title */
+    .page-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+    /* Form Labels */
+    label {
+        font-size: 1.3rem;
+        font-weight: bold;
+        display: block;
+        margin: 20px 0 8px;
+    }
+
+    /* Bigger Input Fields */
+    input[type="text"], 
+    textarea, 
+    select {
+        width: 100%;
+        padding: 14px;
+        font-size: 1.2rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus, 
+    textarea:focus, 
+    select:focus {
+        border-color: #d4af37;
+        outline: none;
+        box-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
+    }
+
+    /* Select2 Styling */
+    .select2-container {
+        width: 100% !important;
+    }
+
+    .select2-selection--multiple {
+        min-height: 45px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 5px;
+        font-size: 16px;
+        background-color: #fff;
+    }
+
+    /* Style selected product tags (Dropdown) */
+    .select2-selection__choice {
+        background-color: #eed9a4 !important; /* Beige */
+        color: black !important;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    /* Remove the X icon on selection to prevent misalignment */
+    .select2-selection__choice__remove {
+        display: none;
+    }
+
+    /* Selected Products Section */
+    #product-selection {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .product-item {
+        background-color: #eed9a4; /* Beige Background */
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        border: 2px solid #d4af37;
+    }
+
+    /* Bigger Product Image */
+    .product-img {
+        width: 90px; /* Increased size */
+        height: 90px;
+        border-radius: 5px;
+        object-fit: cover;
+    }
+
+    /* Bigger Quantity Input */
+    .return-qty-input {
+        width: 100px;
+        text-align: center;
+        font-size: 1.1rem;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* File Upload */
+    input[type="file"] {
+        padding: 10px;
+        font-size: 1.1rem;
+    }
+
+    /* Bigger Submit Button */
+    .return-button {
+        background-color: #d4af37; /* Gold */
+        color: black;
+        padding: 14px 22px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.4rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        margin-top: 15px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .return-button:hover {
+        background-color: #b08a2e;
+    }
+
+    /* Selected Products for Return Section */
+    #product-preview {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #eed9a4; /* Beige */
+        border-radius: 8px;
+        border: 2px solid #d4af37;
+    }
+
+    #product-preview li {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+
+    /* Enlarged Product Image in Selected Section */
+    .product-img-preview {
+        width: 100px;
+        height: 100px;
+        border-radius: 5px;
+        object-fit: cover;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .container {
+            padding: 30px;
+        }
+
+        .page-title {
+            font-size: 2rem;
+        }
+
+        .product-img, .product-img-preview {
+            width: 80px;
+            height: 80px;
+        }
+    }
+</style>
 @endsection
