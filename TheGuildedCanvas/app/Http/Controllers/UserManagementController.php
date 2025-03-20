@@ -6,12 +6,18 @@ use App\Models\Admin;
 use App\Models\Manager;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserManagementController extends Controller
 {
 
     public function index()
     {
+        // Check if user is logged in first or role will read as null throwing error
+        // Ensure the user is an manager
+        if (!Auth::check()) {
+            return redirect()->route('sign-in')->with('status', 'Please log in to view.');
+        }
         if (auth()->user()->role !== \App\Enums\UserRole::manager) {
             return redirect('/home')->with('error', 'You do not have access to this page.');
         }

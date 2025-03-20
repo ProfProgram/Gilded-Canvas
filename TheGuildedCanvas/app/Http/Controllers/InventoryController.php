@@ -13,7 +13,11 @@ class InventoryController extends Controller
 {
     public function index()
     {
-    // Ensure the user is an admin
+        // Check if user is logged in first or role will read as null throwing error
+        // Ensure the user is an admin
+        if (!Auth::check()) {
+            return redirect()->route('sign-in')->with('status', 'Please log in to view.');
+        }
         if (auth()->user()->role !== \App\Enums\UserRole::admin) {
             return redirect('/home')->with('status', 'You do not have access to this page.');
         }
@@ -151,6 +155,11 @@ class InventoryController extends Controller
 
     public function dashboard() {
 
+        // Check if user is logged in first or role will read as null throwing error
+        // Ensure the user is an admin
+        if (!Auth::check()) {
+            return redirect()->route('sign-in')->with('status', 'Please log in to view');
+        }
         if (auth()->user()->role !== \App\Enums\UserRole::admin) {
             return redirect('/home')->with('status', 'You do not have access to this page.');
         }
