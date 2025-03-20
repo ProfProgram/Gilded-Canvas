@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Inventory;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
 
@@ -78,5 +79,33 @@ class InventoryController extends Controller
         $inventory->delete();
 
         return redirect()->route('admin.inventory')->with('status', 'Inventory item deleted successfully!');
+    }
+
+    public function dashboard() {
+
+        if (auth()->user()->role !== \App\Enums\UserRole::admin) {
+            return redirect('/home')->with('status', 'You do not have access to this page.');
+        }
+
+        $stockData = Inventory::with('product')->get();
+    
+        $parsedData = [];
+        foreach ($stockData as $stock) {
+            $parsedData[] = '["' . addslashes($stock->product['product_name']) . '", ' . $stock->stock_incoming . ', ' . $stock->stock_outgoing . ']';
+        }
+    
+        $parsed = implode(",", $parsedData);
+    
+        $pending = Order::where('status', 'pending')->count();
+        $shipped = Order::where('status', 'shipped')->count();
+        $delivered = Order::where('status', 'delivered')->count();
+        $cancelled = Order::where('status', 'cancelled')->count();
+        $pieData = '["Status", "Count"], 
+                    ["Pending", ' . $pending . '], 
+                    ["Shipped", ' . $shipped . '], 
+                    ["Delivered", ' . $delivered . '], 
+                    ["Cancelled", ' . $cancelled . ']';
+
+        return view('admin.dashboard', ['stockChartData' => $parsed, 'pieChartData' => $pieData]);
     }
 }

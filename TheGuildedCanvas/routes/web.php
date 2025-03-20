@@ -147,4 +147,6 @@ Route::put('/admin/customers/{id}/update', [CustomerController::class, 'update']
 Route::delete('/admin/customers/{id}/delete', [CustomerController::class, 'destroy'])
     ->name('admin.customers.delete');
 
+// DASHBOARD
 
+Route::get('/admin/dashboard', [InventoryController::class, 'dashboard'])->name('admin.dashboard');
