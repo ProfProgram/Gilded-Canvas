@@ -3418,3 +3418,6 @@ Did you mean one of these?
 #54 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\artisan(13): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
 #55 {main}
 "} 
+[2025-03-20 12:21:40] local.INFO: Order saved successfully. Order ID: 5  
+[2025-03-20 12:21:40] local.INFO: Creating OrderDetail for Order ID: 5  
+[2025-03-20 12:21:40] local.INFO: Product ID : 1 stock outgoing updated to : 2  
