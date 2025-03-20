@@ -15,6 +15,8 @@ class Inventory extends Model
         'product_id',
         'admin_id',
         'stock_level',
+        'stock_incoming',
+        'stock_outgoing',
     ];
 
 

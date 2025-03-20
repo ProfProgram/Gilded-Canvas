@@ -1590,3 +1590,39 @@ display: flex;
     width: 100%;
     border-collapse: collapse;
 }
+
+/* DASHBOARD */
+
+.charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    place-self: center;
+    height: 100vh;
+}
+
+.divider {
+    width: 100%;
+    border: 1px solid #000;
+    margin: 2px 0;
+}
+
+.tracking-tabs {
+    width: 100%;
+    height: 100%;
+}
+
+.tracking-tabs h4 {
+    justify-self: center;
+}
+
+.total-orders {
+    justify-self: center;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+}
+
+.tO-data {
+    justify-self: center;
+}

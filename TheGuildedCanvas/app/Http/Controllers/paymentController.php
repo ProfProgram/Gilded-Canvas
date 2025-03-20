@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Cart;
 use App\Models\OrderDetail;
+use App\Models\Inventory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -53,6 +54,17 @@ class paymentController extends Controller
                         'quantity' => $cartItem->quantity,
                         'price_of_order' => $cartItem->price,
                     ]);
+                    $product = Inventory::where('product_id', $cartItem->product_id)->firstOrFail();
+                    try {
+                        if ($product->update([
+                            'stock_outgoing' => $product->stock_outgoing + $cartItem->quantity,
+                        ])) {
+                            Log::info("Product ID : {$product->product_id} stock outgoing updated to : {$product->stock_outgoing}");
+                        }
+                    } catch (\Exception $e) {
+                        Log::info('Error: when updating inventory_table : '. $e->getMessage());
+                        return redirect()->back()->with('status', 'Stocks could not be updated');
+                    }
                 }
 
                 Cart::where('user_id', $userId)->delete();
@@ -62,7 +74,8 @@ class paymentController extends Controller
                 return redirect()->back()->with('status', 'Order could not be made');
             }
         } catch (\Exception $e) {
-            return redirect()->back()->with('status', 'Error: ' . $e->getMessage());
+            Log::info('Error: When saving order : ' . $e->getMessage());
+            return redirect()->back()->with('status', 'Error: Order could not be made');
         }
     }
 }
