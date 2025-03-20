@@ -26,6 +26,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Models\User;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\UserManagementController;
+Route::post('/admin/product/store', [InventoryController::class, 'store'])->name('product.store');
 
 
 

@@ -103,13 +103,17 @@ class InventoryController extends Controller
             'category_name' => $validatedData['category_name'],
         ]);
 
-        // Optionally add the product to inventory (Set default stock level if applicable)
+        // Add the new product to the inventory with an initial stock level
         Inventory::create([
-            'product_id' => $product->id, // Link inventory to the new product
+            'product_id' => $product->id,  // Link inventory to the new product
             'stock_level' => 0, // Default stock level (can be updated later)
             'admin_id' => Admin::where('user_id', Auth::id())->value('admin_id'),
         ]);
 
         return redirect()->route('admin.inventory')->with('success', 'Product added successfully!');
     }
+
+    
+
+
 }
