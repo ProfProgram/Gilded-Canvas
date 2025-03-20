@@ -530,6 +530,7 @@ nav a:nth-child(5) {
 .purchase-btn {
     width: 100%;
     padding: 12px;
+    margin-bottom: 15px;
     font-size: 18px;
     font-weight: bold;
     color: #000;
@@ -561,15 +562,12 @@ nav a:nth-child(5) {
 
 .summary-box {
     background-color: #c4c4c4;
-    height: 150px;
     border-radius: 8px;
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    color: #444;
-    font-size: 16px;
-    font-style: italic;
+    align-items: flex-start;
+    padding: 20px;
 }
 
 .total-section {
