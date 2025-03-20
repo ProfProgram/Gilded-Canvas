@@ -17,6 +17,8 @@
             <tr>
                 <th>Product Name</th>
                 <th>Stock Level</th>
+                <th>Stock Incoming</th>
+                <th>Stock Outgoing</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -32,6 +34,12 @@
                             <input type="number" name="stock_level" value="{{ $item->stock_level }}" class="form-control" style="width: 100px;" required>
                             <button type="submit" class="logout-link">Update</button>
                         </form>
+                    </td>
+                    <td>
+                        {{ $item->stock_incoming }}
+                    </td>
+                    <td>
+                        {{ $item->stock_outgoing  }}
                     </td>
                     <td>
                         <form action="{{ route('admin.inventory.destroy', $item->inventory_id) }}" method="POST" style="display:inline;">
