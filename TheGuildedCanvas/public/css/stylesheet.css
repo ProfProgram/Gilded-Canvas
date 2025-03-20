@@ -131,7 +131,7 @@ nav a:nth-child(5) {
 #reviewForm textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #d4af37;
     border-radius: 5px;
     font-size: 14px;
 }
@@ -155,7 +155,6 @@ nav a:nth-child(5) {
 
 #desc-txtArea {
     resize: none;
-    border: 1px solid #ccc;
     border-radius: 5px;
 }
 
@@ -500,7 +499,7 @@ nav a:nth-child(5) {
     padding: 12px;
     margin-bottom: 15px;
     font-size: 16px;
-    border: 2px solid #ccc;
+    border: 2px solid #d4af37;
     border-radius: 20px;
     background-color: #f9f9f9;
     transition: border-color 0.3s;
@@ -530,6 +529,7 @@ nav a:nth-child(5) {
 .purchase-btn {
     width: 100%;
     padding: 12px;
+    margin-bottom: 15px;
     font-size: 18px;
     font-weight: bold;
     color: #000;
@@ -561,15 +561,12 @@ nav a:nth-child(5) {
 
 .summary-box {
     background-color: #c4c4c4;
-    height: 150px;
     border-radius: 8px;
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    color: #444;
-    font-size: 16px;
-    font-style: italic;
+    align-items: flex-start;
+    padding: 20px;
 }
 
 .total-section {
@@ -1021,7 +1018,7 @@ nav a:nth-child(5) {
 .category-select {
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #e3c878;
+    border: 1px solid #d4af37;
     border-radius: 5px;
     font-size: 14px;
 }
@@ -1110,7 +1107,7 @@ form input, form textarea {
     width: 100%;
     padding: 8px;
     margin-bottom: 20px;
-    border: 1px solid #e3c878;
+    border: 1px solid #d4af37;
     border-radius: 5px;
     font-size: 14px;
     box-sizing: border-box;
