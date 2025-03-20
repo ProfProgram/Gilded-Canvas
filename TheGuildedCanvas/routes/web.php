@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\homeController;
@@ -152,19 +152,15 @@ Route::delete('/admin/customers/{id}/delete', [CustomerController::class, 'destr
     ->name('admin.customers.delete');
 
 // Returns
-// Route to return form
-Route::get('/return-request/{order_id}', function ($order_id) {
-    $orderDetails = \DB::table('orders_details_table')
-    ->where('order_id', $order_id)
-    ->join('products_table', 'orders_details_table.product_id', '=', 'products_table.product_id')
-    ->select('orders_details_table.product_id', 'products_table.product_name', 'orders_details_table.quantity') // Fetch quantity
-    ->get();
-    return view('return-form', ['order_id' => $order_id, 'orderDetails' => $orderDetails]);
-})->name('return.request');
 
-// Route to submit return request (Handled by Controller)
-Route::post('/submit-return-request', [ReturnController::class, 'processReturn'])
-    ->middleware('auth')
+// Route to return form
+Route::get('/return-request/{order_id}', [OrdersController::class, 'showReturnRequestForm'])
+    ->middleware('auth') // Ensures only logged-in users can request a return
+    ->name('return.request');
+
+// Route to submit the return request (Handles form submission)
+Route::post('/submit-return-request/{order_id}', [OrdersController::class, 'submitReturnRequest'])
+    ->middleware('auth') // Prevents unauthorized return submissions
     ->name('return.submit');
 
 // ADMIN DASHBOARD ROUTE

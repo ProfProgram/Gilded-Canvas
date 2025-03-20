@@ -5,37 +5,51 @@
 <div class="container">
     <h2 class="page-title">Return Request Form</h2>
 
-    <form action="{{ url('/submit-return-request') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <label for="order_id">Order ID:</label>
-        <input type="text" name="order_id" value="{{ $order_id }}" readonly>
+    <!-- Display success message -->
+    @if(session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
 
-        <label for="product_ids">Select Products:</label>
-        <select name="product_ids[]" id="product_ids" class="custom-select" multiple required>
-            @foreach ($orderDetails as $product)
-                <option value="{{ $product->product_id }}" 
-                        data-image="{{ asset('images/products/img-'.$product->product_id.'.png') }}" 
-                        data-quantity="{{ $product->quantity }}">
-                    {{ $product->product_name }} (Qty: {{ $product->quantity }})
-                </option>
-            @endforeach
-        </select>
+    <!-- Show pending message if return is already requested -->
+    @if(isset($return_status) && $return_status === 'pending')
+        <div class="alert alert-info">
+            Your return request has been submitted and is pending.
+        </div>
+    @else
+        <!-- Show return form if request is NOT pending -->
+        <form action="{{ route('return.submit', ['order_id' => $order_id]) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <label for="order_id">Order ID:</label>
+            <input type="text" name="order_id" value="{{ $order_id }}" readonly>
 
-        <label for="return_images">Upload Images (Optional):</label>
-        <input type="file" name="return_images[]" multiple accept="image/*" class="form-control">
+            <label for="product_ids">Select Products:</label>
+            <select name="product_ids[]" id="product_ids" class="custom-select" multiple required>
+                @foreach ($orderDetails as $product)
+                    <option value="{{ $product->product_id }}" 
+                            data-image="{{ asset('images/products/img-'.$product->product_id.'.png') }}" 
+                            data-quantity="{{ $product->quantity }}">
+                        {{ $product->product_name }} (Qty: {{ $product->quantity }})
+                    </option>
+                @endforeach
+            </select>
 
+            <label for="return_images">Upload Images (Optional):</label>
+            <input type="file" name="return_images[]" multiple accept="image/*" class="form-control">
 
-        <label for="reason">Reason for Return:</label>
-        <textarea name="reason" id="reason" required></textarea>
+            <label for="reason">Reason for Return:</label>
+            <textarea name="reason" id="reason" required></textarea>
 
-        <button type="submit" class="return-button" id="submit-btn">
-            <span id="submit-text">Submit Return Request</span>
-            <span id="loading-spinner" class="spinner-border spinner-border-sm" style="display: none;"></span>
-        </button>
+            <button type="submit" class="return-button" id="submit-btn">
+                <span id="submit-text">Submit Return Request</span>
+                <span id="loading-spinner" class="spinner-border spinner-border-sm" style="display: none;"></span>
+            </button>
 
-        <h3>Selected Products for Return:</h3>
-        <ul id="product-preview"></ul>
-    </form>
+            <h3>Selected Products for Return:</h3>
+            <ul id="product-preview"></ul>
+        </form>
+    @endif
 </div>
 
 <!-- Include jQuery (Required for Select2) -->
@@ -117,153 +131,15 @@
     }
 
     .select2-selection__choice {
-        background-color: #b22222 !important;
-        color: white !important;
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-weight: bold;
-    }
-
-    .select2-selection__choice__remove {
-        color: white !important;
-        margin-left: 5px;
-        cursor: pointer;
-    }
-
-    /* Mobile Responsiveness */
-    @media (max-width: 600px) {
-        .return-button {
-            width: 100%;
-            font-size: 1.2rem;
-            padding: 15px;
-        }
-    }
-</style>
-<style>
-    /*  */
-    .container {
-        max-width: 900px;  /* Wider form */
-        margin: 50px auto;
-        padding: 40px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        font-family: 'Merriweather', serif;
-    }
-
-    /* Form Wrapper */
-    .return-form-wrapper {
-        min-height: 85vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Bigger Title */
-    .page-title {
-        text-align: center;
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 30px;
-    }
-
-    /* Form Labels */
-    label {
-        font-size: 1.3rem;
-        font-weight: bold;
-        display: block;
-        margin: 20px 0 8px;
-    }
-
-    /* Bigger Input Fields */
-    input[type="text"], 
-    textarea, 
-    select {
-        width: 100%;
-        padding: 14px;
-        font-size: 1.2rem;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        background-color: #f9f9f9;
-        transition: border-color 0.3s ease;
-    }
-
-    input[type="text"]:focus, 
-    textarea:focus, 
-    select:focus {
-        border-color: #d4af37;
-        outline: none;
-        box-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
-    }
-
-    /* Select2 Styling */
-    .select2-container {
-        width: 100% !important;
-    }
-
-    .select2-selection--multiple {
-        min-height: 45px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        padding: 5px;
-        font-size: 16px;
-        background-color: #fff;
-    }
-
-    /* Style selected product tags (Dropdown) */
-    .select2-selection__choice {
-        background-color: #eed9a4 !important; /* Beige */
+        background-color: #eed9a4 !important;
         color: black !important;
         padding: 5px 10px;
         border-radius: 5px;
         font-weight: bold;
     }
 
-    /* Remove the X icon on selection to prevent misalignment */
     .select2-selection__choice__remove {
         display: none;
-    }
-
-    /* Selected Products Section */
-    #product-selection {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .product-item {
-        background-color: #eed9a4; /* Beige Background */
-        padding: 15px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        border: 2px solid #d4af37;
-    }
-
-    /* Bigger Product Image */
-    .product-img {
-        width: 90px; /* Increased size */
-        height: 90px;
-        border-radius: 5px;
-        object-fit: cover;
-    }
-
-    /* Bigger Quantity Input */
-    .return-qty-input {
-        width: 100px;
-        text-align: center;
-        font-size: 1.1rem;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    /* File Upload */
-    input[type="file"] {
-        padding: 10px;
-        font-size: 1.1rem;
     }
 
     /* Bigger Submit Button */
@@ -328,4 +204,6 @@
         }
     }
 </style>
+
 @endsection
+
