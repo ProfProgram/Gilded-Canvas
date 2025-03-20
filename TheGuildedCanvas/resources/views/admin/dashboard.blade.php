@@ -17,9 +17,18 @@
     @endif
     <h1>Dashboard</h1>
     <section class="charts">
-        <div id="curve_chart" style="width: 900px; height: 500px"></div>
-        <hr class="divider">
-        <div id="piechart" style="width: 900px; height: 500px;"></div>
+        <div>
+            <div id="curve_chart" style="width: 900px; height: 500px"></div>
+            <hr class="divider">
+            <div id="piechart" style="width: 900px; height: 500px;"></div>
+        </div>
+        <div class="tracking-tabs">
+        <h4>Tracking Tabs</h4>
+            <div class="total-orders">
+                <h5>Total Orders</h5>
+                <h5 class="tO-data">{{ $totalOrders }}</h5>
+            </div>
+        </div>
     </section>
 </main>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

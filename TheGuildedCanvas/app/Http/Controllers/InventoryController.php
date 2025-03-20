@@ -106,6 +106,7 @@ class InventoryController extends Controller
                     ["Delivered", ' . $delivered . '], 
                     ["Cancelled", ' . $cancelled . ']';
 
-        return view('admin.dashboard', ['stockChartData' => $parsed, 'pieChartData' => $pieData]);
+        $totalOrders = Order::all()->count();
+        return view('admin.dashboard', ['stockChartData' => $parsed, 'pieChartData' => $pieData, 'totalOrders' => $totalOrders]);
     }
 }
