@@ -64,6 +64,74 @@ class InventoryController extends Controller
 
         return redirect()->route('admin.inventory')->with('status', 'Inventory item updated successfully!');
     }
+    public function updateIncoming(Request $request, $id)
+    {
+        // Ensure the user is an admin
+        if (auth()->user()->role !== \App\Enums\UserRole::admin) {
+            return redirect('/home')->with('status', 'You do not have access to this page.');
+        }
+
+
+        // Validate the request data
+        $validatedData = $request->validate([
+            'product_id' => 'required|exists:products_table,product_id',
+            'stock_incoming' => 'required|integer',
+        ]);
+
+        //dd($validatedData);
+
+        // Find the inventory item by ID
+        $inventory = Inventory::findOrFail($id);
+
+        //dd($inventory);
+
+
+
+        // Update the inventory item
+        $inventory->update([
+            'product_id' => $request['product_id'],
+            'stock_incoming' => $validatedData['stock_incoming'],
+            'admin_id' => Admin::where('user_id', Auth::id())->value('admin_id'), // Update the admin who made the change
+        ]);
+
+        //dd($inventory);
+
+        return redirect()->route('admin.inventory')->with('status', 'Inventory item incoming stock updated successfully!');
+    }
+    public function updateOutgoing(Request $request, $id)
+    {
+        // Ensure the user is an admin
+        if (auth()->user()->role !== \App\Enums\UserRole::admin) {
+            return redirect('/home')->with('status', 'You do not have access to this page.');
+        }
+
+
+        // Validate the request data
+        $validatedData = $request->validate([
+            'product_id' => 'required|exists:products_table,product_id',
+            'stock_outgoing' => 'required|integer',
+        ]);
+
+        //dd($validatedData);
+
+        // Find the inventory item by ID
+        $inventory = Inventory::findOrFail($id);
+
+        //dd($inventory);
+
+
+
+        // Update the inventory item
+        $inventory->update([
+            'product_id' => $request['product_id'],
+            'stock_outgoing' => $validatedData['stock_outgoing'],
+            'admin_id' => Admin::where('user_id', Auth::id())->value('admin_id'), // Update the admin who made the change
+        ]);
+
+        //dd($inventory);
+
+        return redirect()->route('admin.inventory')->with('status', 'Inventory item outgoing stock updated successfully!');
+    }
 
     public function destroy($id)
     {
