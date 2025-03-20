@@ -33,8 +33,16 @@
                 </a>
                 <a href="/previous-orders">Previous Orders</a>
                 <!-- Role-Specific Links -->
-                @if(Auth::user()->role === \App\Enums\UserRole::admin)
-                    <a href="{{ route('admin.inventory') }}">Admin Panel</a>
+                 <!-- Admin Dropdown Menu -->
+                 @if(Auth::user()->role === \App\Enums\UserRole::admin)
+                <div class="dropdown">
+                    <button class="dropdown-toggle">Admin Panel</button>
+                    <div class="dropdown-menu">
+                        <a href="{{ route('admin.orders') }}">Order Management</a>
+                        <a href="{{ route('admin.inventory') }}">Inventory Management</a>
+                        <a href="{{ route('admin.customers') }}">Customer Management</a>
+                    </div>
+                </div>
                 @endif
                 @if(Auth::user()->role === \App\Enums\UserRole::manager)
                     <a href="{{ route('manager.users') }}">Manage Users</a>

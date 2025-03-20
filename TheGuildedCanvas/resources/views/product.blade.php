@@ -84,7 +84,7 @@ $categories = array_unique($categoryUnordered);
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $info->product_id }}">
                         <input type="hidden" name="product_name" value="{{ $info->product_name }}">
-                        <input type="hidden" name="product_price" value="{{ $info->price }}">
+                        <input type="hidden" name="price" value="{{ $info->price }}">
                         <input type="hidden" name="cartQuan_add" value="1">
                         <button type="submit" class="buy-button">Buy Now</button>
                     </form>

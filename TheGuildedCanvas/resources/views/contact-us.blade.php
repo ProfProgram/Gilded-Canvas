@@ -44,11 +44,6 @@ style="padding-left: 370px;"
             name="name"
             required
             style="
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
             "
         />
 
@@ -61,11 +56,6 @@ style="padding-left: 370px;"
             name="email"
             required
             style="
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
             "
         />
 
@@ -78,24 +68,13 @@ style="padding-left: 370px;"
             rows="5"
             required
             style="
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
             "
         ></textarea>
 
         <button
             type="submit"
             style="
-            padding: 10px 20px;
-            background-color:#d4af37;      
-            color:black;
-            border: none;
-            border-radius: 5px;
             font-size: 16px;
-            cursor: pointer;
             "
         >
 

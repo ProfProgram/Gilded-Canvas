@@ -19,6 +19,15 @@
     {{ $inventoryInfo}} -->
     <!--  -->
 
+    @if (session('status'))
+    <div class="alert">
+        <p class="message">{{ session('status') }}</p>
+        <form method="POST" action="{{ url('/close-alert') }}" style="display: inline;">
+            @csrf
+            <button type="submit" class="close-btn">✖</button>
+        </form>
+    </div>
+    @endif
     <section class="product-info">
         <h1 class="productName">{{$productInfo->product_name}}</h1>
         <div class="productImg-Container">
@@ -46,10 +55,13 @@
     <!-- {{ $reviewInfo }} -->
     <!--  -->
     <section class="review-list">
-        <h1 class="ReviewList-title">Reviews:</h1>
-        @auth
-        <button class="MakeReview" onclick="window.location.href='{{ url('/review') }}'">Leave a Review</button>
-        @endauth
+        <div class="review-header">
+            @auth
+            <button class="MakeReview" onclick="window.location.href='{{ url('/review') }}'">Leave a Review</button>
+            @endauth
+            <h1 class="ReviewList-title">Reviews:</h1>
+        </div>
+
         <div class="ReviewList">
             @foreach ($reviewInfo as $review)
                 <div class="review">
@@ -75,9 +87,11 @@
         overflow: hidden;
     }
     .productImg-Container img {
-        height: 100%;
-        width: 100%;
-        background-size: cover;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
         transition: 1s;
         cursor: zoom-in;
     }

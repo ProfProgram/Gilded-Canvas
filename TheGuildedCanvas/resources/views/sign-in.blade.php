@@ -12,7 +12,7 @@
     </div>
 @endif
 
-<main>
+<main class="sign-inMain">
     <section class="login-container">
         <h1>Login</h1>
         @if ($errors->any())

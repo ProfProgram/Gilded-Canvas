@@ -4,7 +4,6 @@
 @section('content')
 
 <!DOCTYPE html>
-{{ Auth::check() ? Auth::user()->user_id :'' }}
 @if (!Auth::check())
     <div class="alert">
         <p>User Not Logged In: this form will submit but wont save anything.</p>

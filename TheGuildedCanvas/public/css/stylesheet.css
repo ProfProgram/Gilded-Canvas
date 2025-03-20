@@ -64,6 +64,55 @@ nav a:nth-child(4),
 nav a:nth-child(5) {
     margin-left: 15px; /* Space between "Home" and other links */
 }
+/* ADMIN PANEL DROPDOWN */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    font-family: Arial, sans-serif;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.dropdown-toggle:hover {
+    color: #d4af37; /* Gold color on hover */
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #d4af37;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 160px;
+    z-index: 1000;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    font-weight: normal;
+    transition: color 0.3s ease-in-out;
+}
+
+.dropdown-menu a:hover {
+    color: #d4af37; /* Change text to gold */
+    background-color: transparent; /* Remove background color */
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
 
 /* REVIEW PAGE */
 
@@ -576,7 +625,6 @@ nav a:nth-child(5) {
     text-align: center;
     max-width: 400px;
     width: 100%;
-    box-shadow: 0 4px 6px 
 }
 
 .login-container h1 {
@@ -584,12 +632,16 @@ nav a:nth-child(5) {
     margin-bottom: 20px;
 }
 
+.login-container form *:not(.form-text, .form-text label) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .form-text {
     margin-bottom: 15px;
     text-align: left;
 }
-
-
 
 .form-text input {
     width: 100%;
@@ -607,21 +659,6 @@ nav a:nth-child(5) {
     font-size: 15px;
 }
 
-.login-btn {
-    background-color: #FFD700;
-    border: none;
-    border-radius: 0px;
-    padding: 5px 5px;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    width: 50%;
-}
-
-.login-btn:hover {
-    background-color: #FFD700;
-}
-
 .signup-link {
     color: black;
     font-weight: bold;
@@ -630,16 +667,6 @@ nav a:nth-child(5) {
 
 .signup-link:hover {
     text-decoration: underline;
-}
-
-#role {
-    width: 60%;
-    padding: 4px;
-    font-size: 14px;
-    border: #ccc;
-    background-color: #ffcc00; 
-    color: black; 
-    cursor: pointer;
 }
 
 /* Mobile Optimization */
@@ -789,17 +816,54 @@ nav a:nth-child(5) {
     color: green;
     margin-top: 20px;
 }
-.buy-button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
+
+/* PRODUCT PAGE (INDIVIDUAL) */
+
+.product-info {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
-.buy-button:hover {
-    background-color: #0056b3;
+
+.addToCart {
+    width: 100%;
+}
+
+.review-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.MakeReview {
+    background-color: #d4af37;
+    color: #1A1A1A;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: color 0.3s ease;
+    border: none;
+    justify-self: start;
+}
+
+.MakeReview:hover {
+    color: #ffffff;
+}
+
+.ReviewList-title {
+    justify-self: center;
+    margin-right: 139.55px; /* Offsets the title to be slightly within the button, this centres the title to the true centre of the page rather than the center of its leftover space in the column */
+    width: 100%;
+}
+
+.review {
+    border-bottom: 1px solid #ddd;
+}
+
+.review:last-child {
+    border-bottom: none;
 }
 
 /* HOME PAGE */
@@ -905,17 +969,17 @@ nav a:nth-child(5) {
 
 .product-slide .btn {
     background-color: #d4af37;
-    color: #ffffff;
-    border: none;
+    color: #1A1A1A;
     padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    border: none;
+    transition: color 0.3s ease;
 }
 
 .product-slide .btn:hover {
-    background-color: #ffffff;
-    color: #d4af37;
+    color: #ffffff;
 }
 
 
@@ -957,7 +1021,7 @@ nav a:nth-child(5) {
 .category-select {
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #e3c878;
     border-radius: 5px;
     font-size: 14px;
 }
@@ -986,30 +1050,45 @@ nav a:nth-child(5) {
 
 /* CONTACT-US/ABOUT-US PAGE */
 
-#contact-main {
-    padding: 40px;
-    max-width: 800px;
-    margin: auto;
+
+/* About Us Page Styling */
+
+.about-us-page {
+    font-family: 'Merriweather', serif;
+    max-width: 70%;  
+    margin: 0 auto; 
+    text-align: center;  
+    padding: 50px 0; 
 }
 
-#headers-contact {
-    font-size: 28px;
-    margin-bottom: 15px;
+
+.about-us-page h2 {
+    font-weight: bold;
+    font-size: 30px; 
+    color: #333333;
+    text-align: center; 
+    margin-bottom: 20px; 
 }
 
-#para-contact {
-    margin-bottom: 20px;
+
+.about-us-page p {
+    font-size: 18px;
+    line-height: 1.8; 
+    margin-bottom: 30px; 
 }
 
-.mission, .team {
-    margin-top: 40px;
+/* Custom Divider */
+.about-us-divider {
+    border: none;
+    height: 4px;
+    background-color: #d4af37; 
+    margin: 40px auto; 
+    width: 50%;
 }
 
-.team img {
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    margin: 10px;
+
+.about-us-page section {
+    margin-bottom: 70px; /* Increased space between sections */
 }
 
 /* Contact Us Section */
@@ -1028,21 +1107,27 @@ form label {
 }
 
 form input, form textarea {
-    padding: 10px;
+    width: 100%;
+    padding: 8px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #e3c878;
     border-radius: 5px;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
 form button {
+    background-color: #d4af37;
+    color: #1A1A1A;
     padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    border: none;
+    font-weight: bold;
     border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+    transition: color 0.3s ease;
+    border: none;
+}
+
+form button:hover {
+    color: #ffffff;
 }
 
 /* SEARCH BAR */
@@ -1254,4 +1339,257 @@ body {
 /* Ensure headers and table text use Merriweather */
 h1, .table th, .table td, button, select, input {
     font-family: 'Merriweather', serif;
+}
+/* ORDER MANAGEMENT PAGE STYLING */
+
+/* Center the Order Management title */
+.page-title {
+    text-align: center;  /* Centers the text */
+    font-size: 2rem;  /* Adjust as needed */
+    font-weight: bold;
+    color: #333;  /* Ensures readability */
+    margin-bottom: 20px;
+    width: 100%;  /* Makes sure it spans the full width */
+}
+
+
+/* Center the search input, status dropdown, and filter button */
+.order-management-filters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Style the filter button to match the search button */
+.filter-button {
+    background-color: #d4af37;
+    color: black;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.filter-button:hover {
+    background-color: #b08a2e;
+    color: white;
+}
+
+/* Maintain spacing for table */
+.order-management-table {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the table */
+.order-management-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 2px solid #333;
+}
+
+.order-management-table thead {
+    background: #d4af37;
+    color: white;
+    font-weight: bold;
+}
+
+.order-management-table th, 
+.order-management-table td {
+    padding: 12px;
+    text-align: left;
+    border: 2px solid #333;
+}
+
+.order-management-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* Style update & delete buttons */
+.update-button,
+.delete-button {
+    background-color: #d4af37;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.update-button:hover,
+.delete-button:hover {
+    background-color: #b08a2e;
+    color: white;
+}
+/* Customer Management Styling */
+.customer-management {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Page Title */
+.page-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+.filter form {
+display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Table Styling */
+.customer-management .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 2px solid #333;
+}
+
+.customer-management thead {
+    background: #d4af37;
+    color: white;
+    font-weight: bold;
+}
+
+.customer-management th, 
+.customer-management td {
+    padding: 12px;
+    text-align: left;
+    border: 2px solid #333;
+}
+
+.customer-management tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* Buttons Spacing & Styling */
+.customer-management .update-button,
+.customer-management .delete-button {
+    background-color: #d4af37;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-right: 10px; /* Ensures proper spacing between buttons */
+}
+
+.customer-management .update-button:hover,
+.customer-management .delete-button:hover {
+    background-color: #b08a2e;
+    color: white;
+}
+
+/* Add Customer Button */
+.add-button {
+    display: inline-block;
+    background-color: #d4af37;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.add-button:hover {
+    background-color: #b08a2e;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #EED9A4;
+    margin: 15% auto;
+    padding: 20px;
+    width: 40%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Modal Buttons */
+.modal-content .update-button,
+.modal-content .cancel-button {
+    background-color: white;
+    color: black;
+    border: 2px solid #d4af37;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-content .update-button:hover,
+.modal-content .cancel-button:hover {
+    background-color: #b08a2e;
+    color: white;
+}
+
+/* */
+
+/* Match focus effect with Order Management */
+.search-bar:focus {
+    border-color: #999; /* Slightly darker grey */
+    box-shadow: none; /* Remove any unwanted glow */
+}
+
+.search-bar {
+	margin-top: 15px;
+}
+
+/* Adjust table container to match search width */
+.table-container {
+    width: 90%;
+    max-width: 1200px; /* Same as table width */
+    margin: auto; /* Centers content */
+}
+
+/* Ensure table takes full width */
+.customer-table {
+    width: 100%;
+    border-collapse: collapse;
 }
