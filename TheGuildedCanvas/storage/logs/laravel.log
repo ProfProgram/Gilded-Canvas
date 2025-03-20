@@ -3269,3 +3269,5 @@ Stack trace:
 #48 C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Gilded-Canvas\\TheGuildedCanvas\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\muham\\\\...')
 #49 {main}
 "} 
+[2025-03-20 10:26:39] local.INFO: Order saved successfully. Order ID: 6  
+[2025-03-20 10:26:39] local.INFO: Creating OrderDetail for Order ID: 6  
