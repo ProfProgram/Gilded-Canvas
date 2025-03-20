@@ -132,4 +132,67 @@ class OrdersController extends Controller
 
         return redirect()->back()->with('status', "Order : {$id} DELETED.");
     }
+    public function showReturnRequestForm($order_id)
+{
+    if (!Auth::check()) {
+        return redirect()->route('sign-in')->with('status', 'Please log in to request a return.');
+    }
+
+    $user_id = Auth::id();
+
+    $order = DB::table('orders_table')->where('order_id', $order_id)->first();
+
+    if (!$order) {
+        return redirect()->route('previous-orders')->with('status', 'Order not found.');
+    }
+
+    // Check if the return request exists
+    $existingReturn = DB::table('returns_table')
+        ->where('order_id', $order_id)
+        ->where('user_id', $user_id)
+        ->first();
+
+    return view('return-form', [
+        'order_id' => $order_id,
+        'return_status' => $existingReturn ? 'pending' : 'not_requested',
+        'orderDetails' => DB::table('orders_details_table')
+            ->where('order_id', $order_id)
+            ->join('products_table', 'orders_details_table.product_id', '=', 'products_table.product_id')
+            ->select('orders_details_table.product_id', 'products_table.product_name', 'orders_details_table.quantity')
+            ->get()
+    ]);
+}
+
+public function submitReturnRequest(Request $request, $order_id)
+{
+    if (!Auth::check()) {
+        return redirect()->route('sign-in')->with('status', 'Please log in to submit a return request.');
+    }
+
+    $user_id = Auth::id();
+
+    // Check if the return request already exists
+    $existingReturn = DB::table('returns_table')
+        ->where('order_id', $order_id)
+        ->where('user_id', $user_id)
+        ->first();
+
+    if ($existingReturn) {
+        return redirect()->route('return.request', ['order_id' => $order_id])
+            ->with('message', 'Your return request has already been submitted and is pending.');
+    }
+
+    // Insert return request into `returns_table`
+    DB::table('returns_table')->insert([
+        'order_id' => $order_id,
+        'user_id' => $user_id,
+        'reason' => $request->input('reason'),
+        'status' => 'pending', // Default return request status
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+    return redirect()->route('home')->with('message', 'Your return request has been successfully submitted and is pending.');
+}
+
 }
