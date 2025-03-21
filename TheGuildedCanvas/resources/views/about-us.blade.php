@@ -36,6 +36,14 @@
             and empowering the next generation of artists.
         </p>
     </section>
+             
+    @auth
+        <a href="{{ route('website.review.create') }}" class="btn btn-primary mt-3">Rate Your Experience</a>
+    @else
+        <p class="mt-3">
+            <a href="{{ route('login') }}">Log in</a> to rate your experience on The Gilded Canvas.
+        </p>
+    @endauth
 </main>
 @endsection
 
