@@ -77,6 +77,8 @@ return new class extends Migration
                 $table->unsignedInteger('product_id');
                 $table->unsignedInteger('admin_id');
                 $table->integer('stock_level')->default(0);
+                $table->integer('stock_incoming')->default(0);
+                $table->integer('stock_outgoing')->default(0);
                 $table->timestamps();
                 // Threshold will send notification if stock level is exceedingly low
                 //$table->integer('threshold_level')->default(0)->nullable();

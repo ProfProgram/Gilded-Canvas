@@ -176,23 +176,54 @@ public function submitReturnRequest(Request $request, $order_id)
         ->where('order_id', $order_id)
         ->where('user_id', $user_id)
         ->first();
+    $order = Order::where('order_id', $order_id)
+                  ->where('user_id', Auth::id())
+                  ->first();
+
+    if (!$order) {
+        return redirect()->route('previous-orders')->with('status', 'Order not found.');
+    }
+
+    // Check if a return request already exists
+    $existingReturn = DB::table('returns_table')
+                        ->where('order_id', $order_id)
+                        ->where('user_id', Auth::id())
+                        ->where('status', 'pending')
+                        ->exists();
 
     if ($existingReturn) {
         return redirect()->route('return.request', ['order_id' => $order_id])
             ->with('message', 'Your return request has already been submitted and is pending.');
     }
 
-    // Insert return request into `returns_table`
-    DB::table('returns_table')->insert([
-        'order_id' => $order_id,
-        'user_id' => $user_id,
-        'reason' => $request->input('reason'),
-        'status' => 'pending', // Default return request status
-        'created_at' => now(),
-        'updated_at' => now(),
+    // Validate request
+    $request->validate([
+        'reason' => 'required|string',
+        'product_ids' => 'required|array',
+        'return_quantities' => 'required|array',
     ]);
 
-    return redirect()->route('home')->with('message', 'Your return request has been successfully submitted and is pending.');
+    $products = $request->input('product_ids');
+    $quantities = $request->input('return_quantities');
+
+    foreach ($products as $product_id) {
+        $quantityToReturn = isset($quantities[$product_id]) ? (int)$quantities[$product_id] : 0;
+
+        if ($quantityToReturn > 0) {
+            DB::table('returns_table')->insert([
+                'order_id' => $order_id,
+                'user_id' => Auth::id(),
+                'product_id' => $product_id,
+                'quantity' => $quantityToReturn,
+                'reason' => $request->input('reason'),
+                'status' => 'pending',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+    }
+
+    return redirect()->route('home')->with('message', 'Your return request has been submitted.');
 }
 
 }

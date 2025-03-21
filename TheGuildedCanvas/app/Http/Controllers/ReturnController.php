@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ReturnController extends Controller
 {
- public function processReturn(Request $request)
+    public function processReturn(Request $request)
     {
         $request->validate([
             'order_id' => 'required|integer',
@@ -48,4 +48,51 @@ class ReturnController extends Controller
 
         return redirect()->route('home')->with('status', 'Return request submitted successfully!');
     }
+    public function manageReturns()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('sign-in')->with('status', 'Please log in to view.');
+        }
+        if (auth()->user()->role !== \App\Enums\UserRole::admin) {
+            return redirect('/home')->with('status', 'You do not have access to this page.');
+        }
+        $returns = DB::table('returns_table')
+            ->join('orders_table', 'returns_table.order_id', '=', 'orders_table.order_id')
+            ->join('users_table', 'orders_table.user_id', '=', 'users_table.user_id')
+            ->select(
+                'returns_table.return_id',
+                'orders_table.order_id',
+                'users_table.user_id',
+                'returns_table.product_id',
+                'returns_table.quantity',
+                'returns_table.reason',
+                'returns_table.status',
+                'returns_table.created_at'
+            )
+            ->orderBy('returns_table.created_at', 'desc')
+            ->get();
+
+        return view('admin.returns', compact('returns'));
+    }
+
+    public function updateReturnStatus(Request $request, $return_id)
+    {
+        $request->validate([
+            'status' => 'required|in:approved,denied,pending'
+        ]);
+
+        DB::table('returns_table')
+            ->where('return_id', $return_id)
+            ->update(['status' => $request->status, 'updated_at' => now()]);
+
+        return redirect()->route('admin.returns')->with('status', 'Return status updated successfully!');
+    }
+
+    public function deleteReturn($return_id)
+    {
+        DB::table('returns_table')->where('return_id', $return_id)->delete();
+
+        return redirect()->route('admin.returns')->with('status', 'Return deleted successfully!');
+    }
+    
 }
