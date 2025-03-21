@@ -145,25 +145,20 @@ return new class extends Migration
         /**
          * requires order, order, product, user and admin tables for foreign keys
          * */
-        // not using since no return page
-    //     if (!Schema::hasTable('returns_table')) {
-    //         Schema::create('returns_table', function (Blueprint $table) {
-    //             $table->increments('return_id');
-    //             $table->unsignedInteger('order_id');
-    //             $table->unsignedInteger('product_id');
-    //             $table->unsignedInteger('user_id');
-    //             $table->unsignedInteger('admin_id');
-    //             $table->text('return_reason');
-    //             $table->enum('return_status', ['pending', 'approved', 'rejected', 'completed', 'refunded', 'cancelled'])->default('pending');
-    //             // not timestamp since Return_date will be a chosen date to return by
-    //             $table->dateTime('return_date');
-    //             $table->timestamps();
-    //             $table->foreign('user_id')->references('user_id')->on('users_table')->onDelete('cascade');
-    //             $table->foreign('product_id')->references('product_id')->on('products_table')->onDelete('cascade');
-    //             $table->foreign('order_id')->references('order_id')->on('orders_table')->onDelete('cascade');
-    //             $table->foreign('admin_id')->references('admin_id')->on('admin_table')->onDelete('cascade');
-    //         });
-    //     }
+        if (!Schema::hasTable('returns_table')) {
+            Schema::create('returns_table', function (Blueprint $table) {
+                $table->increments('return_id');
+                $table->unsignedInteger('order_id');
+                $table->unsignedInteger('product_id');
+                $table->unsignedInteger('user_id');
+                $table->integer('quantity');
+                $table->text('reason');
+                $table->enum('status', ['pending', 'approved', 'denied'])->default('pending')->nullable();
+                $table->timestamps();
+                $table->foreign('user_id')->references('user_id')->on('users_table')->onDelete('cascade');
+                $table->foreign('product_id')->references('product_id')->on('products_table')->onDelete('cascade');
+                $table->foreign('order_id')->references('order_id')->on('orders_table')->onDelete('cascade');            });
+        }
 
         if (!Schema::hasTable('cart_table')) {
             Schema::create('cart_table', function (Blueprint $table) {

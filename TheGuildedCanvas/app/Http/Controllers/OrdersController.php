@@ -132,4 +132,98 @@ class OrdersController extends Controller
 
         return redirect()->back()->with('status', "Order : {$id} DELETED.");
     }
+    public function showReturnRequestForm($order_id)
+{
+    if (!Auth::check()) {
+        return redirect()->route('sign-in')->with('status', 'Please log in to request a return.');
+    }
+
+    $user_id = Auth::id();
+
+    $order = DB::table('orders_table')->where('order_id', $order_id)->first();
+
+    if (!$order) {
+        return redirect()->route('previous-orders')->with('status', 'Order not found.');
+    }
+
+    // Check if the return request exists
+    $existingReturn = DB::table('returns_table')
+        ->where('order_id', $order_id)
+        ->where('user_id', $user_id)
+        ->first();
+
+    return view('return-form', [
+        'order_id' => $order_id,
+        'return_status' => $existingReturn ? 'pending' : 'not_requested',
+        'orderDetails' => DB::table('orders_details_table')
+            ->where('order_id', $order_id)
+            ->join('products_table', 'orders_details_table.product_id', '=', 'products_table.product_id')
+            ->select('orders_details_table.product_id', 'products_table.product_name', 'orders_details_table.quantity')
+            ->get()
+    ]);
+}
+
+public function submitReturnRequest(Request $request, $order_id)
+{
+    if (!Auth::check()) {
+        return redirect()->route('sign-in')->with('status', 'Please log in to submit a return request.');
+    }
+
+    $user_id = Auth::id();
+
+    // Check if the return request already exists
+    $existingReturn = DB::table('returns_table')
+        ->where('order_id', $order_id)
+        ->where('user_id', $user_id)
+        ->first();
+    $order = Order::where('order_id', $order_id)
+                  ->where('user_id', Auth::id())
+                  ->first();
+
+    if (!$order) {
+        return redirect()->route('previous-orders')->with('status', 'Order not found.');
+    }
+
+    // Check if a return request already exists
+    $existingReturn = DB::table('returns_table')
+                        ->where('order_id', $order_id)
+                        ->where('user_id', Auth::id())
+                        ->where('status', 'pending')
+                        ->exists();
+
+    if ($existingReturn) {
+        return redirect()->route('return.request', ['order_id' => $order_id])
+            ->with('message', 'Your return request has already been submitted and is pending.');
+    }
+
+    // Validate request
+    $request->validate([
+        'reason' => 'required|string',
+        'product_ids' => 'required|array',
+        'return_quantities' => 'required|array',
+    ]);
+
+    $products = $request->input('product_ids');
+    $quantities = $request->input('return_quantities');
+
+    foreach ($products as $product_id) {
+        $quantityToReturn = isset($quantities[$product_id]) ? (int)$quantities[$product_id] : 0;
+
+        if ($quantityToReturn > 0) {
+            DB::table('returns_table')->insert([
+                'order_id' => $order_id,
+                'user_id' => Auth::id(),
+                'product_id' => $product_id,
+                'quantity' => $quantityToReturn,
+                'reason' => $request->input('reason'),
+                'status' => 'pending',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+    }
+
+    return redirect()->route('home')->with('message', 'Your return request has been submitted.');
+}
+
 }

@@ -1,4 +1,3 @@
-
 /* GLOBAL CSS */
 
 body, html {
@@ -691,7 +690,6 @@ nav a:nth-child(5) {
 }
 
 /* PREVIOUS ORDERS PAGE */
-
 .orders-container {
     padding: 20px;
     max-width: 1200px;
@@ -731,9 +729,17 @@ nav a:nth-child(5) {
     flex: 1;
 }
 
-.reorder-button {
-    background-color: #d4af37;
-    color: #ffffff;
+/* Buttons Wrapper */
+.order-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adds spacing between buttons */
+}
+
+/* Styling for Both Buttons */
+.reorder-button, .return-button {
+    background-color: #d4af37 !important; /* Gold */
+    color: #ffffff !important;
     padding: 10px 20px;
     border: none;
     border-radius: 50px;
@@ -742,13 +748,18 @@ nav a:nth-child(5) {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
 }
 
-.reorder-button:hover {
-    background-color: #b08a2e;
+/* Hover Effect */
+.reorder-button:hover, .return-button:hover {
+    background-color: #b08a2e !important; /* Darker Gold */
     transform: scale(1.05);
 }
 
+
+/* Order Details */
 .order-details, .order-footer {
     display: flex;
     justify-content: space-between;
@@ -758,6 +769,9 @@ nav a:nth-child(5) {
 .order-details h3, .order-details p, .order-footer p {
     margin: 0;
 }
+
+
+
 
 /* PRODUCT PAGE */
 
@@ -1121,6 +1135,7 @@ form button {
     border-radius: 5px;
     transition: color 0.3s ease;
     border: none;
+    margin: 5px;
 }
 
 form button:hover {
@@ -1591,6 +1606,7 @@ display: flex;
     border-collapse: collapse;
 }
 
+
 /* DASHBOARD */
 
 .charts {
@@ -1626,3 +1642,4 @@ display: flex;
 .tO-data {
     justify-self: center;
 }
+
