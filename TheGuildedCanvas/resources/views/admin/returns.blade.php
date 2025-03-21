@@ -15,6 +15,7 @@
                 <th>Reason</th>
                 <th>Status</th>
                 <th>Requested At</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -28,11 +29,34 @@
                 <td>{{ $return->reason }}</td>
                 <td>{{ ucfirst($return->status) }}</td>
                 <td>{{ $return->created_at }}</td>
+                <td>
+                    <!-- Approve Return -->
+                    <form action="{{ route('admin.returns.updateStatus', $return->return_id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        <input type="hidden" name="status" value="approved">
+                        <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                    </form>
+
+                    <!-- Deny Return -->
+                    <form action="{{ route('admin.returns.updateStatus', $return->return_id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        <input type="hidden" name="status" value="denied">
+                        <button type="submit" class="btn btn-danger btn-sm">Deny</button>
+                    </form>
+
+                    <!-- Delete Return -->
+                    <form action="{{ route('admin.returns.delete', $return->return_id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
             </tr>
             @endforeach
         </tbody>
     </table>
 </div>
 @endsection
+
 
 

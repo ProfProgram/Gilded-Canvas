@@ -53,11 +53,10 @@ class ReturnController extends Controller
         $returns = DB::table('returns_table')
             ->join('orders_table', 'returns_table.order_id', '=', 'orders_table.order_id')
             ->join('users_table', 'orders_table.user_id', '=', 'users_table.user_id')
-            ->join('products_table', 'returns_table.product_id', '=', 'products_table.product_id')
             ->select(
-                'returns_table.return_id',  
+                'returns_table.return_id',
                 'orders_table.order_id',
-                'returns_table.user_id',  // Fetching user_id instead of customer name
+                'users_table.user_id',
                 'returns_table.product_id',
                 'returns_table.quantity',
                 'returns_table.reason',
@@ -66,8 +65,28 @@ class ReturnController extends Controller
             )
             ->orderBy('returns_table.created_at', 'desc')
             ->get();
-    
+
         return view('admin.returns', compact('returns'));
+    }
+
+    public function updateReturnStatus(Request $request, $return_id)
+    {
+        $request->validate([
+            'status' => 'required|in:approved,denied,pending'
+        ]);
+
+        DB::table('returns_table')
+            ->where('return_id', $return_id)
+            ->update(['status' => $request->status, 'updated_at' => now()]);
+
+        return redirect()->route('admin.returns')->with('status', 'Return status updated successfully!');
+    }
+
+    public function deleteReturn($return_id)
+    {
+        DB::table('returns_table')->where('return_id', $return_id)->delete();
+
+        return redirect()->route('admin.returns')->with('status', 'Return deleted successfully!');
     }
     
 }
