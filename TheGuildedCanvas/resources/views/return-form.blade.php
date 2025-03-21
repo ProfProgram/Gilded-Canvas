@@ -21,29 +21,49 @@
         <!-- Show return form if request is NOT pending -->
         <form action="{{ route('return.submit', ['order_id' => $order_id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <label for="order_id">Order ID:</label>
-            <input type="text" name="order_id" value="{{ $order_id }}" readonly>
 
-            <label for="product_ids">Select Products:</label>
-            <select name="product_ids[]" id="product_ids" class="custom-select" multiple required>
+            <div class="form-group">
+                <label for="order_id">Order ID:</label>
+                <input type="text" name="order_id" value="{{ $order_id }}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="products">Select Products to Return:</label>
+                <select name="product_ids[]" id="product_ids" class="custom-select" multiple required>
+                    @foreach ($orderDetails as $product)
+                        <option value="{{ $product->product_id }}" 
+                                data-image="{{ asset('images/products/img-'.$product->product_id.'.png') }}" 
+                                data-quantity="{{ $product->quantity }}">
+                            {{ $product->product_name }} (Qty: {{ $product->quantity }})
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="quantity-section">
+                <h3>Select Quantity to Return:</h3>
                 @foreach ($orderDetails as $product)
-                    <option value="{{ $product->product_id }}" 
-                            data-image="{{ asset('images/products/img-'.$product->product_id.'.png') }}" 
-                            data-quantity="{{ $product->quantity }}">
-                        {{ $product->product_name }} (Qty: {{ $product->quantity }})
-                    </option>
+                    <div class="quantity-item">
+                        <label for="return_quantity_{{ $product->product_id }}">{{ $product->product_name }} (Purchased: {{ $product->quantity }})</label>
+                        <input type="number" name="return_quantities[{{ $product->product_id }}]" 
+                               id="return_quantity_{{ $product->product_id }}"
+                               class="return-quantity" min="1" max="{{ $product->quantity }}">
+                    </div>
                 @endforeach
-            </select>
+            </div>
 
-            <label for="return_images">Upload Images (Optional):</label>
-            <input type="file" name="return_images[]" multiple accept="image/*" class="form-control">
+            <div class="form-group">
+                <label for="return_images">Upload Images (Optional):</label>
+                <input type="file" name="return_images[]" multiple accept="image/*" class="form-control file-input">
+            </div>
 
-            <label for="reason">Reason for Return:</label>
-            <textarea name="reason" id="reason" required></textarea>
+            <div class="form-group">
+                <label for="reason">Reason for Return:</label>
+                <textarea name="reason" id="reason" required></textarea>
+            </div>
 
-            <button type="submit" class="return-button" id="submit-btn">
-                <span id="submit-text">Submit Return Request</span>
-                <span id="loading-spinner" class="spinner-border spinner-border-sm" style="display: none;"></span>
+            <button type="submit" class="return-button">
+                Submit Return Request
             </button>
 
             <h3>Selected Products for Return:</h3>
@@ -86,8 +106,6 @@
         });
 
         $("form").on("submit", function() {
-            $("#submit-text").text("Submitting...");
-            $("#loading-spinner").show();
             $("button[type=submit]").prop("disabled", true);
         });
 
@@ -102,59 +120,58 @@
 </script>
 
 <style>
-    /* Product Image Preview */
-    .product-img-preview, .product-img {
-        width: 50px;
-        height: 50px;
-        border-radius: 5px;
-        margin-right: 10px;
+    /* Apply Merriweather Font */
+    body {
+        font-family: 'Merriweather', serif;
     }
 
-    /* Error Highlighting */
-    .error-input {
-        border: 2px solid red !important;
-        background-color: #ffe6e6;
+    .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 30px;
     }
 
-    /* Select2 Styling */
-    .select2-container {
-        width: 100% !important;
-    }
-
-    .select2-selection--multiple {
-        min-height: 40px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        padding: 5px;
-        font-size: 16px;
-        background-color: #fff;
-    }
-
-    .select2-selection__choice {
-        background-color: #eed9a4 !important;
-        color: black !important;
-        padding: 5px 10px;
-        border-radius: 5px;
+    .page-title {
+        font-size: 2rem;
         font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
     }
 
-    .select2-selection__choice__remove {
-        display: none;
+    .form-group {
+        margin-bottom: 20px;
+        font-size: 1.2rem;
     }
 
-    /* Bigger Submit Button */
+    .form-group label {
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 1.2rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .file-input {
+        padding: 12px;
+        font-size: 1.3rem;
+        width: 100%;
+    }
+
     .return-button {
         background-color: #d4af37; /* Gold */
         color: black;
         padding: 14px 22px;
         border: none;
         border-radius: 50px;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         font-weight: bold;
         cursor: pointer;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        margin-top: 15px;
         width: 100%;
         text-align: center;
     }
@@ -163,11 +180,59 @@
         background-color: #b08a2e;
     }
 
-    /* Selected Products for Return Section */
-    #product-preview {
+    /* Product Selection */
+    .product-img {
+        width: 35px;
+        height: 35px;
+        border-radius: 5px;
+        margin-right: 5px;
+    }
+
+    .product-img-preview {
+        width: 50px;
+        height: 50px;
+        border-radius: 5px;
+        object-fit: cover;
+    }
+
+    /* Quantity Section */
+    .quantity-section {
+        background-color: #f8e8a6;
+        padding: 15px;
+        border-radius: 8px;
         margin-top: 20px;
-        padding: 20px;
-        background-color: #eed9a4; /* Beige */
+    }
+
+    .quantity-section h3 {
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .quantity-item {
+        background: #ffffff;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .quantity-item label {
+        display: block;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .return-quantity {
+        width: 100%;
+        font-size: 1.1rem;
+    }
+
+    /* Selected Products Section */
+    #product-preview {
+        margin-top: 15px;
+        padding: 15px;
+        background-color: #eed9a4;
         border-radius: 8px;
         border: 2px solid #d4af37;
     }
@@ -175,35 +240,25 @@
     #product-preview li {
         display: flex;
         align-items: center;
-        gap: 20px;
-        font-size: 1.3rem;
+        gap: 15px;
+        font-size: 1.2rem;
         font-weight: bold;
-    }
-
-    /* Enlarged Product Image in Selected Section */
-    .product-img-preview {
-        width: 100px;
-        height: 100px;
-        border-radius: 5px;
-        object-fit: cover;
     }
 
     /* Responsive Adjustments */
     @media (max-width: 768px) {
         .container {
-            padding: 30px;
+            padding: 20px;
         }
 
         .page-title {
-            font-size: 2rem;
+            font-size: 1.7rem;
         }
 
-        .product-img, .product-img-preview {
-            width: 80px;
-            height: 80px;
+        .return-button {
+            font-size: 1.2rem;
         }
     }
 </style>
 
 @endsection
-
