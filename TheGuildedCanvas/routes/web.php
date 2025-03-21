@@ -165,3 +165,6 @@ Route::post('/submit-return-request/{order_id}', [OrdersController::class, 'subm
 
 // ADMIN DASHBOARD ROUTE
 Route::get('/admin/dashboard', [InventoryController::class, 'dashboard'])->name('admin.dashboard');
+
+// Route for admin managing returns
+Route::get('/admin/returns', [ReturnController::class, 'manageReturns'])->name('admin.returns');
