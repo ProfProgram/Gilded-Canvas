@@ -1127,7 +1127,7 @@ form input, form textarea {
     box-sizing: border-box;
 }
 
-form button {
+form button, .update-button, .delete-button {
     background-color: #d4af37;
     color: #1A1A1A;
     padding: 10px 20px;
@@ -1325,29 +1325,6 @@ h1 {
     cursor: pointer;
 }
 
-/* Buttons */
-.update-button,
-.delete-button,
-.logout-link {
-    background-color: #d4af37; /* Gold color */
-    color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 50px; /* Rounded edges */
-    font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Hover effect */
-.update-button:hover,
-.delete-button:hover,
-.logout-link:hover {
-    background-color: #b7952b; /* Slightly darker gold */
-}
-
 /* Apply Merriweather to the entire page */
 body {
     font-family: 'Merriweather', serif;
@@ -1433,26 +1410,14 @@ h1, .table th, .table td, button, select, input {
     background: #f9f9f9;
 }
 
-/* Style update & delete buttons */
-.update-button,
-.delete-button {
-    background-color: #d4af37;
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+.status-select {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #d4af37;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
-.update-button:hover,
-.delete-button:hover {
-    background-color: #b08a2e;
-    color: white;
-}
 /* Customer Management Styling */
 .customer-management {
     width: 90%;

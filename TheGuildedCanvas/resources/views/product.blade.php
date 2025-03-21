@@ -95,7 +95,7 @@ $categories = array_unique($categoryUnordered);
 
     <div class="product-list">
         @if ($query || $category || $minPrice || $maxPrice)
-            <h4>
+            <h4 style="justify-self: center;">
             @php
                 $searchStatement = "Searching Products for products ";
                 // adding query to statement
@@ -143,7 +143,7 @@ $categories = array_unique($categoryUnordered);
                 </div>
             </div>
         @empty
-            <p>No products found matching your search.</p>
+            <p style="justify-self: center;">No products found matching your search.</p>
         @endforelse
     </div>
 </div>

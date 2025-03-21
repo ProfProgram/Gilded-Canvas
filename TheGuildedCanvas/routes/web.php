@@ -35,6 +35,7 @@ Auth::routes(['verify' => true]);
 Route::middleware('auth')->group(function () {
     // Inventory management routes
     Route::get('/admin/inventory', [InventoryController::class, 'index'])->name('admin.inventory');
+    Route::get('/admin/inventory/search', [InventoryController::class, 'search'])->name('inventory-search');
     Route::put('/admin/inventory/{id}', [InventoryController::class, 'update'])->name('admin.inventory.update');
     Route::put('/admin/inventory/{id}/incoming', [InventoryController::class, 'updateIncoming'])->name('admin.inventory.update.incoming');
     Route::put('/admin/inventory/{id}/outgoing', [InventoryController::class, 'updateOutgoing'])->name('admin.inventory.update.outgoing');
