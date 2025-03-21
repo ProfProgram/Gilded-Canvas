@@ -49,21 +49,25 @@ class ReturnController extends Controller
         return redirect()->route('home')->with('status', 'Return request submitted successfully!');
     }
     public function manageReturns()
-{
-    $returns = DB::table('returns_table')
-        ->join('orders_table', 'returns_table.order_id', '=', 'orders_table.order_id')
-        ->join('users_table', 'orders_table.user_id', '=', 'users_table.user_id')
-        ->select(
-            'returns_table.return_id',  // Correct field
-            'orders_table.order_id',
-            'users_table.name as customer_name',
-            'returns_table.reason',
-            'returns_table.status',
-            'returns_table.created_at'
-        )
-        ->orderBy('returns_table.created_at', 'desc')
-        ->get();
-
-    return view('admin.returns', compact('returns'));
-}
+    {
+        $returns = DB::table('returns_table')
+            ->join('orders_table', 'returns_table.order_id', '=', 'orders_table.order_id')
+            ->join('users_table', 'orders_table.user_id', '=', 'users_table.user_id')
+            ->join('products_table', 'returns_table.product_id', '=', 'products_table.product_id')
+            ->select(
+                'returns_table.return_id',  
+                'orders_table.order_id',
+                'returns_table.user_id',  // Fetching user_id instead of customer name
+                'returns_table.product_id',
+                'returns_table.quantity',
+                'returns_table.reason',
+                'returns_table.status',
+                'returns_table.created_at'
+            )
+            ->orderBy('returns_table.created_at', 'desc')
+            ->get();
+    
+        return view('admin.returns', compact('returns'));
+    }
+    
 }
