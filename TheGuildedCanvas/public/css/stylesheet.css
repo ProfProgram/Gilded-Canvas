@@ -1135,6 +1135,7 @@ form button {
     border-radius: 5px;
     transition: color 0.3s ease;
     border: none;
+    margin: 5px;
 }
 
 form button:hover {

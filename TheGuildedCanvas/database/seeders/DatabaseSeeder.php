@@ -652,38 +652,34 @@ class DatabaseSeeder extends Seeder
         /**
           * returns dummy data
           */
-        // not needed for MVP
-        // $returns = [
-        //     [
-        //         'order_id' => 1,
-        //         'product_id' => 1,
-        //         'user_id' => 1,
-        //         'admin_id' => 1,
-        //         'return_reason' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        //         'return_status' => 'Refunded',
-        //         'return_date' => '2024-11-19 17:04:30',
-        //     ],
-        //     [
-        //         'Order_id' => 2,
-        //         'Product_id' => 2,
-        //         'User_id' => 2,
-        //         'Admin_id' => 2,
-        //         'Return_reason' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        //         'Return_status' => 'Approved',
-        //         'Return_date' => '2024-11-19 17:04:30',
-        //     ],
-        //     [
-        //         'Order_id' => 3,
-        //         'Product_id' => 3,
-        //         'User_id' => 3,
-        //         'Admin_id' => 3,
-        //         'Return_reason' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        //         'Return_status' => 'Cancelled',
-        //         'Return_date' => '2024-11-19 17:04:30',
-        //     ],
-        // ];
-        // foreach($returns as $returnData) {
-        //     OrderReturn::firstOrCreate($returnData);
-        // }
+        $returns = [
+            [
+                'order_id' => 1,
+                'product_id' => 1,
+                'user_id' => 1,
+                'quantity'=> 5,
+                'reason' => 'The items were damaged when I received it',
+                'status' => 'approved',
+            ],
+            [
+                'order_id' => 1,
+                'product_id' => 2,
+                'user_id' => 1,
+                'quantity'=> 2,
+                'reason' => 'The items were damaged when I received it',
+                'status' => 'Approved',
+            ],
+            [
+                'order_id' => 3,
+                'product_id' => 4,
+                'user_id' => 5,
+                'quantity'=> 1,
+                'reason' => 'I changed my mind after I made the purchase',
+                'status' => 'denied',
+            ],
+        ];
+        foreach($returns as $returnData) {
+            OrderReturn::firstOrCreate($returnData);
+        }
     }
 }
