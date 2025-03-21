@@ -50,6 +50,12 @@ class ReturnController extends Controller
     }
     public function manageReturns()
     {
+        if (!Auth::check()) {
+            return redirect()->route('sign-in')->with('status', 'Please log in to view.');
+        }
+        if (auth()->user()->role !== \App\Enums\UserRole::admin) {
+            return redirect('/home')->with('status', 'You do not have access to this page.');
+        }
         $returns = DB::table('returns_table')
             ->join('orders_table', 'returns_table.order_id', '=', 'orders_table.order_id')
             ->join('users_table', 'orders_table.user_id', '=', 'users_table.user_id')

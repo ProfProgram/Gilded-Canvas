@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2 class="page-title">Manage Returns</h2>
+    <h2 class="page-title">Returns Management</h2>
 
     <table class="table">
         <thead>

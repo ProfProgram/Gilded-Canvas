@@ -42,6 +42,7 @@
                         <a href="{{ route('admin.inventory') }}">Inventory Management</a>
                         <a href="{{ route('admin.customers') }}">Customer Management</a>
                         <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+                        <a href="{{ route('admin.returns') }}">Returns Management</a>
                     </div>
                 </div>
                 @endif
