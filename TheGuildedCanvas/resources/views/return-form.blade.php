@@ -15,7 +15,7 @@
     <!-- Show pending message if return is already requested -->
     @if(isset($return_status) && $return_status === 'pending')
         <div class="alert alert-info">
-            Your return request has been submitted and is pending.
+            Your return request has been submitted.
         </div>
     @else
         <!-- Show return form if request is NOT pending -->
