@@ -1261,6 +1261,11 @@ form button:hover {
     height: 200px;
 }
 
+.price-filter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
 
 /* Apply to both User Management & Inventory Management pages */
 .user-management, .inventory-management {

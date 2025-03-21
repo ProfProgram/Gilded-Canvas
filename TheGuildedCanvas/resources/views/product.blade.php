@@ -48,6 +48,23 @@ $categories = array_unique($categoryUnordered);
                 </option>
             @endforeach
         </select>
+        <!-- Price filtering -->
+        <div class="price-filter">
+            <input 
+            type="number" 
+            name="min_price" 
+            placeholder="Min Price" 
+            value="{{ request('min_price') }}"
+            class="price-input"
+            >
+            <input 
+                type="number" 
+                name="max_price" 
+                placeholder="Max Price" 
+                value="{{ request('max_price') }}"
+                class="price-input"
+            >
+        </div>
         <button type="submit" class="search-button">Search</button>
     </form>
     </div>
@@ -55,19 +72,54 @@ $categories = array_unique($categoryUnordered);
     @php
         $query = request('query');
         $category = request('category');
+        $minPrice = request('min_price');
+        $maxPrice = request('max_price');
 
-        // Filter products based on query and category
-        $filteredProducts = $productInfo->filter(function($product) use ($query, $category) {
+        // Filter products based on query, category, and price
+        $filteredProducts = $productInfo->filter(function($product) use ($query, $category, $minPrice, $maxPrice) {
             $matchesQuery = $query ? stripos($product->product_name, $query) !== false || stripos($product->category_name, $query) !== false : true;
             $matchesCategory = $category ? $product->category_name == $category : true;
+            $matchesPrice = true; // Default to true if no price filtering is done
 
-            return $matchesQuery && $matchesCategory;
-        });
+            if ($minPrice !== null && $maxPrice !== null) {
+                $matchesPrice = $product->price >= $minPrice && $product->price <= $maxPrice;
+            } elseif ($minPrice !== null) {
+                $matchesPrice = $product->price >= $minPrice;
+            } elseif ($maxPrice !== null) {
+                $matchesPrice = $product->price <= $maxPrice;
+            }
+
+            return $matchesQuery && $matchesCategory && $matchesPrice;
+        }); 
     @endphp
 
     <div class="product-list">
-        @if ($query || $category)
-            <h2>Search Results for "{{ $query }}" in "{{ $category }}" category</h2>
+        @if ($query || $category || $minPrice || $maxPrice)
+            <h4>
+            @php
+                $searchStatement = "Searching Products for products ";
+                // adding query to statement
+                if ($query !== null) {
+                    $searchStatement .= "with a name-likeness to '{$query}' ";
+                }
+
+                // adding category to statement
+                if ($category != null) {
+                    $searchStatement .= "within category {$category} ";
+                }
+
+                // adding price filter to statement
+                if ($minPrice !== null && $maxPrice !== null) {
+                    $searchStatement .= "within £{$minPrice} - £{$maxPrice} ";
+                } elseif ($minPrice !== null) {
+                    $searchStatement .= "within £{$minPrice} - MAX ";
+                } elseif ($maxPrice !== null) {
+                    $searchStatement .= "within MIN - £{$maxPrice} ";
+                }
+
+                echo $searchStatement
+            @endphp
+            </h4>
         @endif
 
         @forelse ($filteredProducts as $info)
