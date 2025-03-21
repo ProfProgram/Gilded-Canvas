@@ -1138,7 +1138,7 @@ form button, .update-button, .delete-button {
     margin: 5px;
 }
 
-form button:hover {
+form button:hover, .update-button:hover, .delete-button:hover {
     color: #ffffff;
 }
 
