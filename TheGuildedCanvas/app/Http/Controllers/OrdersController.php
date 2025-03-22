@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Admin;
+use App\Models\Inventory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log; 
@@ -23,18 +24,26 @@ class OrdersController extends Controller
         ->where('user_id', $userId)
         ->get()
         ->map(function ($order) {
+            $returnProducts = DB::table('returns_table')
+                ->where('order_id', $order->order_id)
+                ->get()
+                ->pluck('product_id')
+                ->toArray();
+            
             return [
                 'order_id' => $order->order_id,
                 'order_time' => $order->order_time,
                 'status' => $order->status,
                 'total_price' => $order->total_price,
                 'admin_name' => optional($order->admin)->user->name ?? 'Not yet assigned.',
-                'products' => $order->details->map(function ($detail) {
+                'products' => $order->details->map(function ($detail) use ($returnProducts) {
+                    $isReturned = in_array($detail->product_id, $returnProducts);
                     return [
                         'product_id' => optional($detail->product)->product_id ?? null,
                         'product_name' => optional($detail->product)->product_name ?? 'Unknown Product',
                         'quantity' => $detail->quantity,
-                        'price_of_order' => $detail->price_of_order
+                        'price_of_order' => $detail->price_of_order,
+                        'is_returned' => $isReturned,
                     ];
                 })->toArray(),
             ];
@@ -97,6 +106,9 @@ class OrdersController extends Controller
         return view('admin.orders', compact('orders'));
     }
 
+//     Issue with updateStatus
+//     if admin updates status to 'shipped' or 'delivered' the inventory stock out will update - this is intended
+//     if they update back to 'pending' then back to 'shipped' or 'delivered' then the stock out will increase again - this is not intended
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
@@ -104,24 +116,35 @@ class OrdersController extends Controller
         ]);
 
         $userId = Auth::user()->user_id;
-        $adminId = Admin::with('user')->where('user_id', $userId)->value('admin_id');
-
-        //  Ensure that updating status applies to the whole order, not individual items
-        $order = Order::where('order_id', $id)->firstOrFail();
-        $order->update(['status' => $request->status]);
-
+        $adminId = Admin::where('user_id', $userId)->value('admin_id');
+        
+        $order = Order::with('details')->where('order_id', $id)->firstOrFail();
+        
         try {
-            if ($order->update(['admin_id' => $adminId])) {
+            if ($order->update(['status' => $request->status, 'admin_id' => $adminId])) {
+                
+                // Proceed only if the order status is not 'pending' or 'cancelled'
+                if (!in_array($order->status, ['pending', 'cancelled'])) {
+                    try {
+                        // Loop through the related order details to update inventory
+                        foreach ($order->details as $orderDetail) {
+                            $product = Inventory::where('product_id', $orderDetail->product_id)->firstOrFail();
 
-            }
-            else {
-                return redirect()->back()->with('status', 'Admin ID could not be updated.');
+                            if ($product->update(['stock_outgoing' => $product->stock_outgoing + $orderDetail->quantity])) {
+                                Log::info("Product ID: {$product->product_id} stock outgoing updated to: {$product->stock_outgoing}");
+                            }
+                        }
+                    } catch (\Exception $e) {
+                        Log::error("Error updating inventory_table for Product ID: {$orderDetail->product_id}. {$e->getMessage()}");
+                        return redirect()->back()->with('status', 'Stocks could not be updated');
+                    }
+                }
             }
         } catch (\Exception $e) {
-            Log::error('Failed to update admin_id on Order: '.$id.'' . $e->getMessage());
-            return redirect()->back()->with('status','Failed to update admin_id on Order: '.$id.'. ' . $e->getMessage() . ' Please contact us for more help.') ;
+            Log::error("Failed to update Order: {$id}. {$e->getMessage()}");
+            return redirect()->back()->with('status', "Order: {$id} status could not be updated.");
         }
-
+        
         return redirect()->route('admin.orders')->with('status', 'Order status updated successfully!');
     }
 

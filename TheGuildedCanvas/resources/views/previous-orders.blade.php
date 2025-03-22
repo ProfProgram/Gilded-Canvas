@@ -43,10 +43,12 @@
                                 </button>
 
                                 <!-- Request Return Button (Styled Below) -->
+                                @if (!$product['is_returned'])
                                 <button class="return-button" 
                                     onclick="window.location.href='{{ route('return.request', ['order_id' => $order['order_id']]) }}'">
                                     Request Return
                                 </button>
+                                @endif
                             </div>
 
                         </div>

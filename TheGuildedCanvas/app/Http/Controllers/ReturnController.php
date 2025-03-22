@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderReturn;
 use Illuminate\Http\Request;
+use App\Models\Inventory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log; 
 
 class ReturnController extends Controller
 {
@@ -84,6 +87,20 @@ class ReturnController extends Controller
         DB::table('returns_table')
             ->where('return_id', $return_id)
             ->update(['status' => $request->status, 'updated_at' => now()]);
+
+        $return = OrderReturn::with('product')->where('return_id', $return_id)->first();
+        $product = Inventory::where('product_id', $return->product_id)->first();
+
+        if (in_array($request->status, ['approved'])) {
+            try {
+                if ($product->update(['stock_incoming' => $product->stock_incoming + $return->quantity])) {
+                    Log::info("Updating product: {$return->product_id} stock incoming to {$product->stock_incoming}");
+                }
+            } catch (\Exception $e) {
+                Log::error("Error: could not update incoming stock for product: {$return->product_id} : {$e->getMessage()}");
+                return redirect()->back()->with('status', 'Error when updating stock incoming');
+            }
+        }
 
         return redirect()->route('admin.returns')->with('status', 'Return status updated successfully!');
     }
