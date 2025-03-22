@@ -23,42 +23,21 @@
     </div>
 @endif
 
+<!-- ? Search Section -->
 <section class="productFilters">
     <h2>Search Our Products</h2>
-    <!-- Product Filtering -->
     <div class="search-container">
         <form action="{{ route('product.index') }}" method="GET">
-            <!-- Search by name or category -->
-            <input
-                type="text"
-                name="query"
-                placeholder="Search for product names or categories..."
-                value="{{ request('query') }}"
-                class="search-input"
-            >
-            <!-- Choose Category -->
+            <input type="text" name="query" placeholder="Search for product names or categories..." value="{{ request('query') }}" class="search-input">
             <select class="category-select" name="category">
                 <option value="" disabled {{ !request('category') ? 'selected' : '' }} hidden>Select a Category</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category }}" @if(request('category') == $category) selected @endif>{{ $category }}</option>
                 @endforeach
             </select>
-            <!-- Price filtering -->
             <div class="price-filter">
-                <input 
-                    type="number" 
-                    name="min_price" 
-                    placeholder="Min Price" 
-                    value="{{ request('min_price') }}"
-                    class="price-input"
-                >
-                <input 
-                    type="number" 
-                    name="max_price" 
-                    placeholder="Max Price" 
-                    value="{{ request('max_price') }}"
-                    class="price-input"
-                >
+                <input type="number" name="min_price" placeholder="Min Price" value="{{ request('min_price') }}" class="price-input">
+                <input type="number" name="max_price" placeholder="Max Price" value="{{ request('max_price') }}" class="price-input">
             </div>
             <button type="submit" class="search-button">Search</button>
         </form>
@@ -70,7 +49,6 @@
         $minPrice = request('min_price');
         $maxPrice = request('max_price');
 
-        // Filter products based on query, category, and price
         $filteredProducts = $productInfo->filter(function($product) use ($query, $category, $minPrice, $maxPrice) {
             $matchesQuery = $query ? stripos($product->product_name, $query) !== false || stripos($product->category_name, $query) !== false : true;
             $matchesCategory = $category ? $product->category_name == $category : true;
@@ -96,56 +74,83 @@
     <a href="{{ url('/product') }}" class="btn">Shop Now</a>
 </section>
 
-<!-- 🛍️ Featured Products Section Fixed -->
+<!-- 🛍️ Featured Products Section -->
 <section class="products-carousel" id="products-sliders">
     <h2>Featured Products</h2>
     <div class="slider">
-        <button class="slider-btn prev-btn">❮</button>
+        <button class="slider-btn prev-btn">&#10094;</button>
         <div class="slider-track">
-            <!-- Product 1 -->
             <a class="product-slide">
                 <img src="{{ asset('images/products/img-12.png') }}" alt="Gilded Frame Art">
                 <p>Gilded Frame Art</p>
-                <p class="price">£199</p>
+                <p class="price">&pound;199</p>
                 <button class="btn">Add to Cart</button>
             </a>
-            <!-- Product 2 -->
             <a class="product-slide">
                 <img src="{{ asset('images/products/img-13.png') }}" alt="Golden Vase">
                 <p>Golden Vase</p>
-                <p class="price">£149</p>
+                <p class="price">&pound;149</p>
                 <button class="btn">Add to Cart</button>
             </a>
-            <!-- Product 3 -->
             <a class="product-slide">
                 <img src="{{ asset('images/products/img-14.png') }}" alt="Luxury Wall Clock">
                 <p>Luxury Wall Clock</p>
-                <p class="price">£249</p>
+                <p class="price">&pound;249</p>
                 <button class="btn">Add to Cart</button>
             </a>
-            <!-- Product 4 -->
             <a class="product-slide">
                 <img src="{{ asset('images/products/img-15.png') }}" alt="Golden Candle Holder">
                 <p>Golden Candle Holder</p>
-                <p class="price">£129</p>
+                <p class="price">&pound;129</p>
                 <button class="btn">Add to Cart</button>
             </a>
-            <!-- Product 5 -->
             <a class="product-slide">
                 <img src="{{ asset('images/products/img-16.png') }}" alt="Elegant Gold Mirror">
                 <p>Elegant Gold Mirror</p>
-                <p class="price">£179</p>
+                <p class="price">&pound;179</p>
                 <button class="btn">Add to Cart</button>
             </a>
-            <!-- Product 6 -->
             <a class="product-slide">
                 <img src="{{ asset('images/products/img-17.png') }}" alt="Art Deco Sculpture">
                 <p>Art Deco Sculpture</p>
-                <p class="price">£219</p>
+                <p class="price">&pound;219</p>
                 <button class="btn">Add to Cart</button>
             </a>
         </div>
-        <button class="slider-btn next-btn">❯</button>
+        <button class="slider-btn next-btn">&#10095;</button>
+    </div>
+</section>
+
+<!-- ⭐ Latest Reviews Section -->
+<section class="user-reviews py-5" style="background-color: #fff;">
+    <h2 class="text-center mb-4" style="font-size: 2rem; color: #1A1A1A;">Reviews From Our Customers</h2>
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            @foreach ($reviews as $review)
+                <div class="col-md-6 col-lg-4 d-flex">
+                    <div class="card text-center p-4 shadow-sm w-100" style="border-radius: 12px; border: 1px solid #eee;">
+                        <h5 style="color: #d4af37; font-weight: bold;">
+                            Rating: {!! str_repeat('★', $review->rating) !!}{!! str_repeat('☆', 5 - $review->rating) !!}
+                        </h5>
+                        <p style="font-size: 1rem; color: #333;">
+                            Ease of Use: {!! str_repeat('★', $review->ease_of_use) !!}{!! str_repeat('☆', 5 - $review->ease_of_use) !!}<br>
+                            Checkout: {!! str_repeat('★', $review->checkout_process) !!}{!! str_repeat('☆', 5 - $review->checkout_process) !!}<br>
+                            Product Info: {!! str_repeat('★', $review->product_info) !!}{!! str_repeat('☆', 5 - $review->product_info) !!}<br>
+                            Delivery Experience: {!! str_repeat('★', $review->delivery_experience) !!}{!! str_repeat('☆', 5 - $review->delivery_experience) !!}<br>
+                            Customer Support: {!! str_repeat('★', $review->customer_support) !!}{!! str_repeat('☆', 5 - $review->customer_support) !!}
+                        </p>
+                        <p style="font-size: 0.95rem; color: #555;">
+                            <strong>Best Feature:</strong> {{ $review->best_feature }}<br>
+                            <strong>Improvement Area:</strong> {{ $review->improvement_area }}<br>
+                            <strong>Recommend to Others?</strong> {{ $review->recommend }}
+                        </p>
+                        <p class="mt-3" style="font-style: italic; color: #555;">
+                            {{ $review->review_text ?? 'No written review' }}
+                        </p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
 </section>
 
