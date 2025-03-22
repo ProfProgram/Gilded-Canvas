@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
@@ -27,7 +27,8 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Models\User;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\UserManagementController;
-
+use App\Http\Controllers\ReturnController;
+use App\Http\Controllers\CustomerController;
 
 
 Auth::routes(['verify' => true]);
@@ -36,15 +37,20 @@ Auth::routes(['verify' => true]);
 Route::middleware('auth')->group(function () {
     // Inventory management routes
     Route::get('/admin/inventory', [InventoryController::class, 'index'])->name('admin.inventory');
+    Route::get('/admin/inventory/search', [InventoryController::class, 'search'])->name('inventory-search');
     Route::put('/admin/inventory/{id}', [InventoryController::class, 'update'])->name('admin.inventory.update');
+    Route::put('/admin/inventory/{id}/incoming', [InventoryController::class, 'updateIncoming'])->name('admin.inventory.update.incoming');
+    Route::put('/admin/inventory/{id}/outgoing', [InventoryController::class, 'updateOutgoing'])->name('admin.inventory.update.outgoing');
     Route::delete('/admin/inventory/{id}', [InventoryController::class, 'destroy'])->name('admin.inventory.destroy');
 });
+
 // Manager routes
 Route::middleware('auth')->group(function () {
     Route::get('manager/users', [UserManagementController::class, 'index'])->name('manager.users');
     Route::put('manager/users/{id}', [UserManagementController::class, 'updateRole'])->name('manager.users.update');
     Route::delete('manager/users/{id}', [UserManagementController::class, 'destroy'])->name('manager.users.destroy');
 });
+
 // Handle email verification
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -73,7 +79,6 @@ Route::post('password/email', [ForgotPasswordController::class, 'sendResetLink']
 Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('password/reset', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
 
-
 Route::get('/', [homeController::class, 'index']);
 
 Route::get('/home', [homeController::class, 'index'])->name('home');
@@ -82,12 +87,13 @@ Route::get('/search', [homeController::class, 'search'])->name('home-search');
 Route::get('/sign-up', function () {
     return view('sign-up');
 });
+
 // SIGN IN PAGE (LOGIN)
 Route::get('/sign-in', function () {
     return view('sign-in');
 })->name('sign-in');
 
-// SIGN UP PAGE
+// CONTACT US
 Route::get('/contact-us', function () {
     return view('contact-us');
 });
@@ -99,7 +105,6 @@ Route::get('delete/{id}', [CartController::class, 'delete'])->name('cart_delete'
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/update-basket', [CartController::class, 'update'])->name('basket.update');
 
-
 // PREVIOUS ORDERS
 Route::get('/previous-orders', [OrdersController::class, 'index']);
 
@@ -108,7 +113,6 @@ Route::get('/product', [productListing::class, 'index'])->name('product.index');
 Route::get('/prod-search', [productListing::class, 'search'])->name('product-search');
 
 // INDIVIDUAL DYNAMIC PRODUCTS
-// needs to be updated to be dynamic name in url
 Route::get('/product/{productName}', [IndivProductController::class, 'index']);
 
 // PAYMENT ROUTES
@@ -137,20 +141,54 @@ Route::get('/contact-us', function () {
     return view('contact-us');
 })->name('contact');
 
-
+// ADMIN ORDER MANAGEMENT
 Route::get('/admin/orders', [OrdersController::class, 'manage'])->name('admin.orders');
 Route::put('/admin/orders/{id}/update', [OrdersController::class, 'updateStatus'])->name('admin.orders.update');
 Route::delete('/admin/orders/{id}/delete', [OrdersController::class, 'destroy'])->name('admin.orders.destroy');
 
-use App\Http\Controllers\CustomerController;
-
+// Customer Management
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/customers', [CustomerController::class, 'manage'])->name('admin.customers');
+    Route::post('/admin/customers/add', [CustomerController::class, 'store'])->name('admin.customers.add');
+    Route::post('/admin/customers/store', [CustomerController::class, 'store'])->name('admin.customers.store');
+    Route::put('/admin/customers/{id}/update', [CustomerController::class, 'update'])->name('admin.customers.update');
+    Route::delete('/admin/customers/{id}/delete', [CustomerController::class, 'destroy'])->name('admin.customers.delete');
 });
-Route::post('/admin/customers/add', [CustomerController::class, 'store'])->name('admin.customers.add');
-Route::post('/admin/customers/store', [CustomerController::class, 'store'])->name('admin.customers.store');
-Route::put('/admin/customers/{id}/update', [CustomerController::class, 'update'])->name('admin.customers.update');
-Route::delete('/admin/customers/{id}/delete', [CustomerController::class, 'destroy'])
-    ->name('admin.customers.delete');
+
+// Returns
+
+// productAddButton
+
+Route::get('/admin/product/create', [InventoryController::class, 'create'])->name('product.create');
+Route::post('/admin/product/store', [InventoryController::class, 'store'])->name('product.store');
 
 
+Route::put('/admin/product/update/{id}', [InventoryController::class, 'updateProduct'])->name('admin.product.update');
+Route::delete('/admin/product/delete/{id}', [InventoryController::class, 'destroyProduct'])->name('admin.product.destroy');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/inventory', [InventoryController::class, 'index'])->name('admin.inventory');
+    Route::get('/admin/product/create', [InventoryController::class, 'create'])->name('product.create');
+    Route::post('/admin/product/store', [InventoryController::class, 'store'])->name('product.store');
+    Route::put('/admin/product/update/{id}', [InventoryController::class, 'updateProduct'])->name('admin.product.update');
+    Route::delete('/admin/product/delete/{id}', [InventoryController::class, 'destroyProduct'])->name('admin.product.destroy');
+});
+// Route to return form
+Route::get('/return-request/{order_id}', [OrdersController::class, 'showReturnRequestForm'])
+    ->middleware('auth') // Ensures only logged-in users can request a return
+    ->name('return.request');
+
+// Route to submit the return request (Handles form submission)
+Route::post('/submit-return-request/{order_id}', [OrdersController::class, 'submitReturnRequest'])
+    ->middleware('auth') // Prevents unauthorized return submissions
+    ->name('return.submit');
+
+// ADMIN DASHBOARD ROUTE
+Route::get('/admin/dashboard', [InventoryController::class, 'dashboard'])->name('admin.dashboard');
+
+// Route for admin managing returns
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/returns', [ReturnController::class, 'manageReturns'])->name('admin.returns');
+    Route::post('/admin/returns/update-status/{return_id}', [ReturnController::class, 'updateReturnStatus'])->name('admin.returns.updateStatus');
+    Route::delete('/admin/returns/delete/{return_id}', [ReturnController::class, 'deleteReturn'])->name('admin.returns.delete');
+});
