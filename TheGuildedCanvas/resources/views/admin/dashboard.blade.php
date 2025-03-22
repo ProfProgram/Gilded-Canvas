@@ -62,7 +62,7 @@
         ]);
 
         var options = {
-            title: 'Stock Tracking',
+            
             curveType: 'function',
             legend: { position: 'bottom' },
             colors: ['#d4af37', '#000000']
@@ -81,7 +81,7 @@
         ]);
 
         var options = {
-            title: 'Orders by Status',
+            
             colors: ['#d4af37', '#000000', '#cccccc', '#808080'],
             backgroundColor: 'transparent',
             pieSliceTextStyle: {
