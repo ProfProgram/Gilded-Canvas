@@ -45,7 +45,11 @@
             <input type="hidden" name="price" value="{{$productInfo->price}}">
             <input type="hidden" name="product_name" value="{{$productInfo->product_name}}">
             <input type="hidden" name="product_id" value="{{$productInfo->product_id}}">
+            @if ($inventoryInfo->stock_level > 0)
             <button type="submit" class="btn-AddProductCart">Add To Cart</button>
+            @else
+            <button type="button" class="out-of-stock-button" disabled>Out of Stock</button>
+            @endif
         </form>
     </section>
 

@@ -87,7 +87,7 @@ $categories = array_unique($categoryUnordered);
     <h2>Search Our Products</h2>
     <!-- Product Filtering -->
     <div class="search-container">
-        <form action="{{ route('product-search') }}" method="GET">
+        <form action="{{ route('product.index') }}" method="GET">
             <!-- Search by name or category -->
             <input
                 type="text"

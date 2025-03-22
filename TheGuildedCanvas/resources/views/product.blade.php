@@ -28,7 +28,7 @@ $categories = array_unique($categoryUnordered);
     </div>
     <!-- Product Filtering -->
     <div class="search-container">
-    <form action="{{ route('product-search') }}" method="GET">
+    <form action="{{ route('product.index') }}" method="GET">
         <!-- Search by name or category -->
         <input 
             type="text" 
@@ -93,9 +93,9 @@ $categories = array_unique($categoryUnordered);
         }); 
     @endphp
 
-    <div class="product-list">
-        @if ($query || $category || $minPrice || $maxPrice)
-            <h4 style="justify-self: center;">
+<div class="product-list">
+    @if ($query || $category || $minPrice || $maxPrice)
+        <h4 style="justify-self: center;">
             @php
                 $searchStatement = "Searching Products for products ";
                 // adding query to statement
@@ -116,32 +116,33 @@ $categories = array_unique($categoryUnordered);
                 } elseif ($maxPrice !== null) {
                     $searchStatement .= "within MIN - £{$maxPrice} ";
                 }
-
-                echo $searchStatement
             @endphp
-            </h4>
-        @endif
+            {{ $searchStatement }}
+        </h4>
+    @endif
 
-        @forelse ($filteredProducts as $info)
-            <div class="product">
-                <div class="product-image">
-                    <img src="{{ asset('images/products/img-'.$info->product_id.'.png') }}" 
-                        alt="{{ $info->product_name }}" onclick="window.location.href='{{ url('/product/'.$info->product_name.'') }}'">
-                </div>
-                <div class="prod-page-details">
-                    <h2>{{ $info->product_name }}</h2>
-                    <p>{{ $info->description }}</p>
-                    <p class="product-price">£{{ $info->price }}.00</p>
-                    <form method="POST" action="{{ route('cart.add') }}">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $info->product_id }}">
-                        <input type="hidden" name="product_name" value="{{ $info->product_name }}">
-                        <input type="hidden" name="price" value="{{ $info->price }}">
-                        <input type="hidden" name="cartQuan_add" value="1">
-                        <button type="submit" class="buy-button">Buy Now</button>
-                    </form>
-                </div>
+    @forelse ($productInfo as $info)
+    @if ($info->inventory && $info->inventory->stock_level > 0)
+        <div class="product">
+            <div class="product-image">
+                <img src="{{ asset('images/products/img-'.$info->product_id.'.png') }}" 
+                    alt="{{ $info->product_name }}" onclick="window.location.href='{{ url('/product/'.$info->product_name.'') }}'">
             </div>
+            <div class="prod-page-details">
+                <h2>{{ $info->product_name }}</h2>
+                <p>{{ $info->description }}</p>
+                <p class="product-price">£{{ number_format($info->price, 2) }}</p>
+                <form method="POST" action="{{ route('cart.add') }}">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $info->product_id }}">
+                    <input type="hidden" name="product_name" value="{{ $info->product_name }}">
+                    <input type="hidden" name="price" value="{{ $info->price }}">
+                    <input type="hidden" name="cartQuan_add" value="1">
+                    <button type="submit" class="buy-button">Buy Now</button>
+                </form>
+            </div>
+        </div>
+        @endif
         @empty
             <p style="justify-self: center;">No products found matching your search.</p>
         @endforelse

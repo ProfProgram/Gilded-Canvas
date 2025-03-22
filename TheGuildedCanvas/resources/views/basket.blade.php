@@ -49,18 +49,20 @@ $totalPrice = 0;
                 <h3>{{ $item->product->product_name }}</h3>
                 <!-- Remove the description line here -->
                 <!-- <p>{{ $item->product->description }}</p> -->
-
+                @if ($item->stock_level > 0)
+                <p>Out of Stock. Current stock : {{ $item->stock_level }}</p>
+                @endif
                 <p>Price: £{{ $item->product->price }}</p>
                 <div class="quantity-container">
                     <label for="quantity">Quantity:</label>
                     <input type="number"
-                           class="quantity-input"
-                           name="quantity"
-                           value="{{ $item->quantity }}"
-                           min="1"
-                           max="15"
-                           step="1"
-                           data-price="{{ $item->product->price }}">
+                        class="quantity-input"
+                        name="quantity"
+                        value="{{ $item->quantity }}"
+                        min="1"
+                        max="15"
+                        step="1"
+                        data-price="{{ $item->product->price }}">
                 </div>
                 <button class="update-basket-button">Update Basket</button>
                 <a href="{{ url('delete/'.$item->basket_id) }}">
@@ -92,7 +94,11 @@ $totalPrice = 0;
                     <h2>Estimated Total:</h2>
                     <input type="hidden" name="totalPrice" value="{{$totalPrice}}">
                     <p id="estimated-total" name="total_price" value="{{$totalPrice}}">£{{$totalPrice}}.00</p>
+                    @if ($item->stock_level > 0)
                     <button class="checkout-button" type="submit">Checkout</button>
+                    @else
+                    <button class="checkout-button" disabled>One or more items in basket are out of stock</button>
+                    @endif
                 </aside>
             </form>
         </div>

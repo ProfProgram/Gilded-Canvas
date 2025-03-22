@@ -18,7 +18,7 @@ class CartController extends Controller
             return redirect()->route('sign-in')->with('status', 'Please log in to view your basket.');
         }
         $userId = Auth::user()->user_id;
-        $cartItems = Cart::with('product')->with( 'user')->where('user_id', '=', $userId)->get();
+        $cartItems = Cart::with('product')->with( 'user')->join('inventory_table', 'cart_table.product_id', '=', 'inventory_table.product_id')->where('user_id', '=', $userId)->get();
         return view('basket', ['cartItems'=>$cartItems]);
     }
 

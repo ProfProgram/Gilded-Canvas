@@ -110,7 +110,6 @@ Route::get('/previous-orders', [OrdersController::class, 'index']);
 
 // PRODUCT LISTINGS
 Route::get('/product', [productListing::class, 'index'])->name('product.index');
-Route::get('/prod-search', [productListing::class, 'search'])->name('product-search');
 
 // INDIVIDUAL DYNAMIC PRODUCTS
 Route::get('/product/{productName}', [IndivProductController::class, 'index']);
