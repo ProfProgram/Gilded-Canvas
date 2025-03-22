@@ -104,9 +104,6 @@ $categories = $inventory->filter(fn($item) => $item->product)->pluck('product.ca
             @endif
             <div class="inventory-header">
                 <button class="update-button" onclick="showAddProductModal()">+ Add Product</button>
-                <form method="GET" action="{{ route('admin.inventory') }}" class="search-container">
-                    <input type="text" name="search" class="search-bar" placeholder="Search products..." value="{{ request()->search }}">
-                </form>
             </div>
         <table class="table">
             <thead>
@@ -130,7 +127,6 @@ $categories = $inventory->filter(fn($item) => $item->product)->pluck('product.ca
                     <td>{{ $item->product->product_id }}</td>
                     <td>{{ $item->product->product_name }}</td>
                     <td>£{{ number_format($item->product->price, 2) }}</td>
-                    <td>{{ $item->stock_level }}</td>
                     <td>{{ $item->product->height }}</td>
                         <td>{{ $item->product->width }}</td>
                         <td>{{ $item->product->description }}</td>
@@ -139,13 +135,68 @@ $categories = $inventory->filter(fn($item) => $item->product)->pluck('product.ca
                         <td>{{ $item->stock_incoming}}</td>
                         <td>{{ $item->stock_outgoing}}</td>
                         <td>
-                            <button class="update-button" onclick="showEditProductModal({{ json_encode($item->product) }})">Edit</button>
+                            <button class="update-button" onclick="showEditProductModal({{ json_encode($item) }})">Edit</button>
                             <button class="delete-button" onclick="showDeleteProductModal('{{ $item->product->product_id }}')">Delete</button>
                         </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
+    </div>
+    <div id="addProductModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddProductModal()">&times;</span>
+            <h3>Add New Product</h3>
+            <form id="addProductForm" method="POST" action="{{ route('product.store') }}">
+                @csrf
+                <input type="text" name="product_name" placeholder="Product Name" required>
+                <input type="number" name="price" placeholder="Price (£)" step="0.01" required>
+                <input type="number" name="height" placeholder="Height (cm)" required>
+                <input type="number" name="width" placeholder="Width (cm)" required>
+                <input type="text" name="description" placeholder="Description" required>
+                <input type="text" name="category_name" placeholder="Category" required>
+                <input type="number" name="stock_level" placeholder="Stock Level" required>
+                <input type="number" name="stock_incoming" placeholder="Stock incoming" required>
+                <input type="number" name="stock_outgoing" placeholder="Stock outgoing" required>
+                <button type="submit" class="update-button">Add Product</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Product Modal -->
+    <div id="editProductModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditProductModal()">&times;</span>
+            <h3>Edit Product Details</h3>
+            <form id="editProductForm" method="POST" action="">
+                @csrf
+                @method('PUT')
+                <input type="text" id="edit_product_name" name="product_name" placeholder="Product Name" required>
+                <input type="number" id="edit_price" name="price" placeholder="Price (£)" step="0.01" required>
+                <input type="number" id="edit_height" name="height" placeholder="Height (cm)" required>
+                <input type="number" id="edit_width" name="width" placeholder="Width (cm)" required>
+                <input type="text" id="edit_description" name="description" placeholder="Description" required>
+                <input type="text" id="edit_category_name" name="category_name" placeholder="Category" required>
+                <input type="number" id="edit_stock_level" name="stock_level" placeholder="Stock Level" required>
+                <input type="number" id="edit_stock_incoming" name="stock_incoming" placeholder="Stock Incoming" required>
+                <input type="number" id="edit_stock_outgoing" name="stock_outgoing" placeholder="Stock Outgoing" required>
+                <button type="submit" class="update-button">Update Product</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteProductModal" class="modal">
+        <div class="modal-content">
+            <h3>Are you sure?</h3>
+            <p>Do you really want to delete this product? This action cannot be undone.</p>
+            <form id="deleteProductForm" method="POST" action="">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="update-button">Yes, Delete</button>
+                <button type="button" class="update-button cancel-button" onclick="closeDeleteProductModal()">Cancel</button>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -159,17 +210,19 @@ function closeAddProductModal() {
     document.getElementById("addProductModal").style.display = "none";
 }
 
-function showEditProductModal(product) {
-    document.getElementById("edit_product_name").value = product.product_name;
-    document.getElementById("edit_price").value = product.price;
-    document.getElementById("edit_height").value = product.height;
-    document.getElementById("edit_width").value = product.width;
-    document.getElementById("edit_description").value = product.description;
-    document.getElementById("edit_category_name").value = product.category_name;
-    document.getElementById("edit_stock_level").value = product.inventory ? product.inventory.stock_level : 0;
+function showEditProductModal(item) {
+    document.getElementById("edit_product_name").value = item.product.product_name;
+    document.getElementById("edit_price").value = item.product.price;
+    document.getElementById("edit_height").value = item.product.height;
+    document.getElementById("edit_width").value = item.product.width;
+    document.getElementById("edit_description").value = item.product.description;
+    document.getElementById("edit_category_name").value = item.product.category_name;
+    document.getElementById("edit_stock_level").value = item.stock_level ?? 0;
+    document.getElementById("edit_stock_incoming").value = item.stock_incoming ?? 0;
+    document.getElementById("edit_stock_outgoing").value = item.stock_outgoing ?? 0;
 
-    const updateRoute = @json(route('admin.product.update', ['id' =>  '__ID__']));
-    document.getElementById("editProductForm").action = updateRoute.replace('__ID__', product.product_id);
+    const updateRoute = @json(route('admin.product.update', ['id' => '__ID__']));
+    document.getElementById("editProductForm").action = updateRoute.replace('__ID__', item.product.product_id);
     document.getElementById("editProductModal").style.display = "block";
 }
 
