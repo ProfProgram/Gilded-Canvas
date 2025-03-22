@@ -102,64 +102,142 @@ $categories = $inventory->filter(fn($item) => $item->product)->pluck('product.ca
                     @endif
                 </h4>
             @endif
-                <table class="table">
-                <thead>
+            <div class="inventory-header">
+                <button class="update-button" onclick="showAddProductModal()">+ Add Product</button>
+            </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Price (£)</th>
+                <th>Height (cm)</th>
+                <th>Width (cm)</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Stock Level</th>
+		        <th>Stock Incoming</th>
+                <th>Stock Outgoing</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($inventory as $item)
                 <tr>
-                    <th>Product Name</th>
-                    <th>Product Price</th>
-                    <th>Stock Level</th>
-                    <th>Stock Incoming</th>
-                    <th>Stock Outgoing</th>
-                    <th>Actions</th>
+                    <td>{{ $item->product->product_id }}</td>
+                    <td>{{ $item->product->product_name }}</td>
+                    <td>£{{ number_format($item->product->price, 2) }}</td>
+                    <td>{{ $item->product->height }}</td>
+                        <td>{{ $item->product->width }}</td>
+                        <td>{{ $item->product->description }}</td>
+                        <td>{{ $item->product->category_name }}</td>
+                        <td>{{ $item->stock_level }}</td>
+                        <td>{{ $item->stock_incoming}}</td>
+                        <td>{{ $item->stock_outgoing}}</td>
+                        <td>
+                            <button class="update-button" onclick="showEditProductModal({{ json_encode($item) }})">Edit</button>
+                            <button class="delete-button" onclick="showDeleteProductModal('{{ $item->product->product_id }}')">Delete</button>
+                        </td>
                 </tr>
-                </thead>
-                <tbody>
-                @forelse ($filteredInventory as $item)
-                    <tr>
-                        <td>{{ $item->product->product_name }}</td>
-                        <td>{{ $item->product->price }}</td>
-                        <td>
-                            <form action="{{ route('admin.inventory.update', $item->inventory_id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="product_id" value="{{ $item->product_id }}">
-                                <input type="number" name="stock_level" value="{{ $item->stock_level }}" class="form-control" style="width: 100px;" required>
-                                <button type="submit" class="logout-link">Update</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{{ route('admin.inventory.update.incoming', $item->inventory_id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="product_id" value="{{ $item->product_id }}">
-                                <input type="number" name="stock_incoming" value="{{ $item->stock_incoming }}" class="form-control" style="width: 100px;" required>
-                                <button type="submit" class="logout-link">Update</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{{ route('admin.inventory.update.outgoing', $item->inventory_id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="product_id" value="{{ $item->product_id }}">
-                                <input type="number" name="stock_outgoing" value="{{ $item->stock_outgoing }}" class="form-control" style="width: 100px;" required>
-                                <button type="submit" class="logout-link">Update</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{{ route('admin.inventory.destroy', $item->inventory_id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="logout-link">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="6">No inventory items match your search criteria.</td>
-                    </tr>
-                @endforelse
-                </tbody>
-            </table>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+    <div id="addProductModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddProductModal()">&times;</span>
+            <h3>Add New Product</h3>
+            <form id="addProductForm" method="POST" action="{{ route('product.store') }}">
+                @csrf
+                <input type="text" name="product_name" placeholder="Product Name" required>
+                <input type="number" name="price" placeholder="Price (£)" step="0.01" required>
+                <input type="number" name="height" placeholder="Height (cm)" required>
+                <input type="number" name="width" placeholder="Width (cm)" required>
+                <input type="text" name="description" placeholder="Description" required>
+                <input type="text" name="category_name" placeholder="Category" required>
+                <input type="number" name="stock_level" placeholder="Stock Level" required>
+                <input type="number" name="stock_incoming" placeholder="Stock incoming" required>
+                <input type="number" name="stock_outgoing" placeholder="Stock outgoing" required>
+                <button type="submit" class="update-button">Add Product</button>
+            </form>
         </div>
     </div>
+
+    <!-- Edit Product Modal -->
+    <div id="editProductModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditProductModal()">&times;</span>
+            <h3>Edit Product Details</h3>
+            <form id="editProductForm" method="POST" action="">
+                @csrf
+                @method('PUT')
+                <input type="text" id="edit_product_name" name="product_name" placeholder="Product Name" required>
+                <input type="number" id="edit_price" name="price" placeholder="Price (£)" step="0.01" required>
+                <input type="number" id="edit_height" name="height" placeholder="Height (cm)" required>
+                <input type="number" id="edit_width" name="width" placeholder="Width (cm)" required>
+                <input type="text" id="edit_description" name="description" placeholder="Description" required>
+                <input type="text" id="edit_category_name" name="category_name" placeholder="Category" required>
+                <input type="number" id="edit_stock_level" name="stock_level" placeholder="Stock Level" required>
+                <input type="number" id="edit_stock_incoming" name="stock_incoming" placeholder="Stock Incoming" required>
+                <input type="number" id="edit_stock_outgoing" name="stock_outgoing" placeholder="Stock Outgoing" required>
+                <button type="submit" class="update-button">Update Product</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteProductModal" class="modal">
+        <div class="modal-content">
+            <h3>Are you sure?</h3>
+            <p>Do you really want to delete this product? This action cannot be undone.</p>
+            <form id="deleteProductForm" method="POST" action="">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="update-button">Yes, Delete</button>
+                <button type="button" class="update-button cancel-button" onclick="closeDeleteProductModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Modal Handling -->
+<script>
+function showAddProductModal() {
+    document.getElementById("addProductModal").style.display = "block";
+}
+
+function closeAddProductModal() {
+    document.getElementById("addProductModal").style.display = "none";
+}
+
+function showEditProductModal(item) {
+    document.getElementById("edit_product_name").value = item.product.product_name;
+    document.getElementById("edit_price").value = item.product.price;
+    document.getElementById("edit_height").value = item.product.height;
+    document.getElementById("edit_width").value = item.product.width;
+    document.getElementById("edit_description").value = item.product.description;
+    document.getElementById("edit_category_name").value = item.product.category_name;
+    document.getElementById("edit_stock_level").value = item.stock_level ?? 0;
+    document.getElementById("edit_stock_incoming").value = item.stock_incoming ?? 0;
+    document.getElementById("edit_stock_outgoing").value = item.stock_outgoing ?? 0;
+
+    const updateRoute = @json(route('admin.product.update', ['id' => '__ID__']));
+    document.getElementById("editProductForm").action = updateRoute.replace('__ID__', item.product.product_id);
+    document.getElementById("editProductModal").style.display = "block";
+}
+
+function closeEditProductModal() {
+    document.getElementById("editProductModal").style.display = "none";
+}
+
+function showDeleteProductModal(productId) {
+    const deleteRoute = @json(route('admin.product.destroy', ['id' => '__ID__']));
+    document.getElementById("deleteProductForm").action = deleteRoute.replace('__ID__', productId);
+    document.getElementById("deleteProductModal").style.display = "block";
+}
+
+function closeDeleteProductModal() {
+    document.getElementById("deleteProductModal").style.display = "none";
+}
+</script>
 @endsection

@@ -29,6 +29,7 @@ use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\ReturnController;
 use App\Http\Controllers\CustomerController;
 
+
 Auth::routes(['verify' => true]);
 
 // Admin routes
@@ -153,6 +154,22 @@ Route::middleware(['auth'])->group(function () {
 
 // Returns
 
+// productAddButton
+
+Route::get('/admin/product/create', [InventoryController::class, 'create'])->name('product.create');
+Route::post('/admin/product/store', [InventoryController::class, 'store'])->name('product.store');
+
+
+Route::put('/admin/product/update/{id}', [InventoryController::class, 'updateProduct'])->name('admin.product.update');
+Route::delete('/admin/product/delete/{id}', [InventoryController::class, 'destroyProduct'])->name('admin.product.destroy');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/inventory', [InventoryController::class, 'index'])->name('admin.inventory');
+    Route::get('/admin/product/create', [InventoryController::class, 'create'])->name('product.create');
+    Route::post('/admin/product/store', [InventoryController::class, 'store'])->name('product.store');
+    Route::put('/admin/product/update/{id}', [InventoryController::class, 'updateProduct'])->name('admin.product.update');
+    Route::delete('/admin/product/delete/{id}', [InventoryController::class, 'destroyProduct'])->name('admin.product.destroy');
+});
 // Route to return form
 Route::get('/return-request/{order_id}', [OrdersController::class, 'showReturnRequestForm'])
     ->middleware('auth') // Ensures only logged-in users can request a return
