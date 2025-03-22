@@ -36,6 +36,36 @@
             and empowering the next generation of artists.
         </p>
     </section>
+    @auth
+    <div class="text-center my-5">
+        <a href="{{ route('website.review.create') }}" class="rate-link-custom">Rate Your Experience</a>
+    </div>
+@endauth
+
+<!-- Styling for the Rate Your Experience link -->
+<style>
+    .rate-link-custom {
+        display: inline-block;
+        font-family: 'Merriweather', serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        padding: 12px 28px;
+        border-radius: 50px;
+        background-color: #d4af37;
+        color: white;
+        text-decoration: none;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .rate-link-custom:hover {
+        background-color: #b08a2e;
+        transform: scale(1.05);
+        text-decoration: none;
+        color: white;
+    }
+</style>
+
 </main>
 @endsection
 

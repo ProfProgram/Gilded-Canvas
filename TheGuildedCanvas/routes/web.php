@@ -191,3 +191,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/returns/update-status/{return_id}', [ReturnController::class, 'updateReturnStatus'])->name('admin.returns.updateStatus');
     Route::delete('/admin/returns/delete/{return_id}', [ReturnController::class, 'deleteReturn'])->name('admin.returns.delete');
 });
+use App\Http\Controllers\WebsiteReviewController;
+
+// Group routes to ensure only authenticated users can access them
+Route::middleware(['auth'])->group(function () {
+    Route::get('/website-review', [WebsiteReviewController::class, 'create'])->name('website.review.create');
+    Route::post('/website-review/store', [WebsiteReviewController::class, 'store'])->name('website.review.store');
+    Route::get('/website-reviews', [WebsiteReviewController::class, 'index'])->name('website.reviews.index');
+});
+
+
