@@ -8,14 +8,30 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/.env" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/ForgotPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Http/Controllers/Auth/ResetPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Mail/ResetPassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Mail/ResetPassword.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Mail/TestMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Mail/TestMail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/mail/forgot-password.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/mail/forgot-password.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/mail/reset-password.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/auth/passwords/reset.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/resources/views/layouts/master.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/0e85c9b766b88e131a2815d925a3f541.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/207d6e9cd25b1478fc6bb82cc86c3b0a.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/2197762da2daa1a263205fac5b87a1a4.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/25e313e3c4d1b156523428bad011ceaa.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/492209741159f34a3503933c22fbfa86.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/5c05401a793c9edf9fc9176f9c4ebf8b.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/6516c4cbe48f78a45532e39339ba1dee.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/915970070d68777294ca72c0c6cffcab.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/970084803a779b2cf2b724f82eed0405.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/9948c51d59d1e5629b3dac2c025be0fd.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/a536ebfa4d7ce67182ff9ba505e34383.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/b93d60103a63d7e895155d690a917838.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/b9675a3469d544779d3028486179c2be.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/bb3060638d3a8ba01d27a081c4337412.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/c4b1d443aa16390803529830f8885b19.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/c9e535ce39b25f37421660c32165bc82.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/d134d453549951954a8aa44541139188.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/d893b11ff7252b100c901e3a18ab914e.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/e0830467dc5d2a9021daa1c90e20e63a.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/e43fbd2b3b618775351f97dbb370a034.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/framework/views/e5c402389e5fa28cfaf48d765940e56a.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheGuildedCanvas/storage/logs/laravel.log" beforeDir="false" afterPath="$PROJECT_DIR$/TheGuildedCanvas/storage/logs/laravel.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,6 +182,8 @@
       <path value="$PROJECT_DIR$/TheGuildedCanvas/vendor/sebastian/environment" />
       <path value="$PROJECT_DIR$/TheGuildedCanvas/vendor/sebastian/version" />
       <path value="$PROJECT_DIR$/TheGuildedCanvas/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/TheGuildedCanvas/vendor/league/uri" />
+      <path value="$PROJECT_DIR$/TheGuildedCanvas/vendor/league/uri-interfaces" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -181,7 +199,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;sign-in/sign-up-page(2nd)&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -202,6 +220,9 @@
     <configuration name="Main" type="PestRunConfigurationType">
       <option name="pestRunnerSettings">
         <PestRunner configuration_file="$PROJECT_DIR$/TheGuildedCanvas/phpunit.xml" scope="ConfigurationFile" use_alternative_configuration_file="true" />
+      </option>
+      <option name="runnerSettings">
+        <PhpTestRunnerSettings configuration_file="$PROJECT_DIR$/TheGuildedCanvas/phpunit.xml" scope="ConfigurationFile" use_alternative_configuration_file="true" />
       </option>
       <method v="2" />
     </configuration>
@@ -239,6 +260,12 @@
       <workItem from="1741574434270" duration="1443000" />
       <workItem from="1741649870901" duration="623000" />
       <workItem from="1741690997101" duration="1727000" />
+      <workItem from="1742481127928" duration="651000" />
+      <workItem from="1742509594055" duration="3553000" />
+      <workItem from="1742516441888" duration="5257000" />
+      <workItem from="1742569622461" duration="2306000" />
+      <workItem from="1742578001467" duration="2017000" />
+      <workItem from="1742596195775" duration="11446000" />
     </task>
     <servers />
   </component>
@@ -250,7 +277,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/TheGuildedCanvas/routes/web.php</url>
-          <line>31</line>
+          <line>32</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

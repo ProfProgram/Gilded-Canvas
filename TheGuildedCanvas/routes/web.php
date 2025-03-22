@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\IndivProductController;
@@ -120,6 +121,11 @@ Route::post('/review', [ReviewController::class, 'store']);
 
 // REMOVE THE ALERT MESSAGE
 Route::post('/close-alert', function () {Session::forget('status'); return redirect()->back();})->name('close-alert');
+Route::get('/account/edit', [AccountController::class, 'openEditPage'])->name('account.editPage');
+Route::get('/account', [AccountController::class, 'edit'])->name('account.edit');
+Route::put('/account/update', [AccountController::class, 'update'])->name('account.update');
+Route::post('/password/send-reset-link', [ForgotPasswordController::class, 'sendResetLinkForLoggedInUser'])
+    ->name('password.authenticated-reset');
 
 // ABOUT US
 Route::get('/about-us', function () {
