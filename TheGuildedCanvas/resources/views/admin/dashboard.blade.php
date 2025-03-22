@@ -81,16 +81,24 @@
         ]);
 
         var options = {
-            
-            colors: ['#d4af37', '#000000', '#cccccc', '#808080'],
-            backgroundColor: 'transparent',
-            pieSliceTextStyle: {
-                fontSize: 16,
-                bold: true
-            },
-            pieSliceBorderColor: '#000000',
-            chartArea: { width: '90%', height: '80%' }
-        };
+    
+    colors: ['#d4af37', '#000000', '#cccccc', '#808080'],
+    backgroundColor: 'transparent',
+    pieSliceTextStyle: {
+        fontSize: 19,
+        bold: true
+    },
+    pieSliceBorderColor: '#000000',
+    chartArea: { width: '80%', height: '80%' },
+    legend: {
+        position: 'right',
+        alignment: 'center',
+        textStyle: {
+            fontSize: 20,
+            color: '#333',
+        }
+    }
+};
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
