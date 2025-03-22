@@ -25,17 +25,18 @@
         </div>
 
         <!-- Placeholder Tabs -->
-        <<!-- Active Customers Tab -->
+       <!-- Active Customers Tab -->
+
 <div class="placeholder-tab">
     <h4>Active Customers</h4>
     <div class="placeholder-box">{{ $activeCustomers }}</div>
 </div>
 
-        <div class="placeholder-tab">
-            <h4>Placeholder 2</h4>
-            <div class="placeholder-box"></div>
-        </div>
-    </section>
+            <!-- Total Revenue Tab -->
+<div class="placeholder-tab">
+    <h4>Total Revenue</h4>
+    <div class="placeholder-box">£{{ number_format($totalRevenue, 2) }}</div>
+</div>
 
     <!-- Stock Tracking Chart Card -->
     <section class="chart-card">

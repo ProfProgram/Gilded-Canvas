@@ -8,7 +8,7 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
 use Illuminate\Http\Request;
-
+use App\Models\OrderDetail; 
 class InventoryController extends Controller
 {
     public function index()
@@ -211,11 +211,15 @@ class InventoryController extends Controller
 
         $totalOrders = Order::all()->count();
         $activeCustomers = Order::distinct('user_id')->count('user_id');
+        $totalRevenue = OrderDetail::whereHas('order', function ($query) {
+            $query->whereIn('status', ['pending', 'shipped', 'delivered']);
+        })->sum('price_of_order');
     return view('admin.dashboard', [
     'stockChartData' => $parsed,
     'pieChartData' => $pieData,
     'totalOrders' => $totalOrders,
-    'activeCustomers' => $activeCustomers
+    'activeCustomers' => $activeCustomers,
+    'totalRevenue' => $totalRevenue,
 ]);
     
     }
