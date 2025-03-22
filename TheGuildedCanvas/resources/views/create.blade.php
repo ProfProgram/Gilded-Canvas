@@ -6,20 +6,20 @@
 	
 	<div class="container my-5">
 	    <div class="text-center mb-5">
-	        <h1 class="fw-bolder display-1" style="font-size: 3rem; font-weight: 900;">
+	        <h1 class="fw-bolder display-1" style="font-size: 2.5rem; font-weight: 800;">
 	    Rate Your Experience on <span class="text-warning">The Gilded Canvas</span>
 	</h1>
 	
-	          <p class="lead" style="max-width: 800px; margin: auto;font-size: 1.5rem; font-weight: 450;"">Your feedback helps us improve our services and provide the best experience for our customers.</p>
+	          <p class="lead" style="max-width: 800px; margin: auto;font-size: 1rem; font-weight: 225;"">Your feedback helps us improve our services and provide the best experience for our customers.</p>
 	    
 	    </div>
 	@if(session('success'))
-	    <div class="alert alert-success text-center fw-bold" style="font-size: 1.2rem; color: white;">
+	    <div class="alert alert-success text-center fw-bold" style="font-size: 0.6rem; color: white;">
 	        {{ session('success') }}
 	    </div>
 	@endif
 	
-	    <form action="{{ route('website.review.store') }}" method="POST" style="max-width: 1000px; margin: auto;">
+	    <form action="{{ route('website.review.store') }}" method="POST" style="max-width: 500px; margin: auto;">
 	        @csrf
 	
 	        {{-- ⭐ Star Rating Styles --}}
@@ -29,8 +29,8 @@
 	                justify-content: center;
 	                align-items: center;
 	                flex-direction: row-reverse; /* Right-to-left fill */
-	                gap: 15px;
-	                font-size: 60px; /* Increased star size */
+	                gap: 7.5px;
+	                font-size: 30px; /* Increased star size */
 	            }
 	            .star-container input {
 	                display: none;
@@ -46,27 +46,27 @@
 	                color: gold;
 	            }
 	            .form-group {
-	                margin-bottom: 30px;
+	                margin-bottom: 15px;
 	            }
 	            .form-label {
-	                font-size: 1.8rem;
+	                font-size: 0.9rem;
 	                font-weight: bold;
 	                text-align: center;
 	                display: block;
-	                margin-bottom: 12px;
+	                margin-bottom: 6px;
 	            }
 	            .form-select,
 	            .form-control {
-	                font-size: 1rem;
-	                padding: 14px;
-	                border-radius: 10px;
+	                font-size: 0.5rem;
+	                padding: 7px;
+	                border-radius: 5px;
 	                border: 1px solid #ddd;
-	                width: 100%;
+	                width: 150%;
 	            }
 	            .text-center h3 {
-	                font-size: 1.5rem;
+	                font-size: 1rem;
 	                font-weight: bold;
-	                margin-top: 30px;
+	                margin-top: 15px;
 	            }
 	            
 	        .container {
@@ -133,7 +133,7 @@
 	</div>
 	
 	
-	      
+	        {{-- ✅ Structured Feedback Options --}}
 	        <div class="form-group">
 	            <h3 class="fw-bold text-center">What did you like the most?</h3>
 	            <select name="best_feature" class="form-select">
@@ -155,6 +155,7 @@
 	            </select>
 	        </div>
 	
+	        {{-- ✅ Would You Recommend Us? --}}
 	        <div class="form-group text-center">
 	            <h3 class="fw-bold">Would you recommend us to others?</h3>
 	            <div class="d-flex justify-content-center">
@@ -175,7 +176,7 @@
 	            <textarea name="review_text" class="form-control" style="height: 160px;" maxlength="1000"></textarea>
 	        </div>
 	
-	       
+	        {{-- ✅ Submit Button with Loading Effect --}}
 	        <div class="text-center mt-4">
 	            <button type="submit" class="btn btn-warning btn-lg fw-bold px-5 py-3 btn-submit">
 	                Submit Review
