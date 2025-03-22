@@ -18,6 +18,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Product ID</th>
                 <th>Product Name</th>
                 <th>Price (£)</th>
                 <th>Height (cm)</th>
@@ -36,6 +37,7 @@
             @else
                 @foreach($products as $product)
                     <tr>
+                        <td>{{ $product->product_id }}</td>
                         <td>{{ $product->product_name }}</td>
                         <td>£{{ number_format($product->price, 2) }}</td>
                         <td>{{ $product->height }}</td>
@@ -45,7 +47,7 @@
                         <td>{{ optional($product->inventory)->stock_level ?? 0 }}</td>
                         <td>
                             <button class="update-button" onclick="showEditProductModal({{ json_encode($product) }})">Edit</button>
-                            <button class="delete-button" onclick="showDeleteProductModal('{{ $product->id }}')">Delete</button>
+                            <button class="delete-button" onclick="showDeleteProductModal('{{ $product->product_id }}')">Delete</button>
                         </td>
                     </tr>
                 @endforeach
@@ -126,8 +128,8 @@ function showEditProductModal(product) {
     document.getElementById("edit_category_name").value = product.category_name;
     document.getElementById("edit_stock_level").value = product.inventory ? product.inventory.stock_level : 0;
 
-    const updateRoute = @json(route('admin.product.update', ['id' => '__ID__']));
-    document.getElementById("editProductForm").action = updateRoute.replace('__ID__', product.id);
+    const updateRoute = @json(route('admin.product.update', ['id' =>  '__ID__']));
+    document.getElementById("editProductForm").action = updateRoute.replace('__ID__', product.product_id);
     document.getElementById("editProductModal").style.display = "block";
 }
 

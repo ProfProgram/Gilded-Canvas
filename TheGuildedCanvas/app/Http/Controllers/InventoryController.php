@@ -54,7 +54,7 @@ class InventoryController extends Controller
             ]);
 
             Inventory::create([
-                'product_id'   => $product->id,
+                'product_id'   => $product->product_id,
                 'stock_level'  => $validated['stock_level'] ?? 0,
                 'admin_id'     => Admin::where('user_id', Auth::id())->value('admin_id'),
             ]);
@@ -86,7 +86,7 @@ class InventoryController extends Controller
         $product->update($validated);
 
         Inventory::updateOrCreate(
-            ['product_id' => $product->id],
+            ['product_id' => $product->product_id],
             [
                 'stock_level' => $validated['stock_level'],
                 'admin_id'    => Admin::where('user_id', Auth::id())->value('admin_id'),
