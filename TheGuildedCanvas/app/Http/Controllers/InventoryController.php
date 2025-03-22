@@ -186,4 +186,31 @@ class InventoryController extends Controller
         $totalOrders = Order::all()->count();
         return view('admin.dashboard', ['stockChartData' => $parsed, 'pieChartData' => $pieData, 'totalOrders' => $totalOrders]);
     }
+
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $category = $request->input('category');
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
+    
+        $inventory = Inventory::with('product')
+            ->whereHas('product', function ($queryBuilder) use ($query, $category, $minPrice, $maxPrice) {
+                if ($query) {
+                    $queryBuilder->where('product_name', 'LIKE', "%$query%")
+                                ->orWhere('category_name', 'LIKE', "%$query%");
+                }
+                if ($category) {
+                    $queryBuilder->where('category_name', $category);
+                }
+                if ($minPrice !== null && $maxPrice !== null) {
+                    $queryBuilder->whereBetween('price', [$minPrice, $maxPrice]);
+                } elseif ($minPrice !== null) {
+                    $queryBuilder->where('price', '>=', $minPrice);
+                } elseif ($maxPrice !== null) {
+                    $queryBuilder->where('price', '<=', $maxPrice);
+                }
+            })
+            ->get();
+        return view('admin.inventory', compact('inventory'));
+    }
 }

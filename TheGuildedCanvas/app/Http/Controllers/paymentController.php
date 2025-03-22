@@ -54,17 +54,6 @@ class paymentController extends Controller
                         'quantity' => $cartItem->quantity,
                         'price_of_order' => $cartItem->price,
                     ]);
-                    $product = Inventory::where('product_id', $cartItem->product_id)->firstOrFail();
-                    try {
-                        if ($product->update([
-                            'stock_outgoing' => $product->stock_outgoing + $cartItem->quantity,
-                        ])) {
-                            Log::info("Product ID : {$product->product_id} stock outgoing updated to : {$product->stock_outgoing}");
-                        }
-                    } catch (\Exception $e) {
-                        Log::info('Error: when updating inventory_table : '. $e->getMessage());
-                        return redirect()->back()->with('status', 'Stocks could not be updated');
-                    }
                 }
 
                 Cart::where('user_id', $userId)->delete();

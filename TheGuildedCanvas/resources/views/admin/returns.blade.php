@@ -31,12 +31,14 @@
                 <td>{{ $return->created_at }}</td>
                 <td>
                     <!-- Approve Return -->
+                    <!-- Remove approve button if status is approved. This stops admins from being able to easily spam the button, increasing the stock incoming infinitely -->
+                    @if ($return->status !== 'approved')
                     <form action="{{ route('admin.returns.updateStatus', $return->return_id) }}" method="POST" style="display:inline;">
                         @csrf
                         <input type="hidden" name="status" value="approved">
                         <button type="submit" class="btn btn-success btn-sm">Approve</button>
                     </form>
-
+                    @endif
                     <!-- Deny Return -->
                     <form action="{{ route('admin.returns.updateStatus', $return->return_id) }}" method="POST" style="display:inline;">
                         @csrf
