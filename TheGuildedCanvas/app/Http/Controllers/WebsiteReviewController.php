@@ -10,7 +10,11 @@ class WebsiteReviewController extends Controller
 {
    public function create()
 {
+    
     return view('create'); // Laravel will now find it inside resources/views/
+    if (!Auth::check()) {
+        return redirect()->route('sign-in')->with('status', 'Please log in to [action].');
+    }
 }
 
 
