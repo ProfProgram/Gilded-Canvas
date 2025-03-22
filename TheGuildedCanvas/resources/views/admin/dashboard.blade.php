@@ -25,10 +25,12 @@
         </div>
 
         <!-- Placeholder Tabs -->
-        <div class="placeholder-tab">
-            <h4>Placeholder 1</h4>
-            <div class="placeholder-box"></div>
-        </div>
+        <<!-- Active Customers Tab -->
+<div class="placeholder-tab">
+    <h4>Active Customers</h4>
+    <div class="placeholder-box">{{ $activeCustomers }}</div>
+</div>
+
         <div class="placeholder-tab">
             <h4>Placeholder 2</h4>
             <div class="placeholder-box"></div>

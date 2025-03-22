@@ -210,7 +210,14 @@ class InventoryController extends Controller
                     ["Cancelled", ' . $cancelled . ']';
 
         $totalOrders = Order::all()->count();
-        return view('admin.dashboard', ['stockChartData' => $parsed, 'pieChartData' => $pieData, 'totalOrders' => $totalOrders]);
+        $activeCustomers = Order::distinct('user_id')->count('user_id');
+    return view('admin.dashboard', [
+    'stockChartData' => $parsed,
+    'pieChartData' => $pieData,
+    'totalOrders' => $totalOrders,
+    'activeCustomers' => $activeCustomers
+]);
+    
     }
 
     public function search(Request $request) {
