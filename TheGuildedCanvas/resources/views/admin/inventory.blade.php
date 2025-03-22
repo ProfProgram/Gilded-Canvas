@@ -1,58 +1,154 @@
 @extends('layouts.master')
 
 @section('content')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+<div class="container inventory-management">
+    <h2 class="page-title">Inventory Management</h2>
+
+    <!-- Success Message -->
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <div class="container">
-        <h1>Inventory Management</h1>
+    <div class="inventory-header">
+        <button class="update-button" onclick="showAddProductModal()">+ Add Product</button>
+        <form method="GET" action="{{ route('admin.inventory') }}" class="search-container">
+            <input type="text" name="search" class="search-bar"
+                   placeholder="Search products..." 
+                   value="{{ request()->search }}">
+        </form>
+    </div>
 
-        <!-- Add Product Button -->
-        <a href="{{ route('product.create') }}" class="btn btn-warning"
-           style="background-color: #d4af37; color: #1A1A1A; padding: 10px 20px;
-                  border-radius: 5px; font-weight: bold; text-decoration: none; 
-                  display: inline-block; margin-bottom: 20px;">
-            + Add Product
-        </a>
-
-        <table class="table">
-            <thead>
+    <!-- Inventory Table -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Price (£)</th>
+                <th>Height (cm)</th>
+                <th>Width (cm)</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Stock Level</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if($products->isEmpty())
                 <tr>
-                    <th>Product Name</th>
-                    <th>Stock Level</th>
-                    <th>Actions</th>
+                    <td colspan="9" class="no-results">No products found.</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($inventory as $item)
+            @else
+                @foreach($products as $product)
                     <tr>
-                        <td>{{ $item->product->product_name }}</td>
+                        <td>{{ $product->id }}</td>
+                        <td>{{ $product->product_name }}</td>
+                        <td>£{{ number_format($product->price, 2) }}</td>
+                        <td>{{ $product->height }}</td>
+                        <td>{{ $product->width }}</td>
+                        <td>{{ $product->description }}</td>
+                        <td>{{ $product->category_name }}</td>
+                        <td>{{ optional($product->inventory)->stock_level ?? 0 }}</td>
                         <td>
-                            <form action="{{ route('admin.inventory.update', $item->inventory_id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="product_id" value="{{ $item->product_id }}">
-                                <input type="number" name="stock_level" value="{{ $item->stock_level }}" class="form-control" style="width: 100px;" required>
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{{ route('admin.inventory.destroy', $item->inventory_id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                            <button class="update-button" onclick="showEditProductModal({{ json_encode($product) }})">Edit</button>
+                            <button class="delete-button" onclick="showDeleteProductModal({{ $product->id }})">Delete</button>
                         </td>
                     </tr>
                 @endforeach
-            </tbody>
-        </table>
+            @endif
+        </tbody>
+    </table>
+</div>
+
+<!-- Add Product Modal -->
+<div id="addProductModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeAddProductModal()">&times;</span>
+        <h3>Add New Product</h3>
+        <form id="addProductForm" method="POST" action="{{ route('product.store') }}">
+            @csrf
+            <input type="text" name="product_name" placeholder="Product Name" required>
+            <input type="number" name="price" placeholder="Price (£)" step="0.01" required>
+            <input type="number" name="height" placeholder="Height (cm)" required>
+            <input type="number" name="width" placeholder="Width (cm)" required>
+            <input type="text" name="description" placeholder="Description" required>
+            <input type="text" name="category_name" placeholder="Category" required>
+            <input type="number" name="stock_level" placeholder="Stock Level" required>
+            <button type="submit" class="update-button">Add Product</button>
+        </form>
     </div>
+</div>
+
+<!-- Edit Product Modal -->
+<div id="editProductModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditProductModal()">&times;</span>
+        <h3>Edit Product Details</h3>
+        <form id="editProductForm" method="POST" action="">
+            @csrf
+            @method('PUT')
+            <input type="hidden" id="edit_product_id" name="product_id">
+            <input type="text" id="edit_product_name" name="product_name" placeholder="Product Name" required>
+            <input type="number" id="edit_price" name="price" placeholder="Price (£)" step="0.01" required>
+            <input type="number" id="edit_height" name="height" placeholder="Height (cm)" required>
+            <input type="number" id="edit_width" name="width" placeholder="Width (cm)" required>
+            <input type="text" id="edit_description" name="description" placeholder="Description" required>
+            <input type="text" id="edit_category_name" name="category_name" placeholder="Category" required>
+            <input type="number" id="edit_stock_level" name="stock_level" placeholder="Stock Level" required>
+            <button type="submit" class="update-button">Update Product</button>
+        </form>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteProductModal" class="modal">
+    <div class="modal-content">
+        <h3>Are you sure?</h3>
+        <p>Do you really want to delete this product? This action cannot be undone.</p>
+        <form id="deleteProductForm" method="POST" action="">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="update-button">Yes, Delete</button>
+            <button type="button" class="update-button cancel-button" onclick="closeDeleteProductModal()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<!-- JavaScript for Modal Handling -->
+<script>
+function showAddProductModal() {
+    document.getElementById("addProductModal").style.display = "block";
+}
+
+function closeAddProductModal() {
+    document.getElementById("addProductModal").style.display = "none";
+}
+
+function showEditProductModal(product) {
+    document.getElementById("edit_product_id").value = product.id;
+    document.getElementById("edit_product_name").value = product.product_name;
+    document.getElementById("edit_price").value = product.price;
+    document.getElementById("edit_height").value = product.height;
+    document.getElementById("edit_width").value = product.width;
+    document.getElementById("edit_description").value = product.description;
+    document.getElementById("edit_category_name").value = product.category_name;
+    document.getElementById("edit_stock_level").value = product.inventory ? product.inventory.stock_level : 0;
+    document.getElementById("editProductForm").action = "/admin/product/update/" + product.id;
+    document.getElementById("editProductModal").style.display = "block";
+}
+
+function closeEditProductModal() {
+    document.getElementById("editProductModal").style.display = "none";
+}
+
+function showDeleteProductModal(productId) {
+    document.getElementById("deleteProductForm").action = "/admin/product/delete/" + productId;
+    document.getElementById("deleteProductModal").style.display = "block";
+}
+
+function closeDeleteProductModal() {
+    document.getElementById("deleteProductModal").style.display = "none";
+}
+</script>
+
 @endsection

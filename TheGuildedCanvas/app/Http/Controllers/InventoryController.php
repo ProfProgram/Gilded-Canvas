@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Models\Inventory;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InventoryController extends Controller
 {
     /**
-     * Constructor - Apply admin middleware to all methods.
+     * Constructor - Apply admin role check to all methods.
      */
     public function __construct()
     {
@@ -24,50 +24,12 @@ class InventoryController extends Controller
     }
 
     /**
-     * Display the inventory page.
+     * Display the inventory management page.
      */
     public function index()
     {
-        // Fetch all inventory items with their associated products
-        $inventory = Inventory::with('product')->get();
-
-        return view('admin.inventory', compact('inventory'));
-    }
-
-    /**
-     * Update an existing inventory item.
-     */
-    public function update(Request $request, $id)
-    {
-        // Validate the request data
-        $validatedData = $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'stock_level' => 'required|integer|min:0',
-        ]);
-
-        // Find the inventory item
-        $inventory = Inventory::findOrFail($id);
-
-        // Update inventory details
-        $inventory->update([
-            'product_id' => $validatedData['product_id'],
-            'stock_level' => $validatedData['stock_level'],
-            'admin_id' => Admin::where('user_id', Auth::id())->value('admin_id'),
-        ]);
-
-        return redirect()->route('admin.inventory')->with('status', 'Inventory updated successfully!');
-    }
-
-    /**
-     * Delete an inventory item.
-     */
-    public function destroy($id)
-    {
-        // Find the inventory item
-        $inventory = Inventory::findOrFail($id);
-        $inventory->delete();
-
-        return redirect()->route('admin.inventory')->with('status', 'Inventory item deleted successfully!');
+        $products = Product::with('inventory')->get(); // eager load inventory relationship
+        return view('admin.inventory', compact('products'));
     }
 
     /**
@@ -75,16 +37,15 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create'); // Ensure this view exists
+        return view('admin.product.create');
     }
 
     /**
-     * Store a newly created product.
+     * Store a newly created product and add it to inventory.
      */
     public function store(Request $request)
     {
-        // Validate form input
-        $validatedData = $request->validate([
+        $validated = $request->validate([
             'product_name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
             'height' => 'required|numeric|min:0',
@@ -93,27 +54,85 @@ class InventoryController extends Controller
             'category_name' => 'required|string|max:255',
         ]);
 
-        // Create and save the product
-        $product = Product::create([
-            'product_name' => $validatedData['product_name'],
-            'price' => $validatedData['price'],
-            'height' => $validatedData['height'],
-            'width' => $validatedData['width'],
-            'description' => $validatedData['description'],
-            'category_name' => $validatedData['category_name'],
-        ]);
+        $product = Product::create($validated);
 
-        // Add the new product to the inventory with an initial stock level
         Inventory::create([
-            'product_id' => $product->id,  // Link inventory to the new product
-            'stock_level' => 0, // Default stock level (can be updated later)
+            'product_id' => $product->id,
+            'stock_level' => 0,
             'admin_id' => Admin::where('user_id', Auth::id())->value('admin_id'),
         ]);
 
         return redirect()->route('admin.inventory')->with('success', 'Product added successfully!');
     }
 
-    
+    /**
+     * Update an existing product and its inventory.
+     */
+    public function updateProduct(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'product_name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'height' => 'required|numeric|min:0',
+            'width' => 'required|numeric|min:0',
+            'description' => 'required|string',
+            'category_name' => 'required|string|max:255',
+            'stock_level' => 'required|integer|min:0',
+        ]);
 
+        $product = Product::findOrFail($id);
+        $product->update($validated);
 
+        Inventory::updateOrCreate(
+            ['product_id' => $product->id],
+            [
+                'stock_level' => $validated['stock_level'],
+                'admin_id' => Admin::where('user_id', Auth::id())->value('admin_id'),
+            ]
+        );
+
+        return redirect()->route('admin.inventory')->with('success', 'Product updated successfully.');
+    }
+
+    /**
+     * Delete a product and its inventory (if any).
+     */
+    public function destroyProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete(); // Will also delete inventory if cascade is set
+
+        return redirect()->route('admin.inventory')->with('success', 'Product deleted successfully.');
+    }
+
+    /**
+     * (Optional) Update just inventory stock level.
+     */
+    public function updateStock(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'stock_level' => 'required|integer|min:0',
+        ]);
+
+        $inventory = Inventory::findOrFail($id);
+        $inventory->update([
+            'product_id' => $validated['product_id'],
+            'stock_level' => $validated['stock_level'],
+            'admin_id' => Admin::where('user_id', Auth::id())->value('admin_id'),
+        ]);
+
+        return redirect()->route('admin.inventory')->with('status', 'Stock updated successfully!');
+    }
+
+    /**
+     * (Optional) Delete only inventory entry.
+     */
+    public function destroyInventory($id)
+    {
+        $inventory = Inventory::findOrFail($id);
+        $inventory->delete();
+
+        return redirect()->route('admin.inventory')->with('status', 'Inventory item deleted.');
+    }
 }

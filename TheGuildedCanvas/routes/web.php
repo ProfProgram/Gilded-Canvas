@@ -26,7 +26,6 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Models\User;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\UserManagementController;
-Route::post('/admin/product/store', [InventoryController::class, 'store'])->name('product.store');
 
 
 
@@ -153,3 +152,7 @@ Route::delete('/admin/customers/{id}/delete', [CustomerController::class, 'destr
 
 Route::get('/admin/product/create', [InventoryController::class, 'create'])->name('product.create');
 Route::post('/admin/product/store', [InventoryController::class, 'store'])->name('product.store');
+
+
+Route::put('/admin/product/update/{id}', [InventoryController::class, 'updateProduct'])->name('admin.product.update');
+Route::delete('/admin/product/delete/{id}', [InventoryController::class, 'destroyProduct'])->name('admin.product.destroy');
