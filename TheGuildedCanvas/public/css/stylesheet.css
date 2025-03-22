@@ -1549,39 +1549,38 @@ display: flex;
 }
 
 
-/* DASHBOARD */
+/* NEW STYLES FOR REORGANIZED DASHBOARD */
 
-.charts {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    place-items: center;
-    place-self: center;
-    height: 100vh;
+.tracking-section {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    padding: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-.divider {
-    width: 100%;
-    border: 1px solid #000;
-    margin: 2px 0;
-}
-
-.tracking-tabs {
-    width: 100%;
-    height: 100%;
-}
-
-.tracking-tabs h4 {
-    justify-self: center;
-}
-
-.total-orders {
-    justify-self: center;
+.tracking-tabs, .placeholder-tab {
+    background-color: white;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+}
+
+.placeholder-box {
     padding: 10px;
+    font-style: italic;
+    color: #666;
 }
 
-.tO-data {
-    justify-self: center;
+.chart-card {
+    background-color: white;
+    margin: 20px auto;
+    padding: 20px;
+    width: fit-content;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    text-align: center;
 }
-
