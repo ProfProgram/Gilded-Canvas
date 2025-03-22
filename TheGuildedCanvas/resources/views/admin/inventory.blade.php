@@ -147,7 +147,7 @@ $categories = $inventory->filter(fn($item) => $item->product)->pluck('product.ca
         <div class="modal-content">
             <span class="close" onclick="closeAddProductModal()">&times;</span>
             <h3>Add New Product</h3>
-            <form id="addProductForm" method="POST" action="{{ route('product.store') }}">
+            <form id="addProductForm" method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
                 @csrf
                 <input type="text" name="product_name" placeholder="Product Name" required>
                 <input type="number" name="price" placeholder="Price (£)" step="0.01" required>
@@ -158,6 +158,7 @@ $categories = $inventory->filter(fn($item) => $item->product)->pluck('product.ca
                 <input type="number" name="stock_level" placeholder="Stock Level" required>
                 <input type="number" name="stock_incoming" placeholder="Stock incoming" required>
                 <input type="number" name="stock_outgoing" placeholder="Stock outgoing" required>
+                <input type="file" name="product_image" accept=".png" placeholder="File names will be overwritten when saved.png" required>
                 <button type="submit" class="update-button">Add Product</button>
             </form>
         </div>

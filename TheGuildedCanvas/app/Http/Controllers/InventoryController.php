@@ -11,16 +11,6 @@ use Illuminate\Http\Request;
 
 class InventoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(function ($request, $next) {
-            if (auth()->user()->role !== \App\Enums\UserRole::admin) {
-                return redirect('/home')->with('error', 'You do not have access to this page.');
-            }
-            return $next($request);
-        });
-    }
-
     public function index()
     {
         // Check if user is logged in first or role will read as null throwing error
@@ -96,6 +86,7 @@ class InventoryController extends Controller
             'stock_level'    => 'nullable|integer|min:0',
             'stock_incoming'    => 'nullable|integer|min:0',
             'stock_outgoing'    => 'nullable|integer|min:0',
+            'product_image'  => 'nullable|mimes:png|image|max:2048',
         ]);
 
         try {
@@ -115,6 +106,22 @@ class InventoryController extends Controller
                 'stock_outgoing'  => $validated['stock_outgoing'] ?? 0,
                 'admin_id'     => Admin::where('user_id', Auth::id())->value('admin_id'),
             ]);
+
+            if ($request->hasFile('product_image')) {
+                \Log::info('Product image detected in request!');
+                \Log::info('Uploaded file details:', [
+                    'Original Name' => $request->file('product_image')->getClientOriginalName(),
+                    'Mime Type'     => $request->file('product_image')->getClientMimeType(),
+                ]);
+    
+    
+                $productId = $product->product_id;
+                $fileName = "img-{$productId}.png";
+                $destinationPath = public_path('images/products');
+    
+                // Move the uploaded file to the correct directory
+                $request->file('product_image')->move($destinationPath, $fileName);
+            }
 
             return redirect()->route('admin.inventory')->with('status', 'Product added successfully!');
         } catch (\Illuminate\Database\QueryException $e) {
@@ -160,32 +167,16 @@ class InventoryController extends Controller
     public function destroyProduct($id)
     {
         $product = Product::findOrFail($id);
+
+        $imagePath = public_path('images/products/img-' . $product->product_id . '.png');
+    
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
         $product->delete();
 
         return redirect()->route('admin.inventory')->with('status', 'Product deleted successfully!');
-    }
-
-    public function updateStock(Request $request, $id)
-    {
-        $validated = $request->validate([
-            'stock_level' => 'required|integer|min:0',
-        ]);
-
-        $inventory = Inventory::findOrFail($id);
-        $inventory->update([
-            'stock_level' => $validated['stock_level'],
-            'admin_id'    => Admin::where('user_id', Auth::id())->value('admin_id'),
-        ]);
-
-        return redirect()->route('admin.inventory')->with('status', 'Stock updated successfully!');
-    }
-
-    public function destroyInventory($id)
-    {
-        $inventory = Inventory::findOrFail($id);
-        $inventory->delete();
-
-        return redirect()->route('admin.inventory')->with('status', 'Inventory item deleted.');
     }
 
     public function dashboard() {
