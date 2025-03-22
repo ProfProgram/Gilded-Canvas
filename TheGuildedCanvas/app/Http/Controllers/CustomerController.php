@@ -16,7 +16,10 @@ class CustomerController extends Controller
      */
     public function manage(Request $request)
     {
-       if (auth()->user()->role !== \App\Enums\UserRole::admin) {
+        if (!Auth::check()) {
+            return redirect()->route('sign-in')->with('status', 'Please log in to view.');
+        }
+        if (auth()->user()->role !== \App\Enums\UserRole::admin) {
             return redirect('/home')->with('status', 'You do not have access to this page.');
         }
        

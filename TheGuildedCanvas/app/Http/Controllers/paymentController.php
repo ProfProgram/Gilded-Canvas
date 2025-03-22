@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Cart;
 use App\Models\OrderDetail;
+use App\Models\Inventory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -62,7 +63,8 @@ class paymentController extends Controller
                 return redirect()->back()->with('status', 'Order could not be made');
             }
         } catch (\Exception $e) {
-            return redirect()->back()->with('status', 'Error: ' . $e->getMessage());
+            Log::info('Error: When saving order : ' . $e->getMessage());
+            return redirect()->back()->with('status', 'Error: Order could not be made');
         }
     }
 }

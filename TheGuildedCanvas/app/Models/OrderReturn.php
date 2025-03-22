@@ -8,16 +8,16 @@ class OrderReturn extends Model
 {
     use HasFactory;
 
-    protected $table = 'Returns Table';
+    protected $table = 'returns_table';
+
+    protected $primaryKey = 'return_id';
 
     protected $fillable = [
-        'Order_id',
-        'Product_id',
-        'User_id',
-        'Admin_id',
-        'Return_reason',
-        'Return_status',
-        'Return_date'
+        'order_id',
+        'product_id',
+        'user_id',
+        'reason',
+        'status',
     ];
 
     /**
@@ -27,21 +27,16 @@ class OrderReturn extends Model
 
     public function order()
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class, 'order_id');
     }
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function admin()
-    {
-        return $this->belongsTo(admin::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

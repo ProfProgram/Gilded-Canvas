@@ -77,8 +77,12 @@
                             @csrf
                             @method('PUT')
                             <select name="status" class="status-select">
-                                <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
+                                <!-- removing pending from select when another option is picked will stop a bug
+                                    where switching back and forth between shipped/delivered and pending/cancelled would increase stock outgoing, indefinitely -->
+                                @if ($order->status === 'pending')
+                                    <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                @endif
+                                    <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
                                 <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
                                 <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                             </select>

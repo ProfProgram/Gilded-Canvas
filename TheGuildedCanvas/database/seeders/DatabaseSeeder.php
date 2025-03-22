@@ -360,16 +360,169 @@ class DatabaseSeeder extends Seeder
                 'product_id' => 1,
                 'admin_id' => 1,
                 'stock_level' => 150,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
             ],
             [
                 'product_id' => 2,
                 'admin_id' => 2,
                 'stock_level' => 230,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
             ],
             [
                 'product_id' => 3,
                 'admin_id' => 3,
                 'stock_level' => 300,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 4,
+                'admin_id' => 1,
+                'stock_level' => 150,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 5,
+                'admin_id' => 2,
+                'stock_level' => 230,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 6,
+                'admin_id' => 3,
+                'stock_level' => 300,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 7,
+                'admin_id' => 1,
+                'stock_level' => 150,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 8,
+                'admin_id' => 2,
+                'stock_level' => 230,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 9,
+                'admin_id' => 3,
+                'stock_level' => 300,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 10,
+                'admin_id' => 1,
+                'stock_level' => 150,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 12,
+                'admin_id' => 2,
+                'stock_level' => 230,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 13,
+                'admin_id' => 3,
+                'stock_level' => 300,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 14,
+                'admin_id' => 1,
+                'stock_level' => 150,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 15,
+                'admin_id' => 2,
+                'stock_level' => 230,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 16,
+                'admin_id' => 3,
+                'stock_level' => 300,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 17,
+                'admin_id' => 1,
+                'stock_level' => 150,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 18,
+                'admin_id' => 2,
+                'stock_level' => 230,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 19,
+                'admin_id' => 3,
+                'stock_level' => 300,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 20,
+                'admin_id' => 1,
+                'stock_level' => 150,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 21,
+                'admin_id' => 2,
+                'stock_level' => 230,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 22,
+                'admin_id' => 3,
+                'stock_level' => 300,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 23,
+                'admin_id' => 1,
+                'stock_level' => 150,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 24,
+                'admin_id' => 2,
+                'stock_level' => 230,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
+            ],
+            [
+                'product_id' => 25,
+                'admin_id' => 3,
+                'stock_level' => 300,
+                'stock_incoming' => rand(1, 10),
+                'stock_outgoing' => rand(1, 10),
             ],
         ];
         foreach($inventory as $invData) {
@@ -499,38 +652,34 @@ class DatabaseSeeder extends Seeder
         /**
           * returns dummy data
           */
-        // not needed for MVP
-        // $returns = [
-        //     [
-        //         'order_id' => 1,
-        //         'product_id' => 1,
-        //         'user_id' => 1,
-        //         'admin_id' => 1,
-        //         'return_reason' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        //         'return_status' => 'Refunded',
-        //         'return_date' => '2024-11-19 17:04:30',
-        //     ],
-        //     [
-        //         'Order_id' => 2,
-        //         'Product_id' => 2,
-        //         'User_id' => 2,
-        //         'Admin_id' => 2,
-        //         'Return_reason' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        //         'Return_status' => 'Approved',
-        //         'Return_date' => '2024-11-19 17:04:30',
-        //     ],
-        //     [
-        //         'Order_id' => 3,
-        //         'Product_id' => 3,
-        //         'User_id' => 3,
-        //         'Admin_id' => 3,
-        //         'Return_reason' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        //         'Return_status' => 'Cancelled',
-        //         'Return_date' => '2024-11-19 17:04:30',
-        //     ],
-        // ];
-        // foreach($returns as $returnData) {
-        //     OrderReturn::firstOrCreate($returnData);
-        // }
+        $returns = [
+            [
+                'order_id' => 1,
+                'product_id' => 1,
+                'user_id' => 1,
+                'quantity'=> 5,
+                'reason' => 'The items were damaged when I received it',
+                'status' => 'approved',
+            ],
+            [
+                'order_id' => 1,
+                'product_id' => 2,
+                'user_id' => 1,
+                'quantity'=> 2,
+                'reason' => 'The items were damaged when I received it',
+                'status' => 'Approved',
+            ],
+            [
+                'order_id' => 3,
+                'product_id' => 4,
+                'user_id' => 5,
+                'quantity'=> 1,
+                'reason' => 'I changed my mind after I made the purchase',
+                'status' => 'denied',
+            ],
+        ];
+        foreach($returns as $returnData) {
+            OrderReturn::firstOrCreate($returnData);
+        }
     }
 }
