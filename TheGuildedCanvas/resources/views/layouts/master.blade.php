@@ -32,6 +32,7 @@
                     <span class="cart-item-count">({{$cartCount}})</span>
                 </a>
                 <a href="/previous-orders">Previous Orders</a>
+
                 <!-- Role-Specific Links -->
                  <!-- Admin Dropdown Menu -->
                  @if(Auth::user()->role === \App\Enums\UserRole::admin)
@@ -49,6 +50,9 @@
                 @if(Auth::user()->role === \App\Enums\UserRole::manager)
                     <a href="{{ route('manager.users') }}">Manage Users</a>
                 @endif
+                <a href="/account" class="cart-icon">
+                    <img src="{{ asset('images/profile.png') }}" alt="Account Centre" class="cart-icon-img">
+                </a>
                 <form action="{{ route('logout') }}" method="POST" class="inline-form">
                     @csrf
                     <button type="submit" class="logout-link">Logout</button>
