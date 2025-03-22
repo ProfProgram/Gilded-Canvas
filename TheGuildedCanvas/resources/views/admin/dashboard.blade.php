@@ -16,15 +16,13 @@
 
     <!-- Top Tracking Tabs Section -->
     <section class="tracking-section">
-        <div class="tracking-tabs">
-            <h4>Tracking Tabs</h4>
-            <div class="total-orders">
-                <h5>Total Orders</h5>
-                <h5 class="tO-data">{{ $totalOrders }}</h5>
-            </div>
-        </div>
+    <!-- Total Orders Tab -->
+    <div class="placeholder-tab">
+        <h4>Total Orders</h4>
+        <div class="placeholder-box">{{ $totalOrders }}</div>
+    </div>
 
-        <!-- Placeholder Tabs -->
+        
        <!-- Active Customers Tab -->
 
 <div class="placeholder-tab">
