@@ -29,6 +29,7 @@ use App\Http\Controllers\UserManagementController;
 
 
 
+
 Auth::routes(['verify' => true]);
 
 // Admin routes
@@ -156,3 +157,11 @@ Route::post('/admin/product/store', [InventoryController::class, 'store'])->name
 
 Route::put('/admin/product/update/{id}', [InventoryController::class, 'updateProduct'])->name('admin.product.update');
 Route::delete('/admin/product/delete/{id}', [InventoryController::class, 'destroyProduct'])->name('admin.product.destroy');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/inventory', [InventoryController::class, 'index'])->name('admin.inventory');
+    Route::get('/admin/product/create', [InventoryController::class, 'create'])->name('product.create');
+    Route::post('/admin/product/store', [InventoryController::class, 'store'])->name('product.store');
+    Route::put('/admin/product/update/{id}', [InventoryController::class, 'updateProduct'])->name('admin.product.update');
+    Route::delete('/admin/product/delete/{id}', [InventoryController::class, 'destroyProduct'])->name('admin.product.destroy');
+});

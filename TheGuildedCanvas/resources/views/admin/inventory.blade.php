@@ -4,7 +4,6 @@
 <div class="container inventory-management">
     <h2 class="page-title">Inventory Management</h2>
 
-    <!-- Success Message -->
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -12,17 +11,13 @@
     <div class="inventory-header">
         <button class="update-button" onclick="showAddProductModal()">+ Add Product</button>
         <form method="GET" action="{{ route('admin.inventory') }}" class="search-container">
-            <input type="text" name="search" class="search-bar"
-                   placeholder="Search products..." 
-                   value="{{ request()->search }}">
+            <input type="text" name="search" class="search-bar" placeholder="Search products..." value="{{ request()->search }}">
         </form>
     </div>
 
-    <!-- Inventory Table -->
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Product Name</th>
                 <th>Price (£)</th>
                 <th>Height (cm)</th>
@@ -41,7 +36,6 @@
             @else
                 @foreach($products as $product)
                     <tr>
-                        <td>{{ $product->id }}</td>
                         <td>{{ $product->product_name }}</td>
                         <td>£{{ number_format($product->price, 2) }}</td>
                         <td>{{ $product->height }}</td>
@@ -51,7 +45,7 @@
                         <td>{{ optional($product->inventory)->stock_level ?? 0 }}</td>
                         <td>
                             <button class="update-button" onclick="showEditProductModal({{ json_encode($product) }})">Edit</button>
-                            <button class="delete-button" onclick="showDeleteProductModal({{ $product->id }})">Delete</button>
+                            <button class="delete-button" onclick="showDeleteProductModal('{{ $product->id }}')">Delete</button>
                         </td>
                     </tr>
                 @endforeach
@@ -87,7 +81,6 @@
         <form id="editProductForm" method="POST" action="">
             @csrf
             @method('PUT')
-            <input type="hidden" id="edit_product_id" name="product_id">
             <input type="text" id="edit_product_name" name="product_name" placeholder="Product Name" required>
             <input type="number" id="edit_price" name="price" placeholder="Price (£)" step="0.01" required>
             <input type="number" id="edit_height" name="height" placeholder="Height (cm)" required>
@@ -125,7 +118,6 @@ function closeAddProductModal() {
 }
 
 function showEditProductModal(product) {
-    document.getElementById("edit_product_id").value = product.id;
     document.getElementById("edit_product_name").value = product.product_name;
     document.getElementById("edit_price").value = product.price;
     document.getElementById("edit_height").value = product.height;
@@ -133,7 +125,9 @@ function showEditProductModal(product) {
     document.getElementById("edit_description").value = product.description;
     document.getElementById("edit_category_name").value = product.category_name;
     document.getElementById("edit_stock_level").value = product.inventory ? product.inventory.stock_level : 0;
-    document.getElementById("editProductForm").action = "/admin/product/update/" + product.id;
+
+    const updateRoute = @json(route('admin.product.update', ['id' => '__ID__']));
+    document.getElementById("editProductForm").action = updateRoute.replace('__ID__', product.id);
     document.getElementById("editProductModal").style.display = "block";
 }
 
@@ -142,7 +136,8 @@ function closeEditProductModal() {
 }
 
 function showDeleteProductModal(productId) {
-    document.getElementById("deleteProductForm").action = "/admin/product/delete/" + productId;
+    const deleteRoute = @json(route('admin.product.destroy', ['id' => '__ID__']));
+    document.getElementById("deleteProductForm").action = deleteRoute.replace('__ID__', productId);
     document.getElementById("deleteProductModal").style.display = "block";
 }
 
@@ -150,5 +145,4 @@ function closeDeleteProductModal() {
     document.getElementById("deleteProductModal").style.display = "none";
 }
 </script>
-
 @endsection
