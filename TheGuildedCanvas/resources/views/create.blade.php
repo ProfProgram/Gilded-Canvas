@@ -2,7 +2,6 @@
 	
 	@section('content')
 	<!-- Add this link tag at the top inside your Blade file -->
-	<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
 	
 	<div class="container my-5">
 	    <div class="text-center mb-5">
@@ -10,16 +9,16 @@
 	    Rate Your Experience on <span class="text-warning">The Gilded Canvas</span>
 	</h1>
 	
-	          <p class="lead" style="max-width: 800px; margin: auto;font-size: 1rem; font-weight: 225;"">Your feedback helps us improve our services and provide the best experience for our customers.</p>
+	        <p class="lead" style="max-width: 800px; margin: auto;font-size: 1rem; font-weight: 225;"">Your feedback helps us improve our services and provide the best experience for our customers.</p>
 	    
 	    </div>
 	@if(session('success'))
-	    <div class="alert alert-success text-center fw-bold" style="font-size: 0.6rem; color: white;">
+	    <div class="alert alert-success text-center fw-bold" style="">
 	        {{ session('success') }}
 	    </div>
 	@endif
 	
-	    <form action="{{ route('website.review.store') }}" method="POST" style="max-width: 500px; margin: auto;">
+		<form action="{{ route('website.review.store') }}" method="POST" style="max-width: 500px; margin: auto;">
 	        @csrf
 	
 	        {{-- ⭐ Star Rating Styles --}}
@@ -57,16 +56,7 @@
 	            }
 	            .form-select,
 	            .form-control {
-	                font-size: 0.5rem;
-	                padding: 7px;
-	                border-radius: 5px;
-	                border: 1px solid #ddd;
-	                width: 150%;
-	            }
-	            .text-center h3 {
 	                font-size: 1rem;
-	                font-weight: bold;
-	                margin-top: 15px;
 	            }
 	            
 	        .container {
@@ -161,11 +151,11 @@
 	            <div class="d-flex justify-content-center">
 	                <div class="form-check mx-3">
 	                    <input type="radio" id="recommend_yes" name="recommend" value="Yes" class="form-check-input" required>
-	                    <label for="recommend_yes" class="form-check-label" style="font-size: 1.5rem;">Yes</label>
+	                    <label for="recommend_yes" class="form-check-label" style="font-size: 1.2rem;">Yes</label>
 	                </div>
 	                <div class="form-check mx-3">
 	                    <input type="radio" id="recommend_no" name="recommend" value="No" class="form-check-input" required>
-	                    <label for="recommend_no" class="form-check-label" style="font-size: 1.5rem;">No</label>
+	                    <label for="recommend_no" class="form-check-label" style="font-size: 1.2rem;">No</label>
 	                </div>
 	            </div>
 	        </div>
@@ -173,12 +163,12 @@
 	        {{-- 📝 Feedback Text --}}
 	        <div class="form-group">
 	            <h3 class="fw-bold text-center">Additional Comments (optional):</h3>
-	            <textarea name="review_text" class="form-control" style="height: 160px;" maxlength="1000"></textarea>
+	            <textarea name="review_text" class="form-control" style="height: 160px; resize: none;" maxlength="1000"></textarea>
 	        </div>
 	
 	        {{-- ✅ Submit Button with Loading Effect --}}
 	        <div class="text-center mt-4">
-	            <button type="submit" class="btn btn-warning btn-lg fw-bold px-5 py-3 btn-submit">
+	            <button type="submit" class="webRev-submitBtn">
 	                Submit Review
 	            </button>
 	        </div>

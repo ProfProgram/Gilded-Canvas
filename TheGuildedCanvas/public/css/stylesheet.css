@@ -1062,7 +1062,8 @@ form label {
     margin-bottom: 5px;
 }
 
-form input, form textarea {
+form input, form textarea,
+.form-control, .form-select {
     width: 100%;
     padding: 8px;
     margin-bottom: 20px;
@@ -1075,7 +1076,9 @@ form input, form textarea {
 
 form input:focus,
 form textarea:focus,
-form select:focus {
+form select:focus,
+.form-select:focus,
+.form-control:focus {
     border-color: #f1c40f;
     outline: none;
     box-shadow: 0 0 6px rgba(241, 196, 15, 0.5);
@@ -1089,7 +1092,9 @@ form button,
 .continue-shopping-button,
 .update-basket-button,
 .reorder-button,
-.return-button {
+.return-button,
+.webRev-submitBtn,
+.rate-link-custom {
     background-color: #d4af37;
     color: #1A1A1A;
     padding: 10px 20px;
@@ -1098,6 +1103,7 @@ form button,
     transition: color 0.3s ease;
     border: none;
     margin: 5px;
+    text-decoration: none;
 }
 
 form button:hover,
@@ -1108,7 +1114,9 @@ form button:hover,
 .continue-shopping-button:hover,
 .update-basket-button:hover,
 .reorder-button:hover,
-.return-button:hover {
+.return-button:hover,
+.webRev-submitBtn:hover,
+.rate-link-custom:hover {
     color: #ffffff;
 }
 
