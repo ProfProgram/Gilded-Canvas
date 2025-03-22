@@ -173,6 +173,26 @@ return new class extends Migration
                 $table->timestamps();
         });
         }
+
+        if (!Schema::hasTable('website_reviews')) {
+            Schema::create('website_reviews', function (Blueprint $table) {
+                $table->increments('id');
+                $table->unsignedInteger('user_id');
+                $table->integer('rating');
+                // remember to make Rating a drop down of 0 to 5
+                $table->text('review_text')->nullable()->default(null);
+                $table->integer('ease_of_use')->nullable()->default(null);
+                $table->integer('checkout_process')->nullable()->default(null);
+                $table->integer('product_info')->nullable();
+                $table->integer('delivery_experience')->nullable()->default(null);
+                $table->integer('customer_support')->nullable()->default(null);
+                $table->string('best_feature')->nullable()->default(null);
+                $table->string('improvement_area')->nullable()->default(null);
+                $table->enum('recommend', ['Yes', 'No'])->nullable()->default(null);
+                $table->foreign('user_id')->references('user_id')->on('users_table')->onDelete('cascade');
+                $table->timestamps();
+        });
+        }
     }
 
     /**
@@ -190,5 +210,6 @@ return new class extends Migration
         Schema::dropIfExists('reviews_table');
         Schema::dropIfExists('returns_table');
         Schema::dropIfExists('cart_table');
+        Schema::dropIfExists('website_reviews');
     }
 };

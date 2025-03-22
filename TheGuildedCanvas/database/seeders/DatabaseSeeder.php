@@ -13,6 +13,7 @@ use App\Models\OrderDetail;
 use App\Models\OrderReturn;
 use App\Models\Cart;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\WebsiteReview;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -680,6 +681,52 @@ class DatabaseSeeder extends Seeder
         ];
         foreach($returns as $returnData) {
             OrderReturn::firstOrCreate($returnData);
+        }
+
+        // Dummy data for website_review
+        $webRev = [
+            [
+                'user_id' => 1,
+                'rating' => 4,
+                'review_text' => null,
+                'ease_of_use'=> 5,
+                'checkout_process' => 5,
+                'product_info' => 5,
+                'delivery_experience' => 5,
+                'customer_support' => 5,
+                'best_feature' => 'Website Design',
+                'improvement_area' => 'Mobile Experience',
+                'recommend' => 'Yes',
+            ],
+            [
+                'user_id' => 9,
+                'rating' => 5,
+                'review_text' => null,
+                'ease_of_use'=> 5,
+                'checkout_process' => 5,
+                'product_info' => 4,
+                'delivery_experience' => 5,
+                'customer_support' => 5,
+                'best_feature' => 'Product Quality',
+                'improvement_area' => 'Payment Options',
+                'recommend' => 'Yes',
+            ],
+            [
+                'user_id' => 5,
+                'rating' => 5,
+                'review_text' => 'Hello, this is a very cool website. Would site again.',
+                'ease_of_use'=> 4,
+                'checkout_process' => 3,
+                'product_info' => 5,
+                'delivery_experience' => 5,
+                'customer_support' => 3,
+                'best_feature' => 'Website Design',
+                'improvement_area' => 'Shipping Time',
+                'recommend' => 'Yes',
+            ],
+        ];
+        foreach($webRev as $web) {
+            WebsiteReview::firstOrCreate($web);
         }
     }
 }
