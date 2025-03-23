@@ -1549,39 +1549,76 @@ display: flex;
 }
 
 
-/* DASHBOARD */
+/* NEW STYLES FOR REORGANIZED DASHBOARD */
 
-.charts {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    place-items: center;
-    place-self: center;
-    height: 100vh;
+.tracking-section {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    padding: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-.divider {
-    width: 100%;
-    border: 1px solid #000;
-    margin: 2px 0;
-}
-
-.tracking-tabs {
-    width: 100%;
-    height: 100%;
-}
-
-.tracking-tabs h4 {
-    justify-self: center;
-}
-
-.total-orders {
-    justify-self: center;
+.tracking-tabs, .placeholder-tab {
+    background-color: white;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-    padding: 10px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+}
+.placeholder-tab {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-top: 5px solid #d4af37; /* gold accent */
+    transition: transform 0.3s ease;
+}
+.placeholder-tab h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-family: 'Merriweather', serif;
 }
 
-.tO-data {
-    justify-self: center;
+.placeholder-box {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #000;
+    font-style: italic;
+    font-family: 'Merriweather', serif;
+}
+.placeholder-tab:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+.tracking-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.placeholder-tab {
+    flex: 1 1 250px;
+    max-width: 300px;
+}
+
+
+
+
+.chart-card {
+    background-color: white;
+    margin: 20px auto;
+    padding: 20px;
+    width: fit-content;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    text-align: center;
 }
 
