@@ -80,41 +80,83 @@
     <div class="slider">
         <button class="slider-btn prev-btn">&#10094;</button>
         <div class="slider-track">
-            <a class="product-slide">
+            <a class="product-slide" href="{{ url('/product/Gilded Frame Art') }}">
                 <img src="{{ asset('images/products/img-12.png') }}" alt="Gilded Frame Art">
                 <p>Gilded Frame Art</p>
-                <p class="price">&pound;199</p>
-                <button class="btn">Add to Cart</button>
+                <p class="price">£199</p>
+                <form action="{{ route('cart.add') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <input type="hidden" name="product_id" value="12">
+                    <input type="hidden" name="product_name" value="Gilded Frame Art">
+                    <input type="hidden" name="price" value="199">
+                    <input type="hidden" name="cartQuan_add" value="1">
+                    <button type="submit" class="btn">Add to Cart</button>
+                </form>
             </a>
-            <a class="product-slide">
-                <img src="{{ asset('images/products/img-13.png') }}" alt="Golden Vase">
-                <p>Golden Vase</p>
-                <p class="price">&pound;149</p>
-                <button class="btn">Add to Cart</button>
+            <a class="product-slide" href="{{ url('/product/Golden Bloom Vase') }}">
+                <img src="{{ asset('images/products/img-13.png') }}" alt="Golden Bloom Vase">
+                <p>Golden Bloom Vase</p>
+                <p class="price">£149</p>
+                <form action="{{ route('cart.add') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <input type="hidden" name="product_id" value="13">
+                    <input type="hidden" name="product_name" value="Golden Bloom Vase">
+                    <input type="hidden" name="price" value="149">
+                    <input type="hidden" name="cartQuan_add" value="1">
+                    <button type="submit" class="btn">Add to Cart</button>
+                </form>
             </a>
-            <a class="product-slide">
+            <a class="product-slide" href="{{ url('/product/Luxury Wall Clock') }}">
                 <img src="{{ asset('images/products/img-14.png') }}" alt="Luxury Wall Clock">
                 <p>Luxury Wall Clock</p>
-                <p class="price">&pound;249</p>
-                <button class="btn">Add to Cart</button>
+                <p class="price">£249</p>
+                <form action="{{ route('cart.add') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <input type="hidden" name="product_id" value="14">
+                    <input type="hidden" name="product_name" value="Luxury Wall Clock">
+                    <input type="hidden" name="price" value="249">
+                    <input type="hidden" name="cartQuan_add" value="1">
+                    <button type="submit" class="btn">Add to Cart</button>
+                </form>
             </a>
-            <a class="product-slide">
-                <img src="{{ asset('images/products/img-15.png') }}" alt="Golden Candle Holder">
-                <p>Golden Candle Holder</p>
-                <p class="price">&pound;129</p>
-                <button class="btn">Add to Cart</button>
+            <a class="product-slide" href="{{ url('/product/Classic Brown Frame') }}">
+                <img src="{{ asset('images/products/img-15.png') }}" alt="Classic Brown Frame">
+                <p>Classic Brown Frame</p>
+                <p class="price">£85</p>
+                <form action="{{ route('cart.add') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <input type="hidden" name="product_id" value="15">
+                    <input type="hidden" name="product_name" value="Classic Brown Frame">
+                    <input type="hidden" name="price" value="85">
+                    <input type="hidden" name="cartQuan_add" value="1">
+                    <button type="submit" class="btn">Add to Cart</button>
+                </form>
             </a>
-            <a class="product-slide">
-                <img src="{{ asset('images/products/img-16.png') }}" alt="Elegant Gold Mirror">
-                <p>Elegant Gold Mirror</p>
-                <p class="price">&pound;179</p>
-                <button class="btn">Add to Cart</button>
+            <a class="product-slide" href="{{ url('/product/Calm Figure') }}">
+                <img src="{{ asset('images/products/img-16.png') }}" alt="Calm Figure">
+                <p>Calm Figure</p>
+                <p class="price">£55</p>
+                <form action="{{ route('cart.add') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <input type="hidden" name="product_id" value="16">
+                    <input type="hidden" name="product_name" value="Calm Figure">
+                    <input type="hidden" name="price" value="55">
+                    <input type="hidden" name="cartQuan_add" value="1">
+                    <button type="submit" class="btn">Add to Cart</button>
+                </form>
             </a>
-            <a class="product-slide">
-                <img src="{{ asset('images/products/img-17.png') }}" alt="Art Deco Sculpture">
-                <p>Art Deco Sculpture</p>
-                <p class="price">&pound;219</p>
-                <button class="btn">Add to Cart</button>
+            <a class="product-slide" href="{{ url('/product/Quite Strength') }}">
+                <img src="{{ asset('images/products/img-17.png') }}" alt="Quite Strength">
+                <p>Quite Strength</p>
+                <p class="price">£50</p>
+                <form action="{{ route('cart.add') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <input type="hidden" name="product_id" value="17">
+                    <input type="hidden" name="product_name" value="Quite Strength">
+                    <input type="hidden" name="price" value="50">
+                    <input type="hidden" name="cartQuan_add" value="1">
+                    <button type="submit" class="btn">Add to Cart</button>
+                </form>
             </a>
         </div>
         <button class="slider-btn next-btn">&#10095;</button>
