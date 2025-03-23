@@ -22,7 +22,7 @@ class ReturnController extends Controller
 
         // Ensure user is authenticated before proceeding
         if (!Auth::check()) { 
-            return redirect()->route('home')->with('error', 'You must be logged in to submit a return request.');
+            return redirect()->route('home')->with('status', 'You must be logged in to submit a return request.');
         }
 
         $user_id = Auth::id(); 

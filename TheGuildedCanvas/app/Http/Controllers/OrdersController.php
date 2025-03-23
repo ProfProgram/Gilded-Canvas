@@ -246,7 +246,7 @@ public function submitReturnRequest(Request $request, $order_id)
         }
     }
 
-    return redirect()->route('home')->with('message', 'Your return request has been submitted.');
+    return redirect()->route('home')->with('status', 'Your return request has been submitted.');
 }
 
 }
