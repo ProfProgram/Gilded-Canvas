@@ -46,7 +46,7 @@ public function store(Request $request)
         'recommend' => $request->recommend,
         'review_text' => $request->review_text,
     ]);
- return redirect()->back()->with('success', '✅ You successfully submitted a review!');
+ return redirect()->back()->with('success', ' You successfully submitted a review!');
 
 }
 
