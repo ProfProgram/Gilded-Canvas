@@ -1,8 +1,9 @@
 # Gilded-Canvas
 A web application implemented as an e-commerce website. The project is based on requirements for a university module project. This is Team 37's interpretation of the requirements.
 
-ASTON SERVER HOSTING STATUS :::: (https://cs2team37.cs2410-web01pvm.aston.ac.uk/) ::: current commit equivalent = Server v4
-Hafsa is working using the webmin and so host server may have changes that are not in any commits on GitHub
+ASTON SERVER HOSTING STATUS :::: (https://cs2team37.cs2410-web01pvm.aston.ac.uk/) ::: current commit equivalent = Server v5
+
+To run the code locally plesae navigate to the TheGuildedCanvas folder and use the command 'php artisan serve', you can also use 'php artisan migrate:fresh --seed' so long as you have a local phpMyAdmin MySQL databse with the name 'cs2team37_db'. If you run into any DB connection issues trying to run locally, please look to .env within TheGuildedCanvas folder to see if your connection variables are incorrect to your actual database.
 
 update1 : Laravel Framework Update
 
